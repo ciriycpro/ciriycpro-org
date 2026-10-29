@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CIRIYC PRO Research — Open Multi-Agent Intelligence</title>
+<meta name="description" content="Open research initiative in multi-agent intelligence: the MAIF open standard, national standardization of industrial MAS, publications and live demos.">
+<link rel="icon" href="star.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--black:#0a0a0a;--grey:#555;--light:#888;--line:#e8e8e8;--bg:#fff}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--black);line-height:1.6}
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+
+header{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);z-index:100}
+.nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:600;font-size:16px;letter-spacing:2px;color:var(--black);text-decoration:none;white-space:nowrap}
+.logo img{width:30px;height:30px}
+.logo .sub-mark{font-weight:400;color:var(--light);letter-spacing:1px;font-size:13px;margin-left:2px}
+nav.menu{display:flex;gap:32px}
+nav.menu a{color:var(--grey);text-decoration:none;font-size:14px;font-weight:500}
+nav.menu a:hover{color:var(--black)}
+.cta-btn{background:var(--black);color:#fff;padding:10px 22px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none}
+.cta-btn:hover{opacity:.8}
+
+.hero{position:relative;padding:110px 0 300px;background:#fff url('hero.jpg') no-repeat bottom center/cover}
+.hero h1{font-size:clamp(42px,6vw,78px);font-weight:800;letter-spacing:-2.5px;line-height:1.05;max-width:880px}
+.hero .sub{margin-top:28px;font-size:20px;color:var(--grey);max-width:640px}
+.hero .actions{margin-top:40px;display:flex;gap:16px;flex-wrap:wrap}
+.btn-primary{background:var(--black);color:#fff;padding:12px 26px;border-radius:8px;font-size:15px;font-weight:600;text-decoration:none}
+.btn-primary:hover{opacity:.85}
+.btn-secondary{border:1px solid var(--line);background:#fff;color:var(--black);padding:12px 26px;border-radius:8px;font-size:15px;font-weight:600;text-decoration:none}
+.btn-secondary:hover{border-color:var(--black)}
+
+section{padding:110px 0}
+.kicker{font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--light);font-weight:600;margin-bottom:16px}
+h2{font-size:clamp(30px,4vw,46px);font-weight:700;letter-spacing:-1.5px;line-height:1.1;margin-bottom:20px}
+.lead{font-size:18px;color:var(--grey);max-width:680px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px;margin-top:56px}
+.card{border:1px solid var(--line);border-radius:14px;padding:32px}
+.card:hover{border-color:#bbb}
+.card h3{font-size:17px;font-weight:600;margin-bottom:10px;letter-spacing:-.3px}
+.card p{font-size:14.5px;color:var(--grey)}
+
+.feature{border:1px solid var(--line);border-radius:16px;padding:48px;margin-top:56px;display:grid;grid-template-columns:2fr 1fr;gap:40px;align-items:center}
+.feature h3{font-size:26px;font-weight:700;letter-spacing:-1px;margin-bottom:14px}
+.feature p{font-size:16px;color:var(--grey);margin-bottom:22px}
+.feature a.link{color:var(--black);font-weight:600;font-size:15px;text-decoration:none;border-bottom:1px solid var(--black)}
+.feature .side{font-size:13.5px;color:var(--light);line-height:2;border-left:1px solid var(--line);padding-left:32px}
+.feature .side b{color:var(--black);display:block;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
+
+.pub{display:grid;grid-template-columns:110px 1fr auto;gap:24px;align-items:baseline;padding:26px 0;border-top:1px solid var(--line)}
+.pub:last-child{border-bottom:1px solid var(--line)}
+.pub .date{font-size:13px;color:var(--light);font-weight:500}
+.pub h3{font-size:17px;font-weight:600;letter-spacing:-.3px;margin-bottom:4px}
+.pub p{font-size:14.5px;color:var(--grey)}
+.pub a{color:var(--black);font-weight:600;font-size:13.5px;text-decoration:none;border-bottom:1px solid var(--black);white-space:nowrap}
+.tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:5px 12px;border-radius:20px;border:1px solid var(--line);color:var(--grey);white-space:nowrap}
+.tag.live{border-color:#16a34a;color:#16a34a}
+
+footer{border-top:1px solid var(--line);padding:64px 0}
+.foot{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:wrap}
+.foot-col{font-size:13.5px;color:var(--grey);line-height:2}
+.foot-col b{color:var(--black);display:block;margin-bottom:6px;font-size:13px;letter-spacing:1px;text-transform:uppercase}
+.foot a{color:var(--grey);text-decoration:none}
+.foot a:hover{color:var(--black)}
+.copyright{margin-top:48px;font-size:12.5px;color:var(--light)}
+
+@media(max-width:900px){
+  nav.menu{display:none}
+  .feature{grid-template-columns:1fr}
+  .feature .side{border-left:none;padding-left:0;border-top:1px solid var(--line);padding-top:24px}
+  .pub{grid-template-columns:1fr}
+  .hero{padding:70px 0 220px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#"><span>CIRIYC PRO</span><span class="sub-mark">RESEARCH</span><img src="star.png" alt=""></a>
+    <nav class="menu">
+      <a href="#areas">Research</a>
+      <a href="#maif">MAIF Standard</a>
+      <a href="#publications">Publications</a>
+      <a href="#demos">Demos</a>
+    </nav>
+    <a class="cta-btn" href="https://github.com/ciriycpro">GitHub</a>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <h1>Open research in<br>multi-agent intelligence.</h1>
+    <p class="sub">An open R&amp;D initiative: we study how autonomous agents coordinate in industrial environments — and publish the standards, code and findings.</p>
+    <div class="actions">
+      <a class="btn-primary" href="#maif">MAIF open standard</a>
+      <a class="btn-secondary" href="#publications">Publications</a>
+    </div>
+  </div>
+</div>
+
+<section id="areas">
+  <div class="wrap">
+    <div class="kicker">Research areas</div>
+    <h2>What we study.</h2>
+    <div class="grid">
+      <div class="card"><h3>Agent coordination</h3><p>Negotiation, task allocation and conflict resolution in decentralized agent contours under real-time constraints.</p></div>
+      <div class="card"><h3>Industrial standardization</h3><p>Formal contracts, auditability and interoperability requirements for multi-agent systems in regulated industries.</p></div>
+      <div class="card"><h3>Agentic re-architecture</h3><p>Methods for rebuilding legacy industrial software — telematics, dispatch, compliance — as agent-based decision systems.</p></div>
+      <div class="card"><h3>Human-agent contours</h3><p>Monitoring and decision-support loops where human operators and autonomous agents share responsibility.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="maif" style="padding-top:0">
+  <div class="wrap">
+    <div class="kicker">Open standard</div>
+    <h2>MAIF — Multi-Agent Industrial Framework.</h2>
+    <p class="lead">An open framework for building auditable industrial agent systems: agent contracts, communication protocol, orchestration semantics. Free to use, fork and implement.</p>
+    <div class="feature">
+      <div>
+        <h3>The standard behind our pilots.</h3>
+        <p>Every CIRIYC PRO contour is built on MAIF. The framework is registered, versioned and published in full — specification, reference architecture and examples.</p>
+        <a class="link" href="https://github.com/ciriycpro/MAIF">github.com/ciriycpro/MAIF</a>
+      </div>
+      <div class="side">
+        <b>Facts</b>
+        License: Apache 2.0<br>
+        Registration: Rospatent №2026611550<br>
+        National standard track: TC 164 (AI)<br>
+        Status: first ПНСТ draft in public review
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="publications" style="padding-top:0">
+  <div class="wrap">
+    <div class="kicker">Publications &amp; working papers</div>
+    <h2>Findings, in the open.</h2>
+    <div style="margin-top:56px">
+      <div class="pub">
+        <div class="date">2026</div>
+        <div>
+          <h3>A national preliminary standard for industrial multi-agent systems</h3>
+          <p>First-edition ПНСТ draft: terminology, architecture requirements and conformance criteria for industrial MAS. Developed within TC 164.</p>
+        </div>
+        <a href="https://github.com/ciriycpro/pnst-industrial-mas">Read draft</a>
+      </div>
+      <div class="pub">
+        <div class="date">2026</div>
+        <div>
+          <h3>Field contour: rebuilding workforce telematics on an agentic layer</h3>
+          <p>Case study of re-architecting legacy field-workforce telematics into a real-time multi-agent decision system. Industrial validation in progress.</p>
+        </div>
+        <a href="https://github.com/ciriycpro/Agentic-telematica">Case &amp; code</a>
+      </div>
+      <div class="pub">
+        <div class="date">2026</div>
+        <div>
+          <h3>Architecture-as-Code for agent systems</h3>
+          <p>C4 models, architecture decision records and service blueprints for reproducible multi-agent system design.</p>
+        </div>
+        <a href="https://github.com/ciriycpro/architect">Repository</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="demos" style="padding-top:0">
+  <div class="wrap">
+    <div class="kicker">Live demos</div>
+    <h2>Try it, don't take our word.</h2>
+    <div style="margin-top:56px">
+      <div class="pub">
+        <div class="date">Demo</div>
+        <div>
+          <h3>Agentic Telematics — interactive stand</h3>
+          <p>React-based interactive prototype of the field-workforce agent contour.</p>
+        </div>
+        <span class="tag live">Live</span>
+      </div>
+      <div class="pub">
+        <div class="date">Demo</div>
+        <div>
+          <h3>Industry expert — conversational analyst</h3>
+          <p>Multi-agent conversational layer for industrial lead qualification, running on ciriyc.ru and ciriycpro.com.</p>
+        </div>
+        <span class="tag live">Live</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <a class="logo" href="#"><span>CIRIYC PRO</span><span class="sub-mark">RESEARCH</span><img src="star.png" alt=""></a>
+      <div class="foot-col">
+        <b>Initiative</b>
+        Open research in multi-agent intelligence<br>
+        Standards · Publications · Open source
+      </div>
+      <div class="foot-col">
+        <b>Contact</b>
+        <a href="mailto:research@ciriycpro.org">research@ciriycpro.org</a><br>
+        <a href="https://github.com/ciriycpro">github.com/ciriycpro</a>
+      </div>
+      <div class="foot-col">
+        <b>Network</b>
+        <a href="https://ciriycpro.com">ciriycpro.com — Laboratory</a><br>
+        <a href="https://ciriyc.ru">ciriyc.ru — Russia</a>
+      </div>
+    </div>
+    <div class="copyright">© 2026 CIRIYC PRO Research Initiative.</div>
+  </div>
+</footer>
+
+</body>
+</html>
