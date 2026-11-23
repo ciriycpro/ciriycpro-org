@@ -29,7 +29,7 @@ h1{font-size:18px;margin:0;font-weight:700;letter-spacing:.2px}
 .scen{display:flex;gap:8px;flex-wrap:wrap;padding:12px 20px;border-bottom:1px solid var(--line);align-items:center}
 .scen .lbl{color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.08em;margin-right:4px}
 main{display:grid;grid-template-columns:300px minmax(0,1fr) 360px;gap:14px;padding:14px 20px 20px}
-@media (max-width:1180px){main{grid-template-columns:1fr 1fr}.right{grid-column:1/-1}}
+@media (max-width:1180px){main{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.right{grid-column:1/-1}}
 @media (max-width:760px){main{grid-template-columns:1fr}}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
 .card h3{margin:0 0 10px;font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:.09em;font-weight:600}
@@ -41,7 +41,11 @@ main{display:grid;grid-template-columns:300px minmax(0,1fr) 360px;gap:14px;paddi
 .kpi .v{font-size:22px;font-weight:700;margin-top:3px;white-space:nowrap}
 .kpi .s{font-size:11.5px;color:var(--mut);margin-top:1px}
 .ok{color:var(--lime)} .warn{color:var(--amber)} .bad{color:var(--red)}
-canvas{width:100%;display:block}
+canvas{width:100%;display:block;max-width:100%}
+html{overflow-y:scroll;scrollbar-gutter:stable}
+.kpi .v,.kpi .s,.clock,.mono{font-variant-numeric:tabular-nums}
+.kpi{min-height:96px}.kpi .s{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.clock{display:inline-block;min-width:150px}
 .agents{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px}
 .ag{display:flex;align-items:center;gap:7px;font-size:12.5px;background:#fafafa;border:1px solid var(--line);border-radius:9px;padding:6px 8px}
 .ag i{width:8px;height:8px;border-radius:50%;background:var(--lime);flex:none;box-shadow:0 0 0 3px #16a34a22}
@@ -55,6 +59,7 @@ canvas{width:100%;display:block}
 .rec .t{font-weight:700;margin-bottom:4px}
 .rec .why{color:var(--mut);font-size:12.5px;margin-bottom:10px}
 .rec .acts{display:flex;gap:8px}
+#recBox{min-height:150px}
 .empty{color:var(--mut);font-size:12.5px}
 .sl{margin:10px 0}
 .sl label{display:flex;justify-content:space-between;font-size:12.5px;color:var(--mut)}
@@ -66,6 +71,8 @@ footer a{color:var(--teal)}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media (max-width:1400px){.grid2{grid-template-columns:1fr}}
 .tag{font-size:11px;color:var(--mut)}
+
+canvas{max-width:100%}.card,.col{min-width:0}html{overflow-y:scroll}
 
 body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif}
 .sitebar{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;height:60px;padding:0 20px;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid #e8e8e8}
@@ -203,7 +210,7 @@ SCEN.forEach(s=>{const b=document.createElement('button');b.className='btn'+(s.i
 const AG=[['sensor','Sensor'],['anomaly','Anomaly'],['heat','Heat-balance'],['forecast','Forecast'],['opt','Optimizer'],['hitl','Planner / HITL']];
 const agState={}; AG.forEach(([k])=>agState[k]='idle');
 const agEl=document.getElementById('agents');
-function drawAgents(){agEl.innerHTML=AG.map(([k,n])=>`<div class="ag ${agState[k]==='alert'?'alert':agState[k]==='busy'?'busy':''}"><i></i>${n}</div>`).join('');}
+function drawAgents(){const ah=AG.map(([k,n])=>`<div class="ag ${agState[k]==='alert'?'alert':agState[k]==='busy'?'busy':''}"><i></i>${n}</div>`).join('');if(agEl._h!==ah){agEl._h=ah;agEl.innerHTML=ah;}}
 const feed=document.getElementById('feed');
 const AGN=Object.fromEntries(AG.concat([['sys','System'],['operator','Operator']]));
 function post(ag,lvl,msg){
@@ -334,7 +341,7 @@ sRat.oninput=()=>{ramp('ratio',+sRat.value,0.06);labels();};
 sCo.oninput=()=>{ramp('co',+sCo.value,0.2);labels();};
 
 // ======================= DRAWING =======================
-function setupCanvas(c){const r=c.getBoundingClientRect(),d=window.devicePixelRatio||1;const h=+c.getAttribute('height');c.width=r.width*d;c.height=h*d;c.style.height=h+'px';const x=c.getContext('2d');x.setTransform(d,0,0,d,0,0);return {x,w:r.width,h};}
+function setupCanvas(c){const d=window.devicePixelRatio||1,h=c._h0||(c._h0=+c.getAttribute('height')),w=Math.round(c.parentElement.clientWidth-(parseFloat(getComputedStyle(c.parentElement).paddingLeft)||0)-(parseFloat(getComputedStyle(c.parentElement).paddingRight)||0));if(c._w!==w||c._d!==d){c._w=w;c._d=d;c.width=w*d;c.height=h*d;c.style.height=h+'px';}const x=c.getContext('2d');x.setTransform(d,0,0,d,0,0);x.clearRect(0,0,w,h);return {x,w,h};}
 function tcol(T){ // 40..120 °C → blue..teal..lime..amber..red
   const s=[[40,[38,90,160]],[60,[25,194,176]],[80,[182,242,74]],[95,[245,165,36]],[110,[255,90,95]]];
   if(T<=s[0][0]) return `rgb(${s[0][1]})`; for(let i=1;i<s.length;i++){ if(T<=s[i][0]){const a=s[i-1],b=s[i],f=(T-a[0])/(b[0]-a[0]);return `rgb(${a[1].map((v,j)=>Math.round(v+(b[1][j]-v)*f)).join(',')})`;} } return `rgb(${s[s.length-1][1]})`;
@@ -419,7 +426,8 @@ function drawK(){
     ['Ethylene loss',t.lossEst.toFixed(2)+'%','heat-balance estimate',t.lossEst>0.3?'warn':'ok'],
     ['C₂H₂ slip',S.ana.slip.toFixed(2)+' ppm','spec ≤ 1 ppm',S.ana.slip>1?'bad':'ok'],
     ['Forecast +30 min',fcTxt,fcSub,fcCls]];
-  kEl.innerHTML=k.map(a=>`<div class="kpi"><div class="k">${a[0]}</div><div class="v ${a[3]}">${a[1]}</div><div class="s">${a[2]}</div></div>`).join('');
+  const kh=k.map(a=>`<div class="kpi"><div class="k">${a[0]}</div><div class="v ${a[3]}">${a[1]}</div><div class="s">${a[2]}</div></div>`).join('');
+  if(kEl._h!==kh){kEl._h=kh;kEl.innerHTML=kh;}
 }
 const fmtT=m=>{m=Math.round(m);return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0');};
 function render(){document.getElementById('clock').textContent='t = '+fmtT(S.t)+' (sim)';drawReactor();drawT();drawP();drawQ();drawK();drawAgents();}
@@ -428,10 +436,11 @@ function render(){document.getElementById('clock').textContent='t = '+fmtT(S.t)+
 let speed=4,paused=false,acc=0,last=performance.now();
 document.querySelectorAll('[data-speed]').forEach(b=>b.onclick=()=>{speed=+b.dataset.speed;document.querySelectorAll('[data-speed]').forEach(x=>x.classList.remove('on'));b.classList.add('on');});
 document.getElementById('pause').onclick=e=>{paused=!paused;e.target.textContent=paused?'Resume':'Pause';e.target.classList.toggle('on',paused);};
-function loop(now){const dt=(now-last)/1000;last=now;if(!paused){acc+=dt*speed;let n=0;while(acc>=1&&n<30){stepMinute();acc-=1;n++;}}render();requestAnimationFrame(loop);}
+let dirty=true,lastDraw=0;
+function loop(now){const dt=Math.min((now-last)/1000,0.5);last=now;if(!paused){acc+=dt*speed;let n=0;while(acc>=1&&n<30){stepMinute();acc-=1;n++;}if(n)dirty=true;}if(dirty&&now-lastDraw>100){render();dirty=false;lastDraw=now;}requestAnimationFrame(loop);}
 reset();
 syncSliders();drawRec();
-window.addEventListener('resize',render);
+window.addEventListener('resize',()=>{dirty=true;});document.addEventListener('click',()=>{dirty=true;},true);document.addEventListener('input',()=>{dirty=true;},true);
 requestAnimationFrame(loop);
 })();
 </script>
