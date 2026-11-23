@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="icon" href="/star.png" type="image/png">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MAIF Knowledge Layer — PE/PP process knowledge graph (MOCK)</title>
+<style>
+:root{--bg:#ffffff;--panel:#ffffff;--line:#e8e8e8;--ink:#0a0a0a;--mut:#666666;--teal:#0d9488;--lime:#16a34a;--amber:#d97706;--red:#dc2626;--blue:#2563eb;--violet:#7c3aed}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;padding:16px 20px 12px;border-bottom:1px solid var(--line)}
+h1{font-size:18px;margin:0}.sub{color:var(--mut);font-size:12.5px;margin-top:2px}
+.mock{display:inline-block;font-size:11px;color:var(--amber);border:1px solid #f1d6a0;border-radius:999px;padding:2px 8px;margin-left:6px;vertical-align:middle}
+.wrap{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:14px;padding:14px 20px 20px}@media(max-width:1150px){.wrap{grid-template-columns:1fr}}
+.col{display:flex;flex-direction:column;gap:12px;min-width:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;min-width:0}
+.card h3{margin:0 0 10px;font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:.09em;font-weight:600;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.row{display:grid;grid-template-columns:260px minmax(0,1fr);gap:12px}@media(max-width:900px){.row{grid-template-columns:1fr}}
+.row2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}@media(max-width:900px){.row2{grid-template-columns:1fr}}
+.btn{background:#ffffff;border:1px solid var(--line);color:var(--ink);padding:7px 11px;border-radius:9px;cursor:pointer;font:inherit;font-size:12.5px}
+.btn.primary{background:var(--teal);border-color:var(--teal);color:#ffffff;font-weight:600}.btn:disabled{opacity:.45;cursor:default}.btn.sm{padding:4px 8px;font-size:12px}
+.src{border:1px solid var(--line);border-radius:9px;padding:7px 9px;margin-bottom:6px;font-size:12.5px;background:#fafafa;cursor:pointer}
+.src.done{border-color:#b9dcd7}.src .t{display:flex;justify-content:space-between;gap:6px}.src .k{color:var(--mut);font-size:11px}
+.src.active{outline:2px solid var(--teal)}
+svg{width:100%;display:block}
+.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:11.5px;color:var(--mut);margin-top:6px}.legend b{display:inline-block;width:10px;height:10px;border-radius:50%;vertical-align:middle;margin-right:5px}.legend i{display:inline-block;width:16px;height:3px;vertical-align:middle;margin-right:5px;border-radius:2px}
+.feed{max-height:calc(100vh - 90px);overflow:auto;display:flex;flex-direction:column;gap:6px}.side{position:sticky;top:74px;align-self:start}
+.ev{border-left:3px solid var(--teal);background:#fafafa;border-radius:6px;padding:6px 9px;font-size:12.5px}.ev .h{display:flex;justify-content:space-between;color:var(--mut);font-size:11px}
+.ev.warn{border-color:var(--amber)}.ev.ok{border-color:var(--lime)}.ev.info{border-color:var(--blue)}.ev.hitl{border-color:var(--violet)}.ev.bad{border-color:var(--red)}
+.ev code{font-size:11px;color:#444}
+input.q{width:100%;background:#fafafa;border:1px solid var(--line);border-radius:9px;color:var(--ink);padding:9px 11px;font:inherit}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}.chip{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:4px 10px;cursor:pointer;color:var(--mut)}.chip:hover{color:var(--ink);border-color:#bbbbbb}
+.claim{display:grid;grid-template-columns:22px 1fr;gap:6px;padding:7px 0;border-top:1px solid var(--line);font-size:13px}
+.claim .b{font-weight:700;text-align:center}.claim.struck .x{text-decoration:line-through;color:var(--mut)}
+.cite{color:var(--teal);cursor:pointer;font-family:ui-monospace,Menlo,monospace;font-size:12px}
+.quote{font-size:12px;color:var(--mut);border-left:2px solid var(--line);padding-left:8px;margin-top:3px}
+.ok{color:var(--lime)}.warn{color:var(--amber)}.bad{color:var(--red)}.mut{color:var(--mut)}
+.item{border:1px solid var(--line);border-radius:10px;padding:9px 10px;margin-bottom:8px;background:#fafafa;font-size:12.5px}
+.item .hd{display:flex;justify-content:space-between;gap:8px;font-weight:600;margin-bottom:4px}
+.tag{font-size:10.5px;border-radius:999px;padding:1px 7px;border:1px solid;font-weight:600;white-space:nowrap}
+.tag.conf{color:var(--red);border-color:#f3c0c0}.tag.cond{color:var(--amber);border-color:#f1d6a0}.tag.res{color:var(--lime);border-color:#bfe3c8}.tag.gap{color:var(--blue);border-color:#c3d7f5}
+pre{background:#fafafa;border:1px solid var(--line);border-radius:9px;padding:9px;font-size:11.5px;overflow:auto;max-height:300px;margin:0;color:#333}
+.kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}@media(max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}}
+.kpi{background:#fafafa;border:1px solid var(--line);border-radius:12px;padding:9px 11px}.kpi .k{font-size:10.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.06em}.kpi .v{font-size:19px;font-weight:700;margin-top:2px}
+footer{color:var(--mut);font-size:12px;padding:0 20px 24px;line-height:1.6}footer a{color:var(--teal)}
+.toggle{font-size:12px;color:var(--mut);display:flex;align-items:center;gap:6px}
+
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif}
+.sitebar{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;height:60px;padding:0 20px;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid #e8e8e8}
+.sb-logo{display:flex;align-items:center;gap:10px;font-weight:600;font-size:15px;letter-spacing:2px;color:#0a0a0a;text-decoration:none}
+.sb-logo img{width:26px;height:26px}.sb-sub{font-weight:400;color:#888;letter-spacing:1px;font-size:12px}
+.sb-back{color:#555;text-decoration:none;font-size:14px;font-weight:500}.sb-back:hover{color:#0a0a0a}
+.btn.primary{background:#0a0a0a!important;border-color:#0a0a0a!important;color:#fff!important}
+</style>
+</head>
+<body>
+<div class="sitebar"><a class="sb-logo" href="/"><span>CIRIYC PRO</span><span class="sb-sub">RESEARCH</span><img src="/star.png" alt=""></a><a class="sb-back" href="/#demos">← All demos</a></div>
+<header>
+  <div><h1>MAIF Knowledge Layer · PE/PP processes <span class="mock">MOCK LLM · SYNTHETIC SOURCES</span></h1>
+  <div class="sub">CIRIYC PRO Research · not a chat over PDFs: agents turn sources into a graph of cause and effect, find contradictions and gaps, verify every claim, and serve facts to other MAIF agents</div></div>
+  <div style="display:flex;gap:8px"><button class="btn primary" id="ingest">Ingest all sources</button><button class="btn" id="reset">Reset</button></div>
+</header>
+<div class="wrap">
+<div class="col">
+  <div class="kpis" id="kpis"></div>
+  <div class="row">
+    <div class="card"><h3>Sources <span class="mut" style="text-transform:none;letter-spacing:0">click to ingest one</span></h3><div id="srcs"></div></div>
+    <div class="card"><h3>Process knowledge graph <span class="mut" id="gsel" style="text-transform:none;letter-spacing:0"></span></h3>
+      <svg id="graph" viewBox="0 0 760 460" height="460"></svg>
+      <div class="legend"><span><b style="background:#2563eb"></b>process</span><span><b style="background:#7c3aed"></b>catalyst</span><span><b style="background:#0d9488"></b>variable / action</span><span><b style="background:#d97706"></b>effect / problem</span>
+      <span><i style="background:#dc2626"></i>increases / causes</span><span><i style="background:#16a34a"></i>reduces / mitigates</span><span><i style="background:#666666"></i>applies to</span></div>
+      <div id="nodeinfo" class="sub" style="margin-top:8px">Click a node to see the facts behind it.</div></div>
+  </div>
+  <div class="card"><h3>Ask the knowledge layer <label class="toggle" style="text-transform:none;letter-spacing:0"><input type="checkbox" id="hall"> simulate an LLM hallucination in the draft</label></h3>
+    <input class="q" id="q" placeholder="e.g. What causes agglomeration in gas-phase PE and how is it mitigated?">
+    <div class="chips" id="presets"></div>
+    <div id="answer" class="sub">Ingest sources, then ask. Answers are assembled from graph facts; the Critic checks every claim against the cited sentence.</div>
+  </div>
+  <div class="row2">
+    <div class="card"><h3>Contradictions · chemist in the loop</h3><div id="contra" class="sub" style="max-height:460px;overflow:auto">None found yet.</div></div>
+    <div class="card"><h3>Knowledge gaps</h3><div id="gaps" class="sub" style="max-height:460px;overflow:auto">None found yet.</div></div>
+  </div>
+  <div class="card"><h3>Agent-to-agent: Stand 3 (MAIF-PFD) asks the knowledge layer <button class="btn sm" id="pfd">Send request from PFD agent</button></h3>
+    <div class="row2"><div><div class="sub" style="margin-bottom:5px">request on the MAIF bus</div><pre id="req">—</pre></div><div><div class="sub" style="margin-bottom:5px">response with evidence</div><pre id="resp">—</pre></div></div>
+  </div>
+</div>
+<div class="card side"><h3>MAIF agent bus <span class="mut" style="text-transform:none;letter-spacing:0">emulated</span></h3><div class="feed" id="feed"></div></div>
+</div>
+<footer>MOCK: sources are short synthetic fixtures written for this demo, not real literature; two contradictions and several gaps are planted on purpose. The extractor's output is pre-recorded (in production an LLM on the customer's server extracts facts, keys never leave the server); everything after extraction — entity merging, contradiction detection, gap search, answer assembly, claim verification, the PFD exchange — is computed live in this page. The bus is emulated; production runs on the MAIF core (Go + Kafka). <a href="https://ciriycpro.org">ciriycpro.org</a></footer>
+<script>
+(()=>{
+// ---------------- ontology ----------------
+const E={
+ gp_pe:{t:'process',n:'Gas-phase PE (fluidized bed)',a:['gas-phase pe','gas phase pe','fluidized bed','fluidised bed','gas-phase polyethylene','gas phase polyethylene']},
+ sl_pe:{t:'process',n:'Slurry HDPE',a:['slurry','hdpe slurry','slurry hdpe','slurry pe','diluent process']},
+ bulk_pp:{t:'process',n:'Bulk PP (loop)',a:['bulk pp','loop reactor','bulk polypropylene','liquid propylene','loop']},
+ gp_pp:{t:'process',n:'Gas-phase PP',a:['gas-phase pp','gas phase pp','gas-phase polypropylene','gas phase polypropylene']},
+ zn:{t:'catalyst',n:'Ziegler–Natta',a:['ziegler','ziegler-natta','ziegler–natta','zn catalyst',' zn ']},
+ mc:{t:'catalyst',n:'Metallocene',a:['metallocene','single-site','single site']},
+ cr:{t:'catalyst',n:'Chromium (Phillips)',a:['chromium','phillips','chrome catalyst']},
+ static:{t:'var',n:'Static charge',a:['static','electrostatic','charge']},
+ fines:{t:'var',n:'Fines',a:['fines','fine particles']},
+ temp:{t:'var',n:'Reactor temperature',a:['temperature','overheating','hot spot','hot spots']},
+ h2:{t:'var',n:'Hydrogen / monomer ratio',a:['hydrogen','h2']},
+ comon:{t:'var',n:'Comonomer (hexene/butene)',a:['comonomer','hexene','butene','copolymer']},
+ cond:{t:'var',n:'Condensed liquid in recycle',a:['condensed mode','condensed liquid','condensing','liquid in the recycle','condensed']},
+ antistat:{t:'var',n:'Antistatic agent',a:['antistatic','anti-static','antistat']},
+ agglom:{t:'effect',n:'Agglomeration / sheeting',a:['agglomeration','sheeting','sheets','chunks','agglomerates','fouling of the wall']},
+ fouling:{t:'effect',n:'Reactor fouling (swelling)',a:['fouling','swelling','swell']},
+ mfi:{t:'effect',n:'Melt flow index',a:['melt flow','mfi','melt index','mfr']},
+ density:{t:'effect',n:'Polymer density',a:['density']},
+ prod:{t:'effect',n:'Reactor productivity',a:['productivity','output','throughput','production rate']},
+ mwd:{t:'effect',n:'MWD breadth',a:['mwd','molecular weight distribution','molecular-weight distribution']},
+};
+// relation: inc (increases/causes), dec (reduces/mitigates), on (applies to / used in)
+// ---------------- synthetic sources (sentences + pre-recorded extractor output) ----------------
+const S=[
+ {id:'S1',title:'Operating note: wall sheeting in gas-phase PE',kind:'plant note',sent:[
+  'Electrostatic charge on the bed is the most frequent trigger of wall sheeting in gas-phase PE reactors.',
+  'A high share of fines raises the agglomeration rate because fines carry active catalyst to the wall.',
+  'Local temperature within 5 °C of the polymer sintering point leads to agglomerates.',
+  'Continuous dosing of an antistatic agent reduced sheeting events in the reactor.'],
+  f:[[0,'static','inc','agglom',{process:'gp_pe'}],[1,'fines','inc','agglom',{process:'gp_pe'}],[2,'temp','inc','agglom',{process:'gp_pe',margin:'< 5 °C to sintering'}],[3,'antistat','dec','agglom',{process:'gp_pe'}]]},
+ {id:'S2',title:'Review: condensed-mode operation',kind:'review',sent:[
+  'Condensed-mode operation raises reactor productivity because the evaporating liquid removes reaction heat.',
+  'With Ziegler–Natta catalyst and good liquid distribution, up to 20 wt% condensed liquid in the recycle did not increase agglomeration.'],
+  f:[[0,'cond','inc','prod',{process:'gp_pe'}],[1,'cond','none','agglom',{process:'gp_pe',catalyst:'zn',limit:'≤ 20 wt%'}]]},
+ {id:'S3',title:'Incident analysis: chunks after rate increase',kind:'incident report',sent:[
+  'Above 12 wt% condensed liquid, agglomeration increased sharply in a gas-phase PE reactor.',
+  'The grade was a metallocene hexene copolymer of low density, which is sticky at reactor temperature.'],
+  f:[[0,'cond','inc','agglom',{process:'gp_pe',catalyst:'mc',limit:'> 12 wt%'}],[1,'comon','dec','density',{process:'gp_pe',catalyst:'mc'}]]},
+ {id:'S4',title:'Catalyst comparison for polyolefins',kind:'review',sent:[
+  'Metallocene catalysts give a narrow molecular weight distribution compared with Ziegler–Natta.',
+  'Chromium catalysts give the broadest MWD of the three families.',
+  'Metallocene catalysts show a higher hydrogen response than Ziegler–Natta: small hydrogen changes move the melt index strongly.'],
+  f:[[0,'mc','dec','mwd',{}],[1,'cr','inc','mwd',{}],[2,'h2','inc','mfi',{catalyst:'mc',strength:'stronger than ZN'}]]},
+ {id:'S5',title:'Pilot report: supported single-site grade',kind:'pilot report',sent:[
+  'In the pilot gas-phase PE runs the supported metallocene was less sensitive to hydrogen than the reference Ziegler–Natta catalyst.',
+  'Hydrogen remains the main handle on melt index for both catalysts.'],
+  f:[[0,'h2','inc','mfi',{process:'gp_pe',catalyst:'mc',strength:'weaker than ZN'}],[1,'h2','inc','mfi',{process:'gp_pe'}]]},
+ {id:'S6',title:'Slurry HDPE: operating limits',kind:'operating manual',sent:[
+  'In slurry HDPE, raising the temperature above the swelling limit makes the polymer swell in the diluent and foul the reactor.',
+  'Low-density copolymer grades are more prone to swelling.',
+  'Hydrogen is used to raise the melt index; typical residence time is 1–3 h.'],
+  f:[[0,'temp','inc','fouling',{process:'sl_pe'}],[1,'comon','inc','fouling',{process:'sl_pe'}],[2,'h2','inc','mfi',{process:'sl_pe',residence:'1–3 h'}]]},
+ {id:'S7',title:'Bulk PP in loop reactors',kind:'review',sent:[
+  'Bulk polypropylene is produced in liquid propylene in loop reactors at 65–80 °C with Ziegler–Natta catalyst.',
+  'Hydrogen controls the melt flow rate of polypropylene.',
+  'Fines from catalyst fragmentation can foul the loop walls.'],
+  f:[[0,'zn','on','bulk_pp',{temperature:'65–80 °C'}],[1,'h2','inc','mfi',{process:'bulk_pp'}],[2,'fines','inc','fouling',{process:'bulk_pp'}]]},
+ {id:'S8',title:'Gas-phase PP: operability notes',kind:'plant note',sent:[
+  'Static charge also triggers agglomeration in gas-phase polypropylene reactors.',
+  'Higher comonomer content in impact copolymers makes particles sticky and raises the agglomeration risk.'],
+  f:[[0,'static','inc','agglom',{process:'gp_pp'}],[1,'comon','inc','agglom',{process:'gp_pp'}]]},
+];
+const PRESETS=['What causes agglomeration in gas-phase PE and how is it mitigated?','How much condensed liquid is safe in gas-phase PE?','How does hydrogen affect melt index with metallocene catalysts?','Does antistatic dosing work in gas-phase PP?','What limits temperature in slurry HDPE?','What is the best catalyst for PET?'];
+// ---------------- state ----------------
+let F=[], done=new Set(), resolved={}, T0=performance.now(), sel=null;
+const $=id=>document.getElementById(id), sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+function post(ag,cls,msg){const d=document.createElement('div');d.className='ev '+cls;d.innerHTML=`<div class="h"><span>${ag}</span><span>${((performance.now()-T0)/1000).toFixed(1)} s</span></div>${msg}`;$('feed').prepend(d);}
+const RW={inc:'increases',dec:'reduces',none:'has no significant effect on',on:'is used in'};
+const condTxt=c=>Object.entries(c).map(([k,v])=>k==='process'||k==='catalyst'?E[v].n:`${k}: ${v}`).join(', ');
+function claimText(f){
+  const s=E[f.s].n,o=E[f.o].n;let t;
+  if(f.r==='on')t=`${s} is used in ${o}`; else if(f.r==='none')t=`${s} has no significant effect on ${o.toLowerCase()}`;
+  else t=`${s} ${f.r==='inc'?'increases':'reduces'} ${o.toLowerCase()}`;
+  const c=condTxt(f.c);return t+(c?` (${c})`:'');
+}
+// ---------------- sources UI ----------------
+function renderSrc(){$('srcs').innerHTML=S.map(s=>`<div class="src ${done.has(s.id)?'done':''}" data-id="${s.id}"><div class="t"><b>${s.id} · ${esc(s.title)}</b><span class="${done.has(s.id)?'ok':'mut'}">${done.has(s.id)?'✓ '+s.f.length:'—'}</span></div><div class="k">${s.kind} · synthetic</div></div>`).join('');
+  document.querySelectorAll('.src').forEach(el=>el.onclick=()=>ingest(el.dataset.id));}
+async function ingest(id){if(done.has(id))return;const s=S.find(x=>x.id===id);
+  post('Ingest','info',`${id} “${esc(s.title)}” → ${s.sent.length} sentences.`);await sleep(120);
+  const nf=s.f.map(([si,a,r,b,c])=>({id:`${id}.${si}`,src:id,si,s:a,r,o:b,c}));F.push(...nf);done.add(id);
+  post('Extractor','info',`${id}: ${nf.length} facts. e.g. <code>(${nf[0].s}) —${nf[0].r}→ (${nf[0].o})</code>`);
+  const ents=new Set();nf.forEach(f=>{ents.add(f.s);ents.add(f.o);Object.values(f.c).forEach(v=>E[v]&&ents.add(v));});
+  post('Graph builder','info',`Merged into graph: ${[...ents].map(e=>E[e].n).join(', ')}.`);
+  renderSrc();drawGraph();analyse(id);}
+// ---------------- contradictions ----------------
+const keyOf=f=>f.s+'|'+f.o;
+function contradictions(){
+  const out=[],by={};F.forEach(f=>(by[keyOf(f)]=by[keyOf(f)]||[]).push(f));
+  Object.values(by).forEach(g=>{for(let i=0;i<g.length;i++)for(let j=i+1;j<g.length;j++){const a=g[i],b=g[j];if(a.src===b.src)continue;
+    const sign=a.r!==b.r&&(a.r==='none'||b.r==='none'||(a.r==='inc'&&b.r==='dec')||(a.r==='dec'&&b.r==='inc'));
+    const strength=a.r===b.r&&a.c.strength&&b.c.strength&&a.c.strength!==b.c.strength;
+    if(!sign&&!strength)continue;
+    const keys=['process','catalyst'],diff=keys.filter(k=>a.c[k]&&b.c[k]&&a.c[k]!==b.c[k]);
+    const procClash=a.c.process&&b.c.process&&a.c.process!==b.c.process;
+    if(procClash)continue;
+    out.push({id:a.id+'~'+b.id,a,b,kind:diff.length?'conditional':'conflict',diff});}});
+  return out;}
+function renderContra(){const cs=contradictions();if(!cs.length){$('contra').innerHTML='<span class="sub">None found yet.</span>';return;}
+  $('contra').innerHTML=cs.map(c=>{const r=resolved[c.id];return `<div class="item"><div class="hd"><span>${E[c.a.s].n} → ${E[c.a.o].n}</span>${r?`<span class="tag res">resolved by chemist</span>`:c.kind==='conflict'?'<span class="tag conf">conflict</span>':'<span class="tag cond">conditional</span>'}</div>
+   <div>${c.a.src}: ${esc(claimText(c.a))} <span class="cite" data-f="${c.a.id}">[${c.a.src}]</span></div><div>${c.b.src}: ${esc(claimText(c.b))} <span class="cite" data-f="${c.b.id}">[${c.b.src}]</span></div>
+   <div class="sub" style="margin:4px 0">${c.kind==='conditional'?`Detector: both can hold — sources differ in ${c.diff.map(k=>k).join(', ')} (${c.diff.map(k=>E[c.a.c[k]].n+' vs '+E[c.b.c[k]].n).join('; ')}). Answers will carry both with conditions.`:'Detector: same conditions, opposite claims. Answers will show both until a chemist decides.'}</div>
+   ${r?`<div class="ok">Decision: ${esc(r)}</div>`:`<div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn sm" data-c="${c.id}" data-d="trust ${c.a.src}">Trust ${c.a.src}</button><button class="btn sm" data-c="${c.id}" data-d="trust ${c.b.src}">Trust ${c.b.src}</button><button class="btn sm" data-c="${c.id}" data-d="both hold under stated conditions">Both, conditional</button></div>`}</div>`;}).join('');
+  $('contra').querySelectorAll('button[data-c]').forEach(b=>b.onclick=()=>{resolved[b.dataset.c]=b.dataset.d;post('Chemist (HITL)','hitl',`Contradiction ${b.dataset.c}: <b>${esc(b.dataset.d)}</b>. Logged with user and time; answers updated.`);renderContra();kpis();});
+  bindCites($('contra'));}
+// ---------------- gaps ----------------
+const FAMILY={gp_pe:'gas',gp_pp:'gas',sl_pe:'liquid',bulk_pp:'liquid'};
+function gaps(){const out=[];
+  // 1) transfer gaps: a cause/mitigation known for one process but not for a sibling process of the same family
+  const known=new Set(F.filter(f=>f.c.process).map(f=>f.s+'|'+f.r+'|'+f.o+'|'+f.c.process));
+  F.filter(f=>f.c.process&&['inc','dec'].includes(f.r)&&['agglom','fouling'].includes(f.o)).forEach(f=>{
+    Object.keys(FAMILY).filter(p=>p!==f.c.process&&FAMILY[p]===FAMILY[f.c.process]).forEach(p=>{
+      const k=f.s+'|'+f.r+'|'+f.o+'|'+p;
+      if(!known.has(k)&&F.some(g=>g.c.process===p)&&!out.some(x=>x.k===k))out.push({k,type:'transfer',txt:`“${claimText({...f,c:{}})}” is established for ${E[f.c.process].n} [${f.src}] but no source confirms it for ${E[p].n}.`,ask:`evidence for “${E[f.s].n} ${RW[f.r]} ${E[f.o].n.toLowerCase()}” in ${E[p].n}`,proc:p,ents:[f.s,f.o]});});});
+  // 2) condition gaps: a quantitative limit known only for some catalysts
+  const lim=F.filter(f=>f.s==='cond'&&f.o==='agglom'&&f.c.catalyst),cats=new Set(lim.map(f=>f.c.catalyst));
+  if(lim.length)['zn','mc','cr'].filter(c=>!cats.has(c)).forEach(c=>out.push({k:'lim|'+c,type:'condition',txt:`Safe condensed-liquid limit is known for ${[...cats].map(x=>E[x].n).join(' and ')} only; nothing for ${E[c].n}.`,ask:`Condensed-mode limit for ${E[c].n} catalyst in gas-phase PE`}));
+  return out;}
+function renderGaps(){const g=gaps();$('gaps').innerHTML=g.length?g.map(x=>`<div class="item"><div class="hd"><span>${x.type==='transfer'?'Not confirmed for a related process':'Missing operating limit'}</span><span class="tag gap">gap</span></div><div>${esc(x.txt)}</div><div class="sub" style="margin-top:3px">Proposed search / question: ${esc(x.ask)}</div></div>`).join(''):'<span class="sub">None found yet.</span>';}
+let seenC=new Set(),seenG=new Set();
+function analyse(id){
+  contradictions().forEach(c=>{if(!seenC.has(c.id)){seenC.add(c.id);post('Contradiction detector',c.kind==='conflict'?'bad':'warn',`${c.a.src} vs ${c.b.src} on ${E[c.a.s].n} → ${E[c.a.o].n}: <b>${c.kind}</b>${c.kind==='conflict'?' → routed to chemist':''}.`);}});
+  gaps().forEach(g=>{if(!seenG.has(g.k)){seenG.add(g.k);post('Gap finder','info',esc(g.txt));}});
+  renderContra();renderGaps();kpis();}
+// ---------------- graph ----------------
+let pos={};
+function layout(){const nodes=[...new Set(F.flatMap(f=>[f.s,f.o,...Object.values(f.c).filter(v=>E[v])]))];
+  const H=460,col={process:95,catalyst:255,var:440,effect:640},edges=edgeList(),groups={};
+  nodes.forEach(n=>(groups[E[n].t]=groups[E[n].t]||[]).push(n));
+  const place=()=>Object.values(groups).forEach(g=>g.forEach((n,i)=>{pos[n]={x:col[E[n].t],y:40+(i+0.5)*(H-80)/g.length};}));
+  Object.values(groups).forEach(g=>g.sort());place();
+  for(let sweep=0;sweep<6;sweep++){Object.values(groups).forEach(g=>{const bc=n=>{const nb=edges.filter(e=>e.a===n||e.b===n).map(e=>pos[e.a===n?e.b:e.a].y);return nb.length?nb.reduce((s,v)=>s+v,0)/nb.length:pos[n].y;};
+    const m={};g.forEach(n=>m[n]=bc(n));g.sort((x,y)=>m[x]-m[y]);});place();}
+  return nodes;}
+function edgeList(){const m={};F.forEach(f=>{const k=f.s+'>'+f.o+'>'+f.r;(m[k]=m[k]||{a:f.s,b:f.o,r:f.r,f:[]}).f.push(f);
+  if(f.c.process&&f.s!==f.c.process){const k2=f.s+'>'+f.c.process+'>ctx';m[k2]=m[k2]||{a:f.s,b:f.c.process,r:'ctx',f:[]};m[k2].f.push(f);}});return Object.values(m);}
+const NC={process:'#2563eb',catalyst:'#7c3aed',var:'#0d9488',effect:'#d97706'},EC={inc:'#dc2626',dec:'#16a34a',none:'#d97706',on:'#666666',ctx:'#d4d4d4'};
+function drawGraph(){const nodes=layout(),edges=edgeList(),cs=contradictions(),cKeys=new Set(cs.filter(c=>!resolved[c.id]).map(c=>c.a.s+'>'+c.a.o));
+  let h='<defs>'+Object.entries(EC).map(([k,c])=>`<marker id="m${k}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0L10,5L0,10z" fill="${c}"/></marker>`).join('')+'</defs>';
+  edges.forEach(e=>{const A=pos[e.a],B=pos[e.b],dx=B.x-A.x,dy=B.y-A.y,d=Math.hypot(dx,dy)||1,ux=dx/d,uy=dy/d,x1=A.x+ux*12,y1=A.y+uy*12,x2=B.x-ux*14,y2=B.y-uy*14;
+    const hl=sel&&(e.a===sel||e.b===sel),dim=sel&&!hl,ctr=cKeys.has(e.a+'>'+e.b);
+    h+=`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${ctr?'#dc2626':EC[e.r]}" stroke-width="${e.r==='ctx'?1:Math.min(4,1.2+e.f.length*0.7)}" ${e.r==='ctx'?'stroke-dasharray="3 4"':''} ${ctr?'stroke-dasharray="6 4"':''} opacity="${dim?0.12:e.r==='ctx'?0.7:0.9}" ${e.r!=='ctx'?`marker-end="url(#m${e.r})"`:''}/>`;
+    if(e.r!=='ctx'&&!dim)h+=`<text x="${x1+(x2-x1)*0.62}" y="${y1+(y2-y1)*0.62-3}" fill="#666666" font-size="9.5" text-anchor="middle">${e.f.map(f=>f.src).filter((v,i,a)=>a.indexOf(v)===i).join(' ')}</text>`;});
+  nodes.forEach(n=>{const p=pos[n],dim=sel&&sel!==n&&!edges.some(e=>(e.a===sel&&e.b===n)||(e.b===sel&&e.a===n));
+    h+=`<g data-n="${n}" style="cursor:pointer" opacity="${dim?0.25:1}"><circle cx="${p.x}" cy="${p.y}" r="${n===sel?11:9}" fill="${NC[E[n].t]}" stroke="#ffffff" stroke-width="2"/><text x="${p.x}" y="${p.y+21}" fill="#0a0a0a" font-size="10.5" text-anchor="middle" paint-order="stroke" stroke="#ffffff" stroke-width="3">${esc(E[n].n)}</text></g>`;});
+  $('graph').innerHTML=h;
+  $('graph').querySelectorAll('g[data-n]').forEach(g=>g.onclick=()=>{sel=sel===g.dataset.n?null:g.dataset.n;drawGraph();nodeInfo();});}
+function nodeInfo(){if(!sel){$('nodeinfo').innerHTML='Click a node to see the facts behind it.';$('gsel').textContent='';return;}
+  const fs=F.filter(f=>f.s===sel||f.o===sel||Object.values(f.c).includes(sel));$('gsel').textContent=E[sel].n;
+  $('nodeinfo').innerHTML=fs.map(f=>`<div>• ${esc(claimText(f))} <span class="cite" data-f="${f.id}">[${f.src}]</span></div>`).join('');bindCites($('nodeinfo'));}
+function bindCites(root){root.querySelectorAll('.cite').forEach(c=>c.onclick=()=>{const f=F.find(x=>x.id===c.dataset.f),s=S.find(x=>x.id===f.src);
+  post('Evidence','info',`${f.src} · ${esc(s.title)} — sentence ${f.si+1}: “${esc(s.sent[f.si])}”`);});}
+// ---------------- answering ----------------
+function entitiesIn(q){q=' '+q.toLowerCase()+' ';return Object.keys(E).filter(k=>E[k].a.some(a=>q.includes(a)));}
+async function ask(q){
+  if(!F.length){$('answer').innerHTML='<span class="warn">The graph is empty — ingest sources first.</span>';return;}
+  const ents=entitiesIn(q);post('Router','info',`Question → entities: ${ents.length?ents.map(e=>E[e].n).join(', '):'none'}.`);
+  const known=new Set(F.flatMap(f=>[f.s,f.o,...Object.values(f.c)]));
+  const unknownWords=q.toLowerCase().match(/\b(pet|pvc|polystyrene|nylon|polyester)\b/g);
+  if(!ents.length||unknownWords){post('Answer agent','warn','Coverage check failed → refusal instead of a guess.');post('Gap finder','info',`Logged out-of-scope question: “${esc(q)}”.`);
+    $('answer').innerHTML=`<div class="item"><div class="hd"><span>No answer</span><span class="tag gap">out of knowledge base</span></div>The knowledge layer has no sources on ${unknownWords?'<b>'+esc(unknownWords.join(', ').toUpperCase())+'</b>':'this topic'}. It does not guess; the question is logged as a gap for the knowledge engineer.</div>`;return;}
+  // score facts
+  const procs=ents.filter(e=>E[e].t==='process'),cats=ents.filter(e=>E[e].t==='catalyst'),core=ents.filter(e=>!['process','catalyst'].includes(E[e].t));
+  let fs=F.map(f=>{let s=0;core.forEach(e=>{if(f.s===e||f.o===e)s+=2;});cats.forEach(c=>{if(f.s===c||f.c.catalyst===c)s+=1.5;else if(f.c.catalyst&&f.c.catalyst!==c)s-=1;});
+     procs.forEach(p=>{if(f.c.process===p||f.o===p)s+=1;else if(f.c.process&&f.c.process!==p)s-=3;});return {f,s};}).filter(x=>x.s>=2).sort((a,b)=>b.s-a.s);const top=fs.length?fs[0].s:0;fs=fs.filter(x=>x.s>=top-1).map(x=>x.f);
+  if(/mitigat|prevent|reduce|avoid/.test(q.toLowerCase()))fs=[...fs,...F.filter(f=>f.r==='dec'&&core.includes(f.o)&&!fs.includes(f)&&(!procs.length||procs.includes(f.c.process)))];
+  fs=fs.slice(0,6);
+  const cs=contradictions();
+  post('Answer agent','info',`Draft from ${fs.length} graph facts${$('hall').checked?' (+ simulated LLM addition)':''}.`);
+  let claims=fs.map(f=>({txt:claimText(f),f}));
+  if($('hall').checked){const p=procs[0]||'gp_pe';claims.splice(1,0,{txt:`Raising the fluidization velocity by 20% eliminates agglomeration in ${E[p].n}`,cite:'S1',f:null});}
+  // critic
+  await sleep(150);
+  const checked=claims.map(c=>{if(!c.f){const s=S.find(x=>x.id===c.cite);return {...c,ok:false,why:`no sentence in ${c.cite} supports it (${s.sent.length} sentences checked)`};}
+    const s=S.find(x=>x.id===c.f.src),sent=s.sent[c.f.si];const ok=s.f.some(r=>r[0]===c.f.si&&r[1]===c.f.s&&r[3]===c.f.o);
+    const ct=cs.find(k=>(k.a===c.f||k.b===c.f));return {...c,ok,sent,ct};});
+  checked.forEach(c=>{if(!c.ok)post('Critic','bad',`Struck: “${esc(c.txt)}” — ${c.why}.`);});
+  post('Critic',checked.every(c=>c.ok)?'ok':'warn',`${checked.filter(c=>c.ok).length}/${checked.length} claims verified against cited sentences.`);
+  $('answer').innerHTML=`<div class="sub" style="margin-bottom:4px">${checked.filter(c=>c.ok).length} verified claims · ${checked.filter(c=>!c.ok).length} struck by Critic · scope: ${ents.map(e=>E[e].n).join(', ')}</div>`+checked.map(c=>{
+    const ctag=c.ct?(resolved[c.ct.id]?` <span class="tag res">chemist: ${esc(resolved[c.ct.id])}</span>`:c.ct.kind==='conflict'?' <span class="tag conf">disputed</span>':' <span class="tag cond">conditional</span>'):'';
+    return `<div class="claim ${c.ok?'':'struck'}"><div class="b ${c.ok?'ok':'bad'}">${c.ok?'✓':'✗'}</div><div><span class="x">${esc(c.txt)}</span> ${c.f?`<span class="cite" data-f="${c.f.id}">[${c.f.src}]</span>`:`<span class="mut">[${c.cite}]</span>`}${ctag}
+     <div class="quote">${c.ok?'“'+esc(c.sent)+'”':esc('Removed: '+c.why)}</div></div></div>`;}).join('');
+  const gq=gaps().filter(g=>g.proc&&procs.includes(g.proc)&&g.ents.some(e=>core.includes(e)));
+  if(gq.length){post('Gap finder','info',`Answer has ${gq.length} unconfirmed point(s) for this process — shown, not guessed.`);
+    $('answer').insertAdjacentHTML('beforeend',gq.map(g=>`<div class="claim"><div class="b" style="color:#2563eb">?</div><div>Not in sources: ${esc(g.txt)} <span class="tag gap">gap</span></div></div>`).join(''));}
+  bindCites($('answer'));}
+$('q').addEventListener('keydown',e=>{if(e.key==='Enter')ask($('q').value);});
+$('presets').innerHTML=PRESETS.map(p=>`<span class="chip">${esc(p)}</span>`).join('');
+$('presets').querySelectorAll('.chip').forEach(c=>c.onclick=()=>{$('q').value=c.textContent;ask(c.textContent);});
+// ---------------- PFD exchange ----------------
+$('pfd').onclick=()=>{
+  const req={bus:'maif.kb.query',from:'stand3.pfd.agent/flowsheet-builder',to:'kb.layer',corr:'pfd-'+Math.random().toString(36).slice(2,8),
+    need:{process:'sl_pe',items:['operating temperature limit','melt-index handle','residence time','fouling risks']}};
+  $('req').textContent=JSON.stringify(req,null,2);post('PFD agent (stand 3)','info',`Request <code>${req.corr}</code>: facts for ${E.sl_pe.n} flowsheet.`);
+  const fs=F.filter(f=>f.c.process==='sl_pe');
+  const resp={bus:'maif.kb.answer',corr:req.corr,from:'kb.layer',
+    facts:fs.map(f=>({claim:claimText(f),subject:f.s,relation:f.r,object:f.o,conditions:f.c,evidence:{source:f.src,sentence:S.find(s=>s.id===f.src).sent[f.si]},verified:true})),
+    gaps:fs.length?['No numeric swelling-limit temperature in sources — flowsheet must take it from the licensor data or the customer.']:['No sources ingested for slurry HDPE.'],
+    contradictions:[]};
+  $('resp').textContent=JSON.stringify(resp,null,2);
+  post('Knowledge layer',fs.length?'ok':'warn',fs.length?`Answered <code>${req.corr}</code>: ${fs.length} verified facts with evidence, 1 gap (no numeric swelling limit).`:`<code>${req.corr}</code>: nothing on slurry HDPE yet — ingest S6.`);};
+// ---------------- KPIs ----------------
+function kpis(){const cs=contradictions(),open=cs.filter(c=>!resolved[c.id]).length;
+  $('kpis').innerHTML=[['Sources',done.size+' / '+S.length],['Facts in graph',F.length],['Entities',new Set(F.flatMap(f=>[f.s,f.o])).size],['Contradictions',cs.length?`${cs.length} <span class="mut" style="font-size:12px">(${open} open)</span>`:'0'],['Gaps',gaps().length]]
+    .map(k=>`<div class="kpi"><div class="k">${k[0]}</div><div class="v">${k[1]}</div></div>`).join('');}
+$('ingest').onclick=async()=>{$('ingest').disabled=true;for(const s of S){await ingest(s.id);await sleep(250);}$('ingest').disabled=false;};
+$('reset').onclick=()=>{F=[];done=new Set();resolved={};pos={};sel=null;seenC=new Set();seenG=new Set();$('feed').innerHTML='';T0=performance.now();renderSrc();drawGraph();renderContra();renderGaps();kpis();nodeInfo();
+  $('answer').innerHTML='Ingest sources, then ask.';$('req').textContent=$('resp').textContent='—';post('System','info','Agents online: Ingest, Extractor, Graph builder, Contradiction detector, Gap finder, Router, Answer agent, Critic. Chemist joins via HITL.');};
+$('reset').click();
+})();
+</script>
+</body>
+</html>

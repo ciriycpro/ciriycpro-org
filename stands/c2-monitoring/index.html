@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="icon" href="/star.png" type="image/png">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MAIF Live Demo — Agentic Monitoring of a C2 Hydrogenation Reactor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff; --panel:#ffffff; --panel2:#fafafa01; --line:#e8e8e8; --ink:#0a0a0a; --mut:#666666;
+  --teal:#0d9488; --lime:#16a34a; --amber:#d97706; --red:#dc2626; --blue:#2563eb; --violet:#7c3aed;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+.mono{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace}
+header{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:16px 20px 10px;border-bottom:1px solid var(--line)}
+.brand{display:flex;gap:12px;align-items:center}
+.brand .dot{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--teal),var(--lime));display:grid;place-items:center;color:#e6f4f2;font-weight:800}
+h1{font-size:18px;margin:0;font-weight:700;letter-spacing:.2px}
+.sub{color:var(--mut);font-size:12.5px;margin-top:2px}
+.ctrl{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.btn{background:#ffffff;border:1px solid var(--line);color:var(--ink);padding:7px 11px;border-radius:9px;cursor:pointer;font:inherit;font-size:13px}
+.btn:hover{border-color:#bbbbbb}
+.btn.on{background:var(--teal);color:#ffffff;border-color:var(--teal);font-weight:600}
+.btn.danger{border-color:#f3c0c0}
+.clock{font-size:13px;color:var(--mut);padding:0 6px}
+.scen{display:flex;gap:8px;flex-wrap:wrap;padding:12px 20px;border-bottom:1px solid var(--line);align-items:center}
+.scen .lbl{color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.08em;margin-right:4px}
+main{display:grid;grid-template-columns:300px minmax(0,1fr) 360px;gap:14px;padding:14px 20px 20px}
+@media (max-width:1180px){main{grid-template-columns:1fr 1fr}.right{grid-column:1/-1}}
+@media (max-width:760px){main{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
+.card h3{margin:0 0 10px;font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:.09em;font-weight:600}
+.col{display:flex;flex-direction:column;gap:14px;min-width:0}
+.kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+@media (max-width:1400px){.kpis{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px;min-width:0}
+.kpi .k{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.06em}
+.kpi .v{font-size:22px;font-weight:700;margin-top:3px;white-space:nowrap}
+.kpi .s{font-size:11.5px;color:var(--mut);margin-top:1px}
+.ok{color:var(--lime)} .warn{color:var(--amber)} .bad{color:var(--red)}
+canvas{width:100%;display:block}
+.agents{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px}
+.ag{display:flex;align-items:center;gap:7px;font-size:12.5px;background:#fafafa;border:1px solid var(--line);border-radius:9px;padding:6px 8px}
+.ag i{width:8px;height:8px;border-radius:50%;background:var(--lime);flex:none;box-shadow:0 0 0 3px #16a34a22}
+.ag.busy i{background:var(--amber);box-shadow:0 0 0 3px #d9770633}
+.ag.alert i{background:var(--red);box-shadow:0 0 0 3px #dc262633}
+.feed{height:340px;overflow:auto;display:flex;flex-direction:column;gap:6px;padding-right:4px}
+.ev{border-left:3px solid var(--teal);background:#fafafa;border-radius:6px;padding:6px 9px;font-size:12.5px}
+.ev .h{display:flex;justify-content:space-between;gap:8px;color:var(--mut);font-size:11px}
+.ev.warn{border-color:var(--amber)} .ev.bad{border-color:var(--red)} .ev.ok{border-color:var(--lime)} .ev.info{border-color:var(--blue)}
+.rec{border:1px solid #b9dcd7;background:linear-gradient(180deg,#e6f4f2,#f3faf9);border-radius:12px;padding:12px;margin-top:12px}
+.rec .t{font-weight:700;margin-bottom:4px}
+.rec .why{color:var(--mut);font-size:12.5px;margin-bottom:10px}
+.rec .acts{display:flex;gap:8px}
+.empty{color:var(--mut);font-size:12.5px}
+.sl{margin:10px 0}
+.sl label{display:flex;justify-content:space-between;font-size:12.5px;color:var(--mut)}
+.sl input{width:100%;accent-color:var(--teal)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:var(--mut);margin-top:6px}
+.legend b{display:inline-block;width:14px;height:3px;border-radius:2px;vertical-align:middle;margin-right:5px}
+footer{color:var(--mut);font-size:12px;padding:4px 20px 24px;line-height:1.6}
+footer a{color:var(--teal)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:1400px){.grid2{grid-template-columns:1fr}}
+.tag{font-size:11px;color:var(--mut)}
+
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif}
+.sitebar{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;height:60px;padding:0 20px;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid #e8e8e8}
+.sb-logo{display:flex;align-items:center;gap:10px;font-weight:600;font-size:15px;letter-spacing:2px;color:#0a0a0a;text-decoration:none}
+.sb-logo img{width:26px;height:26px}.sb-sub{font-weight:400;color:#888;letter-spacing:1px;font-size:12px}
+.sb-back{color:#555;text-decoration:none;font-size:14px;font-weight:500}.sb-back:hover{color:#0a0a0a}
+.btn.primary{background:#0a0a0a!important;border-color:#0a0a0a!important;color:#fff!important}
+</style>
+</head>
+<body>
+<div class="sitebar"><a class="sb-logo" href="/"><span>CIRIYC PRO</span><span class="sb-sub">RESEARCH</span><img src="/star.png" alt=""></a><a class="sb-back" href="/#demos">← All demos</a></div>
+<header>
+  <div class="brand">
+    <div class="dot">M</div>
+    <div>
+      <h1>Agentic monitoring of a C2 hydrogenation reactor</h1>
+      <div class="sub">MAIF live demo · CIRIYC PRO Research · simulated plant, real agent logic</div>
+    </div>
+  </div>
+  <div class="ctrl">
+    <span class="clock mono" id="clock">t = 00:00</span>
+    <button class="btn" id="pause">Pause</button>
+    <button class="btn" data-speed="1">1×</button>
+    <button class="btn on" data-speed="4">4×</button>
+    <button class="btn" data-speed="12">12×</button>
+  </div>
+</header>
+
+<div class="scen" id="scen">
+  <span class="lbl">Scenario</span>
+</div>
+
+<main>
+  <div class="col">
+    <div class="card">
+      <h3>Reactor R-201 · tail-end, adiabatic bed</h3>
+      <canvas id="reactor" height="420"></canvas>
+    </div>
+    <div class="card">
+      <h3>Operator setpoints</h3>
+      <div class="sl"><label>Inlet temperature <span class="mono" id="vTin"></span></label><input type="range" id="sTin" min="40" max="70" step="0.5"></div>
+      <div class="sl"><label>H₂ / C₂H₂ ratio <span class="mono" id="vRat"></span></label><input type="range" id="sRat" min="1.0" max="3.2" step="0.05"></div>
+      <div class="sl"><label>CO moderator, ppm <span class="mono" id="vCo"></span></label><input type="range" id="sCo" min="0.1" max="4" step="0.05"></div>
+      <div class="tag">Setpoints ramp like a real plant; agents see only measured tags.</div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="kpis" id="kpis"></div>
+    <div class="card">
+      <h3>Temperatures, last 120 min · forecast +30 min</h3>
+      <canvas id="chT" height="250"></canvas>
+      <div class="legend"><span><b style="background:#2563eb"></b>T inlet</span><span><b style="background:#0d9488"></b>T outlet</span><span><b style="background:#7c3aed"></b>Hot spot</span><span><b style="background:#d97706"></b>Forecast (agent)</span><span><b style="background:#dc2626"></b>HI / HH limits</span></div>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <h3>Bed temperature profile</h3>
+        <canvas id="chP" height="210"></canvas>
+        <div class="legend"><span><b style="background:#0d9488"></b>Now</span><span><b style="background:#16a34a"></b>Optimal (agent)</span><span><b style="background:#666666"></b>Design</span></div>
+      </div>
+      <div class="card">
+        <h3>Product quality & ethylene loss</h3>
+        <canvas id="chQ" height="210"></canvas>
+        <div class="legend"><span><b style="background:#d97706"></b>C₂H₂ slip, ppm (analyzer, 5-min lag)</span><span><b style="background:#7c3aed"></b>Ethylene → ethane, % (heat-balance estimate)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col right">
+    <div class="card">
+      <h3>MAIF agent bus</h3>
+      <div class="agents" id="agents"></div>
+      <div class="feed" id="feed"></div>
+      <div id="recBox"></div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  Simplified 1-D adiabatic fixed-bed model of tail-end acetylene hydrogenation on Pd catalyst: C₂H₂ + H₂ → C₂H₄ (ΔH ≈ −172 kJ/mol) and C₂H₄ + H₂ → C₂H₆ (ΔH ≈ −137 kJ/mol), with CO moderation and acetylene inhibition. Kinetics are illustrative and the data are synthetic — this page shows how MAIF agents reason over plant tags, not a model of any specific plant.<br>
+  Agents: Sensor · Anomaly · Heat-balance · Forecast · Optimizer · Planner/HITL. Decisions stay with the operator. <a href="https://ciriycpro.org">ciriycpro.org</a>
+</footer>
+
+<script>
+(() => {
+// ======================= PROCESS MODEL =======================
+const R=8.314, CP=52, DH1=172e3, DH2=137e3, TREF=333.15;
+const KIN={k1:30,k2:0.3,E1:50e3,E2:115e3,KA:300,c1:0.15,c2:2.5};
+const N=40, YA_IN=0.007, FLOW=595; // mol/s (~60 t/h)
+const LIM={HI:90, HH:105, SLIP:1.0, DT_DESIGN:24.2};
+function solve(p){
+  let T=p.Tin+273.15, yA=YA_IN, yH=YA_IN*p.ratio, yE=0.80, yEt=0.10;
+  const f1=1/(1+KIN.c1*p.co), f2=1/(1+KIN.c2*p.co), sub=10, h=1/N/sub, prof=new Array(N);
+  for(let i=0;i<N;i++){ for(let s=0;s<sub;s++){
+    const a1=KIN.k1*p.act*Math.exp(-KIN.E1/R*(1/T-1/TREF))*f1;
+    const a2=KIN.k2*p.act*Math.exp(-KIN.E2/R*(1/T-1/TREF))*f2;
+    const inh=1+KIN.KA*yA;
+    let r1=Math.min(a1*yA*yH/inh*h*100,yA,yH); yA-=r1; yH-=r1; yE+=r1;
+    let r2=Math.min(a2*yE*yH/(inh*inh)*h,yH); yH-=r2; yE-=r2; yEt+=r2;
+    T+=(DH1*r1+DH2*r2)/CP; }
+    prof[i]=T-273.15; }
+  return {prof,Tout:T-273.15,slip:yA*1e6,loss:(yEt-0.10)*100};
+}
+const DESIGN=solve({Tin:50,ratio:1.4,co:2,act:1}).prof;
+
+// ======================= PLANT STATE =======================
+const BASE={Tin:50,ratio:1.4,co:2,act:1};
+let S;
+function reset(){
+  S={t:0, u:{...BASE}, sp:{...BASE}, rate:{Tin:0.4,ratio:0.05,co:0.15,act:0.02},
+     bed:solve(BASE).prof.slice(), hist:[], anaQ:[], ana:{slip:0.1,t:0}, alerts:{}, events:[],
+     rec:null, fc:null, opt:null, dismissed:{}, lastOpt:-99};
+  for(let i=0;i<30;i++) stepMinute();
+  S.alerts={}; S.rec=null; feed.innerHTML='';
+  post('sys','info','Plant at steady state. 6 agents subscribed to 14 tags. Pick a scenario above — agents are not told which one.');
+}
+function ramp(key,to,rate){ S.sp[key]=to; if(rate) S.rate[key]=rate; }
+
+// ======================= SCENARIOS =======================
+const SCEN=[
+ {id:'normal',name:'Normal operation',run(){}},
+ {id:'co',name:'CO moderator loss',run(){ramp('co',0.15,0.12)}},
+ {id:'h2',name:'H₂ overdosing',run(){ramp('ratio',2.8,0.04)}},
+ {id:'combo',name:'Combined upset (dangerous)',run(){ramp('co',0.15,0.15);ramp('ratio',2.6,0.05);ramp('Tin',56,0.25)}},
+ {id:'deact',name:'Catalyst deactivation',run(){ramp('act',0.4,0.015)}},
+ {id:'tin',name:'Inlet temperature drift',run(){ramp('Tin',68,0.35)}},
+];
+let curScen='normal';
+const scenEl=document.getElementById('scen');
+SCEN.forEach(s=>{const b=document.createElement('button');b.className='btn'+(s.id==='normal'?' on':'')+(s.id==='combo'?' danger':'');b.textContent=s.name;
+  b.onclick=()=>{curScen=s.id;[...scenEl.querySelectorAll('.btn')].forEach(x=>x.classList.remove('on'));b.classList.add('on');reset();s.run();syncSliders();
+    post('sys','info','Scenario started: '+s.name+'. Agents are not told what it is.');};scenEl.appendChild(b);});
+
+// ======================= AGENTS =======================
+const AG=[['sensor','Sensor'],['anomaly','Anomaly'],['heat','Heat-balance'],['forecast','Forecast'],['opt','Optimizer'],['hitl','Planner / HITL']];
+const agState={}; AG.forEach(([k])=>agState[k]='idle');
+const agEl=document.getElementById('agents');
+function drawAgents(){agEl.innerHTML=AG.map(([k,n])=>`<div class="ag ${agState[k]==='alert'?'alert':agState[k]==='busy'?'busy':''}"><i></i>${n}</div>`).join('');}
+const feed=document.getElementById('feed');
+const AGN=Object.fromEntries(AG.concat([['sys','System'],['operator','Operator']]));
+function post(ag,lvl,msg){
+  const d=document.createElement('div');d.className='ev '+lvl;
+  d.innerHTML=`<div class="h"><span>${AGN[ag]}</span><span class="mono">${fmtT(S?S.t:0)}</span></div>${msg}`;
+  feed.prepend(d); while(feed.children.length>80) feed.lastChild.remove();
+}
+function raise(key,ag,lvl,msg){ if(!S.alerts[key]){S.alerts[key]={ag,lvl,t:S.t};post(ag,lvl,msg);} }
+function clear(key,msg){ if(S.alerts[key]){ const a=S.alerts[key]; delete S.alerts[key]; if(msg) post(a.ag,'ok',msg);} }
+const noise=s=>(Math.random()-0.5)*2*s;
+
+function stepMinute(){
+  S.t+=1;
+  // plant: move inputs toward setpoints
+  for(const k of ['Tin','ratio','co','act']){const d=S.sp[k]-S.u[k],r=S.rate[k]; S.u[k]+=Math.abs(d)<=r?d:Math.sign(d)*r;}
+  const ss=solve(S.u);
+  for(let i=0;i<N;i++){ S.bed[i]+= (ss.prof[i]-S.bed[i])*(1-Math.exp(-1/4)); } // bed thermal lag, tau = 4 min
+  // ---- Sensor agent: tags ----
+  const tag={Tin:S.u.Tin+noise(0.15), Tout:S.bed[N-1]+noise(0.15), TIs:[8,16,24,32].map(i=>S.bed[i]+noise(0.15)),
+             ratio:S.u.ratio+noise(0.01), co:Math.max(0,S.u.co+noise(0.03))};
+  tag.hot=Math.max(...S.bed); tag.dT=tag.Tout-tag.Tin;
+  S.anaQ.push({t:S.t,slip:Math.max(0,ss.slip*(1+noise(0.05))),loss:ss.loss});
+  if(S.t%5===0){ const old=S.anaQ.find(a=>a.t===S.t-5); if(old) S.ana={slip:old.slip,t:S.t}; }
+  S.anaQ=S.anaQ.filter(a=>a.t>S.t-8);
+  // ---- Heat-balance agent ----
+  const conv=(YA_IN*1e6-S.ana.slip)/1e6;
+  const dTexp=conv*DH1/CP, excess=tag.dT-dTexp;
+  const lossEst=Math.max(0,excess*CP/DH2*100);
+  const Q=FLOW*CP*tag.dT/1e6, Qd=FLOW*CP*LIM.DT_DESIGN/1e6, pct=Q/Qd*100;
+  tag.lossEst=lossEst; tag.Q=Q; tag.pct=pct;
+  const sel=Math.max(-99,(conv*100-lossEst)/(conv*100)*100); tag.sel=sel;
+  S.hist.push({t:S.t,Tin:tag.Tin,Tout:tag.Tout,hot:tag.hot,slip:S.ana.slip,loss:lossEst});
+  if(S.hist.length>200) S.hist.shift();
+  S.tag=tag;
+
+  agState.sensor='idle'; agState.anomaly='idle'; agState.heat='idle'; agState.forecast='idle'; agState.opt='idle'; agState.hitl='idle';
+  if(S.t<4) return;
+  // heat-balance alerts
+  if(pct>118) {raise('heat','heat','warn',`Heat release ${pct.toFixed(0)}% of design (${Q.toFixed(2)} MW vs ${Qd.toFixed(2)} MW). Excess ΔT ${excess.toFixed(1)} K is not explained by acetylene conversion → ethylene is being hydrogenated (~${lossEst.toFixed(2)}%).`); agState.heat='alert';}
+  else if(pct<108) clear('heat','Heat release back within design band.');
+  if(sel<70) {raise('sel','heat','warn',`Selectivity fell to ${sel.toFixed(0)}% (heat balance). Ethylene loss ≈ ${lossEst.toFixed(2)}% of product.`);agState.heat='alert';}
+  else if(sel>80) clear('sel','Selectivity recovered.');
+  // ---- Anomaly agent: trends ----
+  const h=S.hist, n=h.length;
+  if(n>8){
+    const slope=(h[n-1].Tout-h[n-7].Tout)/6, slopeIn=(h[n-1].Tin-h[n-7].Tin)/6;
+    if(slope>0.35 && slope-slopeIn>0.2){raise('trend','anomaly','warn',`Outlet temperature rising ${slope.toFixed(2)} K/min faster than inlet. Reaction heat is growing.`);agState.anomaly='alert';}
+    else if(slope<0.12) clear('trend');
+    const tagCO=tag.co, tagR=tag.ratio;
+    if(tagCO<0.8){raise('co','anomaly','warn',`CO moderator low: ${tagCO.toFixed(2)} ppm (normal 1.5–2.5). Catalyst selectivity will degrade.`);agState.anomaly='alert';} else if(tagCO>1.2) clear('co','CO moderator back to normal.');
+    if(tagR>1.9){raise('h2','anomaly','warn',`H₂/C₂H₂ ratio ${tagR.toFixed(2)} above window 1.2–1.8. Excess hydrogen will attack ethylene.`);agState.anomaly='alert';} else if(tagR<1.7) clear('h2','H₂ dosing back in window.');
+  }
+  if(S.ana.slip>LIM.SLIP){raise('slip','anomaly','bad',`Off-spec: C₂H₂ slip ${S.ana.slip.toFixed(1)} ppm > ${LIM.SLIP} ppm at outlet analyzer. Activity is no longer enough at current inlet temperature.`);agState.anomaly='alert';}
+  else if(S.ana.slip<0.6) clear('slip','Acetylene slip back on spec.');
+  if(tag.Tout>LIM.HI){raise('hi','anomaly','bad',`T outlet ${tag.Tout.toFixed(1)} °C above HI alarm ${LIM.HI} °C.`);} else if(tag.Tout<LIM.HI-2) clear('hi','T outlet below HI alarm.');
+  if(tag.Tout>LIM.HH){raise('hh','anomaly','bad',`<b>HH limit crossed: T outlet ${tag.Tout.toFixed(1)} °C ≥ ${LIM.HH} °C.</b> Interlock zone — operator action required.`);agState.anomaly='alert';} else if(tag.Tout<LIM.HH-2) clear('hh','T outlet back below HH limit.');
+
+  // ---- Forecast agent: extrapolate measured inputs 30 min ----
+  if(n>10){
+    agState.forecast='busy';
+    const k=10, a=h[n-1-k]; const sl=(x,y)=> (x-y)/k;
+    const tin0=tag.Tin, dTin=sl(tag.Tin,a.Tin);
+    const hist10=S.tagHist||[];
+    const rP=S.prevTags&&S.prevTags.length>=k?S.prevTags[S.prevTags.length-k]:null;
+    const dR=rP?(tag.ratio-rP.ratio)/k:0, dC=rP?(tag.co-rP.co)/k:0;
+    const pts=[]; let tAl=null, tHH=null, maxT=tag.Tout;
+    for(let m=5;m<=30;m+=5){
+      const p={Tin:tin0+dTin*m, ratio:Math.max(1,tag.ratio+dR*m), co:Math.max(0.05,tag.co+dC*m), act:estAct()};
+      const r=solve(p); pts.push({t:S.t+m,T:r.Tout}); maxT=Math.max(maxT,r.Tout);
+      if(tAl===null && r.Tout>LIM.HI) tAl=m; if(tHH===null && r.Tout>LIM.HH) tHH=m;
+    }
+    S.fc={pts,tAl,tHH,maxT};
+    if(tHH!==null && tag.Tout<LIM.HH){raise('fcHH','forecast','bad',`Projected T outlet ${maxT.toFixed(0)} °C — crosses HH trip limit ${LIM.HH} °C in ~${tHH} min if trends continue. Runaway risk.`);agState.forecast='alert';}
+    else if(tHH===null) clear('fcHH','Forecast no longer reaches HH limit.');
+    if(tAl!==null && tag.Tout<LIM.HI){raise('fcHI','forecast','warn',`Projected HI alarm (${LIM.HI} °C) in ~${tAl} min.`);agState.forecast='alert';}
+    else if(tAl===null) clear('fcHI');
+  }
+  S.prevTags=(S.prevTags||[]).concat([{ratio:tag.ratio,co:tag.co}]).slice(-30);
+
+  // ---- Optimizer agent: best inlet T for current state ----
+  if(S.t-S.lastOpt>=10 || S.alerts.slip || S.alerts.sel){
+    agState.opt='busy'; S.lastOpt=S.t;
+    let best=null; const act=estAct();
+    for(let T=45;T<=70;T+=0.5){const r=solve({Tin:T,ratio:tag.ratio,co:tag.co,act}); if(r.slip<0.5 && r.Tout<LIM.HI-3){best={Tin:T,r};break;}}
+    S.opt=best; S.optInfeasible=!best;
+    if(!best && S.alerts.slip){raise('eor','opt','bad',`No inlet temperature keeps C₂H₂ slip < 0.5 ppm and T outlet < ${LIM.HI-3} °C at fitted activity ${act.toFixed(2)}. Catalyst is near end of run.`);agState.opt='alert';}
+    else if(best) clear('eor');
+  }
+  // ---- Planner / HITL ----
+  plan(tag);
+}
+// Activity estimate: the optimizer fits catalyst activity to analyzer slip (simple 1-D search)
+function estAct(){
+  const tag=S.tag; if(!tag) return 1;
+  if(S.ana.slip<0.5){ S.actEst=Math.min(1,(S.actEst||1)+0.05); return S.actEst; }
+  let lo=0.1,hi=1.2; for(let i=0;i<14;i++){const m=(lo+hi)/2; const r=solve({Tin:tag.Tin,ratio:tag.ratio,co:tag.co,act:m}); if(r.slip>S.ana.slip) lo=m; else hi=m;}
+  S.actEst=(lo+hi)/2; return S.actEst;
+}
+function plan(tag){
+  let rec=null;
+  const danger=S.alerts.fcHH||S.alerts.hi;
+  if((S.alerts.h2||danger) && tag.ratio>1.75) rec={id:'h2',t:'Reduce H₂ dosing to ratio 1.4',why:`Excess H₂ is the fuel for ethylene hydrogenation. Forecast max T outlet ${S.fc?S.fc.maxT.toFixed(0):'—'} °C.`,apply(){ramp('ratio',1.4,0.08)}};
+  else if((S.alerts.co||danger) && tag.co<1.2) rec={id:'co',t:'Restore CO moderator to 2.0 ppm',why:'Low CO removes the brake on ethylene hydrogenation; selectivity and heat release are drifting up.',apply(){ramp('co',2.0,0.2)}};
+  else if(S.alerts.slip && S.optInfeasible) rec={id:'regen',t:'Plan catalyst regeneration / swing to spare bed',why:`Fitted activity ≈ ${(S.actEst||1).toFixed(2)} of fresh. Raising inlet T further would push T outlet into the alarm zone. Hold inlet T and schedule regeneration.`,apply(){ramp('act',1,0.05)}};
+  else if(S.alerts.slip && S.opt) rec={id:'tin_up',t:`Raise inlet T to ${S.opt.Tin.toFixed(1)} °C`,why:`Fitted catalyst activity ≈ ${(S.actEst||1).toFixed(2)} of fresh. Optimizer: minimum inlet T for slip < 0.5 ppm. Expected ethylene loss ${S.opt.r.loss.toFixed(2)}%.`,apply(){ramp('Tin',S.opt.Tin,0.4)}};
+  else if(S.opt && !S.alerts.slip && tag.Tin>S.opt.Tin+2) rec={id:'tin_dn',t:`Lower inlet T to ${S.opt.Tin.toFixed(1)} °C`,why:`Optimizer: lowest inlet T that keeps C₂H₂ slip < 0.5 ppm. Cuts ethylene loss to ~${S.opt.r.loss.toFixed(2)}%.`,apply(){ramp('Tin',S.opt.Tin,0.4)}};
+  if(rec && S.dismissed[rec.id] && S.t-S.dismissed[rec.id]<15) rec=null;
+  S.recPosted=S.recPosted||{};
+  if(rec && (!S.rec || S.rec.id!==rec.id) && !(S.recPosted[rec.id]>S.t-20)){ S.recPosted[rec.id]=S.t; post('hitl','info','Recommendation for operator: <b>'+rec.t+'</b>'); }
+  if(rec) agState.hitl='busy';
+  S.rec=rec; drawRec();
+}
+const recBox=document.getElementById('recBox');
+function drawRec(){
+  if(!S.rec){recBox.innerHTML='<div class="rec" style="opacity:.6"><div class="empty">No action needed. Agents keep watching.</div></div>';return;}
+  recBox.innerHTML=`<div class="rec"><div class="tag">Planner / HITL · waiting for operator</div><div class="t">${S.rec.t}</div><div class="why">${S.rec.why}</div>
+  <div class="acts"><button class="btn on" id="ap">Apply</button><button class="btn" id="ds">Dismiss</button></div></div>`;
+  document.getElementById('ap').onclick=()=>{const r=S.rec;r.apply();S.dismissed[r.id]=S.t;post('operator','ok','Applied: '+r.t);S.rec=null;syncSliders();drawRec();};
+  document.getElementById('ds').onclick=()=>{S.dismissed[S.rec.id]=S.t;post('operator','info','Dismissed: '+S.rec.t);S.rec=null;drawRec();};
+}
+
+// ======================= SLIDERS =======================
+const sTin=document.getElementById('sTin'),sRat=document.getElementById('sRat'),sCo=document.getElementById('sCo');
+function syncSliders(){sTin.value=S.sp.Tin;sRat.value=S.sp.ratio;sCo.value=S.sp.co;labels();}
+function labels(){document.getElementById('vTin').textContent=(+sTin.value).toFixed(1)+' °C';document.getElementById('vRat').textContent=(+sRat.value).toFixed(2);document.getElementById('vCo').textContent=(+sCo.value).toFixed(2);}
+sTin.oninput=()=>{ramp('Tin',+sTin.value,0.4);labels();};
+sRat.oninput=()=>{ramp('ratio',+sRat.value,0.06);labels();};
+sCo.oninput=()=>{ramp('co',+sCo.value,0.2);labels();};
+
+// ======================= DRAWING =======================
+function setupCanvas(c){const r=c.getBoundingClientRect(),d=window.devicePixelRatio||1;const h=+c.getAttribute('height');c.width=r.width*d;c.height=h*d;c.style.height=h+'px';const x=c.getContext('2d');x.setTransform(d,0,0,d,0,0);return {x,w:r.width,h};}
+function tcol(T){ // 40..120 °C → blue..teal..lime..amber..red
+  const s=[[40,[38,90,160]],[60,[25,194,176]],[80,[182,242,74]],[95,[245,165,36]],[110,[255,90,95]]];
+  if(T<=s[0][0]) return `rgb(${s[0][1]})`; for(let i=1;i<s.length;i++){ if(T<=s[i][0]){const a=s[i-1],b=s[i],f=(T-a[0])/(b[0]-a[0]);return `rgb(${a[1].map((v,j)=>Math.round(v+(b[1][j]-v)*f)).join(',')})`;} } return `rgb(${s[s.length-1][1]})`;
+}
+function drawReactor(){
+  const {x,w,h}=setupCanvas(document.getElementById('reactor'));
+  const tag=S.tag||{Tin:50,Tout:74,TIs:[60,66,70,73],ratio:1.4,co:2};
+  const cx=w/2-6, bw=60, top=60, bot=h-70;
+  x.fillStyle='#666666';x.font='12px Inter';x.textAlign='center';
+  x.fillText('Feed: C₂ fraction + H₂',cx,18);
+  x.strokeStyle='#bbbbbb';x.lineWidth=2;x.beginPath();x.moveTo(cx,26);x.lineTo(cx,top-6);x.stroke();
+  // vessel
+  x.strokeStyle='#d4d4d4';x.lineWidth=2;x.beginPath();x.roundRect(cx-bw/2-6,top-10,bw+12,bot-top+20,22);x.stroke();
+  const segH=(bot-top)/N;
+  for(let i=0;i<N;i++){x.fillStyle=tcol(S.bed[i]);x.fillRect(cx-bw/2,top+i*segH,bw,segH+0.6);}
+  x.strokeStyle='#bbbbbb';x.beginPath();x.moveTo(cx,bot+10);x.lineTo(cx,h-22);x.stroke();
+  x.fillStyle='#666666';x.fillText('Product: ethylene',cx,h-8);
+  // tags
+  x.textAlign='left';x.font='600 12px "JetBrains Mono", ui-monospace, monospace';
+  const lab=(y,name,val,col)=>{x.strokeStyle='#bbbbbb';x.lineWidth=1;x.beginPath();x.moveTo(cx+bw/2+6,y);x.lineTo(cx+bw/2+22,y);x.stroke();
+    x.fillStyle='#666666';x.font='11px Inter';x.fillText(name,cx+bw/2+26,y-3);x.fillStyle=col||'#0a0a0a';x.font='600 12.5px "JetBrains Mono", ui-monospace, monospace';x.fillText(val,cx+bw/2+26,y+12);};
+  lab(top-14,'TI-101 inlet',tag.Tin.toFixed(1)+' °C','#2563eb');
+  [8,16,24,32].forEach((i,k)=>lab(top+i*segH,'TI-10'+(k+2)+' bed',tag.TIs[k].toFixed(1)+' °C'));
+  const tc=tag.Tout>LIM.HH?'#dc2626':tag.Tout>LIM.HI?'#d97706':'#0d9488';
+  lab(bot+10,'TI-106 outlet',tag.Tout.toFixed(1)+' °C',tc);
+  // left side analyzers
+  x.textAlign='right';
+  const la=(y,name,val,col)=>{x.fillStyle='#666666';x.font='11px Inter';x.fillText(name,cx-bw/2-14,y-3);x.fillStyle=col||'#0a0a0a';x.font='600 12.5px "JetBrains Mono", ui-monospace, monospace';x.fillText(val,cx-bw/2-14,y+12);};
+  la(top+20,'H₂ / C₂H₂',tag.ratio.toFixed(2),tag.ratio>1.9?'#d97706':null);
+  la(top+70,'CO',tag.co.toFixed(2)+' ppm',tag.co<0.8?'#d97706':null);
+  la(bot-10,'C₂H₂ out',S.ana.slip.toFixed(2)+' ppm',S.ana.slip>1?'#dc2626':null);
+}
+function axes(x,w,h,pad,ymin,ymax,ylab,xlabFn,xmin,xmax,ticks){
+  x.strokeStyle='#e8e8e8';x.lineWidth=1;x.fillStyle='#666666';x.font='11px Inter';x.textAlign='right';
+  for(let i=0;i<=ticks;i++){const v=ymin+(ymax-ymin)*i/ticks,y=h-pad.b-(h-pad.t-pad.b)*i/ticks;x.beginPath();x.moveTo(pad.l,y);x.lineTo(w-pad.r,y);x.stroke();x.fillText(ylab(v),pad.l-6,y+4);}
+  x.textAlign='center';for(let i=0;i<=4;i++){const v=xmin+(xmax-xmin)*i/4;x.fillText(xlabFn(v),pad.l+(w-pad.l-pad.r)*i/4,h-6);}
+}
+function line(x,pts,X,Y,col,wd,dash){x.strokeStyle=col;x.lineWidth=wd||2;x.setLineDash(dash||[]);x.beginPath();pts.forEach((p,i)=>{const a=X(p[0]),b=Y(p[1]);i?x.lineTo(a,b):x.moveTo(a,b);});x.stroke();x.setLineDash([]);}
+function drawT(){
+  const {x,w,h}=setupCanvas(document.getElementById('chT')),pad={l:40,r:10,t:10,b:22};
+  const t1=Math.max(120,S.t)+30,t0=t1-150,ymin=35,ymax=125;
+  const X=t=>pad.l+(t-t0)/(t1-t0)*(w-pad.l-pad.r),Y=v=>h-pad.b-(v-ymin)/(ymax-ymin)*(h-pad.t-pad.b);
+  axes(x,w,h,pad,ymin,ymax,v=>v.toFixed(0),v=>fmtT(Math.max(0,v)),t0,t1,6);
+  x.fillStyle='#dc262614';x.fillRect(pad.l,Y(ymax),w-pad.l-pad.r,Y(LIM.HH)-Y(ymax));
+  line(x,[[t0,LIM.HI],[t1,LIM.HI]],X,Y,'#dc262688',1,[5,4]);line(x,[[t0,LIM.HH],[t1,LIM.HH]],X,Y,'#dc2626',1.2,[2,0]);
+  x.fillStyle='#dc2626';x.textAlign='left';x.fillText('HH '+LIM.HH,pad.l+4,Y(LIM.HH)-4);x.fillStyle='#dc262699';x.fillText('HI '+LIM.HI,pad.l+4,Y(LIM.HI)-4);
+  const hs=S.hist;
+  line(x,hs.map(p=>[p.t,p.Tin]),X,Y,'#2563eb',2);line(x,hs.map(p=>[p.t,p.hot]),X,Y,'#7c3aed',1.5,[3,3]);line(x,hs.map(p=>[p.t,p.Tout]),X,Y,'#0d9488',2.4);
+  if(S.fc&&hs.length){line(x,[[S.t,hs[hs.length-1].Tout]].concat(S.fc.pts.map(p=>[p.t,p.T])),X,Y,'#d97706',2,[6,4]);}
+  x.strokeStyle='#ffffff22';x.beginPath();x.moveTo(X(S.t),pad.t);x.lineTo(X(S.t),h-pad.b);x.stroke();
+}
+function drawP(){
+  const {x,w,h}=setupCanvas(document.getElementById('chP')),pad={l:40,r:10,t:10,b:22},ymin=35,ymax=125;
+  const X=i=>pad.l+i/(N-1)*(w-pad.l-pad.r),Y=v=>h-pad.b-(v-ymin)/(ymax-ymin)*(h-pad.t-pad.b);
+  axes(x,w,h,pad,ymin,ymax,v=>v.toFixed(0),v=>(v*100).toFixed(0)+'%',0,1,6);
+  line(x,DESIGN.map((v,i)=>[i,v]),X,Y,'#666666',1.2,[4,4]);
+  if(S.opt) line(x,S.opt.r.prof.map((v,i)=>[i,v]),X,Y,'#16a34a',2,[6,3]);
+  line(x,S.bed.map((v,i)=>[i,v]),X,Y,'#0d9488',2.6);
+}
+function drawQ(){
+  const {x,w,h}=setupCanvas(document.getElementById('chQ')),pad={l:40,r:40,t:10,b:22};
+  const t1=Math.max(120,S.t),t0=t1-120,hs=S.hist;
+  const smax=Math.max(5,...hs.map(p=>p.slip))*1.15,lmax=Math.max(0.5,...hs.map(p=>p.loss))*1.15;
+  const X=t=>pad.l+(t-t0)/(t1-t0)*(w-pad.l-pad.r),Y1=v=>h-pad.b-v/smax*(h-pad.t-pad.b),Y2=v=>h-pad.b-v/lmax*(h-pad.t-pad.b);
+  axes(x,w,h,pad,0,smax,v=>v.toFixed(v<10?1:0),v=>fmtT(Math.max(0,v)),t0,t1,4);
+  x.textAlign='left';x.fillStyle='#7c3aed';for(let i=0;i<=4;i++){const v=lmax*i/4;x.fillText(v.toFixed(2),w-pad.r+4,Y2(v)+4);}
+  line(x,[[t0,LIM.SLIP],[t1,LIM.SLIP]],X,Y1,'#dc262688',1,[5,4]);
+  line(x,hs.map(p=>[p.t,p.slip]),X,Y1,'#d97706',2.2);line(x,hs.map(p=>[p.t,p.loss]),X,Y2,'#7c3aed',2.2);
+}
+const kEl=document.getElementById('kpis');
+function drawK(){
+  const t=S.tag; if(!t) return;
+  const fc=S.fc; let fcTxt='—',fcCls='ok',fcSub='no limit in 30 min';
+  if(t.Tout>=LIM.HH){fcTxt='HH exceeded';fcCls='bad';fcSub='act now';}
+  else if(t.Tout>=LIM.HI){fcTxt='Above HI';fcCls='warn';fcSub=fc?'peak '+fc.maxT.toFixed(0)+' °C / 30 min':'';}
+  else if(fc){ if(fc.tHH!==null&&t.Tout<LIM.HH){fcTxt='HH in '+fc.tHH+' min';fcCls='bad';fcSub='peak '+fc.maxT.toFixed(0)+' °C';}
+    else if(fc.tAl!==null&&t.Tout<LIM.HI){fcTxt='HI in '+fc.tAl+' min';fcCls='warn';fcSub='peak '+fc.maxT.toFixed(0)+' °C';}
+    else {fcTxt='Stable';fcSub='peak '+fc.maxT.toFixed(0)+' °C / 30 min';} }
+  const k=[
+    ['Heat release',t.Q.toFixed(2)+' MW',(t.pct).toFixed(0)+'% of design',t.pct>118?'warn':'ok'],
+    ['Selectivity',Math.max(0,t.sel).toFixed(0)+'%','C₂H₂ → C₂H₄',t.sel<70?'warn':'ok'],
+    ['Ethylene loss',t.lossEst.toFixed(2)+'%','heat-balance estimate',t.lossEst>0.3?'warn':'ok'],
+    ['C₂H₂ slip',S.ana.slip.toFixed(2)+' ppm','spec ≤ 1 ppm',S.ana.slip>1?'bad':'ok'],
+    ['Forecast +30 min',fcTxt,fcSub,fcCls]];
+  kEl.innerHTML=k.map(a=>`<div class="kpi"><div class="k">${a[0]}</div><div class="v ${a[3]}">${a[1]}</div><div class="s">${a[2]}</div></div>`).join('');
+}
+const fmtT=m=>{m=Math.round(m);return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0');};
+function render(){document.getElementById('clock').textContent='t = '+fmtT(S.t)+' (sim)';drawReactor();drawT();drawP();drawQ();drawK();drawAgents();}
+
+// ======================= LOOP =======================
+let speed=4,paused=false,acc=0,last=performance.now();
+document.querySelectorAll('[data-speed]').forEach(b=>b.onclick=()=>{speed=+b.dataset.speed;document.querySelectorAll('[data-speed]').forEach(x=>x.classList.remove('on'));b.classList.add('on');});
+document.getElementById('pause').onclick=e=>{paused=!paused;e.target.textContent=paused?'Resume':'Pause';e.target.classList.toggle('on',paused);};
+function loop(now){const dt=(now-last)/1000;last=now;if(!paused){acc+=dt*speed;let n=0;while(acc>=1&&n<30){stepMinute();acc-=1;n++;}}render();requestAnimationFrame(loop);}
+reset();
+syncSliders();drawRec();
+window.addEventListener('resize',render);
+requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
