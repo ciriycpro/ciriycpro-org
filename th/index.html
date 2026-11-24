@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CIRIYC PRO Research — AI แบบหลายเอเจนต์อย่างเปิดเผย</title>
+<meta name="description" content="โครงการวิจัยแบบเปิดด้านปัญญาประดิษฐ์แบบหลายเอเจนต์: มาตรฐานเปิด MAIF การจัดทำมาตรฐานแห่งชาติสำหรับ MAS อุตสาหกรรม สิ่งพิมพ์ด้าน AI และเดโมที่ใช้งานได้">
+<link rel="icon" href="/star.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--black:#0a0a0a;--grey:#555;--light:#888;--line:#e8e8e8;--bg:#fff}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--black);line-height:1.6}
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+
+header{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);z-index:100}
+.nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:600;font-size:16px;letter-spacing:2px;color:var(--black);text-decoration:none;white-space:nowrap}
+.logo img{width:30px;height:30px}
+.logo .sub-mark{font-weight:400;color:var(--light);letter-spacing:1px;font-size:13px;margin-left:2px}
+nav.menu{display:flex;gap:32px}
+nav.menu a{color:var(--grey);text-decoration:none;font-size:14px;font-weight:500}
+nav.menu a:hover{color:var(--black)}
+.cta-btn{background:var(--black);color:#fff;padding:10px 22px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none}
+.cta-btn:hover{opacity:.8}
+
+.hero{position:relative;padding:110px 0 300px;background:#fff url('/hero.jpg') no-repeat bottom center/cover}
+.hero h1{font-size:clamp(42px,6vw,78px);font-weight:800;letter-spacing:-2.5px;line-height:1.05;max-width:880px}
+.hero .sub{margin-top:28px;font-size:20px;color:var(--grey);max-width:640px}
+.hero .actions{margin-top:40px;display:flex;gap:16px;flex-wrap:wrap}
+.btn-primary{background:var(--black);color:#fff;padding:12px 26px;border-radius:8px;font-size:15px;font-weight:600;text-decoration:none}
+.btn-primary:hover{opacity:.85}
+.btn-secondary{border:1px solid var(--line);background:#fff;color:var(--black);padding:12px 26px;border-radius:8px;font-size:15px;font-weight:600;text-decoration:none}
+.btn-secondary:hover{border-color:var(--black)}
+
+section{padding:110px 0}
+.kicker{font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--light);font-weight:600;margin-bottom:16px}
+h2{font-size:clamp(30px,4vw,46px);font-weight:700;letter-spacing:-1.5px;line-height:1.1;margin-bottom:20px}
+.lead{font-size:18px;color:var(--grey);max-width:680px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px;margin-top:56px}
+.card{border:1px solid var(--line);border-radius:14px;padding:32px}
+.card:hover{border-color:#bbb}
+.card h3{font-size:17px;font-weight:600;margin-bottom:10px;letter-spacing:-.3px}
+.card p{font-size:14.5px;color:var(--grey)}
+
+.feature{border:1px solid var(--line);border-radius:16px;padding:48px;margin-top:56px;display:grid;grid-template-columns:2fr 1fr;gap:40px;align-items:center}
+.feature h3{font-size:26px;font-weight:700;letter-spacing:-1px;margin-bottom:14px}
+.feature p{font-size:16px;color:var(--grey);margin-bottom:22px}
+.feature a.link{color:var(--black);font-weight:600;font-size:15px;text-decoration:none;border-bottom:1px solid var(--black)}
+.feature .side{font-size:13.5px;color:var(--light);line-height:2;border-left:1px solid var(--line);padding-left:32px}
+.feature .side b{color:var(--black);display:block;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
+
+.pub{display:grid;grid-template-columns:110px 1fr auto;gap:24px;align-items:baseline;padding:26px 0;border-top:1px solid var(--line)}
+.pub:last-child{border-bottom:1px solid var(--line)}
+.pub .date{font-size:13px;color:var(--light);font-weight:500}
+.pub h3{font-size:17px;font-weight:600;letter-spacing:-.3px;margin-bottom:4px}
+.pub p{font-size:14.5px;color:var(--grey)}
+.pub a{color:var(--black);font-weight:600;font-size:13.5px;text-decoration:none;border-bottom:1px solid var(--black);white-space:nowrap}
+.tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:5px 12px;border-radius:20px;border:1px solid var(--line);color:var(--grey);white-space:nowrap}
+.tag.live{border-color:#16a34a;color:#16a34a}
+
+footer{border-top:1px solid var(--line);padding:64px 0}
+.foot{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:wrap}
+.foot-col{font-size:13.5px;color:var(--grey);line-height:2}
+.foot-col b{color:var(--black);display:block;margin-bottom:6px;font-size:13px;letter-spacing:1px;text-transform:uppercase}
+.foot a{color:var(--grey);text-decoration:none}
+.foot a:hover{color:var(--black)}
+.copyright{margin-top:48px;font-size:12.5px;color:var(--light)}
+
+@media(max-width:900px){
+  nav.menu{display:none}
+  .feature{grid-template-columns:1fr}
+  .feature .side{border-left:none;padding-left:0;border-top:1px solid var(--line);padding-top:24px}
+  .pub{grid-template-columns:1fr}
+  .hero{padding:70px 0 220px}
+}
+</style>
+<link rel="canonical" href="https://ciriycpro.org/th/">
+<link rel="alternate" hreflang="en" href="https://ciriycpro.org/">
+<link rel="alternate" hreflang="en-AU" href="https://ciriycpro.org/au/">
+<link rel="alternate" hreflang="kk-KZ" href="https://ciriycpro.org/kz/">
+<link rel="alternate" hreflang="th-TH" href="https://ciriycpro.org/th/">
+<link rel="alternate" hreflang="x-default" href="https://ciriycpro.org/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ciriycpro.org/th/">
+<meta property="og:title" content="CIRIYC PRO Research — AI แบบหลายเอเจนต์อย่างเปิดเผย">
+<meta property="og:description" content="โครงการวิจัยแบบเปิดด้านปัญญาประดิษฐ์แบบหลายเอเจนต์: มาตรฐานเปิด MAIF การจัดทำมาตรฐานแห่งชาติสำหรับ MAS อุตสาหกรรม สิ่งพิมพ์ด้าน AI และเดโมที่ใช้งานได้">
+<meta property="og:locale" content="th_TH">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="en_AU">
+<meta property="og:locale:alternate" content="kk_KZ">
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style data-i18n>
+.lsw-a{position:relative;display:inline-flex;align-items:center}
+.lsw{position:absolute;right:calc(100% + 10px);top:50%;transform:translateY(-50%);z-index:120;font:500 13px/1.25 'Inter','Noto Sans Thai',-apple-system,BlinkMacSystemFont,sans-serif;letter-spacing:0;text-transform:none}
+.lsw summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:5px;height:34px;padding:0 9px;border:1px solid #e8e8e8;border-radius:8px;color:#555;background:#fff;white-space:nowrap;user-select:none}
+.lsw summary::-webkit-details-marker{display:none}
+.lsw summary:hover,.lsw[open] summary{border-color:#bbb;color:#0a0a0a}
+.lsw ul{position:absolute;right:0;top:calc(100% + 6px);list-style:none;margin:0;padding:6px;background:#fff;border:1px solid #e8e8e8;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.10);min-width:180px}
+.lsw li a{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:7px;color:#0a0a0a;text-decoration:none;white-space:nowrap;line-height:1.6}
+.lsw li a:hover{background:#f4f4f4}
+.lsw li a[aria-current]{font-weight:700}
+.lsw li a.saved::after{content:'';width:6px;height:6px;border-radius:50%;background:#0d9488;margin-left:auto}
+.lsw .beta,.lsw-foot .beta{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#d97706;border:1px solid #f1d6a0;border-radius:10px;padding:0 6px;line-height:16px}
+.lsw-foot{margin-top:14px;font-size:12.5px;color:#888;display:flex;gap:16px;flex-wrap:wrap;align-items:center;line-height:1.6}
+.lsw-foot a{color:inherit;text-decoration:none;border-bottom:1px solid #ddd}
+.lsw-foot a[aria-current]{color:#0a0a0a;border-bottom-color:#0a0a0a}
+@media(max-width:900px){.lsw{position:relative;right:auto;top:auto;transform:none;margin-right:8px}}
+@media(max-width:520px){.lsw summary .lsw-c{display:none}.lsw summary{padding:0 8px}}
+@media(max-width:440px){.logo .sub-mark,.sb-logo .sb-sub{display:none}}
+
+html[lang="th"] body,html[lang="th"] body *{line-height:1.6!important}
+html[lang="th"] body{word-break:normal;line-break:auto}
+html[lang="th"] .kpi .i{line-height:13px!important}
+html[lang="th"] body *{letter-spacing:0!important}
+.kpi .k,.card h3,h1,h2{overflow-wrap:anywhere}
+body,button,select,input,.btn,text{font-family:'Inter','Noto Sans Thai',-apple-system,BlinkMacSystemFont,sans-serif}
+</style>
+<script data-i18n>(function(){var K='ciriyc_lang',s=null;try{s=localStorage.getItem(K)}catch(e){}
+function mark(){if(!s)return;document.querySelectorAll('a[data-lsw="'+s+'"]').forEach(function(a){if(!a.hasAttribute('aria-current'))a.classList.add('saved')})}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mark);else mark();
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[data-lsw]');if(!a)return;try{localStorage.setItem(K,a.getAttribute('data-lsw'))}catch(x){}
+if(location.hash)a.setAttribute('href',a.getAttribute('href').split('#')[0]+location.hash)},true);
+document.addEventListener('click',function(e){var d=document.querySelector('details.lsw[open]');if(d&&!d.contains(e.target))d.removeAttribute('open')});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){var d=document.querySelector('details.lsw[open]');if(d)d.removeAttribute('open')}})})();</script>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#"><span>CIRIYC PRO</span><span class="sub-mark">RESEARCH</span><img src="/star.png" alt=""></a>
+    <nav class="menu">
+      <a href="#areas">การวิจัย</a>
+      <a href="#maif">มาตรฐาน MAIF</a>
+      <a href="#publications">สิ่งพิมพ์</a>
+      <a href="#demos">เดโม</a>
+    </nav>
+    <span class="lsw-a"><details class="lsw" data-i18n-ui><summary aria-label="ภาษา" title="ภาษา"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.6 2.7 3.9 5.9 3.9 9.5s-1.3 6.8-3.9 9.5M12 2.5C9.4 5.2 8.1 8.4 8.1 12s1.3 6.8 3.9 9.5"/></svg><span class="lsw-c">TH</span></summary><ul><li><a href="/" hreflang="en" lang="en" data-lsw="en">English</a></li><li><a href="/au/" hreflang="en-AU" lang="en-AU" data-lsw="en-AU">English (AU)</a></li><li><a href="/kz/" hreflang="kk-KZ" lang="kk" data-lsw="kk">Қазақша <span class="beta">beta</span></a></li><li><a href="/th/" hreflang="th-TH" lang="th" data-lsw="th" aria-current="true">ไทย <span class="beta">beta</span></a></li></ul></details><a class="cta-btn" href="https://github.com/ciriycpro">GitHub</a></span>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="kicker">โครงการวิจัย AI</div>
+    <h1>การวิจัยแบบเปิด<br>ด้านปัญญาหลายเอเจนต์</h1>
+    <p class="sub">โครงการวิจัย AI แบบเปิด: เราศึกษาว่าเอเจนต์ AI อัตโนมัติประสานงานกันอย่างไรในสภาพแวดล้อมอุตสาหกรรม — และเผยแพร่มาตรฐาน โค้ด และผลการศึกษา</p>
+    <div class="actions">
+      <a class="btn-primary" href="#maif">มาตรฐานเปิด MAIF</a>
+      <a class="btn-secondary" href="#publications">สิ่งพิมพ์</a>
+    </div>
+  </div>
+</div>
+
+<section id="areas">
+  <div class="wrap">
+    <div class="kicker">สาขาการวิจัย</div>
+    <h2>สิ่งที่เราศึกษา</h2>
+    <div class="grid">
+      <div class="card"><h3>การประสานงานของเอเจนต์</h3><p>การเจรจา การจัดสรรงาน และการแก้ไขข้อขัดแย้งในวงจรเอเจนต์แบบกระจายศูนย์ภายใต้ข้อจำกัดแบบเรียลไทม์</p></div>
+      <div class="card"><h3>การจัดทำมาตรฐานอุตสาหกรรม</h3><p>ข้อกำหนดด้านสัญญาที่เป็นทางการ ความสามารถในการตรวจสอบ และการทำงานร่วมกันได้ของระบบหลายเอเจนต์ในอุตสาหกรรมที่มีการกำกับดูแล</p></div>
+      <div class="card"><h3>การปรับสถาปัตยกรรมสู่เอเจนต์</h3><p>วิธีการสร้างซอฟต์แวร์อุตสาหกรรมแบบเดิม — เทเลเมติกส์ การจัดส่งงาน การกำกับการปฏิบัติตามข้อกำหนด — ขึ้นใหม่เป็นระบบตัดสินใจที่ใช้เอเจนต์</p></div>
+      <div class="card"><h3>วงจรมนุษย์–เอเจนต์</h3><p>วงจรการเฝ้าติดตามและสนับสนุนการตัดสินใจ ซึ่งโอเปอเรเตอร์ที่เป็นมนุษย์และเอเจนต์อัตโนมัติร่วมกันรับผิดชอบ</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="maif" style="padding-top:0">
+  <div class="wrap">
+    <div class="kicker">มาตรฐานเปิด</div>
+    <h2>MAIF — Multi-Agent Industrial Framework</h2>
+    <p class="lead">เฟรมเวิร์กเปิดสำหรับสร้างระบบเอเจนต์อุตสาหกรรมที่ตรวจสอบได้: สัญญาของเอเจนต์ โปรโตคอลการสื่อสาร ความหมายของการประสานการทำงาน ใช้งาน ฟอร์ก และนำไปพัฒนาได้อย่างเสรี</p>
+    <div class="feature">
+      <div>
+        <h3>มาตรฐานเบื้องหลังโครงการนำร่องของเรา</h3>
+        <p>ทุกวงจรของ CIRIYC PRO สร้างบน MAIF เฟรมเวิร์กนี้ได้รับการจดทะเบียน มีการจัดการเวอร์ชัน และเผยแพร่ฉบับเต็ม — ข้อกำหนด สถาปัตยกรรมอ้างอิง และตัวอย่าง</p>
+        <a class="link" href="https://github.com/ciriycpro/MAIF">github.com/ciriycpro/MAIF</a>
+      </div>
+      <div class="side">
+        <b>ข้อเท็จจริง</b>
+        สัญญาอนุญาต: Apache 2.0<br>
+        การจดทะเบียน: Rospatent №2026611550<br>
+        เส้นทางมาตรฐานแห่งชาติ: คณะกรรมการวิชาการ TC 164 (AI)<br>
+        สถานะ: ร่าง ПНСТ ฉบับแรกอยู่ระหว่างการรับฟังความคิดเห็นสาธารณะ
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="publications" style="padding-top:0">
+  <div class="wrap">
+    <div class="kicker">สิ่งพิมพ์ &amp; เอกสารการทำงาน</div>
+    <h2>ผลการศึกษา เปิดเผยต่อสาธารณะ</h2>
+    <div style="margin-top:56px">
+      <div class="pub">
+        <div class="date">2026</div>
+        <div>
+          <h3>มาตรฐานแห่งชาติเบื้องต้นสำหรับระบบหลายเอเจนต์ในอุตสาหกรรม</h3>
+          <p>ร่าง ПНСТ ฉบับแรก: คำศัพท์ ข้อกำหนดด้านสถาปัตยกรรม และเกณฑ์ความสอดคล้องสำหรับ MAS อุตสาหกรรม พัฒนาภายใต้ TC 164</p>
+        </div>
+        <a href="https://github.com/ciriycpro/pnst-industrial-mas">อ่านร่าง</a>
+      </div>
+      <div class="pub">
+        <div class="date">2026</div>
+        <div>
+          <h3>วงจรภาคสนาม: สร้างเทเลเมติกส์พนักงานขึ้นใหม่บนชั้นเอเจนต์</h3>
+          <p>กรณีศึกษาการปรับสถาปัตยกรรมเทเลเมติกส์พนักงานภาคสนามแบบเดิมให้เป็นระบบตัดสินใจแบบหลายเอเจนต์แบบเรียลไทม์ อยู่ระหว่างการทดสอบความใช้ได้ในอุตสาหกรรม</p>
+        </div>
+        <a href="https://github.com/ciriycpro/Agentic-telematica">กรณีศึกษา &amp; โค้ด</a>
+      </div>
+      <div class="pub">
+        <div class="date">2026</div>
+        <div>
+          <h3>Architecture-as-Code สำหรับระบบเอเจนต์</h3>
+          <p>แบบจำลอง C4 บันทึกการตัดสินใจด้านสถาปัตยกรรม และพิมพ์เขียวบริการ สำหรับการออกแบบระบบหลายเอเจนต์ที่ทำซ้ำได้</p>
+        </div>
+        <a href="https://github.com/ciriycpro/architect">รีโพสิทอรี</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="demos" style="padding-top:0">
+  <div class="wrap">
+    <div class="kicker">เดโมที่ใช้งานได้</div>
+    <h2>ลองด้วยตัวเอง ไม่ต้องเชื่อคำพูดเรา</h2>
+    <div style="margin-top:56px">
+      <div class="pub">
+        <div class="date">เดโม</div>
+        <div>
+          <h3>Agentic Telematics — สแตนด์เชิงโต้ตอบ</h3>
+          <p>ต้นแบบเชิงโต้ตอบบนพื้นฐาน React ของวงจรเอเจนต์สำหรับพนักงานภาคสนาม</p>
+        </div>
+        <span class="tag live">ใช้งานได้</span>
+      </div>
+      <div class="pub">
+        <div class="date">เดโม</div>
+        <div>
+          <h3>ผู้เชี่ยวชาญอุตสาหกรรม — นักวิเคราะห์เชิงสนทนา</h3>
+          <p>ชั้นสนทนาแบบหลายเอเจนต์สำหรับคัดกรองลูกค้าเป้าหมายในอุตสาหกรรม ทำงานบน ciriycpro.com</p>
+        </div>
+        <span class="tag live">ใช้งานได้</span>
+      </div>
+    </div>
+    <div class="kicker" style="margin-top:72px">สแตนด์สำหรับอุตสาหกรรมกระบวนการ</div>
+    <p class="lead">ต้นแบบ MAIF สี่ชิ้นสำหรับกระบวนการเคมีและพอลิเมอร์ แต่ละชิ้นทำงานในเบราว์เซอร์ของคุณ แบบจำลองและข้อมูลเป็นการจำลองหรือข้อมูลสังเคราะห์ และทุกหน้าระบุชัดเจนว่าอะไรเป็นของจริง</p>
+    <div style="margin-top:32px">
+      <div class="pub">
+        <div class="date">สแตนด์ 1</div>
+        <div>
+          <h3>ดิจิทัลทวินของเครื่องปฏิกรณ์ PE แบบเฟสก๊าซ</h3>
+          <p>เครื่องปฏิกรณ์ เคมีของเกรด และภาคตัดเบด 2D คำนวณแบบเรียลไทม์: เอเจนต์เฝ้าดูส่วนเผื่อก่อนการซินเทอร์ของเกรดที่กำลังผลิต ตรวจพบโซนร้อนก่อนค่าเฉลี่ยของเบดจะเปลี่ยน และวางแผนการเปลี่ยนเกรดให้มีของนอกสเปกน้อยลง</p>
+        </div>
+        <a href="/th/stands/gas-phase-pe-twin/">เปิดสแตนด์</a>
+      </div>
+      <div class="pub">
+        <div class="date">สแตนด์ 2</div>
+        <div>
+          <h3>การเฝ้าติดตามด้วยเอเจนต์ของเครื่องปฏิกรณ์ไฮโดรจิเนชัน C2</h3>
+          <p>เอเจนต์หกตัวเฝ้าดูเครื่องปฏิกรณ์แบบ tail-end จำลองแบบเรียลไทม์: การตรวจจับความผิดปกติ สมดุลความร้อน การพยากรณ์ 30 นาที ตัวหาค่าเหมาะสม และโอเปอเรเตอร์ที่อนุมัติทุกการกระทำ</p>
+        </div>
+        <a href="/th/stands/c2-monitoring/">เปิดสแตนด์</a>
+      </div>
+      <div class="pub">
+        <div class="date">สแตนด์ 3</div>
+        <div>
+          <h3>การเร่ง CFD ของเครื่องปฏิกรณ์แบบมีการรับรอง</h3>
+          <p>แบบจำลองตัวแทนตอบในระดับมิลลิวินาที เอเจนต์ผู้ตรวจสอบกำหนดขอบเขตความคลาดเคลื่อนของทุกคำตอบ และส่งต่อให้โซลเวอร์เมื่อขอบเขตกว้างเกินไป ไม่มีตัวเลขใดที่ยังไม่ผ่านการตรวจสอบออกจากระบบ</p>
+        </div>
+        <a href="/th/stands/cfd-acceleration/">เปิดสแตนด์</a>
+      </div>
+      <div class="pub">
+        <div class="date">สแตนด์ 4</div>
+        <div>
+          <h3>จากเอกสารต้นทางสู่ PFD ที่ลู่เข้าแล้ว</h3>
+          <p>การเล่นซ้ำของการรันจริงบน LLM ภายนอก: เอเจนต์ดึงข้อมูลพื้นฐานการออกแบบ แก้ไขข้อขัดแย้ง เสนอและจำลองผังกระบวนการสามแบบ และตรวจสอบไขว้ตัวเลขของแบบจำลองกับซิมูเลเตอร์</p>
+        </div>
+        <a href="/th/stands/pfd-engineering/">เปิดการเล่นซ้ำ</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="kicker">ทิศทาง</div>
+    <h2>เจตนารมณ์ AGI ที่แท้จริง</h2>
+    <p class="lead">เราศึกษาการประสานงานแบบหลายเอเจนต์ในฐานะเส้นทางเชิงปฏิบัติสู่ปัญญาประดิษฐ์ทั่วไปในเศรษฐกิจกายภาพ ในมุมมองของเรา ปัญญาเหนือมนุษย์จะมาถึงอย่างมีรากฐาน: เอเจนต์ที่ตรวจสอบได้ มาตรฐานเปิด พฤติกรรมที่พิสูจน์ได้ — ปัญญาที่คุณรับรองได้ ไม่ใช่กล่องดำ</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <a class="logo" href="#"><span>CIRIYC PRO</span><span class="sub-mark">RESEARCH</span><img src="/star.png" alt=""></a>
+      <div class="foot-col">
+        <b>โครงการริเริ่ม</b>
+        การวิจัยแบบเปิดด้านปัญญาประดิษฐ์แบบหลายเอเจนต์<br>
+        มาตรฐาน · สิ่งพิมพ์ · โอเพนซอร์ส
+      </div>
+      <div class="foot-col">
+        <b>ติดต่อ</b>
+        <a href="mailto:research@ciriycpro.org">research@ciriycpro.org</a><br>
+        <a href="https://github.com/ciriycpro">github.com/ciriycpro</a>
+      </div>
+      <div class="foot-col">
+        <b>เครือข่าย</b>
+        <a href="https://ciriycpro.com">ciriycpro.com — ห้องปฏิบัติการ</a>
+      </div>
+    </div>
+    <div class="copyright">© 2026 CIRIYC PRO Research Initiative.</div>
+    <div class="lsw-foot" data-i18n-ui><span><a href="/" hreflang="en" lang="en" data-lsw="en">English</a></span><span><a href="/au/" hreflang="en-AU" lang="en-AU" data-lsw="en-AU">English (AU)</a></span><span><a href="/kz/" hreflang="kk-KZ" lang="kk" data-lsw="kk">Қазақша</a> <span class="beta">beta</span></span><span><a href="/th/" hreflang="th-TH" lang="th" data-lsw="th" aria-current="true">ไทย</a> <span class="beta">beta</span></span></div>
+  </div>
+</footer>
+
+</body>
+</html>

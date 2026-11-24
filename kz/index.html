@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CIRIYC PRO Research — көпагенттік AI, ашық түрде</title>
+<meta name="description" content="Көпагенттік жасанды интеллект саласындағы ашық зерттеу бастамасы: MAIF ашық стандарты, өнеркәсіптік MAS ұлттық стандарттауы, AI жарияланымдары және жұмыс істеп тұрған демолар.">
+<link rel="icon" href="/star.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--black:#0a0a0a;--grey:#555;--light:#888;--line:#e8e8e8;--bg:#fff}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--black);line-height:1.6}
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+
+header{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);z-index:100}
+.nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:600;font-size:16px;letter-spacing:2px;color:var(--black);text-decoration:none;white-space:nowrap}
+.logo img{width:30px;height:30px}
+.logo .sub-mark{font-weight:400;color:var(--light);letter-spacing:1px;font-size:13px;margin-left:2px}
+nav.menu{display:flex;gap:32px}
+nav.menu a{color:var(--grey);text-decoration:none;font-size:14px;font-weight:500}
+nav.menu a:hover{color:var(--black)}
+.cta-btn{background:var(--black);color:#fff;padding:10px 22px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none}
+.cta-btn:hover{opacity:.8}
+
+.hero{position:relative;padding:110px 0 300px;background:#fff url('/hero.jpg') no-repeat bottom center/cover}
+.hero h1{font-size:clamp(42px,6vw,78px);font-weight:800;letter-spacing:-2.5px;line-height:1.05;max-width:880px}
+.hero .sub{margin-top:28px;font-size:20px;color:var(--grey);max-width:640px}
+.hero .actions{margin-top:40px;display:flex;gap:16px;flex-wrap:wrap}
+.btn-primary{background:var(--black);color:#fff;padding:12px 26px;border-radius:8px;font-size:15px;font-weight:600;text-decoration:none}
+.btn-primary:hover{opacity:.85}
+.btn-secondary{border:1px solid var(--line);background:#fff;color:var(--black);padding:12px 26px;border-radius:8px;font-size:15px;font-weight:600;text-decoration:none}
+.btn-secondary:hover{border-color:var(--black)}
+
+section{padding:110px 0}
+.kicker{font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--light);font-weight:600;margin-bottom:16px}
+h2{font-size:clamp(30px,4vw,46px);font-weight:700;letter-spacing:-1.5px;line-height:1.1;margin-bottom:20px}
+.lead{font-size:18px;color:var(--grey);max-width:680px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px;margin-top:56px}
+.card{border:1px solid var(--line);border-radius:14px;padding:32px}
+.card:hover{border-color:#bbb}
+.card h3{font-size:17px;font-weight:600;margin-bottom:10px;letter-spacing:-.3px}
+.card p{font-size:14.5px;color:var(--grey)}
+
+.feature{border:1px solid var(--line);border-radius:16px;padding:48px;margin-top:56px;display:grid;grid-template-columns:2fr 1fr;gap:40px;align-items:center}
+.feature h3{font-size:26px;font-weight:700;letter-spacing:-1px;margin-bottom:14px}
+.feature p{font-size:16px;color:var(--grey);margin-bottom:22px}
+.feature a.link{color:var(--black);font-weight:600;font-size:15px;text-decoration:none;border-bottom:1px solid var(--black)}
+.feature .side{font-size:13.5px;color:var(--light);line-height:2;border-left:1px solid var(--line);padding-left:32px}
+.feature .side b{color:var(--black);display:block;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
+
+.pub{display:grid;grid-template-columns:110px 1fr auto;gap:24px;align-items:baseline;padding:26px 0;border-top:1px solid var(--line)}
+.pub:last-child{border-bottom:1px solid var(--line)}
+.pub .date{font-size:13px;color:var(--light);font-weight:500}
+.pub h3{font-size:17px;font-weight:600;letter-spacing:-.3px;margin-bottom:4px}
+.pub p{font-size:14.5px;color:var(--grey)}
+.pub a{color:var(--black);font-weight:600;font-size:13.5px;text-decoration:none;border-bottom:1px solid var(--black);white-space:nowrap}
+.tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:5px 12px;border-radius:20px;border:1px solid var(--line);color:var(--grey);white-space:nowrap}
+.tag.live{border-color:#16a34a;color:#16a34a}
+
+footer{border-top:1px solid var(--line);padding:64px 0}
+.foot{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:wrap}
+.foot-col{font-size:13.5px;color:var(--grey);line-height:2}
+.foot-col b{color:var(--black);display:block;margin-bottom:6px;font-size:13px;letter-spacing:1px;text-transform:uppercase}
+.foot a{color:var(--grey);text-decoration:none}
+.foot a:hover{color:var(--black)}
+.copyright{margin-top:48px;font-size:12.5px;color:var(--light)}
+
+@media(max-width:900px){
+  nav.menu{display:none}
+  .feature{grid-template-columns:1fr}
+  .feature .side{border-left:none;padding-left:0;border-top:1px solid var(--line);padding-top:24px}
+  .pub{grid-template-columns:1fr}
+  .hero{padding:70px 0 220px}
+}
+</style>
+<link rel="canonical" href="https://ciriycpro.org/kz/">
+<link rel="alternate" hreflang="en" href="https://ciriycpro.org/">
+<link rel="alternate" hreflang="en-AU" href="https://ciriycpro.org/au/">
+<link rel="alternate" hreflang="kk-KZ" href="https://ciriycpro.org/kz/">
+<link rel="alternate" hreflang="th-TH" href="https://ciriycpro.org/th/">
+<link rel="alternate" hreflang="x-default" href="https://ciriycpro.org/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ciriycpro.org/kz/">
+<meta property="og:title" content="CIRIYC PRO Research — көпагенттік AI, ашық түрде">
+<meta property="og:description" content="Көпагенттік жасанды интеллект саласындағы ашық зерттеу бастамасы: MAIF ашық стандарты, өнеркәсіптік MAS ұлттық стандарттауы, AI жарияланымдары және жұмыс істеп тұрған демолар.">
+<meta property="og:locale" content="kk_KZ">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="en_AU">
+<meta property="og:locale:alternate" content="th_TH">
+<meta name="robots" content="noindex">
+<style data-i18n>
+.lsw-a{position:relative;display:inline-flex;align-items:center}
+.lsw{position:absolute;right:calc(100% + 10px);top:50%;transform:translateY(-50%);z-index:120;font:500 13px/1.25 'Inter','Noto Sans Thai',-apple-system,BlinkMacSystemFont,sans-serif;letter-spacing:0;text-transform:none}
+.lsw summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:5px;height:34px;padding:0 9px;border:1px solid #e8e8e8;border-radius:8px;color:#555;background:#fff;white-space:nowrap;user-select:none}
+.lsw summary::-webkit-details-marker{display:none}
+.lsw summary:hover,.lsw[open] summary{border-color:#bbb;color:#0a0a0a}
+.lsw ul{position:absolute;right:0;top:calc(100% + 6px);list-style:none;margin:0;padding:6px;background:#fff;border:1px solid #e8e8e8;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.10);min-width:180px}
+.lsw li a{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:7px;color:#0a0a0a;text-decoration:none;white-space:nowrap;line-height:1.6}
+.lsw li a:hover{background:#f4f4f4}
+.lsw li a[aria-current]{font-weight:700}
+.lsw li a.saved::after{content:'';width:6px;height:6px;border-radius:50%;background:#0d9488;margin-left:auto}
+.lsw .beta,.lsw-foot .beta{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#d97706;border:1px solid #f1d6a0;border-radius:10px;padding:0 6px;line-height:16px}
+.lsw-foot{margin-top:14px;font-size:12.5px;color:#888;display:flex;gap:16px;flex-wrap:wrap;align-items:center;line-height:1.6}
+.lsw-foot a{color:inherit;text-decoration:none;border-bottom:1px solid #ddd}
+.lsw-foot a[aria-current]{color:#0a0a0a;border-bottom-color:#0a0a0a}
+@media(max-width:900px){.lsw{position:relative;right:auto;top:auto;transform:none;margin-right:8px}}
+@media(max-width:520px){.lsw summary .lsw-c{display:none}.lsw summary{padding:0 8px}}
+@media(max-width:440px){.logo .sub-mark,.sb-logo .sb-sub{display:none}}
+.kpi .k,.card h3,h1,h2{overflow-wrap:anywhere}
+</style>
+<script data-i18n>(function(){var K='ciriyc_lang',s=null;try{s=localStorage.getItem(K)}catch(e){}
+function mark(){if(!s)return;document.querySelectorAll('a[data-lsw="'+s+'"]').forEach(function(a){if(!a.hasAttribute('aria-current'))a.classList.add('saved')})}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mark);else mark();
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[data-lsw]');if(!a)return;try{localStorage.setItem(K,a.getAttribute('data-lsw'))}catch(x){}
+if(location.hash)a.setAttribute('href',a.getAttribute('href').split('#')[0]+location.hash)},true);
+document.addEventListener('click',function(e){var d=document.querySelector('details.lsw[open]');if(d&&!d.contains(e.target))d.removeAttribute('open')});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){var d=document.querySelector('details.lsw[open]');if(d)d.removeAttribute('open')}})})();</script>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#"><span>CIRIYC PRO</span><span class="sub-mark">RESEARCH</span><img src="/star.png" alt=""></a>
+    <nav class="menu">
+      <a href="#areas">Зерттеулер</a>
+      <a href="#maif">MAIF стандарты</a>
+      <a href="#publications">Жарияланымдар</a>
+      <a href="#demos">Демолар</a>
+    </nav>
+    <span class="lsw-a"><details class="lsw" data-i18n-ui><summary aria-label="Тіл" title="Тіл"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.6 2.7 3.9 5.9 3.9 9.5s-1.3 6.8-3.9 9.5M12 2.5C9.4 5.2 8.1 8.4 8.1 12s1.3 6.8 3.9 9.5"/></svg><span class="lsw-c">KZ</span></summary><ul><li><a href="/" hreflang="en" lang="en" data-lsw="en">English</a></li><li><a href="/au/" hreflang="en-AU" lang="en-AU" data-lsw="en-AU">English (AU)</a></li><li><a href="/kz/" hreflang="kk-KZ" lang="kk" data-lsw="kk" aria-current="true">Қазақша <span class="beta">beta</span></a></li><li><a href="/th/" hreflang="th-TH" lang="th" data-lsw="th">ไทย <span class="beta">beta</span></a></li></ul></details><a class="cta-btn" href="https://github.com/ciriycpro">GitHub</a></span>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="kicker">AI зерттеу бастамасы</div>
+    <h1>Көпагенттік интеллект<br>саласындағы ашық зерттеулер.</h1>
+    <p class="sub">Ашық AI зерттеу бастамасы: біз автономды AI агенттерінің өнеркәсіптік ортада қалай үйлесетінін зерттейміз — және стандарттарды, кодты және нәтижелерді жариялаймыз.</p>
+    <div class="actions">
+      <a class="btn-primary" href="#maif">MAIF ашық стандарты</a>
+      <a class="btn-secondary" href="#publications">Жарияланымдар</a>
+    </div>
+  </div>
+</div>
+
+<section id="areas">
+  <div class="wrap">
+    <div class="kicker">Зерттеу бағыттары</div>
+    <h2>Біз не зерттейміз.</h2>
+    <div class="grid">
+      <div class="card"><h3>Агенттердің үйлесімі</h3><p>Нақты уақыт шектеулері жағдайында орталықсыздандырылған агенттік контурлардағы келіссөздер, тапсырмаларды бөлу және қайшылықтарды шешу.</p></div>
+      <div class="card"><h3>Өнеркәсіптік стандарттау</h3><p>Реттелетін салалардағы көпагенттік жүйелерге қойылатын формалды келісімшарттар, аудиттелу және өзара әрекеттесу талаптары.</p></div>
+      <div class="card"><h3>Агенттік қайта архитектуралау</h3><p>Ескі өнеркәсіптік бағдарламалық жасақтаманы — телематиканы, диспетчерлікті, сәйкестікті бақылауды — агенттік шешім қабылдау жүйелері ретінде қайта құру әдістері.</p></div>
+      <div class="card"><h3>Адам мен агент контурлары</h3><p>Адам-операторлар мен автономды агенттер жауапкершілікті бөлісетін мониторинг және шешім қабылдауды қолдау контурлары.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="maif" style="padding-top:0">
+  <div class="wrap">
+    <div class="kicker">Ашық стандарт</div>
+    <h2>MAIF — Multi-Agent Industrial Framework.</h2>
+    <p class="lead">Аудиттелетін өнеркәсіптік агенттік жүйелерді құруға арналған ашық фреймворк: агент келісімшарттары, байланыс хаттамасы, оркестрлеу семантикасы. Еркін пайдалануға, форк жасауға және іске асыруға болады.</p>
+    <div class="feature">
+      <div>
+        <h3>Біздің пилоттарымыздың негізіндегі стандарт.</h3>
+        <p>CIRIYC PRO-ның әрбір контуры MAIF негізінде құрылған. Фреймворк тіркелген, нұсқаланған және толық жарияланған — спецификация, эталондық архитектура және мысалдар.</p>
+        <a class="link" href="https://github.com/ciriycpro/MAIF">github.com/ciriycpro/MAIF</a>
+      </div>
+      <div class="side">
+        <b>Деректер</b>
+        Лицензия: Apache 2.0<br>
+        Тіркеу: Роспатент №2026611550<br>
+        Ұлттық стандарт бағыты: ТК 164 (AI)<br>
+        Мәртебесі: ПНСТ-ның бірінші редакциясы жария талқылауда
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="publications" style="padding-top:0">
+  <div class="wrap">
+    <div class="kicker">Жарияланымдар &amp; жұмыс құжаттары</div>
+    <h2>Нәтижелер — ашық түрде.</h2>
+    <div style="margin-top:56px">
+      <div class="pub">
+        <div class="date">2026</div>
+        <div>
+          <h3>Өнеркәсіптік көпагенттік жүйелерге арналған алдын ала ұлттық стандарт</h3>
+          <p>ПНСТ-ның бірінші редакция жобасы: өнеркәсіптік MAS терминологиясы, архитектуралық талаптар және сәйкестік критерийлері. ТК 164 аясында әзірленген.</p>
+        </div>
+        <a href="https://github.com/ciriycpro/pnst-industrial-mas">Жобаны оқу</a>
+      </div>
+      <div class="pub">
+        <div class="date">2026</div>
+        <div>
+          <h3>Далалық контур: персонал телематикасын агенттік қабатта қайта құру</h3>
+          <p>Ескі далалық персонал телематикасын нақты уақыттағы көпагенттік шешім қабылдау жүйесіне қайта архитектуралау кейсі. Өнеркәсіптік валидация жүріп жатыр.</p>
+        </div>
+        <a href="https://github.com/ciriycpro/Agentic-telematica">Кейс &amp; код</a>
+      </div>
+      <div class="pub">
+        <div class="date">2026</div>
+        <div>
+          <h3>Агенттік жүйелерге арналған Architecture-as-Code</h3>
+          <p>Көпагенттік жүйелерді қайталанатын түрде жобалауға арналған C4 модельдері, архитектуралық шешімдер жазбалары және сервистік жобалар.</p>
+        </div>
+        <a href="https://github.com/ciriycpro/architect">Репозиторий</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="demos" style="padding-top:0">
+  <div class="wrap">
+    <div class="kicker">Жұмыс істеп тұрған демолар</div>
+    <h2>Сынап көріңіз, сөзімізге сенбеңіз.</h2>
+    <div style="margin-top:56px">
+      <div class="pub">
+        <div class="date">Демо</div>
+        <div>
+          <h3>Agentic Telematics — интерактивті стенд</h3>
+          <p>Далалық персонал агенттік контурының React негізіндегі интерактивті прототипі.</p>
+        </div>
+        <span class="tag live">Жұмыс істейді</span>
+      </div>
+      <div class="pub">
+        <div class="date">Демо</div>
+        <div>
+          <h3>Сала сарапшысы — диалогтық талдаушы</h3>
+          <p>ciriycpro.com сайтында жұмыс істейтін, өнеркәсіптік өтінімдерді іріктеуге арналған көпагенттік диалог қабаты.</p>
+        </div>
+        <span class="tag live">Жұмыс істейді</span>
+      </div>
+    </div>
+    <div class="kicker" style="margin-top:72px">Процестік өнеркәсіп стендтері</div>
+    <p class="lead">Химиялық және полимерлік процестерге арналған төрт MAIF прототипі. Әрқайсысы сіздің браузеріңізде жұмыс істейді; модельдер мен деректер модельденген немесе синтетикалық, және әр бетте нақты не шынайы екені дәл көрсетілген.</p>
+    <div style="margin-top:32px">
+      <div class="pub">
+        <div class="date">1-стенд</div>
+        <div>
+          <h3>Газ фазалы ПЭ реакторының цифрлық егізі</h3>
+          <p>Реактор, марка химиясы және қабаттың 2D қимасы нақты уақытта есептеледі: агенттер өндіріліп жатқан марканың агломерацияға дейінгі қорын бақылайды, қабаттың орташа мәні өзгергенге дейін ыстық аймақтарды анықтайды және кондициядан тыс өнімі аз марка ауысуларын жоспарлайды.</p>
+        </div>
+        <a href="/kz/stands/gas-phase-pe-twin/">Стендті ашу</a>
+      </div>
+      <div class="pub">
+        <div class="date">2-стенд</div>
+        <div>
+          <h3>C2 гидрлеу реакторының агенттік мониторингі</h3>
+          <p>Алты агент модельденген tail-end реакторын нақты уақытта бақылайды: аномалияларды анықтау, жылу балансы, 30 минуттық болжам, оңтайландырушы және әр әрекетті бекітетін оператор.</p>
+        </div>
+        <a href="/kz/stands/c2-monitoring/">Стендті ашу</a>
+      </div>
+      <div class="pub">
+        <div class="date">3-стенд</div>
+        <div>
+          <h3>Реактор CFD есептеулерін сертификатталған жеделдету</h3>
+          <p>Суррогат модель миллисекундтарда жауап береді; тексеруші агент әр жауаптың қателік шегін бағалайды және шек тым кең болса, солверге жібереді. Тексерілмеген бірде-бір сан жүйеден шықпайды.</p>
+        </div>
+        <a href="/kz/stands/cfd-acceleration/">Стендті ашу</a>
+      </div>
+      <div class="pub">
+        <div class="date">4-стенд</div>
+        <div>
+          <h3>Бастапқы құжаттардан жинақталған PFD-ге дейін</h3>
+          <p>Сыртқы LLM-дегі нақты іске қосудың жазбасы: агенттер жобалауға арналған бастапқы деректерді алады, қайшылықтарды шешеді, үш технологиялық схеманы ұсынып модельдейді және модель берген сандарды симулятормен салыстырып тексереді.</p>
+        </div>
+        <a href="/kz/stands/pfd-engineering/">Жазбаны ашу</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="kicker">Бағыт</div>
+    <h2>Шынайы AGI ниеті.</h2>
+    <p class="lead">Біз көпагенттік үйлесімді физикалық экономикадағы жалпы жасанды интеллектке апаратын практикалық жол ретінде зерттейміз. Біздің көзқарасымызша, суперинтеллект жерге нық басып келеді: аудиттелетін агенттер, ашық стандарттар, тексерілетін мінез-құлық — қара жәшік емес, сертификаттауға болатын интеллект.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <a class="logo" href="#"><span>CIRIYC PRO</span><span class="sub-mark">RESEARCH</span><img src="/star.png" alt=""></a>
+      <div class="foot-col">
+        <b>Бастама</b>
+        Көпагенттік жасанды интеллект саласындағы ашық зерттеулер<br>
+        Стандарттар · Жарияланымдар · Ашық бастапқы код
+      </div>
+      <div class="foot-col">
+        <b>Байланыс</b>
+        <a href="mailto:research@ciriycpro.org">research@ciriycpro.org</a><br>
+        <a href="https://github.com/ciriycpro">github.com/ciriycpro</a>
+      </div>
+      <div class="foot-col">
+        <b>Желі</b>
+        <a href="https://ciriycpro.com">ciriycpro.com — Зертхана</a>
+      </div>
+    </div>
+    <div class="copyright">© 2026 CIRIYC PRO Research Initiative.</div>
+    <div class="lsw-foot" data-i18n-ui><span><a href="/" hreflang="en" lang="en" data-lsw="en">English</a></span><span><a href="/au/" hreflang="en-AU" lang="en-AU" data-lsw="en-AU">English (AU)</a></span><span><a href="/kz/" hreflang="kk-KZ" lang="kk" data-lsw="kk" aria-current="true">Қазақша</a> <span class="beta">beta</span></span><span><a href="/th/" hreflang="th-TH" lang="th" data-lsw="th">ไทย</a> <span class="beta">beta</span></span></div>
+  </div>
+</footer>
+
+</body>
+</html>

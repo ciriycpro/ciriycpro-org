@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="icon" href="/star.png" type="image/png">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Алты агент модельденген tail-end реакторын нақты уақытта бақылайды: аномалияларды анықтау, жылу балансы, 30 минуттық болжам, оңтайландырушы және әр әрекетті бекітетін оператор.">
+<title>MAIF демосы — C2 гидрлеу реакторының агенттік мониторингі</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff; --panel:#ffffff; --panel2:#fafafa01; --line:#e8e8e8; --ink:#0a0a0a; --mut:#666666;
+  --teal:#0d9488; --lime:#16a34a; --amber:#d97706; --red:#dc2626; --blue:#2563eb; --violet:#7c3aed;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+.mono{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace}
+header{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:16px 20px 10px;border-bottom:1px solid var(--line)}
+.brand{display:flex;gap:12px;align-items:center}
+.brand .dot{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--teal),var(--lime));display:grid;place-items:center;color:#e6f4f2;font-weight:800}
+h1{font-size:18px;margin:0;font-weight:700;letter-spacing:.2px}
+.sub{color:var(--mut);font-size:12.5px;margin-top:2px}
+.ctrl{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.btn{background:#ffffff;border:1px solid var(--line);color:var(--ink);padding:7px 11px;border-radius:9px;cursor:pointer;font:inherit;font-size:13px}
+.btn:hover{border-color:#bbbbbb}
+.btn.on{background:var(--teal);color:#ffffff;border-color:var(--teal);font-weight:600}
+.btn.danger{border-color:#f3c0c0}
+.clock{font-size:13px;color:var(--mut);padding:0 6px}
+.scen{display:flex;gap:8px;flex-wrap:wrap;padding:12px 20px;border-bottom:1px solid var(--line);align-items:center}
+.scen .lbl{color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.08em;margin-right:4px}
+main{display:grid;grid-template-columns:300px minmax(0,1fr) 360px;gap:14px;padding:14px 20px 20px}
+@media (max-width:1180px){main{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.right{grid-column:1/-1}}
+@media (max-width:760px){main{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
+.card h3{margin:0 0 10px;font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:.09em;font-weight:600}
+.col{display:flex;flex-direction:column;gap:14px;min-width:0}
+.kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+@media (max-width:1400px){.kpis{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px;min-width:0}
+.kpi .k{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.06em}
+.kpi .v{font-size:22px;font-weight:700;margin-top:3px;white-space:nowrap}
+.kpi .s{font-size:11.5px;color:var(--mut);margin-top:1px}
+.ok{color:var(--lime)} .warn{color:var(--amber)} .bad{color:var(--red)}
+canvas{width:100%;display:block;max-width:100%}
+html{overflow-y:scroll;scrollbar-gutter:stable}
+.kpi .v,.kpi .s,.clock,.mono{font-variant-numeric:tabular-nums}
+.kpi{min-height:96px}.kpi .s{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.clock{display:inline-block;min-width:150px}
+.agents{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px}
+.ag{display:flex;align-items:center;gap:7px;font-size:12.5px;background:#fafafa;border:1px solid var(--line);border-radius:9px;padding:6px 8px}
+.ag i{width:8px;height:8px;border-radius:50%;background:var(--lime);flex:none;box-shadow:0 0 0 3px #16a34a22}
+.ag.busy i{background:var(--amber);box-shadow:0 0 0 3px #d9770633}
+.ag.alert i{background:var(--red);box-shadow:0 0 0 3px #dc262633}
+.feed{height:340px;overflow:auto;display:flex;flex-direction:column;gap:6px;padding-right:4px}
+.ev{border-left:3px solid var(--teal);background:#fafafa;border-radius:6px;padding:6px 9px;font-size:12.5px}
+.ev .h{display:flex;justify-content:space-between;gap:8px;color:var(--mut);font-size:11px}
+.ev.warn{border-color:var(--amber)} .ev.bad{border-color:var(--red)} .ev.ok{border-color:var(--lime)} .ev.info{border-color:var(--blue)}
+.rec{border:1px solid #b9dcd7;background:linear-gradient(180deg,#e6f4f2,#f3faf9);border-radius:12px;padding:12px;margin-top:12px}
+.rec .t{font-weight:700;margin-bottom:4px}
+.rec .why{color:var(--mut);font-size:12.5px;margin-bottom:10px}
+.rec .acts{display:flex;gap:8px}
+#recBox{min-height:150px}
+.empty{color:var(--mut);font-size:12.5px}
+.sl{margin:10px 0}
+.sl label{display:flex;justify-content:space-between;font-size:12.5px;color:var(--mut)}
+.sl input{width:100%;accent-color:var(--teal)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:var(--mut);margin-top:6px}
+.legend b{display:inline-block;width:14px;height:3px;border-radius:2px;vertical-align:middle;margin-right:5px}
+footer{color:var(--mut);font-size:12px;padding:4px 20px 24px;line-height:1.6}
+footer a{color:var(--teal)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:1400px){.grid2{grid-template-columns:1fr}}
+.tag{font-size:11px;color:var(--mut)}
+
+canvas{max-width:100%}.card,.col{min-width:0}html{overflow-y:scroll}
+
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif}
+.sitebar{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;height:60px;padding:0 20px;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid #e8e8e8}
+.sb-logo{display:flex;align-items:center;gap:10px;font-weight:600;font-size:15px;letter-spacing:2px;color:#0a0a0a;text-decoration:none}
+.sb-logo img{width:26px;height:26px}.sb-sub{font-weight:400;color:#888;letter-spacing:1px;font-size:12px}
+.sb-back{color:#555;text-decoration:none;font-size:14px;font-weight:500}.sb-back:hover{color:#0a0a0a}
+.btn.primary{background:#0a0a0a!important;border-color:#0a0a0a!important;color:#fff!important}
+</style>
+<link rel="canonical" href="https://ciriycpro.org/kz/stands/c2-monitoring/">
+<link rel="alternate" hreflang="en" href="https://ciriycpro.org/stands/c2-monitoring/">
+<link rel="alternate" hreflang="en-AU" href="https://ciriycpro.org/au/stands/c2-monitoring/">
+<link rel="alternate" hreflang="kk-KZ" href="https://ciriycpro.org/kz/stands/c2-monitoring/">
+<link rel="alternate" hreflang="th-TH" href="https://ciriycpro.org/th/stands/c2-monitoring/">
+<link rel="alternate" hreflang="x-default" href="https://ciriycpro.org/stands/c2-monitoring/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ciriycpro.org/kz/stands/c2-monitoring/">
+<meta property="og:title" content="MAIF демосы — C2 гидрлеу реакторының агенттік мониторингі">
+<meta property="og:description" content="Алты агент модельденген tail-end реакторын нақты уақытта бақылайды: аномалияларды анықтау, жылу балансы, 30 минуттық болжам, оңтайландырушы және әр әрекетті бекітетін оператор.">
+<meta property="og:locale" content="kk_KZ">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="en_AU">
+<meta property="og:locale:alternate" content="th_TH">
+<meta name="robots" content="noindex">
+<style data-i18n>
+.lsw-a{position:relative;display:inline-flex;align-items:center}
+.lsw{position:absolute;right:calc(100% + 10px);top:50%;transform:translateY(-50%);z-index:120;font:500 13px/1.25 'Inter','Noto Sans Thai',-apple-system,BlinkMacSystemFont,sans-serif;letter-spacing:0;text-transform:none}
+.lsw summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:5px;height:34px;padding:0 9px;border:1px solid #e8e8e8;border-radius:8px;color:#555;background:#fff;white-space:nowrap;user-select:none}
+.lsw summary::-webkit-details-marker{display:none}
+.lsw summary:hover,.lsw[open] summary{border-color:#bbb;color:#0a0a0a}
+.lsw ul{position:absolute;right:0;top:calc(100% + 6px);list-style:none;margin:0;padding:6px;background:#fff;border:1px solid #e8e8e8;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.10);min-width:180px}
+.lsw li a{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:7px;color:#0a0a0a;text-decoration:none;white-space:nowrap;line-height:1.6}
+.lsw li a:hover{background:#f4f4f4}
+.lsw li a[aria-current]{font-weight:700}
+.lsw li a.saved::after{content:'';width:6px;height:6px;border-radius:50%;background:#0d9488;margin-left:auto}
+.lsw .beta,.lsw-foot .beta{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#d97706;border:1px solid #f1d6a0;border-radius:10px;padding:0 6px;line-height:16px}
+.lsw-foot{margin-top:14px;font-size:12.5px;color:#888;display:flex;gap:16px;flex-wrap:wrap;align-items:center;line-height:1.6}
+.lsw-foot a{color:inherit;text-decoration:none;border-bottom:1px solid #ddd}
+.lsw-foot a[aria-current]{color:#0a0a0a;border-bottom-color:#0a0a0a}
+@media(max-width:900px){.lsw{position:relative;right:auto;top:auto;transform:none;margin-right:8px}}
+@media(max-width:520px){.lsw summary .lsw-c{display:none}.lsw summary{padding:0 8px}}
+@media(max-width:440px){.logo .sub-mark,.sb-logo .sb-sub{display:none}}
+.kpi .k,.card h3,h1,h2{overflow-wrap:anywhere}
+</style>
+<script data-i18n>(function(){var K='ciriyc_lang',s=null;try{s=localStorage.getItem(K)}catch(e){}
+function mark(){if(!s)return;document.querySelectorAll('a[data-lsw="'+s+'"]').forEach(function(a){if(!a.hasAttribute('aria-current'))a.classList.add('saved')})}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mark);else mark();
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[data-lsw]');if(!a)return;try{localStorage.setItem(K,a.getAttribute('data-lsw'))}catch(x){}
+if(location.hash)a.setAttribute('href',a.getAttribute('href').split('#')[0]+location.hash)},true);
+document.addEventListener('click',function(e){var d=document.querySelector('details.lsw[open]');if(d&&!d.contains(e.target))d.removeAttribute('open')});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){var d=document.querySelector('details.lsw[open]');if(d)d.removeAttribute('open')}})})();</script>
+<script data-i18n>var _i18n={"code": "kk", "intl": "kk-KZ", "grouping": true, "dec": ",", "intl_fb": "ru-RU", "root": "/kz", "en_url": "https://ciriycpro.org/stands/c2-monitoring/"};var I18N={"c2.ag.anomaly":"Аномалия","c2.ag.forecast":"Болжам","c2.ag.heat":"Жылу балансы","c2.ag.hitl":"Жоспарлаушы / HITL","c2.ag.operator":"Оператор","c2.ag.opt":"Оңтайландырушы","c2.ag.sensor":"Датчик","c2.ag.sys":"Жүйе","c2.btn.apply":"Қолдану","c2.btn.dismiss":"Бас тарту","c2.clock.sim":"(модель)","c2.cv.c2h2out":"C₂H₂ шығыста","c2.cv.feed":"Шикізат: C₂ фракциясы + H₂","c2.cv.product":"Өнім: этилен","c2.cv.ti101":"TI-101 кіріс","c2.cv.ti106":"TI-106 шығыс","c2.cv.tibed":"TI-10{n} қабат","c2.kpi.abovehi":"HI-дан жоғары","c2.kpi.actnow":"дереу әрекет етіңіз","c2.kpi.fc":"Болжам +30 мин","c2.kpi.heat":"Жылу бөлінуі","c2.kpi.heat_s":"жобалық мәннің {p}%","c2.kpi.hhin":"HH {m} минуттан соң","c2.kpi.hhx":"HH асып кетті","c2.kpi.hiin":"HI {m} минуттан соң","c2.kpi.loss":"Этилен шығыны","c2.kpi.loss_s":"жылу балансы бойынша баға","c2.kpi.nolimit":"30 минутта шекке жетпейді","c2.kpi.peak":"шың {t} °C","c2.kpi.peak30":"шың {t} °C / 30 мин","c2.kpi.sel":"Селективтілік","c2.kpi.slip":"C₂H₂ өтіп кетуі","c2.kpi.slip_s":"норма ≤ 1 ppm","c2.kpi.stable":"Тұрақты","c2.msg.applied":"Қолданылды: {t}","c2.msg.boot":"Қондырғы тұрақты режимде. 6 агент 14 тегке жазылған. Жоғарыдан сценарий таңдаңыз — агенттерге қайсысы екені айтылмайды.","c2.msg.co":"CO модераторы төмен: {c} ppm (норма 1,5–2,5). Катализатордың селективтілігі төмендейді.","c2.msg.co_ok":"CO модераторы қалыпқа келді.","c2.msg.dismissed":"Бас тартылды: {t}","c2.msg.eor":"Бағаланған белсенділік {a} кезінде C₂H₂ өтіп кетуін < 0,5 ppm және T шығысты < {l} °C ұстайтын кіріс температурасы жоқ. Катализатор жұмыс циклінің соңына жақын.","c2.msg.fchh":"T шығыстың болжамы {t} °C — үрдіс сақталса, ~{m} минуттан соң HH апаттық шегінен ({l} °C) асады. Реакцияның бақылаусыз үдеу қаупі.","c2.msg.fchh_ok":"Болжам енді HH шегіне жетпейді.","c2.msg.fchi":"~{m} минуттан соң HI дабылы ({l} °C) болжанады.","c2.msg.h2":"H₂/C₂H₂ қатынасы {r} — 1,2–1,8 терезесінен жоғары. Артық сутегі этиленге шабуыл жасайды.","c2.msg.h2_ok":"H₂ мөлшерлеуі терезеге қайтты.","c2.msg.heat":"Жылу бөлінуі жобалық мәннің {p}% ({q} MW, жобалық {qd} MW). Артық ΔT {dt} K ацетилен конверсиясымен түсіндірілмейді → этилен гидрленіп жатыр (~{l}%).","c2.msg.heat_ok":"Жылу бөлінуі жобалық диапазонға қайтты.","c2.msg.hh":"<b>HH шегінен асты: T шығыс {t} °C ≥ {l} °C.<\/b> Блоктау аймағы — оператордың әрекеті қажет.","c2.msg.hh_ok":"T шығыс HH шегінен төмен түсті.","c2.msg.hi":"T шығыс {t} °C — HI дабылынан ({l} °C) жоғары.","c2.msg.hi_ok":"T шығыс HI дабылынан төмен.","c2.msg.rec":"Операторға ұсыныс: <b>{t}<\/b>","c2.msg.scen":"Сценарий басталды: {s}. Агенттерге оның не екені айтылмайды.","c2.msg.sel":"Селективтілік {s}% дейін төмендеді (жылу балансы). Этилен шығыны ≈ өнімнің {l}%.","c2.msg.sel_ok":"Селективтілік қалпына келді.","c2.msg.slip":"Кондициядан тыс: шығыс анализаторында C₂H₂ өтіп кетуі {s} ppm > {l} ppm. Ағымдағы кіріс температурасында белсенділік енді жеткіліксіз.","c2.msg.slip_ok":"Ацетиленнің өтіп кетуі нормаға қайтты.","c2.msg.trend":"Шығыс температурасы кіріске қарағанда {s} K/мин жылдамырақ өсуде. Реакция жылуы артып келеді.","c2.pause":"Кідірту","c2.rec.co":"CO модераторын 2,0 ppm-ге дейін қалпына келтіру","c2.rec.co_why":"CO-ның төмен болуы этиленді гидрлеудің тежегішін алып тастайды; селективтілік пен жылу бөлінуі жоғары қарай ығысуда.","c2.rec.dn":"Кіріс T-ны {t} °C-ке дейін төмендету","c2.rec.dn_why":"Оңтайландырушы: C₂H₂ өтіп кетуін < 0,5 ppm ұстайтын ең төменгі кіріс T. Этилен шығынын ~{l}% дейін азайтады.","c2.rec.h2":"H₂ мөлшерлеуін 1,4 қатынасына дейін азайту","c2.rec.h2_why":"Артық H₂ — этиленді гидрлеудің отыны. Болжанған ең жоғары T шығыс {t} °C.","c2.rec.none":"Әрекет қажет емес. Агенттер бақылауды жалғастыруда.","c2.rec.regen":"Катализаторды регенерациялауды жоспарлау / резервтік қабатқа ауысу","c2.rec.regen_why":"Бағаланған белсенділік ≈ жаңа катализатордың {a}. Кіріс T-ны одан әрі көтеру T шығысты дабыл аймағына итереді. Кіріс T-ны ұстап тұрып, регенерацияны жоспарлаңыз.","c2.rec.up":"Кіріс T-ны {t} °C-ке дейін көтеру","c2.rec.up_why":"Катализатордың бағаланған белсенділігі ≈ жаңасының {a}. Оңтайландырушы: өтіп кету < 0,5 ppm болатын ең төменгі кіріс T. Күтілетін этилен шығыны {l}%.","c2.rec.wait":"Жоспарлаушы / HITL · оператор күтілуде","c2.resume":"Жалғастыру","c2.scen.co":"CO модераторының жоғалуы","c2.scen.combo":"Аралас бұзылыс (қауіпті)","c2.scen.deact":"Катализатордың белсенділігін жоғалтуы","c2.scen.h2":"H₂ артық мөлшерлеу","c2.scen.normal":"Қалыпты жұмыс","c2.scen.tin":"Кіріс температурасының ығысуы"};
+function _t(k,v){var s=I18N[k];if(s===undefined){return k}if(v){s=s.replace(/\{(\w+)\}/g,function(m,n){return Object.prototype.hasOwnProperty.call(v,n)?String(v[n]):m})}return s}
+var _nfc={},_nloc=(function(){try{var p=new Intl.NumberFormat(_i18n.intl,{minimumFractionDigits:1}).formatToParts(1.5);for(var i=0;i<p.length;i++)if(p[i].type==='decimal'&&p[i].value===_i18n.dec)return _i18n.intl}catch(e){}return _i18n.intl_fb||_i18n.intl})();
+function _n(x,d){x=Number(x);d=d||0;if(!isFinite(x))return String(x);var f=_nfc[d]||(_nfc[d]=new Intl.NumberFormat(_nloc,{minimumFractionDigits:d,maximumFractionDigits:d,useGrouping:_i18n.grouping}));return f.format(x)}
+function _ns(s){s=String(s);return _i18n.dec==='.'?s:s.replace(/(\d)\.(\d)/g,'$1'+_i18n.dec+'$2')}
+function _words(s){if(window.Intl&&Intl.Segmenter&&/[\u0E00-\u0E7F]/.test(s)){var o=[];for(var p of new Intl.Segmenter('th',{granularity:'word'}).segment(s))o.push(p.segment);return o}return s.split(/(\s+)/)}
+function _fit(g,s,x,y,maxW,sk,lh){if(g.measureText(s).width<=maxW)return g.fillText(s,x,y),1;if(sk&&I18N[sk]!==undefined&&g.measureText(I18N[sk]).width<=maxW)return g.fillText(I18N[sk],x,y),1;
+var w=_words(s),ln='',L=[];for(var i=0;i<w.length;i++){var c=ln+w[i];if(ln&&g.measureText(c.trim()).width>maxW){L.push(ln.trim());ln=w[i]}else ln=c}if(ln.trim())L.push(ln.trim());
+lh=lh||parseFloat(g.font)*1.25||13;var f0=g.font,sz=parseFloat((f0.match(/([\d.]+)px/)||[0,12])[1]);for(var j=0;j<L.length;j++){while(g.measureText(L[j]).width>maxW&&sz>7){sz-=0.5;g.font=f0.replace(/[\d.]+px/,sz+'px')}g.fillText(L[j],x,y+j*lh);g.font=f0}return L.length}</script>
+</head>
+<body>
+<div class="sitebar"><a class="sb-logo" href="/kz/"><span>CIRIYC PRO</span><span class="sb-sub">RESEARCH</span><img src="/star.png" alt=""></a><span class="lsw-a"><details class="lsw" data-i18n-ui><summary aria-label="Тіл" title="Тіл"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.6 2.7 3.9 5.9 3.9 9.5s-1.3 6.8-3.9 9.5M12 2.5C9.4 5.2 8.1 8.4 8.1 12s1.3 6.8 3.9 9.5"/></svg><span class="lsw-c">KZ</span></summary><ul><li><a href="/stands/c2-monitoring/" hreflang="en" lang="en" data-lsw="en">English</a></li><li><a href="/au/stands/c2-monitoring/" hreflang="en-AU" lang="en-AU" data-lsw="en-AU">English (AU)</a></li><li><a href="/kz/stands/c2-monitoring/" hreflang="kk-KZ" lang="kk" data-lsw="kk" aria-current="true">Қазақша <span class="beta">beta</span></a></li><li><a href="/th/stands/c2-monitoring/" hreflang="th-TH" lang="th" data-lsw="th">ไทย <span class="beta">beta</span></a></li></ul></details><a class="sb-back" href="/kz/#demos">← Барлық демолар</a></span></div>
+<header>
+  <div class="brand">
+    <div class="dot">M</div>
+    <div>
+      <h1>C2 гидрлеу реакторының агенттік мониторингі</h1>
+      <div class="sub">MAIF демосы · CIRIYC PRO Research · модельденген қондырғы, нақты агенттік логика</div>
+    </div>
+  </div>
+  <div class="ctrl">
+    <span class="clock mono" id="clock">t = 00:00</span>
+    <button class="btn" id="pause">Кідірту</button>
+    <button class="btn" data-speed="1">1×</button>
+    <button class="btn on" data-speed="4">4×</button>
+    <button class="btn" data-speed="12">12×</button>
+  </div>
+</header>
+
+<div class="scen" id="scen">
+  <span class="lbl">Сценарий</span>
+</div>
+
+<main>
+  <div class="col">
+    <div class="card">
+      <h3>R-201 реакторы · tail-end, адиабаталық қабат</h3>
+      <canvas id="reactor" height="420"></canvas>
+    </div>
+    <div class="card">
+      <h3>Оператордың берілген мәндері</h3>
+      <div class="sl"><label>Кіріс температурасы <span class="mono" id="vTin"></span></label><input type="range" id="sTin" min="40" max="70" step="0.5"></div>
+      <div class="sl"><label>H₂ / C₂H₂ қатынасы <span class="mono" id="vRat"></span></label><input type="range" id="sRat" min="1.0" max="3.2" step="0.05"></div>
+      <div class="sl"><label>CO модераторы, ppm <span class="mono" id="vCo"></span></label><input type="range" id="sCo" min="0.1" max="4" step="0.05"></div>
+      <div class="tag">Берілген мәндер нақты қондырғыдағыдай біртіндеп өзгереді; агенттер тек өлшенген тегтерді көреді.</div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="kpis" id="kpis"></div>
+    <div class="card">
+      <h3>Температуралар, соңғы 120 мин · болжам +30 мин</h3>
+      <canvas id="chT" height="250"></canvas>
+      <div class="legend"><span><b style="background:#2563eb"></b>T кіріс</span><span><b style="background:#0d9488"></b>T шығыс</span><span><b style="background:#7c3aed"></b>Ыстық нүкте</span><span><b style="background:#d97706"></b>Болжам (агент)</span><span><b style="background:#dc2626"></b>HI / HH шектері</span></div>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <h3>Қабаттың температуралық профилі</h3>
+        <canvas id="chP" height="210"></canvas>
+        <div class="legend"><span><b style="background:#0d9488"></b>Қазір</span><span><b style="background:#16a34a"></b>Оңтайлы (агент)</span><span><b style="background:#666666"></b>Жобалық</span></div>
+      </div>
+      <div class="card">
+        <h3>Өнім сапасы және этилен шығыны</h3>
+        <canvas id="chQ" height="210"></canvas>
+        <div class="legend"><span><b style="background:#d97706"></b>C₂H₂ өтіп кетуі, ppm (анализатор, 5 мин кідіріс)</span><span><b style="background:#7c3aed"></b>Этилен → этан, % (жылу балансы бойынша баға)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col right">
+    <div class="card">
+      <h3>MAIF агенттер шинасы</h3>
+      <div class="agents" id="agents"></div>
+      <div class="feed" id="feed"></div>
+      <div id="recBox"></div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  Pd катализаторындағы ацетиленді tail-end гидрлеудің жеңілдетілген 1-D адиабаталық қозғалмайтын қабат моделі: C₂H₂ + H₂ → C₂H₄ (ΔH ≈ −172 kJ/mol) және C₂H₄ + H₂ → C₂H₆ (ΔH ≈ −137 kJ/mol), CO модерациясы мен ацетиленнің тежеуі ескерілген. Кинетика иллюстрациялық, деректер синтетикалық — бұл бет MAIF агенттерінің қондырғы тегтері бойынша қалай пайымдайтынын көрсетеді, нақты бір қондырғының моделі емес.<br>
+  Агенттер: Датчик · Аномалия · Жылу балансы · Болжам · Оңтайландырушы · Жоспарлаушы/HITL. Шешімдер операторда қалады. <a href="https://ciriycpro.org">ciriycpro.org</a>
+  <div class="lsw-foot" data-i18n-ui><span><a href="/stands/c2-monitoring/" hreflang="en" lang="en" data-lsw="en">English</a></span><span><a href="/au/stands/c2-monitoring/" hreflang="en-AU" lang="en-AU" data-lsw="en-AU">English (AU)</a></span><span><a href="/kz/stands/c2-monitoring/" hreflang="kk-KZ" lang="kk" data-lsw="kk" aria-current="true">Қазақша</a> <span class="beta">beta</span></span><span><a href="/th/stands/c2-monitoring/" hreflang="th-TH" lang="th" data-lsw="th">ไทย</a> <span class="beta">beta</span></span></div>
+</footer>
+
+<script>
+(() => {
+// ======================= PROCESS MODEL =======================
+const R=8.314, CP=52, DH1=172e3, DH2=137e3, TREF=333.15;
+const KIN={k1:30,k2:0.3,E1:50e3,E2:115e3,KA:300,c1:0.15,c2:2.5};
+const N=40, YA_IN=0.007, FLOW=595; // mol/s (~60 t/h)
+const LIM={HI:90, HH:105, SLIP:1.0, DT_DESIGN:24.2};
+function solve(p){
+  let T=p.Tin+273.15, yA=YA_IN, yH=YA_IN*p.ratio, yE=0.80, yEt=0.10;
+  const f1=1/(1+KIN.c1*p.co), f2=1/(1+KIN.c2*p.co), sub=10, h=1/N/sub, prof=new Array(N);
+  for(let i=0;i<N;i++){ for(let s=0;s<sub;s++){
+    const a1=KIN.k1*p.act*Math.exp(-KIN.E1/R*(1/T-1/TREF))*f1;
+    const a2=KIN.k2*p.act*Math.exp(-KIN.E2/R*(1/T-1/TREF))*f2;
+    const inh=1+KIN.KA*yA;
+    let r1=Math.min(a1*yA*yH/inh*h*100,yA,yH); yA-=r1; yH-=r1; yE+=r1;
+    let r2=Math.min(a2*yE*yH/(inh*inh)*h,yH); yH-=r2; yE-=r2; yEt+=r2;
+    T+=(DH1*r1+DH2*r2)/CP; }
+    prof[i]=T-273.15; }
+  return {prof,Tout:T-273.15,slip:yA*1e6,loss:(yEt-0.10)*100};
+}
+const DESIGN=solve({Tin:50,ratio:1.4,co:2,act:1}).prof;
+
+// ======================= PLANT STATE =======================
+const BASE={Tin:50,ratio:1.4,co:2,act:1};
+let S;
+function reset(){
+  S={t:0, u:{...BASE}, sp:{...BASE}, rate:{Tin:0.4,ratio:0.05,co:0.15,act:0.02},
+     bed:solve(BASE).prof.slice(), hist:[], anaQ:[], ana:{slip:0.1,t:0}, alerts:{}, events:[],
+     rec:null, fc:null, opt:null, dismissed:{}, lastOpt:-99};
+  for(let i=0;i<30;i++) stepMinute();
+  S.alerts={}; S.rec=null; feed.innerHTML='';
+  post('sys','info',_t('c2.msg.boot'));
+}
+function ramp(key,to,rate){ S.sp[key]=to; if(rate) S.rate[key]=rate; }
+
+// ======================= SCENARIOS =======================
+const SCEN=[
+ {id:'normal',name:_t('c2.scen.normal'),run(){}},
+ {id:'co',name:_t('c2.scen.co'),run(){ramp('co',0.15,0.12)}},
+ {id:'h2',name:_t('c2.scen.h2'),run(){ramp('ratio',2.8,0.04)}},
+ {id:'combo',name:_t('c2.scen.combo'),run(){ramp('co',0.15,0.15);ramp('ratio',2.6,0.05);ramp('Tin',56,0.25)}},
+ {id:'deact',name:_t('c2.scen.deact'),run(){ramp('act',0.4,0.015)}},
+ {id:'tin',name:_t('c2.scen.tin'),run(){ramp('Tin',68,0.35)}},
+];
+let curScen='normal';
+const scenEl=document.getElementById('scen');
+SCEN.forEach(s=>{const b=document.createElement('button');b.className='btn'+(s.id==='normal'?' on':'')+(s.id==='combo'?' danger':'');b.textContent=s.name;
+  b.onclick=()=>{curScen=s.id;[...scenEl.querySelectorAll('.btn')].forEach(x=>x.classList.remove('on'));b.classList.add('on');reset();s.run();syncSliders();
+    post('sys','info',_t('c2.msg.scen',{s:s.name}));};scenEl.appendChild(b);});
+
+// ======================= AGENTS =======================
+const AG=[['sensor',_t('c2.ag.sensor')],['anomaly',_t('c2.ag.anomaly')],['heat',_t('c2.ag.heat')],['forecast',_t('c2.ag.forecast')],['opt',_t('c2.ag.opt')],['hitl',_t('c2.ag.hitl')]];
+const agState={}; AG.forEach(([k])=>agState[k]='idle');
+const agEl=document.getElementById('agents');
+function drawAgents(){const ah=AG.map(([k,n])=>`<div class="ag ${agState[k]==='alert'?'alert':agState[k]==='busy'?'busy':''}"><i></i>${n}</div>`).join('');if(agEl._h!==ah){agEl._h=ah;agEl.innerHTML=ah;}}
+const feed=document.getElementById('feed');
+const AGN=Object.fromEntries(AG.concat([['sys',_t('c2.ag.sys')],['operator',_t('c2.ag.operator')]]));
+function post(ag,lvl,msg){
+  const d=document.createElement('div');d.className='ev '+lvl;
+  d.innerHTML=`<div class="h"><span>${AGN[ag]}</span><span class="mono">${fmtT(S?S.t:0)}</span></div>${msg}`;
+  feed.prepend(d); while(feed.children.length>80) feed.lastChild.remove();
+}
+function raise(key,ag,lvl,msg){ if(!S.alerts[key]){S.alerts[key]={ag,lvl,t:S.t};post(ag,lvl,msg);} }
+function clear(key,msg){ if(S.alerts[key]){ const a=S.alerts[key]; delete S.alerts[key]; if(msg) post(a.ag,'ok',msg);} }
+const noise=s=>(Math.random()-0.5)*2*s;
+
+function stepMinute(){
+  S.t+=1;
+  // plant: move inputs toward setpoints
+  for(const k of ['Tin','ratio','co','act']){const d=S.sp[k]-S.u[k],r=S.rate[k]; S.u[k]+=Math.abs(d)<=r?d:Math.sign(d)*r;}
+  const ss=solve(S.u);
+  for(let i=0;i<N;i++){ S.bed[i]+= (ss.prof[i]-S.bed[i])*(1-Math.exp(-1/4)); } // bed thermal lag, tau = 4 min
+  // ---- Sensor agent: tags ----
+  const tag={Tin:S.u.Tin+noise(0.15), Tout:S.bed[N-1]+noise(0.15), TIs:[8,16,24,32].map(i=>S.bed[i]+noise(0.15)),
+             ratio:S.u.ratio+noise(0.01), co:Math.max(0,S.u.co+noise(0.03))};
+  tag.hot=Math.max(...S.bed); tag.dT=tag.Tout-tag.Tin;
+  S.anaQ.push({t:S.t,slip:Math.max(0,ss.slip*(1+noise(0.05))),loss:ss.loss});
+  if(S.t%5===0){ const old=S.anaQ.find(a=>a.t===S.t-5); if(old) S.ana={slip:old.slip,t:S.t}; }
+  S.anaQ=S.anaQ.filter(a=>a.t>S.t-8);
+  // ---- Heat-balance agent ----
+  const conv=(YA_IN*1e6-S.ana.slip)/1e6;
+  const dTexp=conv*DH1/CP, excess=tag.dT-dTexp;
+  const lossEst=Math.max(0,excess*CP/DH2*100);
+  const Q=FLOW*CP*tag.dT/1e6, Qd=FLOW*CP*LIM.DT_DESIGN/1e6, pct=Q/Qd*100;
+  tag.lossEst=lossEst; tag.Q=Q; tag.pct=pct;
+  const sel=Math.max(-99,(conv*100-lossEst)/(conv*100)*100); tag.sel=sel;
+  S.hist.push({t:S.t,Tin:tag.Tin,Tout:tag.Tout,hot:tag.hot,slip:S.ana.slip,loss:lossEst});
+  if(S.hist.length>200) S.hist.shift();
+  S.tag=tag;
+
+  agState.sensor='idle'; agState.anomaly='idle'; agState.heat='idle'; agState.forecast='idle'; agState.opt='idle'; agState.hitl='idle';
+  if(S.t<4) return;
+  // heat-balance alerts
+  if(pct>118) {raise('heat','heat','warn',_t('c2.msg.heat',{p:_n(pct,0),q:_n(Q,2),qd:_n(Qd,2),dt:_n(excess,1),l:_n(lossEst,2)})); agState.heat='alert';}
+  else if(pct<108) clear('heat',_t('c2.msg.heat_ok'));
+  if(sel<70) {raise('sel','heat','warn',_t('c2.msg.sel',{s:_n(sel,0),l:_n(lossEst,2)}));agState.heat='alert';}
+  else if(sel>80) clear('sel',_t('c2.msg.sel_ok'));
+  // ---- Anomaly agent: trends ----
+  const h=S.hist, n=h.length;
+  if(n>8){
+    const slope=(h[n-1].Tout-h[n-7].Tout)/6, slopeIn=(h[n-1].Tin-h[n-7].Tin)/6;
+    if(slope>0.35 && slope-slopeIn>0.2){raise('trend','anomaly','warn',_t('c2.msg.trend',{s:_n(slope,2)}));agState.anomaly='alert';}
+    else if(slope<0.12) clear('trend');
+    const tagCO=tag.co, tagR=tag.ratio;
+    if(tagCO<0.8){raise('co','anomaly','warn',_t('c2.msg.co',{c:_n(tagCO,2)}));agState.anomaly='alert';} else if(tagCO>1.2) clear('co',_t('c2.msg.co_ok'));
+    if(tagR>1.9){raise('h2','anomaly','warn',_t('c2.msg.h2',{r:_n(tagR,2)}));agState.anomaly='alert';} else if(tagR<1.7) clear('h2',_t('c2.msg.h2_ok'));
+  }
+  if(S.ana.slip>LIM.SLIP){raise('slip','anomaly','bad',_t('c2.msg.slip',{s:_n(S.ana.slip,1),l:_ns(LIM.SLIP)}));agState.anomaly='alert';}
+  else if(S.ana.slip<0.6) clear('slip',_t('c2.msg.slip_ok'));
+  if(tag.Tout>LIM.HI){raise('hi','anomaly','bad',_t('c2.msg.hi',{t:_n(tag.Tout,1),l:LIM.HI}));} else if(tag.Tout<LIM.HI-2) clear('hi',_t('c2.msg.hi_ok'));
+  if(tag.Tout>LIM.HH){raise('hh','anomaly','bad',_t('c2.msg.hh',{t:_n(tag.Tout,1),l:LIM.HH}));agState.anomaly='alert';} else if(tag.Tout<LIM.HH-2) clear('hh',_t('c2.msg.hh_ok'));
+
+  // ---- Forecast agent: extrapolate measured inputs 30 min ----
+  if(n>10){
+    agState.forecast='busy';
+    const k=10, a=h[n-1-k]; const sl=(x,y)=> (x-y)/k;
+    const tin0=tag.Tin, dTin=sl(tag.Tin,a.Tin);
+    const hist10=S.tagHist||[];
+    const rP=S.prevTags&&S.prevTags.length>=k?S.prevTags[S.prevTags.length-k]:null;
+    const dR=rP?(tag.ratio-rP.ratio)/k:0, dC=rP?(tag.co-rP.co)/k:0;
+    const pts=[]; let tAl=null, tHH=null, maxT=tag.Tout;
+    for(let m=5;m<=30;m+=5){
+      const p={Tin:tin0+dTin*m, ratio:Math.max(1,tag.ratio+dR*m), co:Math.max(0.05,tag.co+dC*m), act:estAct()};
+      const r=solve(p); pts.push({t:S.t+m,T:r.Tout}); maxT=Math.max(maxT,r.Tout);
+      if(tAl===null && r.Tout>LIM.HI) tAl=m; if(tHH===null && r.Tout>LIM.HH) tHH=m;
+    }
+    S.fc={pts,tAl,tHH,maxT};
+    if(tHH!==null && tag.Tout<LIM.HH){raise('fcHH','forecast','bad',_t('c2.msg.fchh',{t:_n(maxT,0),l:LIM.HH,m:tHH}));agState.forecast='alert';}
+    else if(tHH===null) clear('fcHH',_t('c2.msg.fchh_ok'));
+    if(tAl!==null && tag.Tout<LIM.HI){raise('fcHI','forecast','warn',_t('c2.msg.fchi',{l:LIM.HI,m:tAl}));agState.forecast='alert';}
+    else if(tAl===null) clear('fcHI');
+  }
+  S.prevTags=(S.prevTags||[]).concat([{ratio:tag.ratio,co:tag.co}]).slice(-30);
+
+  // ---- Optimizer agent: best inlet T for current state ----
+  if(S.t-S.lastOpt>=10 || S.alerts.slip || S.alerts.sel){
+    agState.opt='busy'; S.lastOpt=S.t;
+    let best=null; const act=estAct();
+    for(let T=45;T<=70;T+=0.5){const r=solve({Tin:T,ratio:tag.ratio,co:tag.co,act}); if(r.slip<0.5 && r.Tout<LIM.HI-3){best={Tin:T,r};break;}}
+    S.opt=best; S.optInfeasible=!best;
+    if(!best && S.alerts.slip){raise('eor','opt','bad',_t('c2.msg.eor',{l:LIM.HI-3,a:_n(act,2)}));agState.opt='alert';}
+    else if(best) clear('eor');
+  }
+  // ---- Planner / HITL ----
+  plan(tag);
+}
+// Activity estimate: the optimizer fits catalyst activity to analyzer slip (simple 1-D search)
+function estAct(){
+  const tag=S.tag; if(!tag) return 1;
+  if(S.ana.slip<0.5){ S.actEst=Math.min(1,(S.actEst||1)+0.05); return S.actEst; }
+  let lo=0.1,hi=1.2; for(let i=0;i<14;i++){const m=(lo+hi)/2; const r=solve({Tin:tag.Tin,ratio:tag.ratio,co:tag.co,act:m}); if(r.slip>S.ana.slip) lo=m; else hi=m;}
+  S.actEst=(lo+hi)/2; return S.actEst;
+}
+function plan(tag){
+  let rec=null;
+  const danger=S.alerts.fcHH||S.alerts.hi;
+  if((S.alerts.h2||danger) && tag.ratio>1.75) rec={id:'h2',t:_t('c2.rec.h2'),why:_t('c2.rec.h2_why',{t:S.fc?_n(S.fc.maxT,0):'—'}),apply(){ramp('ratio',1.4,0.08)}};
+  else if((S.alerts.co||danger) && tag.co<1.2) rec={id:'co',t:_t('c2.rec.co'),why:_t('c2.rec.co_why'),apply(){ramp('co',2.0,0.2)}};
+  else if(S.alerts.slip && S.optInfeasible) rec={id:'regen',t:_t('c2.rec.regen'),why:_t('c2.rec.regen_why',{a:_n(S.actEst||1,2)}),apply(){ramp('act',1,0.05)}};
+  else if(S.alerts.slip && S.opt) rec={id:'tin_up',t:_t('c2.rec.up',{t:_n(S.opt.Tin,1)}),why:_t('c2.rec.up_why',{a:_n(S.actEst||1,2),l:_n(S.opt.r.loss,2)}),apply(){ramp('Tin',S.opt.Tin,0.4)}};
+  else if(S.opt && !S.alerts.slip && tag.Tin>S.opt.Tin+2) rec={id:'tin_dn',t:_t('c2.rec.dn',{t:_n(S.opt.Tin,1)}),why:_t('c2.rec.dn_why',{l:_n(S.opt.r.loss,2)}),apply(){ramp('Tin',S.opt.Tin,0.4)}};
+  if(rec && S.dismissed[rec.id] && S.t-S.dismissed[rec.id]<15) rec=null;
+  S.recPosted=S.recPosted||{};
+  if(rec && (!S.rec || S.rec.id!==rec.id) && !(S.recPosted[rec.id]>S.t-20)){ S.recPosted[rec.id]=S.t; post('hitl','info',_t('c2.msg.rec',{t:rec.t})); }
+  if(rec) agState.hitl='busy';
+  S.rec=rec; drawRec();
+}
+const recBox=document.getElementById('recBox');
+function drawRec(){
+  if(!S.rec){recBox.innerHTML='<div class="rec" style="opacity:.6"><div class="empty">'+_t('c2.rec.none')+'</div></div>';return;}
+  recBox.innerHTML=`<div class="rec"><div class="tag">${_t('c2.rec.wait')}</div><div class="t">${S.rec.t}</div><div class="why">${S.rec.why}</div>
+  <div class="acts"><button class="btn on" id="ap">${_t('c2.btn.apply')}</button><button class="btn" id="ds">${_t('c2.btn.dismiss')}</button></div></div>`;
+  document.getElementById('ap').onclick=()=>{const r=S.rec;r.apply();S.dismissed[r.id]=S.t;post('operator','ok',_t('c2.msg.applied',{t:r.t}));S.rec=null;syncSliders();drawRec();};
+  document.getElementById('ds').onclick=()=>{S.dismissed[S.rec.id]=S.t;post('operator','info',_t('c2.msg.dismissed',{t:S.rec.t}));S.rec=null;drawRec();};
+}
+
+// ======================= SLIDERS =======================
+const sTin=document.getElementById('sTin'),sRat=document.getElementById('sRat'),sCo=document.getElementById('sCo');
+function syncSliders(){sTin.value=S.sp.Tin;sRat.value=S.sp.ratio;sCo.value=S.sp.co;labels();}
+function labels(){document.getElementById('vTin').textContent=_n(+sTin.value,1)+' °C';document.getElementById('vRat').textContent=_n(+sRat.value,2);document.getElementById('vCo').textContent=_n(+sCo.value,2);}
+sTin.oninput=()=>{ramp('Tin',+sTin.value,0.4);labels();};
+sRat.oninput=()=>{ramp('ratio',+sRat.value,0.06);labels();};
+sCo.oninput=()=>{ramp('co',+sCo.value,0.2);labels();};
+
+// ======================= DRAWING =======================
+function setupCanvas(c){const d=window.devicePixelRatio||1,h=c._h0||(c._h0=+c.getAttribute('height')),w=Math.round(c.parentElement.clientWidth-(parseFloat(getComputedStyle(c.parentElement).paddingLeft)||0)-(parseFloat(getComputedStyle(c.parentElement).paddingRight)||0));if(c._w!==w||c._d!==d){c._w=w;c._d=d;c.width=w*d;c.height=h*d;c.style.height=h+'px';}const x=c.getContext('2d');x.setTransform(d,0,0,d,0,0);x.clearRect(0,0,w,h);return {x,w,h};}
+function tcol(T){ // 40..120 °C → blue..teal..lime..amber..red
+  const s=[[40,[38,90,160]],[60,[25,194,176]],[80,[182,242,74]],[95,[245,165,36]],[110,[255,90,95]]];
+  if(T<=s[0][0]) return `rgb(${s[0][1]})`; for(let i=1;i<s.length;i++){ if(T<=s[i][0]){const a=s[i-1],b=s[i],f=(T-a[0])/(b[0]-a[0]);return `rgb(${a[1].map((v,j)=>Math.round(v+(b[1][j]-v)*f)).join(',')})`;} } return `rgb(${s[s.length-1][1]})`;
+}
+function drawReactor(){
+  const {x,w,h}=setupCanvas(document.getElementById('reactor'));
+  const tag=S.tag||{Tin:50,Tout:74,TIs:[60,66,70,73],ratio:1.4,co:2};
+  const cx=w/2-6, bw=60, top=60, bot=h-70;
+  x.fillStyle='#666666';x.font='12px Inter';x.textAlign='center';
+  _fit(x,_t('c2.cv.feed'),cx,18,w-8,'c2.cv.feed.short');
+  x.strokeStyle='#bbbbbb';x.lineWidth=2;x.beginPath();x.moveTo(cx,26);x.lineTo(cx,top-6);x.stroke();
+  // vessel
+  x.strokeStyle='#d4d4d4';x.lineWidth=2;x.beginPath();x.roundRect(cx-bw/2-6,top-10,bw+12,bot-top+20,22);x.stroke();
+  const segH=(bot-top)/N;
+  for(let i=0;i<N;i++){x.fillStyle=tcol(S.bed[i]);x.fillRect(cx-bw/2,top+i*segH,bw,segH+0.6);}
+  x.strokeStyle='#bbbbbb';x.beginPath();x.moveTo(cx,bot+10);x.lineTo(cx,h-22);x.stroke();
+  x.fillStyle='#666666';_fit(x,_t('c2.cv.product'),cx,h-8,w-8,'c2.cv.product.short');
+  // tags
+  x.textAlign='left';x.font='600 12px "JetBrains Mono", ui-monospace, monospace';
+  const lab=(y,name,val,col)=>{x.strokeStyle='#bbbbbb';x.lineWidth=1;x.beginPath();x.moveTo(cx+bw/2+6,y);x.lineTo(cx+bw/2+22,y);x.stroke();
+    x.fillStyle='#666666';x.font='11px Inter';_fit(x,name,cx+bw/2+26,y-3,w-(cx+bw/2+26)-2);x.fillStyle=col||'#0a0a0a';x.font='600 12.5px "JetBrains Mono", ui-monospace, monospace';x.fillText(val,cx+bw/2+26,y+12);};
+  lab(top-14,_t('c2.cv.ti101'),_n(tag.Tin,1)+' °C','#2563eb');
+  [8,16,24,32].forEach((i,k)=>lab(top+i*segH,_t('c2.cv.tibed',{n:k+2}),_n(tag.TIs[k],1)+' °C'));
+  const tc=tag.Tout>LIM.HH?'#dc2626':tag.Tout>LIM.HI?'#d97706':'#0d9488';
+  lab(bot+10,_t('c2.cv.ti106'),_n(tag.Tout,1)+' °C',tc);
+  // left side analyzers
+  x.textAlign='right';
+  const la=(y,name,val,col)=>{x.fillStyle='#666666';x.font='11px Inter';_fit(x,name,cx-bw/2-14,y-3,cx-bw/2-16);x.fillStyle=col||'#0a0a0a';x.font='600 12.5px "JetBrains Mono", ui-monospace, monospace';x.fillText(val,cx-bw/2-14,y+12);};
+  la(top+20,'H₂ / C₂H₂',_n(tag.ratio,2),tag.ratio>1.9?'#d97706':null);
+  la(top+70,'CO',_n(tag.co,2)+' ppm',tag.co<0.8?'#d97706':null);
+  la(bot-10,_t('c2.cv.c2h2out'),_n(S.ana.slip,2)+' ppm',S.ana.slip>1?'#dc2626':null);
+}
+function axes(x,w,h,pad,ymin,ymax,ylab,xlabFn,xmin,xmax,ticks){
+  x.strokeStyle='#e8e8e8';x.lineWidth=1;x.fillStyle='#666666';x.font='11px Inter';x.textAlign='right';
+  for(let i=0;i<=ticks;i++){const v=ymin+(ymax-ymin)*i/ticks,y=h-pad.b-(h-pad.t-pad.b)*i/ticks;x.beginPath();x.moveTo(pad.l,y);x.lineTo(w-pad.r,y);x.stroke();x.fillText(ylab(v),pad.l-6,y+4);}
+  x.textAlign='center';for(let i=0;i<=4;i++){const v=xmin+(xmax-xmin)*i/4;x.fillText(xlabFn(v),pad.l+(w-pad.l-pad.r)*i/4,h-6);}
+}
+function line(x,pts,X,Y,col,wd,dash){x.strokeStyle=col;x.lineWidth=wd||2;x.setLineDash(dash||[]);x.beginPath();pts.forEach((p,i)=>{const a=X(p[0]),b=Y(p[1]);i?x.lineTo(a,b):x.moveTo(a,b);});x.stroke();x.setLineDash([]);}
+function drawT(){
+  const {x,w,h}=setupCanvas(document.getElementById('chT')),pad={l:40,r:10,t:10,b:22};
+  const t1=Math.max(120,S.t)+30,t0=t1-150,ymin=35,ymax=125;
+  const X=t=>pad.l+(t-t0)/(t1-t0)*(w-pad.l-pad.r),Y=v=>h-pad.b-(v-ymin)/(ymax-ymin)*(h-pad.t-pad.b);
+  axes(x,w,h,pad,ymin,ymax,v=>_n(v,0),v=>fmtT(Math.max(0,v)),t0,t1,6);
+  x.fillStyle='#dc262614';x.fillRect(pad.l,Y(ymax),w-pad.l-pad.r,Y(LIM.HH)-Y(ymax));
+  line(x,[[t0,LIM.HI],[t1,LIM.HI]],X,Y,'#dc262688',1,[5,4]);line(x,[[t0,LIM.HH],[t1,LIM.HH]],X,Y,'#dc2626',1.2,[2,0]);
+  x.fillStyle='#dc2626';x.textAlign='left';x.fillText('HH '+LIM.HH,pad.l+4,Y(LIM.HH)-4);x.fillStyle='#dc262699';x.fillText('HI '+LIM.HI,pad.l+4,Y(LIM.HI)-4);
+  const hs=S.hist;
+  line(x,hs.map(p=>[p.t,p.Tin]),X,Y,'#2563eb',2);line(x,hs.map(p=>[p.t,p.hot]),X,Y,'#7c3aed',1.5,[3,3]);line(x,hs.map(p=>[p.t,p.Tout]),X,Y,'#0d9488',2.4);
+  if(S.fc&&hs.length){line(x,[[S.t,hs[hs.length-1].Tout]].concat(S.fc.pts.map(p=>[p.t,p.T])),X,Y,'#d97706',2,[6,4]);}
+  x.strokeStyle='#ffffff22';x.beginPath();x.moveTo(X(S.t),pad.t);x.lineTo(X(S.t),h-pad.b);x.stroke();
+}
+function drawP(){
+  const {x,w,h}=setupCanvas(document.getElementById('chP')),pad={l:40,r:10,t:10,b:22},ymin=35,ymax=125;
+  const X=i=>pad.l+i/(N-1)*(w-pad.l-pad.r),Y=v=>h-pad.b-(v-ymin)/(ymax-ymin)*(h-pad.t-pad.b);
+  axes(x,w,h,pad,ymin,ymax,v=>_n(v,0),v=>_n(v*100,0)+'%',0,1,6);
+  line(x,DESIGN.map((v,i)=>[i,v]),X,Y,'#666666',1.2,[4,4]);
+  if(S.opt) line(x,S.opt.r.prof.map((v,i)=>[i,v]),X,Y,'#16a34a',2,[6,3]);
+  line(x,S.bed.map((v,i)=>[i,v]),X,Y,'#0d9488',2.6);
+}
+function drawQ(){
+  const {x,w,h}=setupCanvas(document.getElementById('chQ')),pad={l:40,r:40,t:10,b:22};
+  const t1=Math.max(120,S.t),t0=t1-120,hs=S.hist;
+  const smax=Math.max(5,...hs.map(p=>p.slip))*1.15,lmax=Math.max(0.5,...hs.map(p=>p.loss))*1.15;
+  const X=t=>pad.l+(t-t0)/(t1-t0)*(w-pad.l-pad.r),Y1=v=>h-pad.b-v/smax*(h-pad.t-pad.b),Y2=v=>h-pad.b-v/lmax*(h-pad.t-pad.b);
+  axes(x,w,h,pad,0,smax,v=>_n(v,v<10?1:0),v=>fmtT(Math.max(0,v)),t0,t1,4);
+  x.textAlign='left';x.fillStyle='#7c3aed';for(let i=0;i<=4;i++){const v=lmax*i/4;x.fillText(_n(v,2),w-pad.r+4,Y2(v)+4);}
+  line(x,[[t0,LIM.SLIP],[t1,LIM.SLIP]],X,Y1,'#dc262688',1,[5,4]);
+  line(x,hs.map(p=>[p.t,p.slip]),X,Y1,'#d97706',2.2);line(x,hs.map(p=>[p.t,p.loss]),X,Y2,'#7c3aed',2.2);
+}
+const kEl=document.getElementById('kpis');
+function drawK(){
+  const t=S.tag; if(!t) return;
+  const fc=S.fc; let fcTxt='—',fcCls='ok',fcSub=_t('c2.kpi.nolimit');
+  if(t.Tout>=LIM.HH){fcTxt=_t('c2.kpi.hhx');fcCls='bad';fcSub=_t('c2.kpi.actnow');}
+  else if(t.Tout>=LIM.HI){fcTxt=_t('c2.kpi.abovehi');fcCls='warn';fcSub=fc?_t('c2.kpi.peak30',{t:_n(fc.maxT,0)}):'';}
+  else if(fc){ if(fc.tHH!==null&&t.Tout<LIM.HH){fcTxt=_t('c2.kpi.hhin',{m:fc.tHH});fcCls='bad';fcSub=_t('c2.kpi.peak',{t:_n(fc.maxT,0)});}
+    else if(fc.tAl!==null&&t.Tout<LIM.HI){fcTxt=_t('c2.kpi.hiin',{m:fc.tAl});fcCls='warn';fcSub=_t('c2.kpi.peak',{t:_n(fc.maxT,0)});}
+    else {fcTxt=_t('c2.kpi.stable');fcSub=_t('c2.kpi.peak30',{t:_n(fc.maxT,0)});} }
+  const k=[
+    [_t('c2.kpi.heat'),_n(t.Q,2)+' MW',_t('c2.kpi.heat_s',{p:_n(t.pct,0)}),t.pct>118?'warn':'ok'],
+    [_t('c2.kpi.sel'),_n(Math.max(0,t.sel),0)+'%','C₂H₂ → C₂H₄',t.sel<70?'warn':'ok'],
+    [_t('c2.kpi.loss'),_n(t.lossEst,2)+'%',_t('c2.kpi.loss_s'),t.lossEst>0.3?'warn':'ok'],
+    [_t('c2.kpi.slip'),_n(S.ana.slip,2)+' ppm',_t('c2.kpi.slip_s'),S.ana.slip>1?'bad':'ok'],
+    [_t('c2.kpi.fc'),fcTxt,fcSub,fcCls]];
+  const kh=k.map(a=>`<div class="kpi"><div class="k">${a[0]}</div><div class="v ${a[3]}">${a[1]}</div><div class="s">${a[2]}</div></div>`).join('');
+  if(kEl._h!==kh){kEl._h=kh;kEl.innerHTML=kh;}
+}
+const fmtT=m=>{m=Math.round(m);return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0');};
+function render(){document.getElementById('clock').textContent='t = '+fmtT(S.t)+' '+_t('c2.clock.sim');drawReactor();drawT();drawP();drawQ();drawK();drawAgents();}
+
+// ======================= LOOP =======================
+let speed=4,paused=false,acc=0,last=performance.now();
+document.querySelectorAll('[data-speed]').forEach(b=>b.onclick=()=>{speed=+b.dataset.speed;document.querySelectorAll('[data-speed]').forEach(x=>x.classList.remove('on'));b.classList.add('on');});
+document.getElementById('pause').onclick=e=>{paused=!paused;e.target.textContent=paused?_t('c2.resume'):_t('c2.pause');e.target.classList.toggle('on',paused);};
+let dirty=true,lastDraw=0;
+function loop(now){const dt=Math.min((now-last)/1000,0.5);last=now;if(!paused){acc+=dt*speed;let n=0;while(acc>=1&&n<30){stepMinute();acc-=1;n++;}if(n)dirty=true;}if(dirty&&now-lastDraw>100){render();dirty=false;lastDraw=now;}requestAnimationFrame(loop);}
+window.C2={get S(){return S},run(id,min){const i=SCEN.findIndex(s=>s.id===id);[...scenEl.querySelectorAll('.btn')][i].click();for(let k=0;k<(min||0);k++)stepMinute();render();drawRec();},apply(){const a=document.getElementById('ap');if(a)a.click();render();},step(min){for(let k=0;k<min;k++)stepMinute();render();drawRec();}};
+reset();
+syncSliders();drawRec();
+window.addEventListener('resize',()=>{dirty=true;});document.addEventListener('click',()=>{dirty=true;},true);document.addEventListener('input',()=>{dirty=true;},true);
+requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

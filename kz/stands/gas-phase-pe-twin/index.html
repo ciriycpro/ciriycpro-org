@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Газ фазалы ПЭ реакторы — AI цифрлық егізі · CIRIYC PRO Research</title>
+<meta name="description" content="Газ фазалы ПЭ реакторы — AI цифрлық егізі: процесс пен полимер қасиеттерінің нақты уақыттағы моделі, жабысқақтық терезесі, қабаттың 2D проксиі, контурда операторы бар MAIF агенттері.">
+<link rel="icon" href="/star.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0a0a0a;--grey:#555;--light:#888;--line:#e8e8e8;--bg:#fff;--soft:#fafafa;
+--teal:#0d9488;--green:#16a34a;--amber:#d97706;--red:#dc2626;--blue:#2563eb;--violet:#7c3aed}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--ink);font:14px/1.5 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+body{overflow-x:hidden}
+a{color:var(--ink)}
+.sitebar{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;height:60px;padding:0 20px;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid #e8e8e8}
+.sb-logo{display:flex;align-items:center;gap:10px;font-weight:600;font-size:15px;letter-spacing:2px;color:#0a0a0a;text-decoration:none}
+.sb-logo img{width:26px;height:26px}.sb-sub{font-weight:400;color:#888;letter-spacing:1px;font-size:12px}
+.sb-back{color:#555;text-decoration:none;font-size:14px;font-weight:500}.sb-back:hover{color:#0a0a0a}
+.wrap{max-width:1440px;margin:0 auto;padding:0 20px}
+.hero{padding:28px 0 18px;border-bottom:1px solid var(--line)}
+.hero h1{font-size:clamp(22px,3.2vw,34px);font-weight:800;letter-spacing:-1px;line-height:1.15}
+.hero .sub{color:var(--grey);font-size:15px;margin-top:8px;max-width:980px}
+.pill{display:inline-block;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:4px 11px;border-radius:20px;border:1px solid var(--line);color:var(--grey);margin-top:12px;margin-right:6px}
+.pill.live{border-color:var(--green);color:var(--green)}
+.ctrl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.ctrl .lbl{color:var(--light);font-size:11px;text-transform:uppercase;letter-spacing:.08em;margin-right:2px}
+.btn{background:#fff;border:1px solid var(--line);color:var(--ink);padding:7px 11px;border-radius:9px;cursor:pointer;font:inherit;font-size:13px;white-space:nowrap}
+.btn:hover{border-color:#bbb}
+.btn.primary{background:#0a0a0a;border-color:#0a0a0a;color:#fff;font-weight:600}
+.btn.on{background:#0a0a0a;border-color:#0a0a0a;color:#fff}
+.btn.sm{padding:4px 9px;font-size:12px}
+select.btn{padding:6px 8px}
+.clock{font-variant-numeric:tabular-nums;color:var(--grey);font-size:13px;padding:0 4px}
+.sp{flex:1}
+main.grid{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:16px;padding:16px 0}
+@media(max-width:1100px){main.grid{grid-template-columns:minmax(0,1fr)}}
+.col{display:flex;flex-direction:column;gap:16px;min-width:0}
+.card{border:1px solid var(--line);border-radius:14px;padding:14px;background:#fff;min-width:0}
+.card h3{font-size:11.5px;color:var(--light);text-transform:uppercase;letter-spacing:.09em;font-weight:600;margin-bottom:10px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.card h3 .note{text-transform:none;letter-spacing:0;font-weight:500;color:var(--light)}
+.kpis{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+@media(max-width:1300px){.kpis{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:560px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.kpi{border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;min-width:0}
+.kpi:hover{border-color:#bbb}
+.kpi .k{font-size:10.5px;color:var(--light);text-transform:uppercase;letter-spacing:.06em}
+.kpi .v{font-size:21px;font-weight:700;margin-top:2px;white-space:nowrap;font-variant-numeric:tabular-nums;overflow:hidden;text-overflow:ellipsis}
+.kpi .s{font-size:11.5px;color:var(--grey);margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.kpi .i{float:right;font-size:10px;color:var(--light);border:1px solid var(--line);border-radius:50%;width:15px;height:15px;text-align:center;line-height:13px}
+.ok{color:var(--green)}.warn{color:var(--amber)}.bad{color:var(--red)}
+.charts{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:900px){.charts{grid-template-columns:1fr}}
+canvas{display:block;width:100%}
+.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:11.5px;color:var(--grey);margin-top:6px}
+.legend b{display:inline-block;width:14px;height:3px;border-radius:2px;vertical-align:middle;margin-right:5px}
+.legend b.band{height:9px;opacity:.25}
+.scheme svg{width:100%;height:auto;display:block}
+.scheme text{font-family:Inter,sans-serif}
+.pv{cursor:pointer}
+.pv:hover{text-decoration:underline}
+.heatwrap{display:grid;grid-template-columns:minmax(0,190px) minmax(0,1fr);gap:14px;align-items:start}
+@media(max-width:560px){.heatwrap{grid-template-columns:minmax(0,150px) minmax(0,1fr)}}
+.heatinfo{font-size:12.5px;color:var(--grey)}
+.heatinfo b{color:var(--ink);font-variant-numeric:tabular-nums}
+.proxy{font-size:11.5px;color:var(--grey);background:var(--soft);border:1px dashed #d5d5d5;border-radius:8px;padding:6px 8px;margin-top:8px}
+.agents{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px}
+.ag{display:flex;align-items:center;gap:7px;font-size:12px;background:var(--soft);border:1px solid var(--line);border-radius:9px;padding:6px 8px;min-width:0}
+.ag i{width:8px;height:8px;border-radius:50%;background:var(--green);flex:none;box-shadow:0 0 0 3px #16a34a22}
+.ag.busy i{background:var(--amber);box-shadow:0 0 0 3px #d9770633}
+.ag.alert i{background:var(--red);box-shadow:0 0 0 3px #dc262633}
+.ag span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.feed{height:360px;overflow:auto;display:flex;flex-direction:column;gap:6px;padding-right:4px}
+.ev{border-left:3px solid var(--teal);background:var(--soft);border-radius:6px;padding:6px 9px;font-size:12.5px;overflow-wrap:anywhere}
+.ev .h{display:flex;justify-content:space-between;gap:8px;color:var(--light);font-size:11px}
+.ev.warn{border-color:var(--amber)}.ev.bad{border-color:var(--red)}.ev.ok{border-color:var(--green)}.ev.info{border-color:var(--blue)}
+.ev .refs{color:var(--light);font-size:11px;margin-top:2px}
+.rec{border:1px solid var(--line);background:var(--soft);border-radius:12px;padding:12px;margin-top:12px}
+.rec .t{font-weight:700;margin-bottom:4px}
+.rec .why{color:var(--grey);font-size:12.5px;margin-bottom:10px}
+.rec .acts{display:flex;gap:8px}
+.empty{color:var(--light);font-size:12.5px}
+.sl{margin:9px 0}
+.sl label{display:flex;justify-content:space-between;font-size:12.5px;color:var(--grey);gap:8px}
+.sl label b{color:var(--ink);font-variant-numeric:tabular-nums}
+.sl input{width:100%;accent-color:#0a0a0a}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.tr-res{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.tr-res .box{border:1px solid var(--line);border-radius:10px;padding:10px}
+.tr-res .box .n{font-size:20px;font-weight:700;font-variant-numeric:tabular-nums}
+.tr-res .box.agent{border-color:#99d5cf;background:#f3faf9}
+section.blk{padding:44px 0;border-top:1px solid var(--line)}
+.kicker{font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--light);font-weight:600;margin-bottom:10px}
+section.blk h2{font-size:clamp(22px,3vw,32px);font-weight:700;letter-spacing:-1px;line-height:1.15;margin-bottom:12px}
+.lead{font-size:15.5px;color:var(--grey);max-width:860px}
+.archg{margin-top:18px;display:flex;flex-direction:column;gap:0}
+.al{display:grid;grid-template-columns:64px minmax(0,1fr) minmax(0,330px);gap:14px;align-items:center;border:1px solid var(--line);border-left-width:8px;border-radius:14px;padding:14px 16px}
+.al .id{font-size:22px;font-weight:800}.al .tt{font-size:17px;font-weight:700}.al .ds{font-size:13px;color:var(--grey)}
+.al .tg{display:inline-block;font-size:11.5px;font-weight:600;padding:3px 10px;border-radius:11px;border:1px solid #ccc;color:var(--grey);background:var(--soft)}
+.al .tg.live{border-color:var(--green);color:var(--green);background:#f0fdf4}.al .pl{font-size:12px;color:var(--light);margin-top:4px}
+.alink{height:18px;margin-left:60px;border-left:2px dashed #ccc;font-size:10.5px;color:var(--light);padding-left:8px;line-height:18px}
+@media(max-width:760px){.al{grid-template-columns:44px minmax(0,1fr)}.al>div:last-child{grid-column:1/-1}}
+.scheme .sx{overflow-x:auto}
+@media(max-width:700px){.scheme svg{min-width:640px}}
+.tblw{overflow-x:auto;margin-top:18px;border:1px solid var(--line);border-radius:14px}
+table{border-collapse:collapse;width:100%;font-size:12.5px}
+th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--light);font-weight:600;background:var(--soft)}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+.st{font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;padding:2px 7px;border-radius:10px;border:1px solid;white-space:nowrap}
+.st.verified{color:var(--green);border-color:#a7dcb8}.st.assumption{color:var(--amber);border-color:#f1cf9f}.st.derived{color:var(--blue);border-color:#b7c9f5}.st.design{color:var(--grey);border-color:#cfd4dc}.st.illustrative{color:var(--amber);border-color:#f1cf9f}
+.pn{font-size:12px;color:var(--light);margin-top:3px;line-height:1.35}
+.srcl{margin-top:18px;display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--grey)}
+.srcl div{overflow-wrap:anywhere}
+.pilot{border:1px solid var(--line);border-radius:16px;padding:28px;margin-top:18px;display:grid;grid-template-columns:1.2fr 1fr;gap:28px}
+@media(max-width:900px){.pilot{grid-template-columns:1fr}}
+.pilot .price{font-size:clamp(20px,2.6vw,28px);font-weight:800;letter-spacing:-.6px;line-height:1.2}
+.pilot ul{padding-left:18px;color:var(--grey);font-size:14px;display:flex;flex-direction:column;gap:6px}
+footer.disc{color:var(--grey);font-size:12.5px;padding:28px 0 40px;border-top:1px solid var(--line);line-height:1.7}
+.modal{position:fixed;inset:0;background:rgba(10,10,10,.28);display:none;align-items:center;justify-content:center;z-index:100;padding:16px}
+.modal.open{display:flex}
+.pcard{background:#fff;border-radius:14px;max-width:620px;width:100%;max-height:86vh;overflow:auto;padding:20px;border:1px solid var(--line);box-shadow:0 20px 60px rgba(0,0,0,.15)}
+.pcard h4{font-size:17px;margin-bottom:6px}
+.pcard .val{font-size:24px;font-weight:700;margin:4px 0 10px;font-variant-numeric:tabular-nums}
+.pcard .formula{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:10px;white-space:pre-wrap;overflow-wrap:anywhere}
+.pcard .lbl{font-size:11px;color:var(--light);text-transform:uppercase;letter-spacing:.08em;margin:12px 0 6px;font-weight:600}
+.pcard .src div{font-size:12.5px;color:var(--grey);margin-bottom:6px;overflow-wrap:anywhere}
+.pcard table td,.pcard table th{padding:5px 7px}
+.warnline{color:var(--amber);font-size:12.5px;margin-top:8px}
+
+canvas{max-width:100%}.card,.col{min-width:0}html{overflow-y:scroll}
+
+.chain{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;margin-top:22px}
+.chain .cs{flex:1 1 150px;border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:#fff;min-width:0}
+.chain .cs b{display:block;font-size:14px;margin-bottom:4px}.chain .cs span{font-size:12.5px;color:var(--grey);display:block;line-height:1.4}
+.chain .cs.us{border-color:#0d9488;background:#f3faf9}.chain .ar{align-self:center;color:#888;font-size:18px}
+.cases{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:26px}
+.case{border:1px solid var(--line);border-radius:14px;padding:20px 20px 16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.case .who{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#888;font-weight:600}
+.case h3{font-size:17px;font-weight:700;margin:0;letter-spacing:-.3px}
+.case .nums{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.case .n{background:#fafafa;border:1px solid var(--line);border-radius:10px;padding:8px 10px}
+.case .n b{display:block;font-size:20px;color:#0d9488;font-variant-numeric:tabular-nums}.case .n span{font-size:12px;color:var(--grey)}
+.case p{font-size:13.5px;color:var(--grey);margin:0}
+.case .refs{font-size:12.5px;margin-top:auto;padding-top:8px;border-top:1px solid var(--line)}
+.case .refs a{color:#0a0a0a;display:block;margin:3px 0}
+@media(max-width:700px){.chain .ar{display:none}}
+</style>
+<link rel="canonical" href="https://ciriycpro.org/kz/stands/gas-phase-pe-twin/">
+<link rel="alternate" hreflang="en" href="https://ciriycpro.org/stands/gas-phase-pe-twin/">
+<link rel="alternate" hreflang="en-AU" href="https://ciriycpro.org/au/stands/gas-phase-pe-twin/">
+<link rel="alternate" hreflang="kk-KZ" href="https://ciriycpro.org/kz/stands/gas-phase-pe-twin/">
+<link rel="alternate" hreflang="th-TH" href="https://ciriycpro.org/th/stands/gas-phase-pe-twin/">
+<link rel="alternate" hreflang="x-default" href="https://ciriycpro.org/stands/gas-phase-pe-twin/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ciriycpro.org/kz/stands/gas-phase-pe-twin/">
+<meta property="og:title" content="Газ фазалы ПЭ реакторы — AI цифрлық егізі · CIRIYC PRO Research">
+<meta property="og:description" content="Газ фазалы ПЭ реакторы — AI цифрлық егізі: процесс пен полимер қасиеттерінің нақты уақыттағы моделі, жабысқақтық терезесі, қабаттың 2D проксиі, контурда операторы бар MAIF агенттері.">
+<meta property="og:locale" content="kk_KZ">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="en_AU">
+<meta property="og:locale:alternate" content="th_TH">
+<meta name="robots" content="noindex">
+<style data-i18n>
+.lsw-a{position:relative;display:inline-flex;align-items:center}
+.lsw{position:absolute;right:calc(100% + 10px);top:50%;transform:translateY(-50%);z-index:120;font:500 13px/1.25 'Inter','Noto Sans Thai',-apple-system,BlinkMacSystemFont,sans-serif;letter-spacing:0;text-transform:none}
+.lsw summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:5px;height:34px;padding:0 9px;border:1px solid #e8e8e8;border-radius:8px;color:#555;background:#fff;white-space:nowrap;user-select:none}
+.lsw summary::-webkit-details-marker{display:none}
+.lsw summary:hover,.lsw[open] summary{border-color:#bbb;color:#0a0a0a}
+.lsw ul{position:absolute;right:0;top:calc(100% + 6px);list-style:none;margin:0;padding:6px;background:#fff;border:1px solid #e8e8e8;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.10);min-width:180px}
+.lsw li a{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:7px;color:#0a0a0a;text-decoration:none;white-space:nowrap;line-height:1.6}
+.lsw li a:hover{background:#f4f4f4}
+.lsw li a[aria-current]{font-weight:700}
+.lsw li a.saved::after{content:'';width:6px;height:6px;border-radius:50%;background:#0d9488;margin-left:auto}
+.lsw .beta,.lsw-foot .beta{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#d97706;border:1px solid #f1d6a0;border-radius:10px;padding:0 6px;line-height:16px}
+.lsw-foot{margin-top:14px;font-size:12.5px;color:#888;display:flex;gap:16px;flex-wrap:wrap;align-items:center;line-height:1.6}
+.lsw-foot a{color:inherit;text-decoration:none;border-bottom:1px solid #ddd}
+.lsw-foot a[aria-current]{color:#0a0a0a;border-bottom-color:#0a0a0a}
+@media(max-width:900px){.lsw{position:relative;right:auto;top:auto;transform:none;margin-right:8px}}
+@media(max-width:520px){.lsw summary .lsw-c{display:none}.lsw summary{padding:0 8px}}
+@media(max-width:440px){.logo .sub-mark,.sb-logo .sb-sub{display:none}}
+.kpi .k,.card h3,h1,h2{overflow-wrap:anywhere}
+</style>
+<script data-i18n>(function(){var K='ciriyc_lang',s=null;try{s=localStorage.getItem(K)}catch(e){}
+function mark(){if(!s)return;document.querySelectorAll('a[data-lsw="'+s+'"]').forEach(function(a){if(!a.hasAttribute('aria-current'))a.classList.add('saved')})}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mark);else mark();
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[data-lsw]');if(!a)return;try{localStorage.setItem(K,a.getAttribute('data-lsw'))}catch(x){}
+if(location.hash)a.setAttribute('href',a.getAttribute('href').split('#')[0]+location.hash)},true);
+document.addEventListener('click',function(e){var d=document.querySelector('details.lsw[open]');if(d&&!d.contains(e.target))d.removeAttribute('open')});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){var d=document.querySelector('details.lsw[open]');if(d)d.removeAttribute('open')}})})();</script>
+<script data-i18n>var _i18n={"code": "kk", "intl": "kk-KZ", "grouping": true, "dec": ",", "intl_fb": "ru-RU", "root": "/kz", "en_url": "https://ciriycpro.org/stands/gas-phase-pe-twin/"};var I18N={"twin.ag.guard":"Жабысқақтық күзеті","twin.ag.hot":"Ыстық нүкте детекторы","twin.ag.observer":"Бақылаушы","twin.ag.operator":"Оператор (HITL)","twin.ag.planner":"Ауысу жоспарлаушы","twin.ag.prov":"Шығу тегі","twin.ag.soft":"Қасиет датчигі","twin.arch.L1.d":"CSTR ретіндегі псевдосұйылтылған қабат, катализатордың екі орталықты кинетикасы, салқындатқышы және конденсациялық режимі бар газ контуры, T реттеу","twin.arch.L1.p":"Пилот: қондырғы мұрағаты бойынша калибрлеу, күйді EKF арқылы бағалау","twin.arch.L1.t":"Процесс моделі","twin.arch.L2.d":"MI-дің лездік және жинақталған мәндері, тығыздық, MFR бағасы","twin.arch.L2.p":"Пилот: қондырғының зертханалық талдаулары бойынша калибрлеу","twin.arch.L2.t":"Полимер қасиеттері","twin.arch.L3.d":"Қабаттағы температура / белсенділік өрісі, қабырға мен таратқыш тор маңындағы ыстық аймақтар","twin.arch.L3.p":"Пилот: реактор геометриясының 3D CFD-і + сертификатталған қателігі бар оқытылған суррогат","twin.arch.L3.t":"Қабат өрісі (3D CFD + суррогат)","twin.arch.L3.tag":"иллюстрациялық өріс жұмыс істейді · пилотта CFD бойынша оқытылады","twin.arch.L4.d":"Дереккөзі мен мәртебесі көрсетілген параметрлер, шектеулер және жұмыс терезелері","twin.arch.L4.p":"Пилот: мақалалар, технологиялық регламенттер, қондырғы деректері, операторлар тәжірибесі","twin.arch.L4.t":"Білім","twin.arch.L4.tag":"осы POC-та жұмыс істейді · тізілім төменде","twin.arch.L5.d":"Бақылаушы · қасиеттердің виртуалды датчигі · жабысқақтық күзетшісі · ыстық нүкте детекторы · ауысу жоспарлаушысы · шығу тегі · оператор","twin.arch.L5.p":"Пилот: MAIF ядросы (Go + Kafka), OPC UA тек оқу, көлеңкелі режим","twin.arch.L5.t":"MAIF агенттері + оператор (HITL)","twin.arch.L5.tag":"осы POC-та жұмыс істейді · шина эмуляцияланған","twin.arch.link1":"оқиғалар, ұсыныстар ↔ оператор арқылы берілген мәндерге сұраулар","twin.arch.link2":"дереккөзі мен анықталмағандығы бар параметрлер","twin.arch.link3":"жергілікті ыстық аймақтар, тәуекел аймағы","twin.arch.link4":"қабаттағы шайырдың қасиеттері","twin.arch.live":"осы POC-та жұмыс істейді","twin.btn.apply":"Қолдану","twin.btn.dismiss":"Бас тарту","twin.card.close":"Жабу","twin.card.formula":"Формула","twin.card.params":"Параметрлер","twin.card.sources":"Дереккөздер","twin.ctl.pause":"Кідірту","twin.ctl.play":"Іске қосу","twin.ctl.tc":"T реттегіші","twin.ev.refs":"сілтемелер:","twin.grade.row":"MI {mi}, ρ {rho}, T {t} °C, iC5 {y} %, кат. {c} kg/сағ (газ қатынастары модельді кері шешу арқылы)","twin.heat.info":"Қима 5 m × 15 m, тор 40 × 60. Төменде: таратқыш тор (суық газ). Қара контур: тәуекел аймағы. T_stick арқылы маркаға тәуелді.","twin.heat.lmax":"Жергілікті максимум","twin.heat.mean":"Қабат орташасы","twin.heat.risk":"Тәуекел аймағы (T &gt; T_max)","twin.heat.tmax":"T_max (марка)","twin.kpi.MIc":"MI_c және марка","twin.kpi.T":"Қабат температурасы","twin.kpi.T_s":"берілгені {sp} · T_in {tin} °C","twin.kpi.Tstick":"T_stick · қор","twin.kpi.Tstick_s":"қор {m} K · T_max {tm}","twin.kpi.liq":"Конденсат","twin.kpi.liq_s":"iC5 {y} % · салқындатқыш {c} %","twin.kpi.prod":"Өнімділік","twin.kpi.prod_s":"τ {tau} сағ · қабат {m} т","twin.kpi.rhoc":"ρ_c және марка","twin.kpi.win_mi":"терезе {a}–{b} · MI_i {i}","twin.kpi.win_rho":"терезе {a}–{b} · ρ_i {i}","twin.level.bad":"апат","twin.level.info":"ақпарат","twin.level.ok":"қалыпты","twin.level.warn":"ескерту","twin.msg.applied":"Қолданылды: {t}","twin.msg.boot1":"Егіз {g} маркасында тұрақты режимде іске қосылды (12 сағаттық қыздыру браузерде есептелді). Тегтер оқылуда: T, P, газ құрамы, G, T_in, катализатор.","twin.msg.boot2":"Параметрлер тізілімі жүктелді: {n} параметр, {v} тексерілген, {d} есептеп шығарылған, {p} қондырғының жобалық мәні. Карточкасын ашу үшін кез келген санды басыңыз.","twin.msg.cooler":"Салқындатқыш шегіне жақын: қуаттың {u} % пайдаланылуда (T_in {tin} °C, төменгі шек {fl} °C).","twin.msg.dismissed":"Бас тартылды: {t}","twin.msg.g_alarm":"ДАБЫЛ: қабат {t} °C — осы марка үшін T_max {tm} °C-ден жоғары (T_stick {ts} °C, P_eq {p} psia).","twin.msg.g_ok":"Агломерацияға дейінгі қор қалпына келді: T_stick {ts} °C, қор {m} K.","twin.msg.g_warn":"Агломерацияға дейінгі қор азаюда: {m} K (T_stick {ts} °C).","twin.msg.g_warn_t":"Агломерацияға дейінгі қор азаюда: {m} K (T_stick {ts} °C), ағымдағы үрдіспен ≈ {min} минутта 10 K-ге жетеді.","twin.msg.hot_bad":"ЖЕРГІЛІКТІ ДАБЫЛ {w} нүктесінде: қиманың {a} m² ауданы T_max {tm} °C-ден жоғары (жергілікті максимум {tl} °C), ал қабат орташасы {t} °C.","twin.msg.hot_ok":"Қабат өрісі қалыпты: жергілікті максимум {t} °C.","twin.msg.hot_warn":"{w} нүктесінде жергілікті қызу: {tl} °C, T_max-тан {d} K төмен. Қабат орташасы {t} °C.","twin.msg.man_bad":"Реттегіш MANUAL режимінде, реактор ашық контурда тұрақсыз: егіздің алдын ала болжамы бойынша {min} минутта T_max {tm} °C-ге жетеді.","twin.msg.man_ok":"Реттегіш MANUAL режимінде. Егіздің алдын ала болжамы: 3 сағат ішінде T_max-қа жетпейді.","twin.msg.op_applied":"Оператор агенттің ауысу жоспарын қолданды.","twin.msg.op_dismissed":"Оператор жоспардан бас тартты; берілген мәндердің стандартты сатылы өзгерісі орындалды.","twin.msg.prov":"Шығу тегі карточкасы ашылды: {t} ({s}).","twin.msg.rate":"Тұрақты беріліс кезінде өнімділік {p} т/сағ-қа дейін өсті — болу уақыты {tau} сағ; қасиеттер өзгерген жоқ (газ қатынас бойынша реттеледі).","twin.msg.reserve":"Жылу әкету қоры қазір {r} % (салқындатқыштың {u} % пайдаланылуда). Конденсат {l} масс. %.","twin.msg.s1":"1-сценарий: {g} маркасындағы тұрақты жұмыс. Барлық айнымалылар марка терезесі ішінде болады деп күтіледі.","twin.msg.s3":"3-сценарий: оператор өнімділікті арттырады — 40 минут ішінде iC5 15 mol %-ға дейін, катализатор +30 %, T берілгені +2 K.","twin.msg.s4":"4-сценарий: қабырға маңындағы циркуляция нашарлайды (статикалық заряд / sheeting), онда белсенді ұсақ бөлшектер жиналады.","twin.msg.s5":"5-сценарий: катализатордың жаңа партиясы, белсенділік +30 %.","twin.msg.s6":"6-сценарий: қабат температурасының реттегіші MANUAL режиміне ауысты; салқындатқыш су температурасы +2 K.","twin.msg.soft_fc":"Лездік MI {mi} терезеден тыс: қабаттағы MI_c ≈ {h} сағаттан соң спецификациядан шығады.","twin.msg.soft_in":"Қабат {g} терезесінде: MI_c {mi}, ρ_c {rho}.","twin.msg.soft_off":"{g} бойынша кондициядан тыс: MI_c {mi} (мақсат {mit}), ρ_c {rho} (мақсат {rhot}).","twin.msg.tags":"Тегтер өзгерді: {l}.","twin.msg.tr_done":"Ауысу аяқталды: қабат {g} терезесінде.","twin.msg.tr_family":"Осы POC-тағы ауысу жоспарлаушысы бутен тобын қамтиды (LLDPE-C4 ↔ HDPE-C4). Алдымен солардың бірін жүктеңіз.","twin.msg.tr_plan":"{a} → {b} жоспарлануда: егіздің көшірмесінде берілген мәндердің қарапайым өзгерісі мен агент стратегиясы модельденуде (30 сағаттық горизонт).","twin.msg.tr_ready":"Жоспар {s} s ішінде дайын. Кондициядан тыс: қарапайым {no} т / {nh} сағ, агент {ao} т / {ah} сағ (−{red} %). Қарапайым рампа T_max-тан {over} сағ бойы асады; агент T_stick-ке дейін ≥ {marg} K сақтайды.","twin.note.target":"мақсат {g}","twin.prm.C6act.d":"Газ қатынасы тұрғысынан гексен/бутеннің тиімді реакцияға қабілеттілігі (гексеннің жоғары сорбциясын қоса)","twin.prm.C6act.n":"LLDPE-C6 1.0/0.918 үшін газда C6/C2 = 0,164 қажет болатындай калибрленген, US 8,367,785 Ziegler мысалындағыдай (MI 0,9, 0,918, 87 °C).","twin.prm.Cmet.d":"Аппарат/ішкі құрылғылардың жылу сыйымдылығы","twin.prm.Cmet.n":"M_r·c_p,r = 1,4×10⁷ cal/K = 5,86×10⁷ J/K (Dadebo/McAuley).","twin.prm.Ea.d":"Активтендіру энергиясы (барлық константалар)","twin.prm.Ea.n":"9000 cal/mol = 37,66 kJ/mol (Dadebo/McAuley); Touloupidis бойынша 9–12 kcal/mol (AUTh диссертациясы).","twin.prm.FmaxE.d":"Этилен беру қуаты","twin.prm.FmaxE.n":"≈6 × тұрақты шығын (137–158 mol/s); сценарийлерде шектемейді.","twin.prm.FmaxH.d":"H₂ беру қуаты","twin.prm.FmaxH.n":"LL→HD кезіндегі H₂ қорының секірісі (≈27 kmol) ≈40 минутта.","twin.prm.FmaxI.d":"iC5 беру қуаты","twin.prm.FmaxI.n":"iC5 толықтыру қуаты.","twin.prm.FmaxM.d":"Сомономер беру қуаты","twin.prm.FmaxM.n":"≈7 × сомономердің тұрақты шығыны.","twin.prm.G.d":"Циркуляциялық газдың массалық шығыны","twin.prm.G.n":"G = U·A·ρ_g: 0,6–0,9 m/s (US 10,266,625; US 11,078,307), A 12,6–15,9 m² (ішкі диаметрі 4,0–4,5 m), ρ_g 21–28 kg/m³ → 200–280 kg/s.","twin.prm.Kb.d":"Қабат деңгейі реттегішінің күшейтуі (өнімді шығару)","twin.prm.Kb.n":"Деңгейді реттеудің уақыт тұрақтысы 30 мин ≪ болу уақыты 4,7 сағ, сондықтан ол марка динамикасына әсер етпейді.","twin.prm.Kc.d":"Қабат температурасының PI күшейтуі (T_in берілгені бойынша)","twin.prm.Kc.n":"DCS баптауы. Анықтама: Dadebo/Ghasem реттегіш зерттеулеріндегі τ_I = 1500 s PI.","twin.prm.Msp.d":"Қабат массасының берілгені (деңгейді реттеу)","twin.prm.Msp.n":"Dadebo/McAuley моделінде B_w = 7×10⁴ kg; 60–80 т өнеркәсіптік терезесі ішінде.","twin.prm.P.d":"Реактордағы қысым (N₂ толықтыруымен ұсталады)","twin.prm.P.n":"Өнеркәсіптік 20,77 bar (IJCCE қондырғы деректері); Dadebo/McAuley моделінде 20 atm; US 11,192,970-де 20–25 barg көрсетілген.","twin.prm.Tcw.d":"Салқындатқыш су температурасы","twin.prm.Tcw.n":"Градирнядан берілетін су, алаңның жобалық деректері.","twin.prm.Tg.d":"Газ қорының орташа температурасы (контурдағы мольдер)","twin.prm.Tg.n":"Газ қоры негізінен қабат температурасындағы реакторда; = Dadebo/McAuley моделінің T_ref 360 K.","twin.prm.Ti.d":"Қабат температурасы PI-дің интегралдау уақыты","twin.prm.Ti.n":"DCS баптауы (K_c қараңыз).","twin.prm.Tref.d":"k_ref үшін базалық температура (87 °C)","twin.prm.Tref.n":"Dadebo/McAuley моделінде T_ref = 360 K.","twin.prm.UAl.d":"Қоршаған ортаға жылу шығыны","twin.prm.UAl.n":"ΔT 60 K кезінде шығын 0,3 MW, бөлінетін 15–17 MW-пен салыстырғанда (<2 %); аппарат пен контур оқшауланған.","twin.prm.Vg.d":"Газ қорының көлемі, реактор + контур","twin.prm.Vg.n":"Реактор ішкі диаметрі 4,5 m × ~30 m (US 5,266,276), кеңейтілген бөлігі мен контурымен ≈ 400–500 m³; Dadebo/McAuley моделі 500 m³ пайдаланады (−10 %).","twin.prm.aC4.d":"Тығыздық коэффициенті, бутен","twin.prm.aC6.d":"Тығыздық коэффициенті, гексен (дәл сол түрі)","twin.prm.aC6.n":"Бутенмен бірдей түрі; 0,918 кезінде 3,0 mol % гексен береді, US 7,381,783-те гексенді LLDPE үшін көрсетілгендей.","twin.prm.aMI.d":"MI–Mw коэффициенті, LL-C4 маркасы MI 1,0 беретіндей калибрленген","twin.prm.aMI.n":"MI = a·Mw^−3.5 түрі McAuley & MacGregor 1991 бойынша; a H₂/C₂ = 0,15 кезінде LL-C4 MI 1,0 беретіндей калибрленген.","twin.prm.antA.d":"iC5 үшін Antoine A, log10(P/bar) = A − B/(T/K + C)","twin.prm.antA.n":"NIST WebBook, 2-метилбутан (Williamham et al. 1945, 289–302 K).","twin.prm.antB.d":"iC5 үшін Antoine B","twin.prm.antB.n":"NIST WebBook (A қараңыз).","twin.prm.antC.d":"iC5 үшін Antoine C","twin.prm.antC.n":"NIST WebBook (A қараңыз).","twin.prm.appr.d":"Салқындатқыштың ең аз температуралық айырмасы, T_in ≥ T_cw + ΔT_app","twin.prm.appr.n":"Салқындатқыштың ең аз температуралық айырмасы, жылу алмастырғыш жобасы.","twin.prm.bC4.d":"Тығыздық дәреже көрсеткіші","twin.prm.cMFR.d":"MFR(I21/I2) ≈ c·PDI (екі орталықты PDI бойынша POC бағасы)","twin.prm.cMFR.n":"c = MFR/PDI: екі орталықты PDI 3,66 → MFR 25,6; ZN газ фазалы LLDPE MFR 24–28 (US 2017/0015768), ≈25 (US 6,384,158; Xu et al.).","twin.prm.cpPE.d":"Қабаттағы PE жылу сыйымдылығы","twin.prm.cpPE.n":"PE SRM 1484: 80 °C кезінде 2,09 J/(g·K), 100 °C кезінде 2,41 (NETZSCH, Gaur & Wunderlich 1981 бойынша) → 88 °C кезінде 2,2.","twin.prm.cpg.d":"Циркуляциялық газдың жылу сыйымдылығы","twin.prm.cpg.n":"360 K кезіндегі циркуляциялық газдың массамен өлшенген идеал газ c_p: үш марка бойынша 1,51–1,66 kJ/(kg·K) (этилен 350–375 K кезінде 1,71–1,80).","twin.prm.dDew.d":"T_min = T_dew + 10 °C","twin.prm.dH.d":"Этиленнің полимерлену жылуы","twin.prm.dH.n":"894 cal/g = 3,74 MJ/kg (McAuley/Dadebo); 93,6 kJ/mol = 3,34 MJ/kg (ACS Catal.); 3,3–4,2 MJ/kg (US 4,042,767).","twin.prm.dStick.d":"T_max = T_stick − 10 °C","twin.prm.hMax.d":"Өтпелі H₂/C₂ қатынасының ең үлкен мәні (беріліс / қауіпсіздік шегі)","twin.prm.hMax.n":"HDPE мақсатының (0,363) 1,65 еселенгені: H₂ асыра беруге орын (McAuley & MacGregor 1992).","twin.prm.kE.d":"Этиленге тізбек тасымалдау (екі орталық)","twin.prm.kH1.d":"H₂-ге тізбек тасымалдау, 1-орталық","twin.prm.kH2.d":"H₂-ге тізбек тасымалдау, 2-орталық","twin.prm.kM1.d":"Сомономерге тізбек тасымалдау, 1-орталық","twin.prm.kM2.d":"Сомономерге тізбек тасымалдау, 2-орталық","twin.prm.kcs.d":"iC5 мольдік үлесіне шаққандағы бірге еру есебінен жылдамдықтың артуы: Rp·(1+k_cs·y_iC5)","twin.prm.kcs.n":"10 mol % iC5 (2,1 bar) кезінде +15 %. Зертхана: 2,5 bar н-пентан бастапқы жылдамдықты ×2,5, 0,8 bar н-гексан ×1,8 берді; модельдік мән — тұрақты жылдамдықтың консервативті төменгі шегі.","twin.prm.kd.d":"Орталықтардың өздігінен дезактивациясы","twin.prm.kp1.d":"Этилен тізбегінің өсуі, 1-орталық (қатынастар негізі)","twin.prm.kp2.d":"Этилен тізбегінің өсуі, 2-орталық (қатынастар негізі)","twin.prm.kpM1.d":"Сомономер тізбегінің өсуі, 1-орталық","twin.prm.kpM2.d":"Сомономер тізбегінің өсуі, 2-орталық","twin.prm.kpScale.d":"Барлық жылдамдық константаларының абсолюттік масштабы (қатынастар сақталады)","twin.prm.kpScale.n":"LL-C4 базалық жағдайы 14,9 т/сағ беретіндей калибрленген; өнеркәсіптік реакторлар: 13,4 т/сағ (IJCCE қондырғы деректері), 13,5 т/сағ (US 5,266,276).","twin.prm.lamI.d":"iC5 буланудың жасырын жылуы (≈24,7 kJ/mol)","twin.prm.lamI.n":"Δ_vapH(2-метилбутан) 24,7–25,2 kJ/mol (NIST) / 72,15 g/mol.","twin.prm.miTol.d":"MI бойынша марка терезесі: ±15 %","twin.prm.miTol.n":"Ішкі терезе, IS 7328:2020-дан қатаңырақ (MI ≥ 1 үшін ±20 %, 1-ден төмен ±30 %).","twin.prm.nMI.d":"MI ∝ Mw^n","twin.prm.rampT.d":"Ауысулар кезіндегі қабат температурасының өзгеру жылдамдығы","twin.prm.rampT.n":"Қондырғының технологиялық регламенті.","twin.prm.rho0.d":"ρ = ρ₀ − α·Cx^β өрнегіндегі гомополимер тығыздығы","twin.prm.rhoTol.d":"Тығыздық бойынша марка терезесі: ±0,002","twin.prm.rhoTol.n":"Ішкі терезе, IS 7328:2020-дан қатаңырақ (±0,004 LLDPE, ±0,003 HDPE).","twin.prm.site.d":"1 kg катализатордағы ықтимал орталықтар, әр түрі","twin.prm.site.n":"2 × 0,25 = 0,5 mol Ti/kg ≈ MgCl₂-дегі Mg/Ti ≈ 20 (патенттік диапазон Mg/Ti 10–50, US 10,138,310); өнімділік бойынша тек s_j·s_kp·F_cat көбейтіндісі анықталады.","twin.prm.st1.d":"C1 = 1.175e-3·D^−59.736·MI^0.641","twin.prm.st2.d":"C1-дегі D дәреже көрсеткіші","twin.prm.st3.d":"C1-дегі MI дәреже көрсеткіші","twin.prm.st4.d":"C2 = 180.6·D^3.07·MFR^−0.077","twin.prm.st5.d":"C2-дегі D дәреже көрсеткіші","twin.prm.st6.d":"C2-дегі MFR дәреже көрсеткіші","twin.prm.st7.d":"P_eq = P_iC5 + 2.7·P_C6 (psia)","twin.prm.tauC.d":"Газ құрамы реттегіштерінің уақыт тұрақтысы","twin.prm.tauC.n":"Газ құрамы бойынша қатынас реттегіштерін баптау.","twin.prm.tauHX.d":"Салқындатқыштың (газ жағы) бірінші ретті кешігуі","twin.prm.tauHX.n":"Циркуляциялық газ салқындатқышының газ жағындағы кешігуі; жылу алмастырғыштың өлшемімен анықталады.","twin.prm.ventBase.d":"Газ қорының үлесі ретіндегі базалық газ шығару (bleed)","twin.prm.ventBase.n":"Газ қорының 1 %/сағ ≈ этилен берілісінің 0,6 %; McAuley & MacGregor 1992 бойынша газ шығару (bleed) басқарылатын айнымалы ретінде.","twin.prm.ventMax.d":"Газ шығарудың ең жоғары жылдамдығы","twin.prm.ventMax.n":"Алау / регенерация қуаты.","twin.prm.ventNaive.d":"Стандартты (қарапайым) ауысу кезіндегі газ шығару","twin.prm.ventNaive.n":"Стандартты ауысудағы оператор тәжірибесі; McAuley & MacGregor 1992 H₂ өзгерістерін жылдамдату үшін газ шығаруды қолданады.","twin.prov.Fcat.f":"оператордың берілген мәні; 1 kg-ға s_j орталықтары","twin.prov.Fcat.t":"Катализатор берілісі","twin.prov.MFR.f":"MFR ≈ c_MFR·PDI, PDI = екі орталықты қоспаның Mw/Mn","twin.prov.MFR.t":"Балқыма ағымдылығының қатынасы I21/I2 (баға)","twin.prov.MIc.f":"MI_i = a·Mw^(−3.5);  Mw = Σ_j w_j·2·DPn_j·m̄_j\n1/DPn_j = (k_trH,j[H₂] + k_trE[C₂] + k_trM,j[M]) / (k_pE,j[C₂] + k_pM,j[M])\nd ln MI_c/dt = (ln MI_i − ln MI_c)·R_p/M_bed","twin.prov.MIc.t":"Балқыма ағымдылық индексі, жинақталған (қабат)","twin.prov.MIi.f":"MI_i = a·Mw^(−3.5) (газ құрамы бойынша екі орталықты Mw)","twin.prov.MIi.t":"Балқыма ағымдылық индексі, лездік","twin.prov.Mbed.f":"dM/dt = R_p − Q_out (деңгейді реттеу)","twin.prov.Mbed.t":"Қабат массасы","twin.prov.P.f":"N₂ толықтыруымен ұсталады (POC-та тұрақты)","twin.prov.P.t":"Реактордағы қысым","twin.prov.T.f":"dT/dt = (R_p·(−ΔH_p) − Q_cycle − Q_loss) / (M_bed·c_p,PE + C_met)\nQ_cycle = G·c_p,g·(T − T_in) + ṁ_liq·λ_iC5\nT_in: салқындатқыштың кешігуі τ_hx, T бойынша PI арқылы беріледі (AUTO)","twin.prov.T.t":"Қабат температурасы","twin.prov.Tin.f":"dT_in/dt = (u − T_in)/τ_hx,  u = PI(T − T_set), T_cw + ΔT_app ≤ u ≤ T − 1","twin.prov.Tin.t":"Кірістегі циркуляциялық газ температурасы","twin.prov.Tmax.f":"T_max = T_stick − 10 °C","twin.prov.Tmax.t":"Қауіпсіз терезенің жоғарғы шегі","twin.prov.Tmin.f":"T_min = T_dew + 10 °C\nT_dew: P_sat,iC5(T_dew) = y_iC5·P, Antoine log10(P/bar) = A − B/(T + C)","twin.prov.Tmin.t":"Қауіпсіз терезенің төменгі шегі","twin.prov.Tstick.f":"T_stick = −C1·P_eq + C2\nC1 = 1.175e-3·D^(−59.736)·MI^0.641\nC2 = 180.6·D^3.07·MFR^(−0.077)\nP_eq = P_iC5 + 2.7·P_C6  [psia]\nD, MI, MFR: жинақталған (қабат) мәндер","twin.prov.Tstick.t":"Қабат шайырының жабысқақтық температурасы","twin.prov.Tstick.x1":"Қазір: D {d}, MI {mi}, MFR {mfr}, P_eq {p} psia → C1 {c1}, C2 {c2} °C.","twin.prov.Tstick.x2":"Корреляция диапазонынан тыс ({l}): металлоцен диапазоны D 0,912–0,954, MI 0,5–42, MFR 16–36.","twin.prov.Tstick.x3":"Корреляция металлоцен шайырлары үшін әзірленген; Ziegler–Natta шайырлары үшін ол пилотта калибрленеді.","twin.prov.cool.f":"пайдалану = (T − T_in)/(T − T_in,min), T_in,min = T_cw + ΔT_app","twin.prov.cool.t":"Салқындатқыш қуатының пайдаланылуы","twin.prov.h.f":"марка мәні MI_i моделін кері шешуден; реттегіш τ_c, газ шығару v","twin.prov.h.t":"Газдағы H₂/C₂ қатынасы","twin.prov.hot.f":"∂θ/∂t + u·∇θ = ∇·(κ∇θ) + S₀·(a(x,y)·g(T) − 1) − γ(x,y)·θ\nθ = T_local − T_bed, S₀ = R_p(−ΔH_p)/C, g = Аррениус көбейткіші\nқабырға жанындағы әлсіз циркуляция: u, κ, γ азаяды; ұсақ бөлшектер: a артады\nтәуекел аймағы: T_local > T_max","twin.prov.hot.t":"Қабат қимасындағы ыстық аймақ (2D прокси)","twin.prov.hot.x":"Тек прокси. 5 m × 15 m қимадағы 40×60 тор. CFD нәтижесі емес.","twin.prov.liq.f":"y_sat = P_sat,iC5(T_in)/P\nṁ_liq = (G/M_g)·max(0, y_iC5 − y_sat)/(1 − y_sat)·M_iC5\nүлес = ṁ_liq / G","twin.prov.liq.t":"Циркуляциялық газдағы конденсат","twin.prov.m.f":"марка мәні ρ_i моделін кері шешуден","twin.prov.m.t":"Газдағы сомономер/C₂ қатынасы","twin.prov.margin.f":"қор = T_stick − T_bed\nҚауіпсіз терезе: T_min = T_dew + 10 °C ≤ T_bed ≤ T_max = T_stick − 10 °C\nДабыл: қор < 10 K болғанда (T_bed > T_max)","twin.prov.margin.t":"Агломерацияға дейінгі қор","twin.prov.offspec.f":"кондициядан тыс = ∫ R_p dt, (MI_c, ρ_c) екі марка терезесінен де тыс болған кезде\nтерезе: |ln(MI_c/MI_B)| ≤ ln(1.15), |ρ_c − ρ_B| ≤ 0.002\nагент: ln MI* = ln MI_B + K(ln MI_B − ln MI_c), 1/ρ* сол сияқты, H₂/C₂, M/C₂-ге кері түрлендіріледі; газ шығару ≤ v_max; T рампасы ≤ T_max − 2","twin.prov.offspec.t":"Ауысу кезіндегі кондициядан тыс өнім","twin.prov.prod.f":"R_p = Σ_j s_kp·k(T)·(1 + k_cs·y_iC5)·Y_j·(k_pE,j[C₂]·M_C₂ + k_pM,j[M]·M_M)\nk(T) = k_ref·exp(−E_a/R·(1/T − 1/T_ref))\ndY_j/dt = F_cat·s_j − k_d·Y_j − (Q_out/M_bed)·Y_j","twin.prov.prod.t":"Өнімділік","twin.prov.rhoc.f":"ρ_i = 0.966 − α·Cx^β, Cx = полимердегі сомономер, mol %\nCx орталықтар бойынша өлшенген сополимер құрамынан (r₂ ≈ 0)\nd(1/ρ_c)/dt = (1/ρ_i − 1/ρ_c)·R_p/M_bed","twin.prov.rhoc.t":"Тығыздық, жинақталған (қабат)","twin.prov.rhoi.f":"ρ_i = 0.966 − α·Cx^β","twin.prov.rhoi.t":"Тығыздық, лездік","twin.prov.tags.f":"T, P, газ құрамы, G, T_in, катализатор — егізден оқылады (пилотта OPC UA тек оқу)","twin.prov.tags.t":"Бақылаушы тегтері","twin.prov.tau.f":"τ = M_bed / Q_out,  Q_out = R_p + K_b·(M_bed − M_sp)","twin.prov.tau.t":"Қабаттағы болу уақыты","twin.prov.yI.f":"қатынас бойынша реттелетін беріліс, P_iC5 = y_iC5·P","twin.prov.yI.t":"Циркуляциялық газдағы iC5","twin.rec.auto":"Қабат температурасының реттегішін AUTO-ға қайтарып, катализатор берілісін 20 %-ға азайту","twin.rec.auto_in":"{min} минутта T_max","twin.rec.auto_none":"3 сағатта қиылысу жоқ","twin.rec.auto_why":"Алдын ала болжам: {la}. Кері байланыссыз жылу бөлінуі T-мен бірге циркуляциялық газдың жылу әкетуінен жылдамырақ өседі.","twin.rec.hot":"Циркуляциялық газ жылдамдығын 10 %-ға арттырып, катализатор берілісін 10 %-ға азайту","twin.rec.hot_why":"Қабат арқылы көбірек газ өтуі қабырға жанындағы циркуляцияны қалпына келтіреді; катализатордың азаюы жергілікті жылу көзін төмендетеді. Орнында статикалық заряд пен ұсақ бөлшектердің жойылуын тексеріңіз.","twin.rec.ic5":"iC5-ті {y} mol %-ға дейін азайту","twin.rec.ic5_t":"iC5-ті {y} mol %-ға дейін және T берілгенін {d} K-ге азайту","twin.rec.ic5_why":"Ағымдағы шайыр үшін T_stick − T ≈ 14 K қалпына келтіреді (D {d}, MI {mi}). Құны: конденсациялық режимдегі салқындату азаяды, өнімділік төмендейді.","twin.rec.none":"Күтудегі ұсыныс жоқ. Агенттер берілген мәндерді ешқашан өздері өзгертпейді.","twin.rec.tr_title":"Агенттің ауысу жоспарын қолдану → {b}","twin.rec.tr_why":"H₂ және сомономер мақсаттарын асыра беру (күшейту K = {k}), үрлеу кезінде газ шығаруды {v} %/сағ-қа дейін арттыру, температура рампасы қабаттың T_max-тан 2 K төмен ұсталады. Күтілетіні: кондициядан тыс {ao} т, қарапайымда {no} т. Бас тарту = оператор стандартты сатылы өзгерісті орындайды.","twin.rec.trim":"Жылу әкету қорын қалпына келтіру үшін катализатор берілісін 15 %-ға азайту","twin.rec.trim_why":"Келесі бұзылысты температура реттегіші өтей алуы үшін салқындатқыштың ≥ 15 % қорын сақтайды.","twin.scen.cooling":"Салқындатудың жоғалуы","twin.scen.hotspot":"Қабырғадағы ыстық нүкте","twin.scen.push":"Өнімділікті арттыру","twin.scen.steady":"Тұрақты марка","twin.scen.surge":"Катализатор белсенділігінің секіруі","twin.scen.transition":"Марка ауысуы A→B","twin.sch.cat":"катализатор","twin.sch.comp":"компрессор","twin.sch.cooler":"салқындатқыш","twin.sch.cw":"салқындатқыш су","twin.sch.cyc":"циркуляциялық газ","twin.sch.disch":"өнімді шығару","twin.sch.dist":"таратқыш тор","twin.sch.fb":"псевдосұйылт. қабат","twin.sch.feed1":"C₂, H₂, сомономер,","twin.sch.feed2":"iC5, N₂ толықтыру","twin.sch.liq":"конденсат","twin.sch.mbed":"қабат массасы","twin.sch.p":"қысым","twin.sch.prod":"өнімділік","twin.sch.tau":"болу уақыты","twin.sch.tbed":"қабат температурасы","twin.sch.tin":"салқындатқыштан кейінгі T_in","twin.sch.tstick":"қабат шайырының T_stick","twin.sl.fcat":"Катализатор берілісі (kg/сағ)","twin.sl.m":"Сомономер/C₂ (mol/mol)","twin.sl.tsp":"T берілгені (°C)","twin.src.S_ABB.f":"Abbasi M.R., Shamiri A., Hussain M.A. Dynamic modeling and molecular weight distribution of ethylene copolymerization in an industrial gas-phase fluidized-bed reactor. Ашық қолжазба, core.ac.uk/download/341795023.pdf","twin.src.S_ABB.n":"Екі орталықты константалар кестесі; бутен үшін тығыздық коэффициенттері.","twin.src.S_ABB.s":"Abbasi, Shamiri, Hussain","twin.src.S_C6.f":"US 8,367,785 (Ineos), 4-мысал: Ziegler катализаторы, этилен/1-гексен 0,918, MI 0,9, 87 °C: P_C6/P_C2 = 0,164, P_H2/P_C2 = 0,145. US 7,381,783: 0,918 тығыздықта сомономері ≈3 mol % гексенді LLDPE.","twin.src.S_C6.n":"α_C6 және f_C6 үшін мақсаттар. Осы марка үшін модельдік H₂/C₂: 0,176 (патентте 0,145).","twin.src.S_C6.s":"Гексенді LLDPE деректері (патенттер)","twin.src.S_CAL.f":"Масштаб коэффициенттері базалық жағдай дереккөздегі өнеркәсіптік сандарды (өнімділік 13,4–13,5 т/сағ, марканың MI) қайталайтындай бір рет калибрленген. Тек калибрленген масштаб коэффициенттерінің көбейтіндісі анықталады; әр параметрдің ескертпесінде мақсаты берілген.","twin.src.S_CAL.n":"Пилотта қондырғы деректері бойынша қайта калибрленеді.","twin.src.S_CAL.s":"Дереккөздегі мақсаттарға калибрленген","twin.src.S_CPG.f":"Этиленнің идеал газ c_p 350 K кезінде 1,709 kJ/(kg·K), 375 K кезінде 1,799 (Engineering ToolBox). Үш марка құрамы үшін қоспаның c_p = Σ w_i·c_p,i (C₂H₄, 1-C₄/1-C₆, H₂, iC5, N₂): 1,51–1,66 kJ/(kg·K).","twin.src.S_CPG.n":"Идеал газ негізі; 21 bar кезіндегі нақты газ түзетуі бірнеше % қосады.","twin.src.S_CPG.s":"Циркуляциялық газдың жылу сыйымдылығы","twin.src.S_CPPE.f":"NETZSCH, PE стандартты эталондық материалы SRM 1484: 80 °C кезінде 2,09 J/(g·K), 100 °C кезінде 2,41 J/(g·K); Gaur U., Wunderlich B., J. Phys. Chem. Ref. Data 10:119, 1981.","twin.src.S_CPPE.n":"88 °C-ке интерполяцияланған.","twin.src.S_CPPE.s":"PE жылу сыйымдылығы","twin.src.S_DAB21.f":"Dabbagh F., Pirker S., Schneiderbauer S. A fast modeling of chemical reactions in industrial-scale olefin polymerization fluidized beds using recurrence CFD. AIChE J. 67(5):e17161, 2021.","twin.src.S_DAB21.n":"Пилоттық деңгейдегі қабаттың жылдам CFD-іне (L3) негіз.","twin.src.S_DAB21.s":"Dabbagh, Pirker, Schneiderbauer 2021","twin.src.S_DAD97.f":"Dadebo S.A., Bell M.L., McLellan P.J., McAuley K.B. Temperature control of industrial gas phase polyethylene reactors. J. Process Control, 1997.","twin.src.S_DAD97.n":"Ашық контурда тұрақсыз реактор; температураны реттеу міндетті.","twin.src.S_DAD97.s":"Dadebo et al. 1997","twin.src.S_DADT.f":"McAuley et al. / Dadebo et al. (J. Process Control 1997) өнеркәсіптік газ фазалы PE реакторы моделінің параметрлер кестесі, PMC12944317 мақаласының 2-кестесінде қайталанғандай (сілтемелер: Dadebo 1997; Ghasem 2006, 2024): V_g 5×10⁵ (= 500 m³), B_w 7×10⁴ kg, M_r·c_p,r 1,4×10⁷ cal/K, E_a 9000 cal/mol, T_ref 360 K, P 20 atm, ΔH −894 (cal/g), k_d 10⁻⁴ 1/s. Қайталаудағы кейбір бірліктерде қате бар, олар шамалары бойынша тексеріп оқылды.","twin.src.S_DADT.n":"pmc.ncbi.nlm.nih.gov/articles/PMC12944317","twin.src.S_DADT.s":"Dadebo/McAuley реактор моделі, параметрлер кестесі","twin.src.S_DESIGN.f":"Нақты қондырғымен анықталады (жабдық өлшемі, DCS баптауы, технологиялық регламент). Мән ескертпеде берілген диапазон ішінде және пилотта тапсырыс берушінің деректерімен ауыстырылады.","twin.src.S_DESIGN.n":"жобалық","twin.src.S_DESIGN.s":"Қондырғының жобалық мәні / баптау мәні","twin.src.S_DH.f":"McAuley/Dadebo моделі: −894 cal/g (3,74 MJ/kg). ACS Catal. doi:10.1021/acscatal.9b03282: 93,6 kJ/mol (3,34 MJ/kg). US 4,042,767: 3 300–4 200 kJ/kg.","twin.src.S_DH.n":"Модельдік мән = McAuley.","twin.src.S_DH.s":"Полимерлену жылуы","twin.src.S_GEO.f":"US 5,266,276: ішкі диаметрі 4,5 m, ≈30 m, 90 °C кезінде 13,5 т/сағ HDPE. US 11,078,307: 4,0 m, 0,9 m/s. US 10,266,625: 2,1 MPa, 88 °C, 0,61 m/s, циркуляциялық газ тығыздығы 28,0 kg/m³. US 10,471,407: 0,45 m/s. US 11,459,408: 1–5 ft/s.","twin.src.S_GEO.n":"V_g және G шығару үшін қолданылды.","twin.src.S_GEO.s":"Реактор геометриясы және газ жылдамдығы (патенттер)","twin.src.S_GRADE.f":"Маркалар жалпылама: MI мен тығыздық коммерциялық ZN газ фазалы LLDPE пленкалық маркаларындағыдай (мысалы, Unipol LLDPE 1.0/0.920, Hanwha 3120; LL-1002 2.0/0.918, US 7,116,414). H₂/C₂ және M/C₂ газ қатынастары қондырғыдан емес, қасиеттер моделін кері шешуден алынған.","twin.src.S_GRADE.n":"Газ қатынастары модельді кері шешу арқылы.","twin.src.S_GRADE.s":"Жалпылама маркалар","twin.src.S_ICA.f":"Alizadeh et al., Condensed mode cooling for ethylene polymerization, Part I. Macromol. Chem. Phys. 2015, doi:10.1002/macp.201400600: барлық ICA тасымалдағыштағы ZN катализаторында лездік жылдамдықты арттырады, әсіресе бастапқы фазада. Chem. Eng. J. (S1385894720338985) келтіруі бойынша: 7 bar этиленмен 2,5 bar н-пентан → бастапқы жылдамдық ≈×2,5; 0,8 bar н-гексан → бастапқы белсенділік ≈×1,8.","twin.src.S_ICA.n":"Модель тұрақты жылдамдыққа кішірек, консервативті әсерді пайдаланады.","twin.src.S_ICA.s":"ICA-ның жылдамдыққа әсері (McKenna тобы)","twin.src.S_IND.f":"Control of a fluidized bed polyethylene reactor, Iran. J. Chem. Chem. Eng. (ijcce.ac.ir/article_6973): өнеркәсіптік деректер P 20,77 bar, өнімділік 3722 g/s (13,4 т/сағ), қабат биіктігі 14 m. US 11,192,970: реактордағы қысым 20–25 barg.","twin.src.S_IND.n":"Ашық әдебиеттегі қондырғы деректері.","twin.src.S_IND.s":"Өнеркәсіптік жұмыс деректері","twin.src.S_L3.f":"Қабаттың 2D қимасы — қабаттың ағымдағы температурасымен басқарылатын иллюстрациялық прокси. Пилотта ол «Өнеркәсіпте дәлелденген» бөліміндегі жарияланған кейстерге сәйкес (Dabbagh et al. 2021; Borealis/JKU) CFD бойынша оқытылған деңгеймен ауыстырылады.","twin.src.S_L3.n":"CFD нәтижесі емес.","twin.src.S_L3.s":"Қабаттың иллюстрациялық қимасы","twin.src.S_MCA90.f":"McAuley K.B., MacGregor J.F., Hamielec A.E. A kinetic model for industrial gas-phase ethylene copolymerization. AIChE J. 36(6):837–850, 1990. doi:10.1002/aic.690360605","twin.src.S_MCA90.n":"Екі орталықты кинетика; константалар қатынасы Abbasi, Shamiri, Hussain қайталағандай.","twin.src.S_MCA90.s":"McAuley, MacGregor, Hamielec 1990","twin.src.S_MCA91.f":"McAuley K.B., MacGregor J.F. On-line inference of polymer properties in an industrial polyethylene reactor. AIChE J. 37(6):825–835, 1991. doi:10.1002/aic.690370605","twin.src.S_MCA91.n":"MI мен тығыздықтың лездік/жинақталған мәндері, болу уақытымен бірінші ретті араластыру.","twin.src.S_MCA91.s":"McAuley & MacGregor 1991","twin.src.S_MCA92.f":"McAuley K.B., MacGregor J.F. Optimal grade transitions in a gas phase polyethylene reactor. AIChE J. 38(10):1564–1576, 1992. doi:10.1002/aic.690381008","twin.src.S_MCA92.n":"Ауысулардағы H₂ / сомономерді асыра беру және газ шығаруды басқару.","twin.src.S_MCA92.s":"McAuley & MacGregor 1992","twin.src.S_MCA93.f":"McAuley K.B., MacGregor J.F. Nonlinear product property control in industrial gas-phase polyethylene reactors. AIChE J. 39(5):855–866, 1993. doi:10.1002/aic.690390514","twin.src.S_MCA93.n":"Қасиеттерді басқару құрылымы.","twin.src.S_MCA93.s":"McAuley & MacGregor 1993","twin.src.S_MFR.f":"US 2017/0015768 (Univation): ZN өнімдері MFR I21/I2 ≈ 24–28. Xu, Wen, Xu, Melt flow ratio: a way to identify the type of polyethylene: ZN-LLD шамамен 25. US 6,384,158: ZN газ фазалы LLDPE MI 1,04, 0,918, MFR 25.","twin.src.S_MFR.n":"c_MFR үшін мақсат.","twin.src.S_MFR.s":"ZN LLDPE балқыма ағымдылығының қатынасы","twin.src.S_NIST.f":"NIST Chemistry WebBook, 2-метилбутан (CAS 78-78-4): Antoine log10(P/bar) = A − B/(T + C), A 3.91457, B 1020.012, C −40.053 (Williamham et al. 1945, 289–302 K); Δ_vapH° 24,8–25,2 kJ/mol.","twin.src.S_NIST.n":"Antoine ≈330 K-ге дейін қолданылды (салқындатқыш шығысы); шамалы экстраполяция.","twin.src.S_NIST.s":"NIST WebBook, 2-метилбутан","twin.src.S_PAT.f":"Method for determining a stickiness temperature of a resin (Univation мысалдары). USPTO толық мәтіні: https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/10029226 ; EP 3968020 B1 (атауы бірдей). Іздеу арқылы табылған байланысты EP 2893342 A1 (Univation, атауы бірдей).","twin.src.S_PAT.n":"T_stick = −C1·P_eq + C2 корреляциясы және T_dew+10…T_stick−10 терезесі тапсырмада берілгендей; C1 түрі мәтіннен қалпына келтірілген. Патент нөмірі осы құрастыруда қайта тексерілмеген (патент сайттары қолжетімсіз).","twin.src.S_PAT.s":"Жабысқақтық патенті (US 10,029,226 / EP отбасы)","twin.src.S_SPEC.f":"IS 7328:2020 (BIS), 5.2.1.1–5.2.1.2-тармақтар: тығыздық LLDPE үшін номиналдан ±4 kg/m³, HDPE үшін ±3 kg/m³ шегінде; MFR ±20 % (номинал ≥ 1) немесе ±30 % (номинал < 1) шегінде.","twin.src.S_SPEC.n":"POC терезелері стандарттан қатаңырақ (ішкі спецификация).","twin.src.S_SPEC.s":"Марка спецификациясының шектері","twin.src.S_WIN.f":"Қабат 60–80 т, 20–22 bar, 12–20 т/сағ, τ 3–6 сағ (S_IND, S_DADT). Тығыздыққа байланысты қабат температурасы, US 11,952,445: 0,90–0,92 үшін 75–90 °C, 0,92–0,94 үшін 80–100 °C, 0,94–0,96 g/mL үшін 90–115 °C.","twin.src.S_WIN.n":"Марка температуралары осы диапазондар ішінде таңдалған.","twin.src.S_WIN.s":"Типтік жұмыс терезесі","twin.status.derived":"есептелген","twin.status.design":"жобалық","twin.status.illustrative":"иллюстрация","twin.status.verified":"тексерілген","twin.sv.act":"белсенділік ×{a}","twin.sv.cool":"салқ. {u} % · G {g} kg/s","twin.sv.tstick":"{t} °C (қор {m} K)","twin.tag.act":"катализатор белсенділігі ×{a}","twin.tag.cat":"катализатор {a}→{b} kg/сағ","twin.tag.tset":"T берілгені {a}→{b} °C","twin.th.status":"Мәртебе","twin.th.sym":"Белгі","twin.th.unit":"Бірлік","twin.th.val":"Мән","twin.tr.agent":"Агент стратегиясы (K {k}, газ шығару {v} %/сағ)","twin.tr.naive":"Қарапайым сатылы өзгеріс","twin.tr.res":"кондициядан тыс · {h} сағ · T_max-тан жоғары {o} сағ · газ шығару {v} т C₂","twin.tr.run":"Ауысуды жоспарлау үшін 2-сценарийді іске қосыңыз.","unit.1/h":"1/сағ","unit.K/h":"K/сағ","unit.g/10 min":"г/10 мин","unit.g/10min·(g/mol)^3.5":"г/10мин·(г/mol)^3,5","unit.h":"сағ","unit.kg/h":"kg/сағ","unit.kmol/h":"kmol/сағ","unit.min":"мин","unit.mol %":"mol %","unit.mol/kg cat":"mol/kg кат.","unit.t":"т","unit.t/h":"т/сағ","unit.wt %":"масс. %"};
+function _t(k,v){var s=I18N[k];if(s===undefined){return k}if(v){s=s.replace(/\{(\w+)\}/g,function(m,n){return Object.prototype.hasOwnProperty.call(v,n)?String(v[n]):m})}return s}
+var _nfc={},_nloc=(function(){try{var p=new Intl.NumberFormat(_i18n.intl,{minimumFractionDigits:1}).formatToParts(1.5);for(var i=0;i<p.length;i++)if(p[i].type==='decimal'&&p[i].value===_i18n.dec)return _i18n.intl}catch(e){}return _i18n.intl_fb||_i18n.intl})();
+function _n(x,d){x=Number(x);d=d||0;if(!isFinite(x))return String(x);var f=_nfc[d]||(_nfc[d]=new Intl.NumberFormat(_nloc,{minimumFractionDigits:d,maximumFractionDigits:d,useGrouping:_i18n.grouping}));return f.format(x)}
+function _ns(s){s=String(s);return _i18n.dec==='.'?s:s.replace(/(\d)\.(\d)/g,'$1'+_i18n.dec+'$2')}
+function _words(s){if(window.Intl&&Intl.Segmenter&&/[\u0E00-\u0E7F]/.test(s)){var o=[];for(var p of new Intl.Segmenter('th',{granularity:'word'}).segment(s))o.push(p.segment);return o}return s.split(/(\s+)/)}
+function _fit(g,s,x,y,maxW,sk,lh){if(g.measureText(s).width<=maxW)return g.fillText(s,x,y),1;if(sk&&I18N[sk]!==undefined&&g.measureText(I18N[sk]).width<=maxW)return g.fillText(I18N[sk],x,y),1;
+var w=_words(s),ln='',L=[];for(var i=0;i<w.length;i++){var c=ln+w[i];if(ln&&g.measureText(c.trim()).width>maxW){L.push(ln.trim());ln=w[i]}else ln=c}if(ln.trim())L.push(ln.trim());
+lh=lh||parseFloat(g.font)*1.25||13;var f0=g.font,sz=parseFloat((f0.match(/([\d.]+)px/)||[0,12])[1]);for(var j=0;j<L.length;j++){while(g.measureText(L[j]).width>maxW&&sz>7){sz-=0.5;g.font=f0.replace(/[\d.]+px/,sz+'px')}g.fillText(L[j],x,y+j*lh);g.font=f0}return L.length}</script>
+</head>
+<body>
+<div class="sitebar"><a class="sb-logo" href="/kz/"><span>CIRIYC PRO</span><span class="sb-sub">RESEARCH</span><img src="/star.png" alt=""></a><span class="lsw-a"><details class="lsw" data-i18n-ui><summary aria-label="Тіл" title="Тіл"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.6 2.7 3.9 5.9 3.9 9.5s-1.3 6.8-3.9 9.5M12 2.5C9.4 5.2 8.1 8.4 8.1 12s1.3 6.8 3.9 9.5"/></svg><span class="lsw-c">KZ</span></summary><ul><li><a href="/stands/gas-phase-pe-twin/" hreflang="en" lang="en" data-lsw="en">English</a></li><li><a href="/au/stands/gas-phase-pe-twin/" hreflang="en-AU" lang="en-AU" data-lsw="en-AU">English (AU)</a></li><li><a href="/kz/stands/gas-phase-pe-twin/" hreflang="kk-KZ" lang="kk" data-lsw="kk" aria-current="true">Қазақша <span class="beta">beta</span></a></li><li><a href="/th/stands/gas-phase-pe-twin/" hreflang="th-TH" lang="th" data-lsw="th">ไทย <span class="beta">beta</span></a></li></ul></details><a class="sb-back" href="/kz/#demos">← Барлық демолар</a></span></div>
+
+<div class="wrap">
+  <div class="hero">
+    <h1>Газ фазалы ПЭ реакторы — AI цифрлық егізі</h1>
+    <p class="sub">Псевдосұйылтылған қабатты полиэтилен реакторы және оның марка химиясы сіздің браузеріңізде нақты уақытта есептеледі; MAIF агенттері өндіріліп жатқан марканың агломерацияға дейінгі қорын көреді, ыстық аймақтарды ерте анықтайды және марка ауысуларын жоспарлайды — ал әр әрекетті оператор бекітеді.</p>
+    <span class="pill">POC · модельденген қондырғы</span><span class="pill live">Модель браузерде жұмыс істейді</span><span class="pill">Құрылым әдебиеттен · POC калибрлеуі</span>
+  </div>
+
+  <div class="ctrl" id="ctrlbar">
+    <button class="btn primary" id="bPlay">Кідірту</button>
+    <span class="lbl">Жылдамдық</span>
+    <select class="btn" id="speed"><option value="60">×60</option><option value="120">×120</option><option value="300" selected>×300</option><option value="600">×600</option></select>
+    <span class="clock" id="clock">t = 0:00</span>
+    <span class="sp"></span>
+    <span class="lbl">Марка</span>
+    <select class="btn" id="gradeSel"></select>
+    <button class="btn" id="bLoad">Тұрақты марканы жүктеу</button>
+  </div>
+  <div class="ctrl" id="scenbar">
+    <span class="lbl">Сценарийлер</span>
+    <button class="btn" data-scen="steady">1 · Тұрақты марка</button>
+    <button class="btn" data-scen="transition">2 · Марка ауысуы A→B</button>
+    <button class="btn" data-scen="push">3 · Өнімділікті арттыру (конденсациялық режим)</button>
+    <button class="btn" data-scen="hotspot">4 · Қабырғадағы ыстық нүкте</button>
+    <button class="btn" data-scen="surge">5 · Катализатор белсенділігінің секіруі</button>
+    <button class="btn" data-scen="cooling">6 · Салқындатудың жоғалуы</button>
+  </div>
+
+  <main class="grid">
+    <div class="col">
+      <div class="card scheme">
+        <h3><span>Реактор &amp; циркуляциялық газ контуры — ағымдағы мәндер</span><span class="note">дереккөзін көру үшін мәнді басыңыз</span></h3>
+        <div class="sx"><svg id="scheme" viewBox="0 0 900 400" role="img" aria-label="Ағымдағы мәндері бар псевдосұйылтылған қабатты реактордың технологиялық схемасы"></svg></div>
+      </div>
+      <div class="kpis" id="kpis"></div>
+      <div class="charts">
+        <div class="card">
+          <h3><span>Қабат температурасы және жабысқақтық терезесі</span><span class="note" id="trWin">соңғы 6 сағ</span></h3>
+          <canvas id="cT" height="220"></canvas>
+          <div class="legend"><span><b style="background:#0a0a0a"></b>T қабат</span><span><b style="background:#dc2626"></b>T_stick</span><span><b style="background:#d97706"></b>T_max = T_stick − 10</span><span><b style="background:#2563eb"></b>T_min = T_dew + 10</span><span><b style="background:#0d9488"></b>T берілгені</span></div>
+        </div>
+        <div class="card">
+          <h3><span>Полимер қасиеттері және марка терезесі</span><span class="note" id="gradeNote"></span></h3>
+          <canvas id="cP" height="220"></canvas>
+          <div class="legend"><span><b style="background:#7c3aed"></b>MI жинақталған (қабат)</span><span><b style="background:#7c3aed;opacity:.4"></b>MI лездік</span><span><b style="background:#0d9488"></b>ρ жинақталған</span><span><b style="background:#0d9488;opacity:.4"></b>ρ лездік</span><span><b class="band" style="background:#16a34a"></b>марка терезесі</span></div>
+        </div>
+        <div class="card">
+          <h3><span>L3 · Қабат қимасы, температура өрісі</span><span class="note">иллюстрациялық өріс</span></h3>
+          <div class="heatwrap">
+            <canvas id="cH" height="300"></canvas>
+            <div class="heatinfo" id="heatInfo"></div>
+          </div>
+          <div class="proxy">Қабаттың иллюстрациялық өрісі. Пилотта: тапсырыс берушінің реакторының CFD моделінде оқытылған, әр жауапта қателік шегі бар суррогат — <a href="#proven">өнеркәсіпте дәлелденген тәсіл</a>.</div>
+        </div>
+        <div class="card" id="trCard">
+          <h3><span>Ауысу жоспарлаушысы · қарапайым және агенттік</span><span class="note" id="trNote">2-сценарийді іске қосыңыз</span></h3>
+          <canvas id="cTr" height="220"></canvas>
+          <div class="legend"><span><b style="background:#888"></b>қарапайым: MI_c / ρ_c</span><span><b style="background:#0d9488"></b>агент: MI_c / ρ_c</span><span><b class="band" style="background:#16a34a"></b>B маркасының терезесі</span></div>
+          <div class="tr-res" id="trRes"><div class="empty">Жоспарлаушы екі стратегияны да ағымдағы күйден бастап егіздің көшірмесінде модельдейді.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card">
+        <h3><span>MAIF агенттер шинасы</span><span class="note">шина браузерде эмуляцияланған</span></h3>
+        <div class="agents" id="agents"></div>
+        <div class="feed" id="feed"></div>
+        <div class="rec" id="rec"><div class="empty">Күтудегі ұсыныс жоқ. Агенттер берілген мәндерді ешқашан өздері өзгертпейді.</div></div>
+      </div>
+      <div class="card">
+        <h3><span>Берілген мәндер (оператор)</span><span class="note" id="ctlMode"></span></h3>
+        <div id="sliders"></div>
+        <div class="row" style="margin-top:6px"><button class="btn sm" id="bAuto">T реттегіші: AUTO</button><span class="empty">Қолмен = салқындатқыш шығысы бекітілген</span></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<section class="blk" id="proven">
+  <div class="wrap">
+    <div class="kicker">Өнеркәсіпте дәлелденген</div>
+    <h2>Жабдықтың CFD-і, оқытылған егіз және соның негізінде болжайтын агенттер.</h2>
+    <p class="lead">Осы егіздің негізіндегі тәсілді жетекші өндірушілер жариялап қойған: псевдосұйылтылған қабатты полимерлеу реакторларының жылдам CFD-і және реактор модельдеріне арналған физикамен ақпараттандырылған нейрондық желілер. Біз оны MAIF агенттік ядросымен газ фазалы ПЭ-ге әкелеміз.</p>
+    <div class="chain">
+      <div class="cs"><b>Жабдықтың CFD моделі</b><span>сызбалардан алынған геометрия, қондырғы режимдері; біздің CFD инженеріміз құрады</span></div><div class="ar">→</div>
+      <div class="cs"><b>Режимдер деректер жиыны</b><span>жұмыс терезесі бойынша CFD есептеулері</span></div><div class="ar">→</div>
+      <div class="cs"><b>Оқытылған егіз</b><span>әр жауапта қателік шегі бар суррогат</span></div><div class="ar">→</div>
+      <div class="cs us"><b>MAIF агенттері болжайды</b><span>ыстық аймақтар, жабысқақтық қоры, марка ауысулары — шешімді оператор қабылдайды</span></div>
+    </div>
+    <div class="cases">
+      <div class="case">
+        <div class="who">Borealis · Johannes Kepler University Linz</div>
+        <h3>Олефиндерді полимерлеудің псевдосұйылтылған қабаттарының CFD-і</h3>
+        <div class="nums">
+          <div class="n"><b>1,5 m³</b><span>реактор, биіктігі 4,8 m, түбінің диаметрі 0,6 m</span></div>
+          <div class="n"><b>381 000× дейін</b><span>рекурренттік CFD мен толық CFD, псевдосұйылтылған қабаттағы жылу алмасу</span></div>
+        </div>
+        <p>Borealis Innovation-мен бірге әзірленген гибридті CFD олефиндерді полимерлеудің псевдосұйылтылған қабатты реакторындағы кесектену және sheeting сияқты процестік ақауларды болжайды. Содан кейін рекурренттік CFD полимерлеу кинетикасы мен реакция жылуын жазылған модельдеуден әлдеқайда ұзақ уақытқа таратады. Borealis — JKU-дағы көпфазалы процестерді көпмасштабты модельдеу жөніндегі Christian Doppler зертханасының серіктесі.</p>
+        <div class="refs">
+          <a href="https://doi.org/10.1002/aic.17161">Dabbagh, Pirker, Schneiderbauer. AIChE J. 67(5):e17161, 2021</a>
+          <a href="https://dc.engconfintl.org/fluidization_xv/67/">Schneiderbauer, Pirker, Aguayo, Touloupidis, Martínez Joaristi (Borealis). Fluidization XV</a>
+          <a href="https://www.sciencedirect.com/science/article/pii/S0360128525000139">Жеделдету 29 000–381 000× (шолу, Prog. Energy Combust. Sci.)</a>
+        </div>
+      </div>
+      <div class="case">
+        <div class="who">Shell · NVIDIA Modulus</div>
+        <h3>GTL реакторына арналған физикамен ақпараттандырылған нейрондық желілер</h3>
+        <div class="nums">
+          <div class="n"><b>10⁷×</b><span>катализатор түйіршігінің моделі; микрокинетика 10⁵×</span></div>
+          <div class="n"><b>≈ 4 s</b><span>Fischer–Tropsch реакторының толық түтігі, бір V100 GPU</span></div>
+          <div class="n"><b>&lt; 1 %</b><span>салыстырмалы қателік, өнімдер бойынша реакция жылдамдықтарының көпшілігі</span></div>
+          <div class="n"><b>10⁶×, 0,03 %</b><span>GPU-дағы микрокинетика PINN (2023)</span></div>
+        </div>
+        <p>Shell Technology Centre Bangalore газды сұйық көмірсутектерге айналдыратын (GTL) реакторларды бірнеше масштабта PINN арқылы модельдейді — нақты уақыттағы процесті басқару және оңтайландыру үшін жеткілікті жылдам.</p>
+        <div class="refs">
+          <a href="https://doi.org/10.2118/222775-MS">SPE-222775-MS, ADIPEC, Абу-Даби, 2024 жылғы қараша</a>
+          <a href="https://arxiv.org/abs/2311.10456">Patel et al. (Shell). Accurate and fast FT microkinetics using PINNs, 2023</a>
+          <a href="https://doi.org/10.1002/adts.202500177">Nikolaienko et al. Advanced Theory and Simulations 8(11), 2025</a>
+        </div>
+      </div>
+      <div class="case">
+        <div class="who">Өнеркәсіптік патент</div>
+        <h3>Қондырғылармен салыстырылған полимерлеудің псевдосұйылтылған қабатының CFD-і</h3>
+        <div class="nums">
+          <div class="n"><b>PET</b><span>қабат гидродинамикасын валидациялау үшін қолданылған бөлшектерді бақылау</span></div>
+          <div class="n"><b>Қондырғылардың T-профильдері</b><span>CFD өнеркәсіптік қондырғылардың температуралық профильдерімен салыстырылды</span></div>
+        </div>
+        <p>Эксперименттік және өнеркәсіптік деректермен валидацияланған псевдосұйылтылған қабатты полимерлеу реакторының CFD-і қатты бөлшектер мен газдың қарқынды циркуляциялық контурын анықтады: ортасында жоғары ағын, қабырға жанында төмен ағын — полимерлеуді басқару процесінің негізі.</p>
+        <div class="refs">
+          <a href="https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/9394381">US 9,394,381 — Polymerisation control process</a>
+        </div>
+      </div>
+    </div>
+    <p class="proxy" style="margin-top:18px">Бұл бетте қабат қимасы — иллюстрациялық өріс. Пилотта ол жоғарыдағы кейстердегідей тапсырыс беруші реакторының CFD моделінде оқытылған суррогатпен ауыстырылады.</p>
+  </div>
+</section>
+
+<section class="blk">
+  <div class="wrap arch">
+    <div class="kicker">Толық егіздің архитектурасы</div>
+    <h2>Бес деңгей. Бұл бет әрқайсысының тік кесіндісін іске қосады.</h2>
+    <p class="lead">Мұнда есептелетіннің бәрі <b>осы POC-та жұмыс істейді</b> деп белгіленген. Қондырғы геометриясын, деректерін немесе қосылымын қажет ететіні <b>пилотта</b> деп белгіленген.</p>
+    <div id="arch" class="archg" role="img" aria-label="Цифрлық егіздің бес деңгейлі архитектурасы"></div>
+  </div>
+</section>
+
+<section class="blk">
+  <div class="wrap">
+    <div class="kicker">Дереккөздер &amp; параметрлер</div>
+    <h2>Әр санның дереккөзі, қорытып шығарылуы немесе жобалық диапазоны бар.</h2>
+    <p class="lead">Модель құрылымы төменде келтірілген ашық әдебиеттен алынған. <span class="st verified">тексерілген</span>: мән келтірілген дереккөзде бар. <span class="st derived">есептелген</span>: дереккөз деректерінен есептелген немесе калибрленген; формуласы мен мақсаты параметрдің астында. <span class="st design">жобалық</span>: нақты қондырғымен анықталады (жабдық, DCS баптауы, регламенттер); мән көрсетілген диапазон ішінде және пилотта тапсырыс берушінің деректерімен ауыстырылады. Бірде-бір параметр негізсіз болжам емес.</p>
+    <div class="tblw"><table id="ptab"><thead><tr><th>Белгі</th><th>Мән</th><th>Бірлік</th><th>Мағынасы</th><th>Дереккөз</th><th>Мәртебе</th></tr></thead><tbody></tbody></table></div>
+    <div class="srcl" id="srcl"></div>
+  </div>
+</section>
+
+<section class="blk">
+  <div class="wrap">
+    <div class="kicker">Пилот</div>
+    <h2>Тұжырымдаманы дәлелдеуден реакторға дейін.</h2>
+    <div class="pilot">
+      <div>
+        <div class="price">Пилот: USD 3 M (≈ RUB 300 M) бастап — бір реактор, көлеңкелі режим</div>
+        <p class="lead" style="margin-top:12px">Егіз DCS-пен қатар, тек оқу режимінде жұмыс істейді. Ол кеңес береді; шешімді оператор қабылдайды. Бұл беттегі ештеңе қондырғыға калибрленбеген — мұны пилот жасайды.</p>
+        <p style="margin-top:16px"><a class="btn primary" href="mailto:research@ciriycpro.org" style="text-decoration:none;display:inline-block">research@ciriycpro.org</a></p>
+      </div>
+      <ul>
+        <li>Тапсырыс беруші реакторының геометриясының CFD моделі және сертификатталған қателік шегі бар оқытылған суррогат.</li>
+        <li>Процесс пен қасиеттер модельдерін қондырғы мұрағаты бойынша калибрлеу.</li>
+        <li>OPC UA (тек оқу) қосылымы және MAIF агенттер шинасы.</li>
+        <li>Қондырғының нақты маркаларындағы жабысқақтық күзетшісі мен ауысу жоспарлаушысы.</li>
+        <li>Бұрынғы инциденттер мұрағаты бойынша ретроспективті валидация.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="disc">
+  <div class="wrap">
+    <b>Бұл бет не.</b> Нақты уақытта есептеледі: реактор моделі (екі орталықты кинетика, салқындатқышы мен конденсациясы бар газ контуры, қабат температурасын реттеу), полимердің лездік және жинақталған қасиеттері, жабысқақтық температурасы мен қауіпсіз терезе, ауысу жоспарлаушысы және барлық агенттер. Иллюстрациялық: қабат қимасы пилоттағы CFD бойынша оқытылған деңгейдің орнын басады; бұл тәсіл сүйенетін жарияланған кейстерді «Өнеркәсіпте дәлелденген» бөлімінен қараңыз. Сандар: жоғарыдағы кестедегі әр параметр дереккөз бойынша тексерілген, дереккөз деректерінен алынған (формуласы берілген) немесе көрсетілген диапазон ішіндегі қондырғының жобалық мәні; калибрленген масштаб коэффициенттері жарияланған өнеркәсіптік өнімділік пен марка деректерін қайталайды. Жабысқақтық корреляциясы металлоцен шайырлары үшін әзірленген; Ziegler–Natta шайырлары үшін ол сол күйінде көрсетіледі және пилотта калибрленуі тиіс. Марка атаулары жалпылама. Құрылым мен сандар ашық әдебиет пен патенттерден алынған. <b>Нақты бір қондырғыға калибрленбеген.</b> <span style="color:#888">· Стенд нұсқасы 0.4.0 · 2026-11-23</span>
+    <div class="lsw-foot" data-i18n-ui><span><a href="/stands/gas-phase-pe-twin/" hreflang="en" lang="en" data-lsw="en">English</a></span><span><a href="/au/stands/gas-phase-pe-twin/" hreflang="en-AU" lang="en-AU" data-lsw="en-AU">English (AU)</a></span><span><a href="/kz/stands/gas-phase-pe-twin/" hreflang="kk-KZ" lang="kk" data-lsw="kk" aria-current="true">Қазақша</a> <span class="beta">beta</span></span><span><a href="/th/stands/gas-phase-pe-twin/" hreflang="th-TH" lang="th" data-lsw="th">ไทย</a> <span class="beta">beta</span></span></div>
+  </div>
+</footer>
+
+<div class="modal" id="modal"><div class="pcard" id="pcard" role="dialog" aria-modal="true"></div></div>
+
+<script>
+/* Gas-phase PE reactor twin — model core (L1 process, L2 properties, L3 2D proxy, stickiness).
+   Structure from open literature; every number lives in PRM with provenance. POC calibration, not plant data. */
+var TW = (function () {
+'use strict';
+const R = 8.314, PSI_PER_BAR = 14.5038, MW_E = 0.02805, MW_H = 0.002016, MW_I = 0.07215, MW_N2 = 0.02801;
+const MWM = { C4: 0.05611, C6: 0.08416 };
+
+// ---------------- L4: parameter registry ----------------
+// status: 'verified' = number/structure taken from a source listed in SOURCES (checked by the task author or here);
+//         'derived'  = computed or fitted from sourced data (formula in note); 'design' = plant design / tuning value,
+//         set by the specific plant, value inside a stated range; replaced by plant data in the pilot.
+const PRM = {};
+function p(id, v, unit, sym, desc, src, status, note) { PRM[id] = { id, v, unit, sym, desc, src, status, note: note || '' }; }
+p('P', 21, 'bar', 'P', _t('twin.prm.P.d'), 'S_IND', 'verified', _t('twin.prm.P.n'));
+p('Vg', 450, 'm³', 'V_g', _t('twin.prm.Vg.d'), 'S_GEO', 'derived', _t('twin.prm.Vg.n'));
+p('Tg', 360, 'K', 'T_g', _t('twin.prm.Tg.d'), 'S_DADT', 'derived', _t('twin.prm.Tg.n'));
+p('Msp', 70000, 'kg', 'M_bed', _t('twin.prm.Msp.d'), 'S_DADT', 'verified', _t('twin.prm.Msp.n'));
+p('Kb', 1 / 1800, '1/s', 'K_b', _t('twin.prm.Kb.d'), 'S_DESIGN', 'design', _t('twin.prm.Kb.n'));
+p('kp1', 85, 'L/(mol·s)', 'k_p,E,1', _t('twin.prm.kp1.d'), 'S_MCA90', 'verified');
+p('kp2', 85, 'L/(mol·s)', 'k_p,E,2', _t('twin.prm.kp2.d'), 'S_MCA90', 'verified');
+p('kpM1', 2, 'L/(mol·s)', 'k_p,M,1', _t('twin.prm.kpM1.d'), 'S_MCA90', 'verified');
+p('kpM2', 15, 'L/(mol·s)', 'k_p,M,2', _t('twin.prm.kpM2.d'), 'S_MCA90', 'verified');
+p('kH1', 0.088, 'L/(mol·s)', 'k_tr,H,1', _t('twin.prm.kH1.d'), 'S_MCA90', 'verified');
+p('kH2', 0.37, 'L/(mol·s)', 'k_tr,H,2', _t('twin.prm.kH2.d'), 'S_MCA90', 'verified');
+p('kM1', 0.006, 'L/(mol·s)', 'k_tr,M,1', _t('twin.prm.kM1.d'), 'S_MCA90', 'verified');
+p('kM2', 0.11, 'L/(mol·s)', 'k_tr,M,2', _t('twin.prm.kM2.d'), 'S_MCA90', 'verified');
+p('kE', 0.0021, 'L/(mol·s)', 'k_tr,E', _t('twin.prm.kE.d'), 'S_MCA90', 'verified');
+p('kd', 1e-4, '1/s', 'k_d', _t('twin.prm.kd.d'), 'S_MCA90', 'verified');
+p('kpScale', 9.2, '—', 's_kp', _t('twin.prm.kpScale.d'), 'S_CAL', 'derived', _t('twin.prm.kpScale.n'));
+p('Ea', 37656, 'J/mol', 'E_a', _t('twin.prm.Ea.d'), 'S_DADT', 'verified', _t('twin.prm.Ea.n'));
+p('Tref', 360.15, 'K', 'T_ref', _t('twin.prm.Tref.d'), 'S_DADT', 'verified', _t('twin.prm.Tref.n'));
+p('site', 0.25, 'mol/kg cat', 's_j', _t('twin.prm.site.d'), 'S_CAL', 'derived', _t('twin.prm.site.n'));
+p('C6act', 1.884, '—', 'f_C6', _t('twin.prm.C6act.d'), 'S_C6', 'derived', _t('twin.prm.C6act.n'));
+p('kcs', 1.5, '—', 'k_cs', _t('twin.prm.kcs.d'), 'S_ICA', 'derived', _t('twin.prm.kcs.n'));
+p('aMI', 0, 'g/10min·(g/mol)^3.5', 'a', _t('twin.prm.aMI.d'), 'S_MCA91', 'derived', _t('twin.prm.aMI.n'));
+p('nMI', -3.5, '—', 'n', _t('twin.prm.nMI.d'), 'S_MCA91', 'verified');
+p('cMFR', 7, '—', 'c_MFR', _t('twin.prm.cMFR.d'), 'S_MFR', 'derived', _t('twin.prm.cMFR.n'));
+p('rho0', 0.966, 'g/cm³', 'ρ₀', _t('twin.prm.rho0.d'), 'S_ABB', 'verified');
+p('aC4', 0.02386, '—', 'α_C4', _t('twin.prm.aC4.d'), 'S_ABB', 'verified');
+p('bC4', 0.514, '—', 'β', _t('twin.prm.bC4.d'), 'S_ABB', 'verified');
+p('aC6', 0.0273, '—', 'α_C6', _t('twin.prm.aC6.d'), 'S_C6', 'derived', _t('twin.prm.aC6.n'));
+p('dH', 3.74e6, 'J/kg', '−ΔH_p', _t('twin.prm.dH.d'), 'S_DH', 'verified', _t('twin.prm.dH.n'));
+p('cpPE', 2200, 'J/(kg·K)', 'c_p,PE', _t('twin.prm.cpPE.d'), 'S_CPPE', 'verified', _t('twin.prm.cpPE.n'));
+p('Cmet', 5.86e7, 'J/K', 'C_met', _t('twin.prm.Cmet.d'), 'S_DADT', 'verified', _t('twin.prm.Cmet.n'));
+p('G', 220, 'kg/s', 'G', _t('twin.prm.G.d'), 'S_GEO', 'derived', _t('twin.prm.G.n'));
+p('cpg', 1600, 'J/(kg·K)', 'c_p,g', _t('twin.prm.cpg.d'), 'S_CPG', 'derived', _t('twin.prm.cpg.n'));
+p('lamI', 3.42e5, 'J/kg', 'λ_iC5', _t('twin.prm.lamI.d'), 'S_NIST', 'verified', _t('twin.prm.lamI.n'));
+p('UAl', 5000, 'W/K', 'UA', _t('twin.prm.UAl.d'), 'S_DESIGN', 'design', _t('twin.prm.UAl.n'));
+p('tauHX', 120, 's', 'τ_hx', _t('twin.prm.tauHX.d'), 'S_DESIGN', 'design', _t('twin.prm.tauHX.n'));
+p('Tcw', 303.15, 'K', 'T_cw', _t('twin.prm.Tcw.d'), 'S_DESIGN', 'design', _t('twin.prm.Tcw.n'));
+p('appr', 5, 'K', 'ΔT_app', _t('twin.prm.appr.d'), 'S_DESIGN', 'design', _t('twin.prm.appr.n'));
+p('Kc', 6, 'K/K', 'K_c', _t('twin.prm.Kc.d'), 'S_DESIGN', 'design', _t('twin.prm.Kc.n'));
+p('Ti', 900, 's', 'T_i', _t('twin.prm.Ti.d'), 'S_DESIGN', 'design', _t('twin.prm.Ti.n'));
+p('tauC', 300, 's', 'τ_c', _t('twin.prm.tauC.d'), 'S_DESIGN', 'design', _t('twin.prm.tauC.n'));
+p('ventBase', 0.01, '1/h', 'v₀', _t('twin.prm.ventBase.d'), 'S_DESIGN', 'design', _t('twin.prm.ventBase.n'));
+p('ventNaive', 0.1, '1/h', 'v_tr', _t('twin.prm.ventNaive.d'), 'S_DESIGN', 'design', _t('twin.prm.ventNaive.n'));
+p('rampT', 5, 'K/h', 'r_T', _t('twin.prm.rampT.d'), 'S_DESIGN', 'design', _t('twin.prm.rampT.n'));
+p('hMax', 0.6, '—', 'h_max', _t('twin.prm.hMax.d'), 'S_DESIGN', 'design', _t('twin.prm.hMax.n'));
+p('ventMax', 0.25, '1/h', 'v_max', _t('twin.prm.ventMax.d'), 'S_DESIGN', 'design', _t('twin.prm.ventMax.n'));
+p('FmaxE', 900, 'mol/s', 'F_E,max', _t('twin.prm.FmaxE.d'), 'S_DESIGN', 'design', _t('twin.prm.FmaxE.n'));
+p('FmaxH', 12, 'mol/s', 'F_H,max', _t('twin.prm.FmaxH.d'), 'S_DESIGN', 'design', _t('twin.prm.FmaxH.n'));
+p('FmaxM', 40, 'mol/s', 'F_M,max', _t('twin.prm.FmaxM.d'), 'S_DESIGN', 'design', _t('twin.prm.FmaxM.n'));
+p('FmaxI', 40, 'mol/s', 'F_I,max', _t('twin.prm.FmaxI.d'), 'S_DESIGN', 'design', _t('twin.prm.FmaxI.n'));
+p('antA', 3.91457, '—', 'A', _t('twin.prm.antA.d'), 'S_NIST', 'verified', _t('twin.prm.antA.n'));
+p('antB', 1020.01, 'K', 'B', _t('twin.prm.antB.d'), 'S_NIST', 'verified', _t('twin.prm.antB.n'));
+p('antC', -40.053, 'K', 'C', _t('twin.prm.antC.d'), 'S_NIST', 'verified', _t('twin.prm.antC.n'));
+p('st1', 1.175e-3, '—', 'C1 coef', _t('twin.prm.st1.d'), 'S_PAT', 'verified');
+p('st2', -59.736, '—', 'C1 D-exp', _t('twin.prm.st2.d'), 'S_PAT', 'verified');
+p('st3', 0.641, '—', 'C1 MI-exp', _t('twin.prm.st3.d'), 'S_PAT', 'verified');
+p('st4', 180.6, '°C', 'C2 coef', _t('twin.prm.st4.d'), 'S_PAT', 'verified');
+p('st5', 3.07, '—', 'C2 D-exp', _t('twin.prm.st5.d'), 'S_PAT', 'verified');
+p('st6', -0.077, '—', 'C2 MFR-exp', _t('twin.prm.st6.d'), 'S_PAT', 'verified');
+p('st7', 2.7, '—', 'w_C6', _t('twin.prm.st7.d'), 'S_PAT', 'verified');
+p('dStick', 10, 'K', 'Δ_stick', _t('twin.prm.dStick.d'), 'S_PAT', 'verified');
+p('dDew', 10, 'K', 'Δ_dew', _t('twin.prm.dDew.d'), 'S_PAT', 'verified');
+p('miTol', 0.15, '—', 'tol_MI', _t('twin.prm.miTol.d'), 'S_SPEC', 'design', _t('twin.prm.miTol.n'));
+p('rhoTol', 0.002, 'g/cm³', 'tol_ρ', _t('twin.prm.rhoTol.d'), 'S_SPEC', 'design', _t('twin.prm.rhoTol.n'));
+
+const SOURCES = {
+  S_MCA90: { short: _t('twin.src.S_MCA90.s'), full: _t('twin.src.S_MCA90.f'), status: 'verified', note: _t('twin.src.S_MCA90.n') },
+  S_MCA91: { short: _t('twin.src.S_MCA91.s'), full: _t('twin.src.S_MCA91.f'), status: 'verified', note: _t('twin.src.S_MCA91.n') },
+  S_MCA92: { short: _t('twin.src.S_MCA92.s'), full: _t('twin.src.S_MCA92.f'), status: 'verified', note: _t('twin.src.S_MCA92.n') },
+  S_MCA93: { short: _t('twin.src.S_MCA93.s'), full: _t('twin.src.S_MCA93.f'), status: 'verified', note: _t('twin.src.S_MCA93.n') },
+  S_DAD97: { short: _t('twin.src.S_DAD97.s'), full: _t('twin.src.S_DAD97.f'), status: 'verified', note: _t('twin.src.S_DAD97.n') },
+  S_DAB21: { short: _t('twin.src.S_DAB21.s'), full: _t('twin.src.S_DAB21.f'), status: 'verified', note: _t('twin.src.S_DAB21.n') },
+  S_PAT: { short: _t('twin.src.S_PAT.s'), full: _t('twin.src.S_PAT.f'), status: 'verified', note: _t('twin.src.S_PAT.n') },
+  S_ABB: { short: _t('twin.src.S_ABB.s'), full: _t('twin.src.S_ABB.f'), status: 'verified', note: _t('twin.src.S_ABB.n') },
+  S_DADT: { short: _t('twin.src.S_DADT.s'), full: _t('twin.src.S_DADT.f'), status: 'verified', note: _t('twin.src.S_DADT.n') },
+  S_IND: { short: _t('twin.src.S_IND.s'), full: _t('twin.src.S_IND.f'), status: 'verified', note: _t('twin.src.S_IND.n') },
+  S_GEO: { short: _t('twin.src.S_GEO.s'), full: _t('twin.src.S_GEO.f'), status: 'verified', note: _t('twin.src.S_GEO.n') },
+  S_CAL: { short: _t('twin.src.S_CAL.s'), full: _t('twin.src.S_CAL.f'), status: 'derived', note: _t('twin.src.S_CAL.n') },
+  S_ICA: { short: _t('twin.src.S_ICA.s'), full: _t('twin.src.S_ICA.f'), status: 'verified', note: _t('twin.src.S_ICA.n') },
+  S_MFR: { short: _t('twin.src.S_MFR.s'), full: _t('twin.src.S_MFR.f'), status: 'verified', note: _t('twin.src.S_MFR.n') },
+  S_C6: { short: _t('twin.src.S_C6.s'), full: _t('twin.src.S_C6.f'), status: 'verified', note: _t('twin.src.S_C6.n') },
+  S_NIST: { short: _t('twin.src.S_NIST.s'), full: _t('twin.src.S_NIST.f'), status: 'verified', note: _t('twin.src.S_NIST.n') },
+  S_DH: { short: _t('twin.src.S_DH.s'), full: _t('twin.src.S_DH.f'), status: 'verified', note: _t('twin.src.S_DH.n') },
+  S_CPPE: { short: _t('twin.src.S_CPPE.s'), full: _t('twin.src.S_CPPE.f'), status: 'verified', note: _t('twin.src.S_CPPE.n') },
+  S_CPG: { short: _t('twin.src.S_CPG.s'), full: _t('twin.src.S_CPG.f'), status: 'derived', note: _t('twin.src.S_CPG.n') },
+  S_SPEC: { short: _t('twin.src.S_SPEC.s'), full: _t('twin.src.S_SPEC.f'), status: 'verified', note: _t('twin.src.S_SPEC.n') },
+  S_WIN: { short: _t('twin.src.S_WIN.s'), full: _t('twin.src.S_WIN.f'), status: 'verified', note: _t('twin.src.S_WIN.n') },
+  S_GRADE: { short: _t('twin.src.S_GRADE.s'), full: _t('twin.src.S_GRADE.f'), status: 'derived', note: _t('twin.src.S_GRADE.n') },
+  S_L3: { short: _t('twin.src.S_L3.s'), full: _t('twin.src.S_L3.f'), status: 'illustrative', note: _t('twin.src.S_L3.n') },
+  S_DESIGN: { short: _t('twin.src.S_DESIGN.s'), full: _t('twin.src.S_DESIGN.f'), status: 'design', note: _t('twin.src.S_DESIGN.n') }
+};
+
+// ---------------- grades ----------------
+// Gas ratios h = H2/C2 and m = M/C2 are obtained by inverting the instantaneous property model (calibrate()).
+const GRADES = {
+  LL4: { id: 'LL4', name: 'LLDPE-C4 1.0/0.918', como: 'C4', MI: 1.0, rho: 0.918, T: 88, yE: 0.40, yI: 0.10, Fcat: 0.60 },
+  LL6: { id: 'LL6', name: 'LLDPE-C6 1.0/0.918', como: 'C6', MI: 1.0, rho: 0.918, T: 84, yE: 0.40, yI: 0.03, Fcat: 0.65 },
+  HD:  { id: 'HD',  name: 'HDPE-C4 8/0.955',     como: 'C4', MI: 8.0, rho: 0.955, T: 102, yE: 0.40, yI: 0.04, Fcat: 0.50 }
+};
+
+// ---------------- helpers ----------------
+const clamp = (x, a, b) => x < a ? a : x > b ? b : x;
+const kArr = (T) => Math.exp(-PRM.Ea.v / R * (1 / T - 1 / PRM.Tref.v));
+const nTot = () => PRM.P.v * 1e5 * PRM.Vg.v / (R * PRM.Tg.v);
+function psat(T) { return Math.pow(10, PRM.antA.v - PRM.antB.v / (T + PRM.antC.v)); }          // bar, T in K
+function tdew(yI, Pbar) { const pp = yI * Pbar; if (pp <= 1e-6) return 150; return PRM.antB.v / (PRM.antA.v - Math.log10(pp)) - PRM.antC.v; } // K
+
+// Stickiness temperature (°C), patent correlation. P in psia, D g/cm3.
+function stick(D, MI, MFR, PiC5, PC6) {
+  const C1 = PRM.st1.v * Math.pow(D, PRM.st2.v) * Math.pow(MI, PRM.st3.v);
+  const C2 = PRM.st4.v * Math.pow(D, PRM.st5.v) * Math.pow(MFR, PRM.st6.v);
+  const Peq = PiC5 + PRM.st7.v * (PC6 || 0);
+  const out = [];
+  if (D < 0.912 || D > 0.954) out.push('D'); if (MI < 0.5 || MI > 42) out.push('MI'); if (MFR < 16 || MFR > 36) out.push('MFR');
+  return { T: -C1 * Peq + C2, C1, C2, Peq, outside: out };
+}
+
+// Instantaneous properties from gas composition (mol/L) — two-site model
+function instProps(cE, cM, cH, como, w1, w2) {
+  const f = como === 'C6' ? PRM.C6act.v : 1, mwM = MWM[como];
+  const kpM = [PRM.kpM1.v * f, PRM.kpM2.v * f], kpE = [PRM.kp1.v, PRM.kp2.v], kH = [PRM.kH1.v, PRM.kH2.v], kM = [PRM.kM1.v, PRM.kM2.v];
+  let mass = 0, molE = 0, molM = 0, Mw = 0, invMn = 0; const ws = [w1, w2], mj = [];
+  for (let j = 0; j < 2; j++) {
+    const rE = kpE[j] * cE * ws[j], rM = kpM[j] * cM * ws[j];
+    const mm = rE * MW_E + rM * mwM; mj.push(mm); mass += mm; molE += rE; molM += rM;
+  }
+  for (let j = 0; j < 2; j++) {
+    const prop = kpE[j] * cE + kpM[j] * cM, tr = kH[j] * cH + PRM.kE.v * cE + kM[j] * cM;
+    const munit = (kpE[j] * cE * MW_E + kpM[j] * cM * mwM) / prop * 1000; // g/mol per unit
+    const Mn = prop / Math.max(tr, 1e-12) * munit, w = mj[j] / mass;
+    Mw += w * 2 * Mn; invMn += w / Mn;
+  }
+  const Cx = 100 * molM / (molE + molM);
+  const alpha = como === 'C6' ? PRM.aC6.v : PRM.aC4.v;
+  const rho = PRM.rho0.v - alpha * Math.pow(Math.max(Cx, 0), PRM.bC4.v);
+  const PDI = Mw * invMn;
+  const MI = PRM.aMI.v * Math.pow(Mw, PRM.nMI.v);
+  return { Mw, Mn: 1 / invMn, PDI, MFR: PRM.cMFR.v * PDI, Cx, rho, MI };
+}
+// Concentrations (mol/L) from mole fractions at bed T
+const conc = (y, T) => y * PRM.P.v * 1e5 / (R * T) / 1000;
+// Properties as function of ratios (site weights equal at steady state since both sites fed equally and same kd)
+function propsRatio(h, m, como, T) { const cE = conc(0.4, T || 361); return instProps(cE, m * cE, h * cE, como, 1, 1); }
+// Invert: target rho -> m (bisection), target MI -> h
+function invert(MI, rho, como) {
+  let lo = 0, hi = 3;
+  for (let i = 0; i < 60; i++) { const mid = (lo + hi) / 2; if (propsRatio(0.2, mid, como).rho > rho) lo = mid; else hi = mid; }
+  let m = (lo + hi) / 2; lo = 0; hi = 5;
+  for (let k = 0; k < 3; k++) {
+    lo = 0; hi = 5;
+    for (let i = 0; i < 60; i++) { const mid = (lo + hi) / 2; if (propsRatio(mid, m, como).MI < MI) lo = mid; else hi = mid; }
+    const h = (lo + hi) / 2;
+    let a = 0, b = 3; for (let i = 0; i < 60; i++) { const mid = (a + b) / 2; if (propsRatio(h, mid, como).rho > rho) a = mid; else b = mid; }
+    m = (a + b) / 2; if (k === 2) return { h, m };
+  }
+}
+function calibrate() {
+  // a in MI = a·Mw^-3.5 so that the LL-C4 grade gives MI = 1.0 at H2/C2 = 0.15 (POC calibration)
+  PRM.aMI.v = 1;
+  let lo = 0, hi = 3; for (let i = 0; i < 60; i++) { const mid = (lo + hi) / 2; if (propsRatio(0.15, mid, 'C4').rho > 0.918) lo = mid; else hi = mid; }
+  const pr = propsRatio(0.15, (lo + hi) / 2, 'C4'); PRM.aMI.v = 1.0 / Math.pow(pr.Mw, PRM.nMI.v);
+  for (const g of Object.values(GRADES)) { const r = invert(g.MI, g.rho, g.como); g.h = r.h; g.m = r.m; }
+}
+calibrate();
+
+// ---------------- L1/L2 dynamic model ----------------
+// state: 0 Y1, 1 Y2 (mol sites); 2 nE, 3 nM, 4 nH, 5 nI (mol in gas); 6 M (kg); 7 T (K); 8 Tin (K); 9 I (PI integral, K·s);
+//        10 lnMIc; 11 invRhoc; 12 lnMFRc
+const NX = 13;
+function defaultInputs(g) {
+  return { como: g.como, yE: g.yE, h: g.h, m: g.m, yI: g.yI, Tsp: g.T + 273.15, Fcat: g.Fcat, vent: PRM.ventBase.v, auto: true, uMan: 318, dTcw: 0, act: 1, Gf: 1 };
+}
+function alg(x, u) {
+  const nt = nTot(), T = x[7];
+  const yE = x[2] / nt, yM = x[3] / nt, yH = x[4] / nt, yI = x[5] / nt;
+  const cE = conc(yE, T), cM = conc(yM, T), cH = conc(yH, T);
+  const s = PRM.kpScale.v * kArr(T) * u.act * (1 + PRM.kcs.v * yI);
+  const f = u.como === 'C6' ? PRM.C6act.v : 1, mwM = MWM[u.como];
+  const rE1 = s * PRM.kp1.v * x[0] * cE, rE2 = s * PRM.kp2.v * x[1] * cE;
+  const rM1 = s * PRM.kpM1.v * f * x[0] * cM, rM2 = s * PRM.kpM2.v * f * x[1] * cM;
+  const rH = s * (PRM.kH1.v * x[0] + PRM.kH2.v * x[1]) * cH;
+  const Rm = (rE1 + rE2) * MW_E + (rM1 + rM2) * mwM;                     // kg/s
+  const ip = instProps(cE, cM, cH, u.como, x[0], x[1]);
+  const Qout = Math.max(0, Rm + PRM.Kb.v * (x[6] - PRM.Msp.v));
+  // cycle gas
+  const MWg = yE * MW_E + yM * mwM + yH * MW_H + yI * MW_I + Math.max(0, 1 - yE - yM - yH - yI) * MW_N2;
+  const G = PRM.G.v * u.Gf, Gmol = G / MWg;
+  const ysat = psat(x[8]) / PRM.P.v;
+  const liqMol = Gmol * Math.max(0, yI - ysat) / Math.max(1e-3, 1 - ysat), liq = liqMol * MW_I; // kg/s condensed
+  const Qcyc = G * PRM.cpg.v * (T - x[8]) + liq * PRM.lamI.v;
+  const Qgen = Rm * PRM.dH.v, Qloss = PRM.UAl.v * (T - 298.15);
+  // controller -> T_in set-point
+  const Tlo = PRM.Tcw.v + u.dTcw + PRM.appr.v;
+  let uT;
+  if (u.auto) { const e = T - u.Tsp; uT = 318 - PRM.Kc.v * (e + x[9] / PRM.Ti.v); } else uT = u.uMan + u.dTcw;
+  const uSat = clamp(uT, Tlo, T - 1);
+  return { nt, yE, yM, yH, yI, cE, cM, cH, rE: rE1 + rE2, rM: rM1 + rM2, rH, Rm, Qout, ip, MWg, G, liq, liqFrac: liq / G, Qcyc, Qgen, Qloss, uT, uSat, Tlo, ysat };
+}
+function deriv(x, u, d) {
+  const a = alg(x, u), nt = a.nt, v = u.vent / 3600, tc = PRM.tauC.v;
+  const out = a.Qout / Math.max(x[6], 1);
+  const Fs = u.Fcat / 3600 * PRM.site.v;
+  d[0] = Fs - PRM.kd.v * x[0] - out * x[0];
+  d[1] = Fs - PRM.kd.v * x[1] - out * x[1];
+  const sp = [u.yE * nt, u.m * u.yE * nt, u.h * u.yE * nt, u.yI * nt], cons = [a.rE, a.rM, a.rH, 0];
+  const Fmax = [PRM.FmaxE.v, PRM.FmaxM.v, PRM.FmaxH.v, PRM.FmaxI.v];
+  for (let i = 0; i < 4; i++) {
+    const n = x[2 + i];
+    const F = clamp(cons[i] + v * n + (sp[i] - n) / tc, 0, Fmax[i]);
+    d[2 + i] = F - cons[i] - v * n;
+  }
+  d[6] = a.Rm - a.Qout;
+  d[7] = (a.Qgen - a.Qcyc - a.Qloss) / (x[6] * PRM.cpPE.v + PRM.Cmet.v);
+  d[8] = (a.uSat - x[8]) / PRM.tauHX.v;
+  // PI integral with anti-windup (freeze when saturated and pushing further)
+  const e = x[7] - u.Tsp, sat = (a.uT < a.Tlo && e > 0) || (a.uT > x[7] - 1 && e < 0);
+  d[9] = u.auto && !sat ? e : 0;
+  const r = a.Rm / Math.max(x[6], 1);
+  d[10] = (Math.log(a.ip.MI) - x[10]) * r;
+  d[11] = (1 / a.ip.rho - x[11]) * r;
+  d[12] = (Math.log(a.ip.MFR) - x[12]) * r;
+}
+const k1 = new Float64Array(NX), k2 = new Float64Array(NX), k3 = new Float64Array(NX), k4 = new Float64Array(NX), xt = new Float64Array(NX);
+function rk4(x, u, dt) {
+  deriv(x, u, k1); for (let i = 0; i < NX; i++) xt[i] = x[i] + dt / 2 * k1[i];
+  deriv(xt, u, k2); for (let i = 0; i < NX; i++) xt[i] = x[i] + dt / 2 * k2[i];
+  deriv(xt, u, k3); for (let i = 0; i < NX; i++) xt[i] = x[i] + dt * k3[i];
+  deriv(xt, u, k4); for (let i = 0; i < NX; i++) x[i] += dt / 6 * (k1[i] + 2 * k2[i] + 2 * k3[i] + k4[i]);
+  if (x[7] > 433) x[7] = 433; // numerical cap (160 °C) — bed would be fused long before
+}
+function initState(g) {
+  const u = defaultInputs(g), nt = nTot(), x = new Float64Array(NX), T = g.T + 273.15;
+  const tau = 4.5 * 3600;
+  const Y = u.Fcat / 3600 * PRM.site.v / (PRM.kd.v + 1 / tau);
+  x[0] = Y; x[1] = Y; x[2] = u.yE * nt; x[3] = u.m * u.yE * nt; x[4] = u.h * u.yE * nt; x[5] = u.yI * nt;
+  x[6] = PRM.Msp.v; x[7] = T; x[8] = 318; x[9] = 0;
+  x[10] = Math.log(g.MI); x[11] = 1 / g.rho; const pr = propsRatio(g.h, g.m, g.como, T); x[12] = Math.log(pr.MFR);
+  return { x, u, t: 0, grade: g.id };
+}
+function clonePlant(pl) { return { x: Float64Array.from(pl.x), u: Object.assign({}, pl.u), t: pl.t, grade: pl.grade }; }
+function stickNow(x, u, a) {
+  a = a || alg(x, u);
+  const D = 1 / x[11], MI = Math.exp(x[10]), MFR = Math.exp(x[12]);
+  const PiC5 = a.yI * PRM.P.v * PSI_PER_BAR, PC6 = u.como === 'C6' ? a.yM * PRM.P.v * PSI_PER_BAR : 0;
+  const s = stick(D, MI, MFR, PiC5, PC6);
+  const Tdew = tdew(a.yI, PRM.P.v) - 273.15;
+  return { Tstick: s.T, C1: s.C1, C2: s.C2, Peq: s.Peq, outside: s.outside, Tmax: s.T - PRM.dStick.v, Tdew, Tmin: Tdew + PRM.dDew.v, D, MI, MFR };
+}
+function snapshot(pl) {
+  const x = pl.x, u = pl.u, a = alg(x, u), st = stickNow(x, u, a);
+  return {
+    t: pl.t, T: x[7] - 273.15, Tin: x[8] - 273.15, M: x[6], prod: a.Rm * 3.6, tau: x[6] / Math.max(a.Qout, 1e-6) / 3600,
+    yE: a.yE, yM: a.yM, yH: a.yH, yI: a.yI, h: a.yH / a.yE, m: a.yM / a.yE, liq: a.liqFrac * 100, Qgen: a.Qgen / 1e6, Qcyc: a.Qcyc / 1e6,
+    MIi: a.ip.MI, rhoi: a.ip.rho, MFRi: a.ip.MFR, Cxi: a.ip.Cx, Mw: a.ip.Mw, PDI: a.ip.PDI,
+    MIc: Math.exp(x[10]), rhoc: 1 / x[11], MFRc: Math.exp(x[12]),
+    Tstick: st.Tstick, Tmax: st.Tmax, Tmin: st.Tmin, Tdew: st.Tdew, Peq: st.Peq, C1: st.C1, C2: st.C2, outside: st.outside,
+    margin: st.Tstick - (x[7] - 273.15), coolUse: clamp((x[7] - x[8]) / Math.max(0.1, x[7] - a.Tlo), 0, 1.5), Tlo: a.Tlo - 273.15, uT: a.uT - 273.15,
+    Psia: a.yI * PRM.P.v * PSI_PER_BAR, vent: u.vent, Fcat: u.Fcat, auto: u.auto
+  };
+}
+function inWindow(MI, rho, g) { return Math.abs(Math.log(MI / g.MI)) <= Math.log(1 + PRM.miTol.v) && Math.abs(rho - g.rho) <= PRM.rhoTol.v; }
+
+// ---------------- L5 planner: grade transition A -> B ----------------
+// naive: step all set-points to grade B at t0. agent: property overshoot policy (McAuley & MacGregor 1992 idea):
+// instantaneous targets lnMI* = lnMI_B + K(lnMI_B − lnMI_c), 1/ρ* likewise; inverted to H2/C2, M/C2; vent raised while
+// the gas must be purged; bed temperature ramped no faster than the stickiness window of the bed allows.
+function policyApply(pl, B, mode, prm, s) {
+  const u = pl.u, x = pl.x;
+  u.como = B.como; u.Fcat = B.Fcat; u.yE = B.yE; u.yI = B.yI;
+  if (mode === 'naive') {
+    // standard practice: step H2/C2 and M/C2 to grade B, open the vent to a fixed transition level while the gas
+    // is above target, ramp the bed temperature at a fixed rate. No property overshoot, no stickiness awareness.
+    u.h = B.h; u.m = B.m;
+    const a = alg(x, u), purge = (a.yM > 1.15 * u.m * a.yE + 0.002) || (a.yH > 1.15 * u.h * a.yE + 0.002);
+    u.vent = purge ? PRM.ventNaive.v : PRM.ventBase.v;
+    const step = PRM.rampT.v / 12, tgt = B.T + 273.15;
+    u.Tsp = Math.abs(tgt - u.Tsp) <= step ? tgt : u.Tsp + Math.sign(tgt - u.Tsp) * step;
+    return;
+  }
+  const K = prm.K, lnB = Math.log(B.MI), lnC = x[10], iB = 1 / B.rho, iC = x[11];
+  let lt = lnB + K * (lnB - lnC); lt = clamp(lt, lnB - 2.5, lnB + 2.5);
+  let it = iB + K * (iB - iC); it = clamp(it, 1 / 0.9655, 1 / 0.900);
+  let r;
+  if (Math.abs(lt - lnB) < 1e-3 && Math.abs(it - iB) < 1e-6) r = { h: B.h, m: B.m };
+  else r = invert(Math.exp(lt), 1 / it, B.como);
+  u.h = clamp(r.h, 0, PRM.hMax.v); u.m = clamp(r.m, 0, 1.2);
+  const a = alg(x, u);
+  const needPurge = (a.yM > 1.15 * u.m * a.yE + 0.002) || (a.yH > 1.15 * u.h * a.yE + 0.002);
+  u.vent = needPurge ? prm.vent : PRM.ventBase.v;
+  // temperature ramp limited by bed stickiness (keep 2 K below T_max)
+  const st = stickNow(x, u, a), Tgoal = B.T;
+  const cur = u.Tsp - 273.15;
+  if (Tgoal > cur) u.Tsp = Math.min(Tgoal, cur + PRM.rampT.v / 12, Math.max(cur, st.Tmax - 2)) + 273.15;
+  else u.Tsp = Math.max(Tgoal, cur - PRM.rampT.v / 12) + 273.15;
+}
+function simulateTransition(pl0, Bid, mode, prm, horizonH, dt, rec) {
+  const pl = clonePlant(pl0), B = GRADES[Bid], A = GRADES[pl0.grade];
+  dt = dt || 10; const steps = Math.round(horizonH * 3600 / dt), ctl = Math.round(300 / dt);
+  let off = 0, lastOut = 0, vented = 0, minMarg = 1e9, overTmax = 0;
+  const tr = [];
+  for (let k = 0; k <= steps; k++) {
+    if (k % ctl === 0) policyApply(pl, B, mode, prm || {});
+    const x = pl.x, MI = Math.exp(x[10]), rho = 1 / x[11];
+    const a = alg(x, pl.u), st = stickNow(x, pl.u, a), T = x[7] - 273.15;
+    const inB = inWindow(MI, rho, B), inA = inWindow(MI, rho, A);
+    if (!inB) { lastOut = k * dt; if (!inA) off += a.Rm * dt; }
+    vented += pl.u.vent / 3600 * x[2] * MW_E * dt;
+    minMarg = Math.min(minMarg, st.Tstick - T); if (T > st.Tmax) overTmax += dt;
+    if (rec && k % Math.round(600 / dt) === 0) tr.push([k * dt / 3600, MI, rho, T, st.Tmax, pl.u.h, pl.u.m, a.Rm * 3.6]);
+    if (k < steps) { rk4(pl.x, pl.u, dt); pl.t += dt; }
+  }
+  const x = pl.x, endIn = inWindow(Math.exp(x[10]), 1 / x[11], B);
+  return { offspec_t: off / 1000, time_h: lastOut / 3600, reached: endIn, vented_t: vented / 1000, minMargin: minMarg, overTmax_h: overTmax / 3600, traj: tr, prm };
+}
+function planTransition(pl0, Bid, horizonH) {
+  horizonH = horizonH || 30;
+  const naive = simulateTransition(pl0, Bid, 'naive', {}, horizonH, 10, true);
+  let best = null;
+  for (const K of [1, 2, 3, 4, 6, 8]) for (const vent of [PRM.ventBase.v, 0.1, PRM.ventMax.v]) {
+    const r = simulateTransition(pl0, Bid, 'agent', { K, vent }, horizonH, 20, false);
+    if (!r.reached) continue;
+    const cost = r.offspec_t + 0.3 * r.vented_t + (r.overTmax_h > 0 ? 1000 : 0);
+    if (!best || cost < best.cost) best = Object.assign(r, { cost });
+  }
+  const agent = simulateTransition(pl0, Bid, 'agent', best.prm, horizonH, 10, true);
+  return { naive, agent, B: Bid, A: pl0.grade };
+}
+
+// ---------------- L3: 2D proxy of the bed (vertical section) ----------------
+const NXg = 40, NYg = 60, Wb = 5.0, Hb = 15.0, dxg = Wb / NXg, dyg = Hb / NYg;
+function makeField() {
+  const N = NXg * NYg, F = {
+    th: new Float64Array(N), tn: new Float64Array(N), U: new Float64Array(N), V: new Float64Array(N),
+    gam: new Float64Array(N), act: new Float64Array(N), kap: new Float64Array(N), vel: new Float64Array(N),
+    wall: 0, fines: 0, dist: 0, nx: NXg, ny: NYg
+  };
+  // solids circulation: up in core, down at walls (two cells), stream function psi = U0 sin(2πX) sin(πY) style
+  for (let i = 0; i < NXg; i++) for (let j = 0; j < NYg; j++) {
+    const X = (i + .5) / NXg, Y = (j + .5) / NYg, k = j * NXg + i;
+    F.U[k] = -0.02 * Math.sin(2 * Math.PI * X) * Math.cos(Math.PI * Y) * 0.5;
+    F.V[k] = 0.02 * Math.cos(2 * Math.PI * X) * Math.sin(Math.PI * Y);
+  }
+  setDisturb(F, 0, 0, 0); return F;
+}
+// wall: 0..1 severity of a low-circulation zone at the left wall (mid height); fines: extra active fines in that zone;
+// dist: distributor non-uniformity (right side gets less gas)
+function setDisturb(F, wall, fines, dist) {
+  F.wall = wall; F.fines = fines; F.dist = dist;
+  for (let i = 0; i < NXg; i++) for (let j = 0; j < NYg; j++) {
+    const k = j * NXg + i, X = (i + .5) / NXg, Y = (j + .5) / NYg;
+    const z = Math.exp(-Math.pow((X - 0.04) / 0.07, 2) - Math.pow((Y - 0.42) / 0.10, 2)); // wall pocket
+    const dside = dist * Math.exp(-Math.pow((X - 0.85) / 0.12, 2) - Math.pow((Y - 0.05) / 0.06, 2));
+    F.vel[k] = 1 - 0.9 * wall * z;
+    F.gam[k] = 0.10 * (1 - 0.88 * wall * z) * (1 - 0.6 * dside);
+    F.kap[k] = 0.0010 * (1 - 0.8 * wall * z);
+    F.act[k] = 1 + 0.9 * fines * z;
+  }
+}
+// advance theta = T_local - T_bed. S0 = mean volumetric heating rate (K/s) = Qgen/C; Ea feedback on local rate.
+function stepField(F, dt, S0, Tbed, Tin) {
+  const th = F.th, tn = F.tn, n = NXg, m = NYg, ea = PRM.Ea.v / R;
+  for (let j = 0; j < m; j++) for (let i = 0; i < n; i++) {
+    const k = j * n + i, c = th[k];
+    const xm = th[j * n + (i > 0 ? i - 1 : 0)], xp = th[j * n + (i < n - 1 ? i + 1 : n - 1)];
+    const ym = th[(j > 0 ? j - 1 : 0) * n + i], yp = th[(j < m - 1 ? j + 1 : m - 1) * n + i];
+    const u = F.U[k] * F.vel[k], v = F.V[k] * F.vel[k];
+    const dfx = u > 0 ? (c - xm) / dxg : (xp - c) / dxg, dfy = v > 0 ? (c - ym) / dyg : (yp - c) / dyg;
+    const K = F.kap[k];
+    const lap = K * ((xm + xp - 2 * c) / (dxg * dxg) + (ym + yp - 2 * c) / (dyg * dyg));
+    const Tl = Tbed + c, g = Math.exp(ea * (1 / Tbed - 1 / Tl));
+    let src = S0 * (F.act[k] * g - 1);
+    // distributor: entering gas cools the bottom rows toward a fraction of (T_in - T_bed)
+    let cool = F.gam[k] * c;
+    if (j < 3) { const tgt = 0.12 * (Tin - Tbed) * (1 - 0.6 * F.dist * Math.exp(-Math.pow(((i + .5) / n - 0.85) / 0.12, 2))); cool = 0.12 * (c - tgt); }
+    tn[k] = clamp(c + dt * (-u * dfx - v * dfy + lap + src - cool), -40, 80);
+  }
+  th.set(tn);
+}
+function fieldStats(F, Tbed, Tmax) {
+  let mx = -1e9, ki = 0, area = 0, warn = 0; const N = NXg * NYg;
+  for (let k = 0; k < N; k++) { const T = Tbed + F.th[k]; if (T > mx) { mx = T; ki = k; } if (T > Tmax) area++; if (T > Tmax - 3) warn++; }
+  return { Tmax_local: mx, at: [ki % NXg, Math.floor(ki / NXg)], riskFrac: area / N, riskArea_m2: area * dxg * dyg, warnFrac: warn / N };
+}
+
+return { PRM, SOURCES, GRADES, NX, R, PSI_PER_BAR, stick, psat, tdew, instProps, propsRatio, invert, calibrate, defaultInputs, alg, deriv, rk4,
+  initState, clonePlant, snapshot, stickNow, inWindow, policyApply, simulateTransition, planTransition,
+  makeField, setDisturb, stepField, fieldStats, NXg, NYg, dxg, dyg, clamp };
+})();
+if (typeof module !== 'undefined') module.exports = TW;
+
+</script>
+<script>
+(function(){
+'use strict';
+const $ = id => document.getElementById(id);
+const P = TW.PRM, G = TW.GRADES, S = TW.SOURCES;
+const fmt = (v, d) => (v === undefined || v === null || !isFinite(v)) ? '—' : _n(v, d);
+const _u = u => { const k = 'unit.' + u; return I18N[k] === undefined ? u : I18N[k]; };
+const hm = s => { const m = Math.floor(s / 60), h = Math.floor(m / 60); return h + ':' + String(m % 60).padStart(2, '0'); };
+let lsSpeed = null; try { lsSpeed = window.localStorage.getItem('gpe_speed'); } catch (e) { lsSpeed = null; }
+
+// ---------------- state ----------------
+const DT = 5; // s, RK4 step (model time)
+const st = { pl: null, F: TW.makeField(), grade: 'LL4', target: 'LL4', running: true, speed: lsSpeed ? +lsSpeed : 300,
+  hist: [], events: [], rec: null, scen: null, scen0: 0, policy: null, plan: null, agState: {}, lastAg: -1e9,
+  marginHist: [], firstHotAlarm: null, firstTmaxCross: null, firstStickWarn: null, timeToTmax: null, lastPrev: null, flags: {} };
+window.TWIN = { TW, st };
+
+function warm(gid, hours) {
+  const pl = TW.initState(G[gid]);
+  for (let k = 0; k < hours * 3600 / DT; k++) TW.rk4(pl.x, pl.u, DT);
+  pl.t = 0; return pl;
+}
+function resetTo(gid) {
+  st.pl = warm(gid, 12); st.grade = gid; st.target = gid; st.hist = []; st.marginHist = []; st.policy = null;
+  st.F = TW.makeField(); for (let k = 0; k < 360; k++) stepFieldOnce();
+  st.firstHotAlarm = null; st.firstTmaxCross = null; st.firstStickWarn = null; st.timeToTmax = null; st.flags = { guard: 'ok', hot: 'ok' };
+  st.lastPrev = Object.assign({}, st.pl.u); st.scen = null; st.rec = null; renderRec();
+  syncSliders(); record();
+}
+function stepFieldOnce() {
+  const pl = st.pl, a = TW.alg(pl.x, pl.u), C = pl.x[6] * P.cpPE.v + P.Cmet.v;
+  TW.stepField(st.F, DT / 2, a.Qgen / C, pl.x[7], pl.x[8]); TW.stepField(st.F, DT / 2, a.Qgen / C, pl.x[7], pl.x[8]);
+}
+
+// ---------------- scenarios ----------------
+const SCN = {
+  steady: { name: _t('twin.scen.steady'), start() { resetTo(st.gradeSel || 'LL4'); post('observer', 'info', _t('twin.msg.s1', { g: G[st.grade].name }), ['T', 'MIc', 'rhoc']); } },
+  transition: { name: _t('twin.scen.transition'), start() { startTransition(); } },
+  push: { name: _t('twin.scen.push'), start() { st.scen0 = st.pl.t; st.pushFrom = { yI: st.pl.u.yI, Fcat: st.pl.u.Fcat, Tsp: st.pl.u.Tsp };
+      post('observer', 'info', _t('twin.msg.s3'), ['yI', 'Fcat']); },
+    tick(t) { const f = Math.min(1, t / 2400), a = st.pushFrom; st.pl.u.yI = a.yI + (0.15 - a.yI) * f; st.pl.u.Fcat = a.Fcat * (1 + 0.3 * f); st.pl.u.Tsp = a.Tsp + 2 * f; } },
+  hotspot: { name: _t('twin.scen.hotspot'), start() { st.scen0 = st.pl.t; post('observer', 'info', _t('twin.msg.s4'), ['hot']); },
+    tick(t) { const f = Math.min(1, t / 1800) * (st.flags.hotFixed ? 0.35 : 1); if (Math.abs(f - st.F.wall) > 0.01) TW.setDisturb(st.F, f, f, 0.5); } },
+  surge: { name: _t('twin.scen.surge'), start() { st.scen0 = st.pl.t; st.pl.u.act = 1.3; post('observer', 'info', _t('twin.msg.s5'), ['prod']); } },
+  cooling: { name: _t('twin.scen.cooling'), start() { st.scen0 = st.pl.t; st.pl.u.uMan = st.pl.x[8] - 273.15 + 273.15; st.pl.u.auto = false; st.pl.u.dTcw = 2;
+      post('observer', 'bad', _t('twin.msg.s6'), ['T', 'Tin']); syncSliders(); } }
+};
+function runScenario(name) {
+  if (name !== 'steady' && name !== 'transition') { if (st.scen) resetTo(st.grade); }
+  if (name === 'transition' && st.scen && st.scen !== 'transition') resetTo(st.grade);
+  st.flags = { guard: 'ok', hot: 'ok' }; st.firstHotAlarm = null; st.firstTmaxCross = null; st.firstStickWarn = null; st.timeToTmax = null;
+  st.scen = name; SCN[name].start(); st.lastPrev = Object.assign({}, st.pl.u);
+  document.querySelectorAll('[data-scen]').forEach(b => b.classList.toggle('on', b.dataset.scen === name));
+  syncSliders();
+}
+
+// ---------------- transitions ----------------
+function otherGrade(g) { return g === 'LL4' ? 'HD' : g === 'HD' ? 'LL4' : null; }
+function startTransition() {
+  const A = st.grade, B = otherGrade(A);
+  if (!B) { post('planner', 'warn', _t('twin.msg.tr_family'), []); return; }
+  st.agState.planner = 'busy';
+  post('planner', 'info', _t('twin.msg.tr_plan', { a: G[A].name, b: G[B].name }), ['offspec']);
+  const t0 = performance.now(), plan = TW.planTransition(st.pl, B, 30), ms = performance.now() - t0;
+  st.plan = plan; st.agState.planner = 'ok';
+  const red = 1 - plan.agent.offspec_t / plan.naive.offspec_t;
+  post('planner', 'ok', _t('twin.msg.tr_ready', { s: fmt(ms / 1000, 1), no: fmt(plan.naive.offspec_t, 0), nh: fmt(plan.naive.time_h, 1), ao: fmt(plan.agent.offspec_t, 0), ah: fmt(plan.agent.time_h, 1), red: fmt(red * 100, 0), over: fmt(plan.naive.overTmax_h, 1), marg: fmt(plan.agent.minMargin, 1) }), ['offspec']);
+  setRec({ agent: 'planner', title: _t('twin.rec.tr_title', { b: G[B].name }),
+    why: _t('twin.rec.tr_why', { k: plan.agent.prm.K, v: fmt(plan.agent.prm.vent * 100, 0), ao: fmt(plan.agent.offspec_t, 0), no: fmt(plan.naive.offspec_t, 0) }),
+    apply() { st.policy = { mode: 'agent', B, prm: plan.agent.prm }; st.target = B; post('operator', 'ok', _t('twin.msg.op_applied'), []); },
+    dismiss() { st.policy = { mode: 'naive', B, prm: {} }; st.target = B; post('operator', 'info', _t('twin.msg.op_dismissed'), []); } });
+  drawTransition();
+}
+
+// ---------------- agents ----------------
+const AG = [['observer', _t('twin.ag.observer')], ['soft', _t('twin.ag.soft')], ['guard', _t('twin.ag.guard')], ['hot', _t('twin.ag.hot')], ['planner', _t('twin.ag.planner')], ['prov', _t('twin.ag.prov')], ['operator', _t('twin.ag.operator')]];
+AG.forEach(([k]) => st.agState[k] = 'ok');
+const AGN = Object.fromEntries(AG);
+function post(agent, level, text, refs) {
+  const ev = { t: st.pl ? st.pl.t : 0, agent, level, text, refs: refs || [] };
+  st.events.push(ev); if (st.events.length > 400) st.events.shift();
+  const feed = $('feed'); const d = document.createElement('div'); d.className = 'ev ' + level;
+  d.innerHTML = `<div class="h"><span>${AGN[agent]}</span><span>t ${hm(ev.t)} · ${_t('twin.level.' + level)}</span></div><div></div>` + (ev.refs.length ? `<div class="refs">${_t('twin.ev.refs')} <span translate="no">${ev.refs.join(', ')}</span></div>` : '');
+  d.children[1].textContent = text;
+  feed.prepend(d); while (feed.children.length > 120) feed.lastChild.remove();
+  if (level === 'bad') st.agState[agent] = 'alert'; else if (level === 'warn') st.agState[agent] = 'busy';
+  drawAgents();
+}
+function drawAgents() { $('agents').innerHTML = AG.map(([k, n]) => `<div class="ag ${st.agState[k] === 'alert' ? 'alert' : st.agState[k] === 'busy' ? 'busy' : ''}"><i></i><span>${n}</span></div>`).join(''); }
+function setRec(r) { st.rec = r; renderRec(); st.agState.operator = 'busy'; drawAgents(); }
+function renderRec() {
+  const el = $('rec'); const r = st.rec;
+  if (!r) { el.innerHTML = '<div class="empty">' + _t('twin.rec.none') + '</div>'; return; }
+  el.innerHTML = `<div class="t"></div><div class="why"></div><div class="acts"><button class="btn primary" id="rApply">${_t('twin.btn.apply')}</button><button class="btn" id="rDis">${_t('twin.btn.dismiss')}</button></div>`;
+  el.querySelector('.t').textContent = r.title; el.querySelector('.why').textContent = r.why;
+  $('rApply').onclick = () => { const x = st.rec; st.rec = null; renderRec(); st.agState.operator = 'ok'; x.apply(); if (![_t('twin.msg.op_applied'), _t('twin.msg.op_dismissed')].includes(st.events[st.events.length - 1].text)) post('operator', 'ok', _t('twin.msg.applied', { t: x.title }), []); syncSliders(); };
+  $('rDis').onclick = () => { const x = st.rec; st.rec = null; renderRec(); st.agState.operator = 'ok'; if (x.dismiss) x.dismiss(); else post('operator', 'info', _t('twin.msg.dismissed', { t: x.title }), []); syncSliders(); };
+}
+function iC5For(margin, s) {
+  // solve T_stick − T = margin for P_iC5 (psia) → mol %
+  const C1 = s.C1, C2 = s.C2, T = s.T, Pc6 = s.Peq - s.Psia;
+  const Pi = (C2 - margin - T) / C1 - Pc6; return Math.max(0, Pi / (P.P.v * TW.PSI_PER_BAR));
+}
+function forecastTmax(hours) {
+  // twin forward simulation under current inputs: time until T bed > T_max
+  const c = TW.clonePlant(st.pl);
+  for (let k = 0; k < hours * 3600 / 10; k++) { const s = TW.stickNow(c.x, c.u); if (c.x[7] - 273.15 > s.Tmax) return k * 10; TW.rk4(c.x, c.u, 10); }
+  return null;
+}
+function agentsTick(s, fs) {
+  const u = st.pl.u, prev = st.lastPrev, t = st.pl.t, g = G[st.target];
+  // Observer: regime changes
+  const ch = [];
+  if (Math.abs(u.yI - prev.yI) > 0.004) ch.push(`iC5 ${fmt(prev.yI * 100, 1)}→${fmt(u.yI * 100, 1)} ${_u('mol %')}`);
+  if (Math.abs(u.Fcat - prev.Fcat) / prev.Fcat > 0.04) ch.push(_t('twin.tag.cat', { a: fmt(prev.Fcat, 2), b: fmt(u.Fcat, 2) }));
+  if (Math.abs(u.Tsp - prev.Tsp) > 0.4) ch.push(_t('twin.tag.tset', { a: fmt(prev.Tsp - 273.15, 1), b: fmt(u.Tsp - 273.15, 1) }));
+  if (Math.abs(u.h - prev.h) > 0.01) ch.push(`H₂/C₂ ${fmt(prev.h, 3)}→${fmt(u.h, 3)}`);
+  if (Math.abs(u.m - prev.m) > 0.01) ch.push(`M/C₂ ${fmt(prev.m, 3)}→${fmt(u.m, 3)}`);
+  if (u.auto !== prev.auto) ch.push(_t('twin.ctl.tc') + ' ' + (u.auto ? 'AUTO' : 'MANUAL'));
+  if (Math.abs(u.act - prev.act) > 0.02) ch.push(_t('twin.tag.act', { a: fmt(u.act, 2) }));
+  if (ch.length) { post('observer', u.auto ? 'info' : 'warn', _t('twin.msg.tags', { l: ch.join('; ') }), ['tags']); st.lastPrev = Object.assign({}, u); }
+  // Property soft-sensor (every 15 min model time, or on exit)
+  const inMI = Math.abs(Math.log(s.MIc / g.MI)) <= Math.log(1 + P.miTol.v), inR = Math.abs(s.rhoc - g.rho) <= P.rhoTol.v;
+  const key = (inMI ? 1 : 0) + (inR ? 2 : 0);
+  if (st.flags.softKey !== key) {
+    st.flags.softKey = key;
+    if (key === 3) { post('soft', 'ok', _t('twin.msg.soft_in', { g: g.name, mi: fmt(s.MIc, 2), rho: fmt(s.rhoc, 4) }), ['MIc', 'rhoc']); st.agState.soft = 'ok'; }
+    else post('soft', st.policy ? 'info' : 'warn', _t('twin.msg.soft_off', { g: g.name, mi: fmt(s.MIc, 2), mit: _ns(g.MI), rho: fmt(s.rhoc, 4), rhot: _ns(g.rho) }), ['MIc', 'rhoc']);
+  } else if (key === 3 && !st.policy) {
+    const lmi = Math.log(s.MIi), lb = Math.log(g.MI), tol = Math.log(1 + P.miTol.v);
+    if (Math.abs(lmi - lb) > tol && !st.flags.softFc) {
+      const bound = lmi > lb ? lb + tol : lb - tol, lc = Math.log(s.MIc);
+      const tt = s.tau * Math.log(Math.abs(lmi - lc) / Math.abs(lmi - bound));
+      post('soft', 'warn', _t('twin.msg.soft_fc', { mi: fmt(s.MIi, 2), h: fmt(tt, 1) }), ['MIi', 'tau']); st.flags.softFc = 1;
+    }
+  }
+  // Stickiness guard
+  st.marginHist.push([t, s.margin]); while (st.marginHist.length && st.marginHist[0][0] < t - 900) st.marginHist.shift();
+  let slope = 0; if (st.marginHist.length > 3) { const a = st.marginHist[0]; slope = (s.margin - a[1]) / Math.max(60, t - a[0]); }
+  const tPred = slope < 0 ? (s.margin - P.dStick.v) / -slope : Infinity;
+  const lvl = s.margin < P.dStick.v ? 'bad' : (s.margin < P.dStick.v + 3 || tPred < 1800) ? 'warn' : 'ok';
+  if (s.T > s.Tmax && st.firstTmaxCross === null) st.firstTmaxCross = t;
+  if (lvl !== st.flags.guard) {
+    st.flags.guard = lvl;
+    if (lvl === 'ok') { post('guard', 'ok', _t('twin.msg.g_ok', { ts: fmt(s.Tstick, 1), m: fmt(s.margin, 1) }), ['Tstick', 'margin']); st.agState.guard = 'ok'; }
+    else {
+      if (st.firstStickWarn === null) st.firstStickWarn = t;
+      const txt = lvl === 'bad' ? _t('twin.msg.g_alarm', { t: fmt(s.T, 1), tm: fmt(s.Tmax, 1), ts: fmt(s.Tstick, 1), p: fmt(s.Peq, 1) })
+        : (isFinite(tPred) ? _t('twin.msg.g_warn_t', { m: fmt(s.margin, 1), ts: fmt(s.Tstick, 1), min: fmt(tPred / 60, 0) }) : _t('twin.msg.g_warn', { m: fmt(s.margin, 1), ts: fmt(s.Tstick, 1) }));
+      post('guard', lvl, txt, ['Tstick', 'margin', 'yI']);
+      if (u.auto && !st.rec && !st.policy) {
+        const yTarget = Math.min(u.yI, iC5For(P.dStick.v + 4, s));
+        const dT = Math.max(0, s.T - (s.Tmax - 2));
+        setRec({ agent: 'guard', title: dT > 0.2 ? _t('twin.rec.ic5_t', { y: fmt(yTarget * 100, 1), d: fmt(dT, 1) }) : _t('twin.rec.ic5', { y: fmt(yTarget * 100, 1) }),
+          why: _t('twin.rec.ic5_why', { d: fmt(s.rhoc, 4), mi: fmt(s.MIc, 2) }),
+          apply() { u.yI = yTarget; if (dT > 0.2) u.Tsp -= dT; if (st.scen === 'push') st.scen = null; } });
+      }
+    }
+  }
+  // Thermal runaway forecast (twin look-ahead) when controller in manual or T rising fast
+  if ((!u.auto || st.flags.surgeCheck) && t - (st.flags.lastFc || -1e9) >= 300) {
+    st.flags.lastFc = t; const tt = forecastTmax(3);
+    st.timeToTmax = tt;
+    if (!u.auto) {
+      post('guard', tt === null ? 'warn' : 'bad', tt === null ? _t('twin.msg.man_ok') : _t('twin.msg.man_bad', { tm: fmt(s.Tmax, 1), min: fmt(tt / 60, 0) }), ['T', 'Tmax']);
+      if (!st.rec) setRec({ agent: 'guard', title: _t('twin.rec.auto'), why: _t('twin.rec.auto_why', { la: tt === null ? _t('twin.rec.auto_none') : _t('twin.rec.auto_in', { min: fmt(tt / 60, 0) }) }),
+        apply() { u.auto = true; u.Fcat *= 0.8; u.dTcw = 0; st.pl.x[9] = 0; if (st.scen === 'cooling') st.scen = null; } });
+    }
+  }
+  // cooling capacity (surge)
+  if (s.coolUse > 0.95 && !st.flags.cool) { st.flags.cool = 1; post('guard', 'warn', _t('twin.msg.cooler', { u: fmt(s.coolUse * 100, 0), tin: fmt(s.Tin, 1), fl: fmt(s.Tlo, 1) }), ['cool']); }
+  if (u.act > 1.05 && !st.flags.surge) {
+    st.flags.surge = 1; post('soft', 'info', _t('twin.msg.rate', { p: fmt(s.prod, 1), tau: fmt(s.tau, 2) }), ['prod', 'tau']);
+    post('guard', 'warn', _t('twin.msg.reserve', { r: fmt((1 - s.coolUse) * 100, 0), u: fmt(s.coolUse * 100, 0), l: fmt(s.liq, 1) }), ['cool', 'liq']);
+    if (!st.rec) setRec({ agent: 'guard', title: _t('twin.rec.trim'), why: _t('twin.rec.trim_why'), apply() { u.Fcat *= 0.85; } });
+  }
+  // Hot-spot detector
+  const hl = fs.riskFrac > 0 ? 'bad' : fs.Tmax_local > s.Tmax - 3 ? 'warn' : 'ok';
+  if (hl !== st.flags.hot) {
+    st.flags.hot = hl;
+    if (hl === 'bad' && st.firstHotAlarm === null) st.firstHotAlarm = t;
+    const where = `x ${fmt((fs.at[0] + .5) * TW.dxg, 2)} m, h ${fmt((fs.at[1] + .5) * TW.dyg, 1)} m`;
+    if (hl === 'ok') { post('hot', 'ok', _t('twin.msg.hot_ok', { t: fmt(fs.Tmax_local, 1) }), ['hot']); st.agState.hot = 'ok'; }
+    else {
+      post('hot', hl, hl === 'bad' ? _t('twin.msg.hot_bad', { w: where, a: fmt(fs.riskArea_m2, 2), tm: fmt(s.Tmax, 1), tl: fmt(fs.Tmax_local, 1), t: fmt(s.T, 1) })
+        : _t('twin.msg.hot_warn', { w: where, tl: fmt(fs.Tmax_local, 1), d: fmt(s.Tmax - fs.Tmax_local, 1), t: fmt(s.T, 1) }), ['hot', 'Tmax']);
+      if (hl === 'bad' && !st.rec) setRec({ agent: 'hot', title: _t('twin.rec.hot'), why: _t('twin.rec.hot_why'),
+        apply() { u.Gf = 1.1; u.Fcat *= 0.9; st.flags.hotFixed = 1; TW.setDisturb(st.F, st.F.wall * 0.35, st.F.fines * 0.35, st.F.dist); } });
+    }
+  }
+  // transition progress
+  if (st.policy && key === 3 && !st.flags.trDone) { st.flags.trDone = 1; st.grade = st.target; const B = G[st.target]; Object.assign(u, { h: B.h, m: B.m, yI: B.yI, Fcat: B.Fcat, vent: P.ventBase.v, Tsp: B.T + 273.15 }); st.policy = null; st.lastPrev = Object.assign({}, u); post('planner', 'ok', _t('twin.msg.tr_done', { g: g.name }), ['MIc', 'rhoc']); }
+  drawAgents();
+}
+
+// ---------------- simulation loop ----------------
+function record() { const s = TW.snapshot(st.pl); st.hist.push([st.pl.t, s.T, s.Tstick, s.Tmax, s.Tmin, st.pl.u.Tsp - 273.15, s.MIc, s.MIi, s.rhoc, s.rhoi, s.prod]); while (st.hist.length > 6 * 60 + 1) st.hist.shift(); }
+function stepModel() {
+  const pl = st.pl;
+  if (st.scen && SCN[st.scen].tick) SCN[st.scen].tick(pl.t - st.scen0);
+  if (st.policy && Math.round(pl.t) % 300 === 0) { TW.policyApply(pl, G[st.policy.B], st.policy.mode, st.policy.prm); }
+  TW.rk4(pl.x, pl.u, DT); pl.t += DT; stepFieldOnce();
+  if (Math.round(pl.t) % 60 === 0) { record(); const s = TW.snapshot(pl), fs = TW.fieldStats(st.F, s.T, s.Tmax); agentsTick(s, fs); }
+}
+function ff(sec) { const n = Math.round(sec / DT); for (let i = 0; i < n; i++) stepModel(); draw(); }
+window.TWIN.ff = ff; window.TWIN.runScenario = runScenario; window.TWIN.snap = () => TW.snapshot(st.pl); window.TWIN.fieldStats = () => { const s = TW.snapshot(st.pl); return TW.fieldStats(st.F, s.T, s.Tmax); };
+window.TWIN.applyRec = () => { if (st.rec) $('rApply').click(); }; window.TWIN.dismissRec = () => { if (st.rec) $('rDis').click(); };
+window.TWIN.resetTo = resetTo; window.TWIN.pause = () => { st.running = false; $('bPlay').textContent = _t('twin.ctl.play'); };
+let lastT = performance.now(), acc = 0, lastDraw = 0;
+function frame(now) {
+  const dt = Math.min(0.1, (now - lastT) / 1000); lastT = now;
+  if (st.running) { acc += dt * st.speed; let n = 0; while (acc >= DT && n < 400) { stepModel(); acc -= DT; n++; } if (n >= 400) acc = 0; }
+  if (now - lastDraw > 100) { draw(); lastDraw = now; }
+  requestAnimationFrame(frame);
+}
+
+// ---------------- provenance ----------------
+const PROV = {
+  prod: { t: _t('twin.prov.prod.t'), u: 't/h', v: s => s.prod, d: 2, f: _t('twin.prov.prod.f'), p: ['kp1', 'kp2', 'kpM1', 'kpM2', 'kpScale', 'Ea', 'Tref', 'kd', 'site', 'kcs'], s: ['S_MCA90', 'S_ICA', 'S_CAL'] },
+  T: { t: _t('twin.prov.T.t'), u: '°C', v: s => s.T, d: 2, f: _t('twin.prov.T.f'), p: ['dH', 'cpPE', 'Cmet', 'G', 'cpg', 'lamI', 'UAl', 'tauHX', 'Kc', 'Ti'], s: ['S_DAD97', 'S_DH', 'S_DADT', 'S_CPPE', 'S_CPG'] },
+  Tin: { t: _t('twin.prov.Tin.t'), u: '°C', v: s => s.Tin, d: 1, f: _t('twin.prov.Tin.f'), p: ['tauHX', 'Kc', 'Ti', 'Tcw', 'appr'], s: ['S_DAD97', 'S_DESIGN'] },
+  Tstick: { t: _t('twin.prov.Tstick.t'), u: '°C', v: s => s.Tstick, d: 1, f: _t('twin.prov.Tstick.f'), p: ['st1', 'st2', 'st3', 'st4', 'st5', 'st6', 'st7'], s: ['S_PAT'], x: s => _t('twin.prov.Tstick.x1', { d: fmt(s.rhoc, 4), mi: fmt(s.MIc, 2), mfr: fmt(s.MFRc, 1), p: fmt(s.Peq, 1), c1: fmt(s.C1, 4), c2: fmt(s.C2, 1) }) + (s.outside.length ? ' ' + _t('twin.prov.Tstick.x2', { l: s.outside.join(', ') }) : '') + ' ' + _t('twin.prov.Tstick.x3') },
+  margin: { t: _t('twin.prov.margin.t'), u: 'K', v: s => s.margin, d: 1, f: _t('twin.prov.margin.f'), p: ['dStick', 'dDew', 'st1', 'st4'], s: ['S_PAT'] },
+  Tmax: { t: _t('twin.prov.Tmax.t'), u: '°C', v: s => s.Tmax, d: 1, f: _t('twin.prov.Tmax.f'), p: ['dStick'], s: ['S_PAT'] },
+  Tmin: { t: _t('twin.prov.Tmin.t'), u: '°C', v: s => s.Tmin, d: 1, f: _t('twin.prov.Tmin.f'), p: ['dDew', 'antA', 'antB', 'antC', 'P'], s: ['S_PAT', 'S_NIST'] },
+  MIc: { t: _t('twin.prov.MIc.t'), u: 'g/10 min', v: s => s.MIc, d: 2, f: _t('twin.prov.MIc.f'), p: ['aMI', 'nMI', 'kH1', 'kH2', 'kE', 'kM1', 'kM2', 'kp1', 'kp2'], s: ['S_MCA91', 'S_MCA90', 'S_ABB'] },
+  MIi: { t: _t('twin.prov.MIi.t'), u: 'g/10 min', v: s => s.MIi, d: 2, f: _t('twin.prov.MIi.f'), p: ['aMI', 'nMI', 'kH1', 'kH2'], s: ['S_MCA91', 'S_MCA90'] },
+  rhoc: { t: _t('twin.prov.rhoc.t'), u: 'g/cm³', v: s => s.rhoc, d: 4, f: _t('twin.prov.rhoc.f'), p: ['rho0', 'aC4', 'bC4', 'aC6', 'kpM1', 'kpM2'], s: ['S_ABB', 'S_MCA90', 'S_MCA91'] },
+  rhoi: { t: _t('twin.prov.rhoi.t'), u: 'g/cm³', v: s => s.rhoi, d: 4, f: _t('twin.prov.rhoi.f'), p: ['rho0', 'aC4', 'bC4', 'aC6'], s: ['S_ABB'] },
+  MFR: { t: _t('twin.prov.MFR.t'), u: '—', v: s => s.MFRc, d: 1, f: _t('twin.prov.MFR.f'), p: ['cMFR'], s: ['S_MFR'] },
+  liq: { t: _t('twin.prov.liq.t'), u: 'wt %', v: s => s.liq, d: 1, f: _t('twin.prov.liq.f'), p: ['antA', 'antB', 'antC', 'G', 'P', 'lamI'], s: ['S_NIST', 'S_GEO'] },
+  tau: { t: _t('twin.prov.tau.t'), u: 'h', v: s => s.tau, d: 2, f: _t('twin.prov.tau.f'), p: ['Msp', 'Kb'], s: ['S_DADT', 'S_DESIGN'] },
+  cool: { t: _t('twin.prov.cool.t'), u: '%', v: s => s.coolUse * 100, d: 0, f: _t('twin.prov.cool.f'), p: ['Tcw', 'appr', 'G', 'cpg'], s: ['S_GEO', 'S_CPG', 'S_DESIGN'] },
+  yI: { t: _t('twin.prov.yI.t'), u: 'mol %', v: s => s.yI * 100, d: 1, f: _t('twin.prov.yI.f'), p: ['P', 'FmaxI'], s: ['S_WIN', 'S_DESIGN'] },
+  h: { t: _t('twin.prov.h.t'), u: 'mol/mol', v: s => s.h, d: 3, f: _t('twin.prov.h.f'), p: ['tauC', 'ventBase', 'FmaxH'], s: ['S_MCA92', 'S_GRADE'] },
+  m: { t: _t('twin.prov.m.t'), u: 'mol/mol', v: s => s.m, d: 3, f: _t('twin.prov.m.f'), p: ['tauC', 'ventBase', 'FmaxM'], s: ['S_MCA92', 'S_GRADE'] },
+  hot: { t: _t('twin.prov.hot.t'), u: '°C', v: () => window.TWIN.fieldStats().Tmax_local, d: 1, f: _t('twin.prov.hot.f'), p: ['Ea', 'dStick'], s: ['S_DAB21', 'S_L3'], x: () => _t('twin.prov.hot.x') },
+  offspec: { t: _t('twin.prov.offspec.t'), u: 't', v: () => st.plan ? st.plan.agent.offspec_t : NaN, d: 0, f: _t('twin.prov.offspec.f'), p: ['miTol', 'rhoTol', 'ventNaive', 'ventMax', 'rampT', 'hMax'], s: ['S_MCA92', 'S_GRADE'] },
+  Fcat: { t: _t('twin.prov.Fcat.t'), u: 'kg/h', v: () => st.pl.u.Fcat, d: 2, f: _t('twin.prov.Fcat.f'), p: ['site'], s: ['S_CAL'] },
+  P: { t: _t('twin.prov.P.t'), u: 'bar', v: () => P.P.v, d: 1, f: _t('twin.prov.P.f'), p: ['P'], s: ['S_IND'] },
+  Mbed: { t: _t('twin.prov.Mbed.t'), u: 't', v: s => s.M / 1000, d: 1, f: _t('twin.prov.Mbed.f'), p: ['Msp', 'Kb'], s: ['S_DADT', 'S_DESIGN'] },
+  tags: { t: _t('twin.prov.tags.t'), u: '', v: () => NaN, d: 0, f: _t('twin.prov.tags.f'), p: [], s: ['S_DESIGN'] }
+};
+window.TWIN.PROV = PROV;
+function openProv(key) {
+  const pr = PROV[key]; if (!pr) return; const s = TW.snapshot(st.pl);
+  const rows = pr.p.map(id => { const q = P[id]; return `<tr><td>${q.sym}</td><td class="num">${fmtP(q.v)}</td><td>${_u(q.unit)}</td><td><span class="st ${q.status}">${_t('twin.status.' + q.status)}</span></td></tr>` + (q.note ? `<tr><td></td><td colspan="3" class="pn">${esc(q.note)}</td></tr>` : ''); }).join('');
+  $('pcard').innerHTML = `<div class="row" style="justify-content:space-between"><h4></h4><button class="btn sm" id="pClose">${_t('twin.card.close')}</button></div>
+    <div class="val">${fmt(pr.v(s), pr.d)} ${_u(pr.u)}</div><div class="lbl">${_t('twin.card.formula')}</div><div class="formula"></div>
+    ${pr.x ? '<div class="warnline"></div>' : ''}
+    ${rows ? `<div class="lbl">${_t('twin.card.params')}</div><div class="tblw" style="margin-top:0"><table><thead><tr><th>${_t('twin.th.sym')}</th><th>${_t('twin.th.val')}</th><th>${_t('twin.th.unit')}</th><th>${_t('twin.th.status')}</th></tr></thead><tbody>${rows}</tbody></table></div>` : ''}
+    <div class="lbl">${_t('twin.card.sources')}</div><div class="src">${pr.s.map(k => `<div><span class="st ${S[k].status}">${_t('twin.status.' + S[k].status)}</span> ${esc(S[k].full)}</div>`).join('')}</div>`;
+  $('pcard').querySelector('h4').textContent = pr.t; $('pcard').querySelector('.formula').textContent = pr.f;
+  if (pr.x) $('pcard').querySelector('.warnline').textContent = pr.x(s);
+  $('modal').classList.add('open'); $('pClose').onclick = closeProv;
+  post('prov', 'info', _t('twin.msg.prov', { t: pr.t, s: pr.s.map(k => S[k].short).join('; ') }), [key]);
+}
+function closeProv() { $('modal').classList.remove('open'); }
+$('modal').addEventListener('click', e => { if (e.target.id === 'modal') closeProv(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeProv(); });
+function esc(t) { return String(t).replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c])); }
+function fmtP(v) { return _ns(fmtP0(v)); }
+function fmtP0(v) { if (v === 0) return '0'; const a = Math.abs(v); if (a >= 1e5 || a < 1e-3) return v.toExponential(3); if (a >= 100) return String(+v.toFixed(1)); return String(+v.toPrecision(4)); }
+
+// ---------------- KPIs ----------------
+const KPI = [
+  ['prod', _t('twin.kpi.prod'), s => fmt(s.prod, 1) + ' ' + _u('t/h'), s => _t('twin.kpi.prod_s', { tau: fmt(s.tau, 2), m: fmt(s.M / 1000, 1) }), s => s.prod >= 12 && s.prod <= 20 ? '' : 'warn'],
+  ['T', _t('twin.kpi.T'), s => fmt(s.T, 1) + ' °C', s => _t('twin.kpi.T_s', { sp: fmt(st.pl.u.Tsp - 273.15, 1), tin: fmt(s.Tin, 1) }), s => s.T > s.Tmax ? 'bad' : s.T > s.Tmax - 2 ? 'warn' : ''],
+  ['Tstick', _t('twin.kpi.Tstick'), s => fmt(s.Tstick, 1) + ' °C', s => _t('twin.kpi.Tstick_s', { m: fmt(s.margin, 1), tm: fmt(s.Tmax, 1) }), s => s.margin < 10 ? 'bad' : s.margin < 13 ? 'warn' : 'ok'],
+  ['MIc', _t('twin.kpi.MIc'), s => fmt(s.MIc, 2), s => _t('twin.kpi.win_mi', { a: fmt(G[st.target].MI / 1.15, 2), b: fmt(G[st.target].MI * 1.15, 2), i: fmt(s.MIi, 2) }), s => Math.abs(Math.log(s.MIc / G[st.target].MI)) <= Math.log(1.15) ? 'ok' : 'warn'],
+  ['rhoc', _t('twin.kpi.rhoc'), s => fmt(s.rhoc, 4), s => _t('twin.kpi.win_rho', { a: fmt(G[st.target].rho - 0.002, 3), b: fmt(G[st.target].rho + 0.002, 3), i: fmt(s.rhoi, 4) }), s => Math.abs(s.rhoc - G[st.target].rho) <= 0.002 ? 'ok' : 'warn'],
+  ['liq', _t('twin.kpi.liq'), s => fmt(s.liq, 1) + ' ' + _u('wt %'), s => _t('twin.kpi.liq_s', { y: fmt(s.yI * 100, 1), c: fmt(s.coolUse * 100, 0) }), s => s.coolUse > 0.95 ? 'warn' : '']
+];
+$('kpis').innerHTML = KPI.map(k => `<div class="kpi" data-prov="${k[0]}" tabindex="0"><span class="i">i</span><div class="k">${k[1]}</div><div class="v"></div><div class="s"></div></div>`).join('');
+document.querySelectorAll('[data-prov]').forEach(el => { el.addEventListener('click', () => openProv(el.dataset.prov)); el.addEventListener('keydown', e => { if (e.key === 'Enter') openProv(el.dataset.prov); }); });
+function drawKPI(s) { document.querySelectorAll('.kpi').forEach((el, i) => { const k = KPI[i]; el.querySelector('.v').textContent = k[2](s); el.querySelector('.v').className = 'v ' + k[4](s); el.querySelector('.s').textContent = k[3](s); }); }
+
+// ---------------- scheme SVG ----------------
+const SV = [];
+function buildScheme() {
+  const svg = $('scheme');
+  const T = (x, y, key, anchor, size, w) => { SV.push(key); return `<text class="pv" data-prov="${key.split(':')[0]}" data-sv="${key}" x="${x}" y="${y}" font-size="${size || 13}" font-weight="${w || 600}" text-anchor="${anchor || 'start'}" fill="#0a0a0a">—</text>`; };
+  const L = (x, y, t, anchor, size) => `<text x="${x}" y="${y}" font-size="${size || 11}" fill="#888" text-anchor="${anchor || 'start'}">${t}</text>`;
+  svg.innerHTML = `
+  <defs><marker id="ar" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#888"/></marker>
+  <linearGradient id="bedg" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#e6f4f2"/><stop offset="1" stop-color="#fff7ed"/></linearGradient></defs>
+  <path d="M250,40 L250,60 L290,60 L290,40" fill="none" stroke="#bbb" stroke-width="2"/>
+  <path d="M200,95 Q200,40 270,40 Q340,40 340,95 L340,110 L310,135 L310,330 L230,330 L230,135 L200,110 Z" fill="#fff" stroke="#0a0a0a" stroke-width="2"/>
+  <rect id="bed" x="232" y="170" width="76" height="158" fill="url(#bedg)"/>
+  <line x1="230" y1="312" x2="310" y2="312" stroke="#0a0a0a" stroke-width="2" stroke-dasharray="4 3"/>
+  ${L(270, 160, _t('twin.sch.fb'), 'middle')}
+  ${L(270, 325, _t('twin.sch.dist'), 'middle', 10)}
+  <path d="M270,40 L270,18 L640,18 L640,70" fill="none" stroke="#2563eb" stroke-width="2.5" marker-end="url(#ar)"/>
+  <circle cx="640" cy="95" r="22" fill="#fff" stroke="#0a0a0a" stroke-width="2"/><path d="M628,85 L656,95 L628,105 Z" fill="none" stroke="#0a0a0a" stroke-width="1.5"/>
+  ${L(670, 92, _t('twin.sch.comp'))}
+  <path d="M640,117 L640,150" fill="none" stroke="#2563eb" stroke-width="2.5" marker-end="url(#ar)"/>
+  <rect x="610" y="152" width="60" height="96" rx="8" fill="#fff" stroke="#0a0a0a" stroke-width="2"/>
+  <path d="M618,170 L662,182 L618,194 L662,206 L618,218 L662,230" fill="none" stroke="#0d9488" stroke-width="2"/>
+  ${L(680, 175, _t('twin.sch.cooler'))}
+  ${L(680, 192, _t('twin.sch.cw'))}
+  <path d="M640,248 L640,372 L270,372 L270,334" fill="none" stroke="#2563eb" stroke-width="2.5" marker-end="url(#ar)"/>
+  <g id="drops"><circle cx="560" cy="372" r="4" fill="#0d9488"/><circle cx="520" cy="372" r="4" fill="#0d9488"/><circle cx="480" cy="372" r="4" fill="#0d9488"/></g>
+  <path d="M310,300 L380,300 L380,345" fill="none" stroke="#0a0a0a" stroke-width="2" marker-end="url(#ar)"/>
+  ${L(388, 340, _t('twin.sch.disch'))}
+  <path d="M120,250 L228,250" fill="none" stroke="#7c3aed" stroke-width="2" marker-end="url(#ar)"/>${L(20, 246, _t('twin.sch.cat'))}
+  <path d="M120,385 L120,372 L262,372" fill="none" stroke="#888" stroke-width="1.5"/>
+  ${L(20, 360, _t('twin.sch.feed1'))}${L(20, 374, _t('twin.sch.feed2'))}
+  ${L(470, 12, _t('twin.sch.cyc'), 'start')}
+  ${T(360, 196, 'T:bed', 'start', 20, 700)}${L(360, 212, _t('twin.sch.tbed'))}
+  ${T(360, 236, 'Tstick:svg', 'start', 13)}${L(360, 250, _t('twin.sch.tstick'))}
+  ${T(360, 272, 'prod:svg', 'start', 13)}${L(360, 286, _t('twin.sch.prod'))}
+  ${T(130, 270, 'Fcat:svg', 'start', 12, 500)}
+  ${T(355, 60, 'P:svg', 'start', 13)}${L(355, 74, _t('twin.sch.p'))}
+  ${T(130, 120, 'Mbed:svg', 'start', 12)}${L(130, 134, _t('twin.sch.mbed'))}
+  ${T(130, 160, 'tau:svg', 'start', 12)}${L(130, 174, _t('twin.sch.tau'))}
+  ${T(700, 300, 'Tin:svg', 'start', 13)}${L(700, 314, _t('twin.sch.tin'))}
+  ${T(700, 338, 'liq:svg', 'start', 13)}${L(700, 352, _t('twin.sch.liq'))}
+  ${T(470, 40, 'yI:svg', 'start', 12, 500)}${T(470, 56, 'h:svg', 'start', 12, 500)}${T(470, 72, 'm:svg', 'start', 12, 500)}
+  ${T(700, 230, 'cool:svg', 'start', 12, 500)}
+  `;
+  svg.querySelectorAll('[data-prov]').forEach(el => el.addEventListener('click', () => openProv(el.dataset.prov)));
+}
+function drawScheme(s) {
+  const v = {
+    'T:bed': fmt(s.T, 1) + ' °C', 'Tstick:svg': _t('twin.sv.tstick', { t: fmt(s.Tstick, 1), m: fmt(s.margin, 1) }), 'prod:svg': fmt(s.prod, 1) + ' ' + _u('t/h'),
+    'Fcat:svg': fmt(st.pl.u.Fcat, 2) + ' ' + _u('kg/h') + (st.pl.u.act !== 1 ? ' · ' + _t('twin.sv.act', { a: fmt(st.pl.u.act, 2) }) : ''), 'P:svg': fmt(P.P.v, 1) + ' bar', 'Mbed:svg': fmt(s.M / 1000, 1) + ' ' + _u('t'), 'tau:svg': fmt(s.tau, 2) + ' ' + _u('h'),
+    'Tin:svg': fmt(s.Tin, 1) + ' °C', 'liq:svg': fmt(s.liq, 1) + ' ' + _u('wt %'), 'yI:svg': `iC5 ${fmt(s.yI * 100, 1)} ${_u('mol %')} · C₂ ${fmt(s.yE * 100, 1)} %`, 'h:svg': `H₂/C₂ ${fmt(s.h, 3)}`,
+    'm:svg': `${st.pl.u.como === 'C6' ? 'C₆' : 'C₄'}/C₂ ${fmt(s.m, 3)}`, 'cool:svg': _t('twin.sv.cool', { u: fmt(s.coolUse * 100, 0), g: fmt(P.G.v * st.pl.u.Gf, 0) })
+  };
+  $('scheme').querySelectorAll('[data-sv]').forEach(el => { el.textContent = v[el.dataset.sv]; });
+  const tb = $('scheme').querySelector('[data-sv="T:bed"]'); tb.setAttribute('fill', s.T > s.Tmax ? '#dc2626' : s.T > s.Tmax - 2 ? '#d97706' : '#0a0a0a');
+  $('drops').style.opacity = s.liq > 0.1 ? 1 : 0.12;
+}
+
+// ---------------- charts ----------------
+function ctx2(c) {
+  const dpr = window.devicePixelRatio || 1, w = Math.floor(c.parentElement.clientWidth-(parseFloat(getComputedStyle(c.parentElement).paddingLeft)||0)-(parseFloat(getComputedStyle(c.parentElement).paddingRight)||0)) || 300, h = c._h0 || (c._h0 = +c.getAttribute('height'));
+  if (c.width !== Math.round(w * dpr) || c.height !== Math.round(h * dpr)) { c.width = Math.round(w * dpr); c.height = Math.round(h * dpr); c.style.height = h + 'px'; }
+  const g = c.getContext('2d'); g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, w, h); return { g, w, h };
+}
+function axes(g, x0, y0, w, h, ymin, ymax, ticks, fmtY, tmin, tmax) {
+  g.strokeStyle = '#e8e8e8'; g.lineWidth = 1; g.fillStyle = '#888'; g.font = '10.5px Inter,sans-serif'; g.textAlign = 'right'; g.textBaseline = 'middle';
+  for (let i = 0; i <= ticks; i++) { const v = ymin + (ymax - ymin) * i / ticks, y = y0 + h - h * i / ticks; g.beginPath(); g.moveTo(x0, y); g.lineTo(x0 + w, y); g.stroke(); g.fillText(fmtY(v), x0 - 4, y); }
+  g.textAlign = 'center'; g.textBaseline = 'top';
+  const span = tmax - tmin, step = span > 4 * 3600 ? 3600 : span > 7200 ? 1800 : 900;
+  for (let t = Math.ceil(tmin / step) * step; t <= tmax; t += step) { const x = x0 + (t - tmin) / span * w; g.fillText(hm(t), x, y0 + h + 4); }
+}
+function line(g, pts, color, width, dash) { g.strokeStyle = color; g.lineWidth = width || 2; g.setLineDash(dash || []); g.beginPath(); pts.forEach((p, i) => i ? g.lineTo(p[0], p[1]) : g.moveTo(p[0], p[1])); g.stroke(); g.setLineDash([]); }
+function drawTrend() {
+  const { g, w, h } = ctx2($('cT')), H = st.hist; if (H.length < 2) return;
+  const x0 = 40, y0 = 8, W = w - x0 - 8, Hh = h - 28, tmax = H[H.length - 1][0], tmin = Math.max(H[0][0], tmax - 6 * 3600), tm = Math.max(tmin + 600, tmax);
+  let lo = 1e9, hi = -1e9; H.forEach(r => { if (r[0] >= tmin) for (const k of [1, 2, 3, 4, 5]) { lo = Math.min(lo, r[k]); hi = Math.max(hi, r[k]); } });
+  lo = Math.floor(lo - 2); hi = Math.ceil(hi + 2); if (hi - lo > 80) lo = hi - 80;
+  axes(g, x0, y0, W, Hh, lo, hi, 4, v => fmt(v, 0), tmin, tm);
+  const X = t => x0 + (t - tmin) / (tm - tmin) * W, Y = v => y0 + Hh - (Math.min(hi, Math.max(lo, v)) - lo) / (hi - lo) * Hh;
+  const sel = H.filter(r => r[0] >= tmin);
+  g.fillStyle = 'rgba(22,163,74,.07)'; g.beginPath(); sel.forEach((r, i) => i ? g.lineTo(X(r[0]), Y(r[3])) : g.moveTo(X(r[0]), Y(r[3]))); for (let i = sel.length - 1; i >= 0; i--) g.lineTo(X(sel[i][0]), Y(sel[i][4])); g.closePath(); g.fill();
+  line(g, sel.map(r => [X(r[0]), Y(r[4])]), '#2563eb', 1.5, [4, 3]);
+  line(g, sel.map(r => [X(r[0]), Y(r[2])]), '#dc2626', 2);
+  line(g, sel.map(r => [X(r[0]), Y(r[3])]), '#d97706', 1.5, [6, 3]);
+  line(g, sel.map(r => [X(r[0]), Y(r[5])]), '#0d9488', 1.2, [2, 3]);
+  line(g, sel.map(r => [X(r[0]), Y(r[1])]), '#0a0a0a', 2.2);
+}
+function drawProps() {
+  const { g, w, h } = ctx2($('cP')), H = st.hist; if (H.length < 2) return; const gr = G[st.target];
+  const x0 = 40, W = w - x0 - 44, tmax = H[H.length - 1][0], tmin = Math.max(H[0][0], tmax - 6 * 3600), tm = Math.max(tmin + 600, tmax);
+  const sel = H.filter(r => r[0] >= tmin), X = t => x0 + (t - tmin) / (tm - tmin) * W;
+  // top: log MI, bottom: density
+  const panes = [{ y0: 8, h: (h - 40) / 2, k: [6, 7], tgt: gr.MI, lo: Math.log(gr.MI / 1.15), hi: Math.log(gr.MI * 1.15), log: true, col: '#7c3aed', lab: 'MI' },
+    { y0: 8 + (h - 40) / 2 + 12, h: (h - 40) / 2, k: [8, 9], tgt: gr.rho, lo: gr.rho - 0.002, hi: gr.rho + 0.002, log: false, col: '#0d9488', lab: 'ρ' }];
+  panes.forEach((p, pi) => {
+    const tf = v => p.log ? Math.log(v) : v; let lo = Math.min(p.lo, ...sel.map(r => Math.min(tf(r[p.k[0]]), tf(r[p.k[1]])))), hi = Math.max(p.hi, ...sel.map(r => Math.max(tf(r[p.k[0]]), tf(r[p.k[1]]))));
+    const pad = (hi - lo) * 0.1 + (p.log ? 0.02 : 0.0004); lo -= pad; hi += pad;
+    const Y = v => p.y0 + p.h - (tf(v) - lo) / (hi - lo) * p.h;
+    g.fillStyle = 'rgba(22,163,74,.12)'; const ya = p.y0 + p.h - (p.hi - lo) / (hi - lo) * p.h, yb = p.y0 + p.h - (p.lo - lo) / (hi - lo) * p.h; g.fillRect(x0, ya, W, yb - ya);
+    g.strokeStyle = '#e8e8e8'; g.strokeRect(x0, p.y0, W, p.h); g.fillStyle = '#888'; g.font = '10.5px Inter,sans-serif'; g.textAlign = 'right'; g.textBaseline = 'middle';
+    for (let i = 0; i <= 2; i++) { const v = lo + (hi - lo) * i / 2; g.fillText(p.log ? fmt(Math.exp(v), Math.exp(v) < 3 ? 2 : 1) : fmt(v, 3), x0 - 4, p.y0 + p.h - p.h * i / 2); }
+    g.textAlign = 'left'; g.fillText(p.lab, x0 + W + 6, p.y0 + 8);
+    line(g, sel.map(r => [X(r[0]), Y(r[p.k[1]])]), p.col + '66', 1.5);
+    line(g, sel.map(r => [X(r[0]), Y(r[p.k[0]])]), p.col, 2.2);
+    if (pi === 1) { g.textAlign = 'center'; g.textBaseline = 'top'; g.fillStyle = '#888'; const span = tm - tmin, step = span > 4 * 3600 ? 3600 : span > 7200 ? 1800 : 900; for (let t = Math.ceil(tmin / step) * step; t <= tm; t += step) g.fillText(hm(t), X(t), p.y0 + p.h + 4); }
+  });
+  $('gradeNote').textContent = _t('twin.note.target', { g: gr.name });
+}
+function colormap(v) { // v 0..1 → teal-white-amber-red
+  const stops = [[0, [37, 99, 235]], [0.35, [204, 238, 234]], [0.55, [255, 247, 237]], [0.75, [217, 119, 6]], [1, [220, 38, 38]]];
+  for (let i = 1; i < stops.length; i++) if (v <= stops[i][0]) { const a = stops[i - 1], b = stops[i], f = (v - a[0]) / (b[0] - a[0]); return a[1].map((c, k) => Math.round(c + (b[1][k] - c) * f)); }
+  return stops[stops.length - 1][1];
+}
+let heatImg = null;
+function drawHeat(s) {
+  const c = $('cH'), F = st.F, nx = TW.NXg, ny = TW.NYg; const cw = c.clientWidth || 160, hh = Math.round(cw * 15 / 5 * 0.62); c.setAttribute('height', Math.min(340, Math.max(220, hh)));
+  const { g, w, h } = ctx2(c);
+  if (!heatImg || heatImg.width !== nx) heatImg = g.createImageData(nx, ny);
+  const lo = s.T - 6, hi = Math.max(s.Tmax + 2, s.T + 6); const d = heatImg.data;
+  for (let j = 0; j < ny; j++) for (let i = 0; i < nx; i++) { const k = j * nx + i, T = s.T + F.th[k], col = colormap(Math.max(0, Math.min(1, (T - lo) / (hi - lo)))), q = ((ny - 1 - j) * nx + i) * 4; d[q] = col[0]; d[q + 1] = col[1]; d[q + 2] = col[2]; d[q + 3] = 255; }
+  const off = document.createElement('canvas'); off.width = nx; off.height = ny; off.getContext('2d').putImageData(heatImg, 0, 0);
+  const bw = Math.min(w - 30, (h - 10) * 5 / 15 * 1.0), bh = h - 10, bx = 0, by = 2; g.imageSmoothingEnabled = true; g.drawImage(off, bx, by, bw, bh);
+  // risk contour: outline cells above T_max
+  g.strokeStyle = '#0a0a0a'; g.lineWidth = 1.6; const cx = bw / nx, cy = bh / ny; g.beginPath();
+  const risk = (i, j) => i >= 0 && j >= 0 && i < nx && j < ny && s.T + F.th[j * nx + i] > s.Tmax;
+  for (let j = 0; j < ny; j++) for (let i = 0; i < nx; i++) if (risk(i, j)) {
+    const X = bx + i * cx, Y = by + (ny - 1 - j) * cy;
+    if (!risk(i - 1, j)) { g.moveTo(X, Y); g.lineTo(X, Y + cy); } if (!risk(i + 1, j)) { g.moveTo(X + cx, Y); g.lineTo(X + cx, Y + cy); }
+    if (!risk(i, j + 1)) { g.moveTo(X, Y); g.lineTo(X + cx, Y); } if (!risk(i, j - 1)) { g.moveTo(X, Y + cy); g.lineTo(X + cx, Y + cy); }
+  }
+  g.stroke(); g.strokeStyle = '#0a0a0a'; g.lineWidth = 1; g.strokeRect(bx, by, bw, bh);
+  // color bar
+  const cbx = bx + bw + 8; for (let y = 0; y < bh; y++) { const col = colormap(1 - y / bh); g.fillStyle = `rgb(${col})`; g.fillRect(cbx, by + y, 8, 1); }
+  g.fillStyle = '#888'; g.font = '10px Inter,sans-serif'; g.textAlign = 'left'; g.textBaseline = 'top'; g.fillText(fmt(hi, 0), cbx + 10 > w - 16 ? cbx - 2 : cbx + 10, by); g.textBaseline = 'bottom'; g.fillText(fmt(lo, 0), cbx + 10 > w - 16 ? cbx - 2 : cbx + 10, by + bh);
+  const fs = TW.fieldStats(F, s.T, s.Tmax);
+  $('heatInfo').innerHTML = `<div class="pv" data-prov="hot">${_t('twin.heat.lmax')} <b>${fmt(fs.Tmax_local, 1)} °C</b></div><div>${_t('twin.heat.mean')} <b>${fmt(s.T, 1)} °C</b></div><div>${_t('twin.heat.tmax')} <b>${fmt(s.Tmax, 1)} °C</b></div>
+    <div>${_t('twin.heat.risk')} <b class="${fs.riskFrac > 0 ? 'bad' : 'ok'}">${fmt(fs.riskArea_m2, 2)} m²</b></div><div style="margin-top:6px">${_t('twin.heat.info')}</div>`;
+  $('heatInfo').querySelector('[data-prov]').onclick = () => openProv('hot');
+}
+function drawTransition() {
+  const { g, w, h } = ctx2($('cTr')); const pl = st.plan; if (!pl) { g.fillStyle = '#888'; g.font = '12px Inter,sans-serif'; _fit(g, _t('twin.tr.run'), 10, 20, w - 20, 'twin.tr.run.short'); return; }
+  const B = G[pl.B], A = G[pl.A], x0 = 40, W = w - x0 - 30, Ht = (h - 40) / 2, tmaxH = 24;
+  const X = t => x0 + t / tmaxH * W;
+  [[1, Math.log(Math.min(A.MI, B.MI) / 1.6), Math.log(Math.max(A.MI, B.MI) * 1.8), v => Math.log(v), B.MI, 'MI', true], [2, Math.min(A.rho, B.rho) - 0.004, Math.max(A.rho, B.rho) + 0.004, v => v, B.rho, 'ρ', false]].forEach((q, pi) => {
+    const y0 = 8 + pi * (Ht + 12), lo = q[1], hi = q[2], Y = v => y0 + Ht - (Math.max(lo, Math.min(hi, q[3](v))) - lo) / (hi - lo) * Ht;
+    const blo = q[6] ? B.MI / 1.15 : B.rho - 0.002, bhi = q[6] ? B.MI * 1.15 : B.rho + 0.002;
+    g.fillStyle = 'rgba(22,163,74,.14)'; g.fillRect(x0, Y(bhi), W, Y(blo) - Y(bhi)); g.strokeStyle = '#e8e8e8'; g.strokeRect(x0, y0, W, Ht);
+    g.fillStyle = '#888'; g.font = '10.5px Inter,sans-serif'; g.textAlign = 'right'; g.textBaseline = 'middle';
+    g.fillText(q[6] ? fmt(A.MI, 1) : fmt(A.rho, 3), x0 - 4, Y(q[6] ? A.MI : A.rho)); g.fillText(q[6] ? fmt(B.MI, 1) : fmt(B.rho, 3), x0 - 4, Y(q[6] ? B.MI : B.rho));
+    g.textAlign = 'left'; g.fillText(q[5], x0 + W + 6, y0 + 8);
+    line(g, pl.naive.traj.filter(r => r[0] <= tmaxH).map(r => [X(r[0]), Y(r[q[0]])]), '#888', 2);
+    line(g, pl.agent.traj.filter(r => r[0] <= tmaxH).map(r => [X(r[0]), Y(r[q[0]])]), '#0d9488', 2.4);
+    if (pi === 1) { g.textAlign = 'center'; g.textBaseline = 'top'; for (let t = 0; t <= tmaxH; t += 4) g.fillText(t + ' ' + _u('h'), X(t), y0 + Ht + 4); }
+  });
+  const red = 1 - pl.agent.offspec_t / pl.naive.offspec_t;
+  $('trNote').textContent = `${A.name} → ${B.name}`;
+  $('trRes').innerHTML = `<div class="box"><div class="empty">${_t('twin.tr.naive')}</div><div class="n pv" data-prov="offspec">${fmt(pl.naive.offspec_t, 0)} ${_u('t')}</div><div class="empty">${_t('twin.tr.res', { h: fmt(pl.naive.time_h, 1), o: fmt(pl.naive.overTmax_h, 1), v: fmt(pl.naive.vented_t, 1) })}</div></div>
+    <div class="box agent"><div class="empty">${_t('twin.tr.agent', { k: pl.agent.prm.K, v: fmt(pl.agent.prm.vent * 100, 0) })}</div><div class="n pv" data-prov="offspec">${fmt(pl.agent.offspec_t, 0)} ${_u('t')} <span class="ok" style="font-size:13px">−${fmt(red * 100, 0)} %</span></div><div class="empty">${_t('twin.tr.res', { h: fmt(pl.agent.time_h, 1), o: fmt(pl.agent.overTmax_h, 1), v: fmt(pl.agent.vented_t, 1) })}</div></div>`;
+  $('trRes').querySelectorAll('[data-prov]').forEach(el => el.onclick = () => openProv('offspec'));
+}
+function draw() {
+  if (!st.pl) return; const s = TW.snapshot(st.pl);
+  $('clock').textContent = 't = ' + hm(st.pl.t) + (st.scen ? ' · ' + SCN[st.scen].name : '');
+  drawKPI(s); drawScheme(s); drawTrend(); drawProps(); drawHeat(s);
+  $('ctlMode').textContent = _t('twin.ctl.tc') + (st.pl.u.auto ? ' AUTO' : ' MANUAL'); $('bAuto').textContent = _t('twin.ctl.tc') + ': ' + (st.pl.u.auto ? 'AUTO' : 'MANUAL'); $('bAuto').classList.toggle('on', !st.pl.u.auto);
+  if (!document.activeElement || document.activeElement.type !== 'range') syncSliders();
+}
+
+// ---------------- sliders ----------------
+const SL = [
+  ['h', 'H₂/C₂ (mol/mol)', 0.02, 0.6, 0.005, u => u.h, (u, v) => u.h = v, v => fmt(v, 3)],
+  ['m', _t('twin.sl.m'), 0, 0.8, 0.005, u => u.m, (u, v) => u.m = v, v => fmt(v, 3)],
+  ['yI', 'iC5 (' + _u('mol %') + ')', 0, 18, 0.1, u => u.yI * 100, (u, v) => u.yI = v / 100, v => fmt(v, 1)],
+  ['Tsp', _t('twin.sl.tsp'), 80, 108, 0.1, u => u.Tsp - 273.15, (u, v) => u.Tsp = v + 273.15, v => fmt(v, 1)],
+  ['Fcat', _t('twin.sl.fcat'), 0.2, 1.0, 0.01, u => u.Fcat, (u, v) => u.Fcat = v, v => fmt(v, 2)]
+];
+$('sliders').innerHTML = SL.map(s => `<div class="sl"><label for="sl_${s[0]}"><span>${s[1]}</span><b id="sv_${s[0]}"></b></label><input type="range" id="sl_${s[0]}" min="${s[2]}" max="${s[3]}" step="${s[4]}"></div>`).join('');
+SL.forEach(s => { $('sl_' + s[0]).addEventListener('input', e => { const v = +e.target.value; s[6](st.pl.u, v); $('sv_' + s[0]).textContent = s[7](v); if (st.scen && st.scen !== 'transition') st.scen = null; }); });
+function syncSliders() { if (!st.pl) return; SL.forEach(s => { const v = s[5](st.pl.u); $('sl_' + s[0]).value = v; $('sv_' + s[0]).textContent = s[7](v); }); }
+$('bAuto').onclick = () => { const u = st.pl.u; u.auto = !u.auto; if (!u.auto) u.uMan = st.pl.x[8]; else st.pl.x[9] = 0; draw(); };
+
+// ---------------- controls ----------------
+$('gradeSel').innerHTML = Object.values(G).map(g => `<option value="${g.id}">${g.name}</option>`).join('');
+$('gradeSel').onchange = e => { st.gradeSel = e.target.value; };
+$('bLoad').onclick = () => { st.gradeSel = $('gradeSel').value; runScenario('steady'); };
+$('bPlay').onclick = () => { st.running = !st.running; $('bPlay').textContent = st.running ? _t('twin.ctl.pause') : _t('twin.ctl.play'); };
+$('speed').value = String(st.speed); if (!$('speed').value) { $('speed').value = '300'; st.speed = 300; }
+$('speed').onchange = e => { st.speed = +e.target.value; try { window.localStorage.setItem('gpe_speed', e.target.value); } catch (er) { /* storage unavailable */ } };
+document.querySelectorAll('[data-scen]').forEach(b => b.onclick = () => runScenario(b.dataset.scen));
+
+// ---------------- architecture SVG + parameter table ----------------
+function buildArch() {
+  const Ls = [
+    ['L5', _t('twin.arch.L5.t'), _t('twin.arch.L5.d'), _t('twin.arch.L5.tag'), _t('twin.arch.L5.p'), '#0a0a0a', 1],
+    ['L4', _t('twin.arch.L4.t'), _t('twin.arch.L4.d'), _t('twin.arch.L4.tag'), _t('twin.arch.L4.p'), '#7c3aed', 1],
+    ['L3', _t('twin.arch.L3.t'), _t('twin.arch.L3.d'), _t('twin.arch.L3.tag'), _t('twin.arch.L3.p'), '#d97706', 1],
+    ['L2', _t('twin.arch.L2.t'), _t('twin.arch.L2.d'), _t('twin.arch.live'), _t('twin.arch.L2.p'), '#0d9488', 1],
+    ['L1', _t('twin.arch.L1.t'), _t('twin.arch.L1.d'), _t('twin.arch.live'), _t('twin.arch.L1.p'), '#2563eb', 1]
+  ];
+  const links = [_t('twin.arch.link1'), _t('twin.arch.link2'), _t('twin.arch.link3'), _t('twin.arch.link4')];
+  let o = '';
+  Ls.forEach((l, i) => {
+    const live = !!l[6];
+    o += `<div class="al" style="border-left-color:${l[5]}"><div class="id" style="color:${l[5]}">${l[0]}</div><div><div class="tt">${l[1]}</div><div class="ds">${l[2]}</div></div><div><span class="tg ${live ? 'live' : ''}">${l[3]}</span><div class="pl">${l[4]}</div></div></div>`;
+    if (i < 4) o += `<div class="alink">↕ ${links[i]}</div>`;
+  });
+  $('arch').innerHTML = o;
+  const tb = $('ptab').querySelector('tbody');
+  tb.innerHTML = Object.values(P).map(q => `<tr><td>${q.sym}</td><td class="num">${fmtP(q.v)}</td><td>${_u(q.unit)}</td><td>${esc(q.desc)}${q.note ? `<div class="pn">${esc(q.note)}</div>` : ''}</td><td>${esc(S[q.src].short)}</td><td><span class="st ${q.status}">${_t('twin.status.' + q.status)}</span></td></tr>`).join('') +
+    Object.values(G).map(g => `<tr><td>${g.id}</td><td class="num">H₂/C₂ ${fmt(g.h, 3)} · M/C₂ ${fmt(g.m, 3)}</td><td>mol/mol</td><td>${esc(g.name)}: ${_t('twin.grade.row', { mi: _ns(g.MI), rho: _ns(g.rho), t: _ns(g.T), y: _ns(g.yI * 100), c: _ns(g.Fcat) })}</td><td>${S.S_GRADE.short}</td><td><span class="st derived">${_t('twin.status.derived')}</span></td></tr>`).join('');
+  $('srcl').innerHTML = Object.entries(S).map(([k, v]) => `<div><span class="st ${v.status}">${_t('twin.status.' + v.status)}</span> <b>${esc(v.short)}.</b> ${esc(v.full)} <i>${esc(v.note)}</i></div>`).join('');
+}
+
+// ---------------- boot ----------------
+buildScheme(); buildArch(); drawAgents();
+resetTo('LL4');
+post('observer', 'info', _t('twin.msg.boot1', { g: G.LL4.name }), ['tags']);
+post('prov', 'info', _t('twin.msg.boot2', { n: Object.keys(P).length, v: Object.values(P).filter(q => q.status === 'verified').length, d: Object.values(P).filter(q => q.status === 'derived').length, p: Object.values(P).filter(q => q.status === 'design').length }), []);
+draw(); drawTransition();
+window.addEventListener('resize', () => { draw(); drawTransition(); });
+requestAnimationFrame(frame);
+window.TWIN.ready = true;
+})();
+</script>
+</body>
+</html>

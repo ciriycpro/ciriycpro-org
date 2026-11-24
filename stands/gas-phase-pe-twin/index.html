@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gas-phase PE reactor — AI Digital Twin · CIRIYC PRO Research</title>
-<meta name="description" content="Proof of concept of a digital twin of a gas-phase polyethylene reactor: live process and polymer property model, stickiness window, 2D bed proxy, MAIF agents with operator in the loop.">
+<meta name="description" content="Gas-phase PE reactor — AI Digital Twin: live process and polymer property model, stickiness window, 2D bed proxy, MAIF agents with operator in the loop.">
 <link rel="icon" href="/star.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -148,9 +148,58 @@ canvas{max-width:100%}.card,.col{min-width:0}html{overflow-y:scroll}
 .case .refs a{color:#0a0a0a;display:block;margin:3px 0}
 @media(max-width:700px){.chain .ar{display:none}}
 </style>
+<link rel="canonical" href="https://ciriycpro.org/stands/gas-phase-pe-twin/">
+<link rel="alternate" hreflang="en" href="https://ciriycpro.org/stands/gas-phase-pe-twin/">
+<link rel="alternate" hreflang="en-AU" href="https://ciriycpro.org/au/stands/gas-phase-pe-twin/">
+<link rel="alternate" hreflang="kk-KZ" href="https://ciriycpro.org/kz/stands/gas-phase-pe-twin/">
+<link rel="alternate" hreflang="th-TH" href="https://ciriycpro.org/th/stands/gas-phase-pe-twin/">
+<link rel="alternate" hreflang="x-default" href="https://ciriycpro.org/stands/gas-phase-pe-twin/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ciriycpro.org/stands/gas-phase-pe-twin/">
+<meta property="og:title" content="Gas-phase PE reactor — AI Digital Twin · CIRIYC PRO Research">
+<meta property="og:description" content="Gas-phase PE reactor — AI Digital Twin: live process and polymer property model, stickiness window, 2D bed proxy, MAIF agents with operator in the loop.">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="en_AU">
+<meta property="og:locale:alternate" content="kk_KZ">
+<meta property="og:locale:alternate" content="th_TH">
+<style data-i18n>
+.lsw-a{position:relative;display:inline-flex;align-items:center}
+.lsw{position:absolute;right:calc(100% + 10px);top:50%;transform:translateY(-50%);z-index:120;font:500 13px/1.25 'Inter','Noto Sans Thai',-apple-system,BlinkMacSystemFont,sans-serif;letter-spacing:0;text-transform:none}
+.lsw summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:5px;height:34px;padding:0 9px;border:1px solid #e8e8e8;border-radius:8px;color:#555;background:#fff;white-space:nowrap;user-select:none}
+.lsw summary::-webkit-details-marker{display:none}
+.lsw summary:hover,.lsw[open] summary{border-color:#bbb;color:#0a0a0a}
+.lsw ul{position:absolute;right:0;top:calc(100% + 6px);list-style:none;margin:0;padding:6px;background:#fff;border:1px solid #e8e8e8;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.10);min-width:180px}
+.lsw li a{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:7px;color:#0a0a0a;text-decoration:none;white-space:nowrap;line-height:1.6}
+.lsw li a:hover{background:#f4f4f4}
+.lsw li a[aria-current]{font-weight:700}
+.lsw li a.saved::after{content:'';width:6px;height:6px;border-radius:50%;background:#0d9488;margin-left:auto}
+.lsw .beta,.lsw-foot .beta{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#d97706;border:1px solid #f1d6a0;border-radius:10px;padding:0 6px;line-height:16px}
+.lsw-foot{margin-top:14px;font-size:12.5px;color:#888;display:flex;gap:16px;flex-wrap:wrap;align-items:center;line-height:1.6}
+.lsw-foot a{color:inherit;text-decoration:none;border-bottom:1px solid #ddd}
+.lsw-foot a[aria-current]{color:#0a0a0a;border-bottom-color:#0a0a0a}
+@media(max-width:900px){.lsw{position:relative;right:auto;top:auto;transform:none;margin-right:8px}}
+@media(max-width:520px){.lsw summary .lsw-c{display:none}.lsw summary{padding:0 8px}}
+@media(max-width:440px){.logo .sub-mark,.sb-logo .sb-sub{display:none}}
+</style>
+<script data-i18n>(function(){var K='ciriyc_lang',s=null;try{s=localStorage.getItem(K)}catch(e){}
+function mark(){if(!s)return;document.querySelectorAll('a[data-lsw="'+s+'"]').forEach(function(a){if(!a.hasAttribute('aria-current'))a.classList.add('saved')})}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mark);else mark();
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[data-lsw]');if(!a)return;try{localStorage.setItem(K,a.getAttribute('data-lsw'))}catch(x){}
+if(location.hash)a.setAttribute('href',a.getAttribute('href').split('#')[0]+location.hash)},true);
+document.addEventListener('click',function(e){var d=document.querySelector('details.lsw[open]');if(d&&!d.contains(e.target))d.removeAttribute('open')});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){var d=document.querySelector('details.lsw[open]');if(d)d.removeAttribute('open')}})})();</script>
+<script data-i18n>var _i18n={"code": "en", "intl": "en-US", "grouping": false, "dec": ".", "intl_fb": null, "root": "", "en_url": "https://ciriycpro.org/stands/gas-phase-pe-twin/"};var I18N={"twin.ag.guard":"Stickiness guard","twin.ag.hot":"Hot-spot detector","twin.ag.observer":"Observer","twin.ag.operator":"Operator (HITL)","twin.ag.planner":"Transition planner","twin.ag.prov":"Provenance","twin.ag.soft":"Property soft-sensor","twin.arch.L1.d":"Fluidized bed as CSTR, two-site catalyst kinetics, gas loop with cooler and condensed mode, T control","twin.arch.L1.p":"Pilot: calibrated on plant archive, EKF state estimation","twin.arch.L1.t":"Process model","twin.arch.L2.d":"Instantaneous and cumulative MI, density, MFR estimate","twin.arch.L2.p":"Pilot: calibrated on plant lab analyses","twin.arch.L2.t":"Polymer properties","twin.arch.L3.d":"Temperature / activity field in the bed, hot zones at wall and distributor","twin.arch.L3.p":"Pilot: 3D CFD of the reactor geometry + trained surrogate with certified error","twin.arch.L3.t":"Bed field (3D CFD + surrogate)","twin.arch.L3.tag":"illustrative field live · CFD-trained in pilot","twin.arch.L4.d":"Parameters, constraints and operating windows with source and status","twin.arch.L4.p":"Pilot: papers, operating procedures, plant data, operators’ experience","twin.arch.L4.t":"Knowledge","twin.arch.L4.tag":"live in this POC · registry below","twin.arch.L5.d":"Observer · property soft-sensor · stickiness guard · hot-spot detector · transition planner · provenance · operator","twin.arch.L5.p":"Pilot: MAIF core (Go + Kafka), OPC UA read-only, shadow mode","twin.arch.L5.t":"MAIF agents + operator (HITL)","twin.arch.L5.tag":"live in this POC · bus emulated","twin.arch.link1":"events, recommendations ↔ set-point requests via operator","twin.arch.link2":"parameters with source and uncertainty","twin.arch.link3":"local hot zones, risk area","twin.arch.link4":"properties of the resin in the bed","twin.arch.live":"live in this POC","twin.btn.apply":"Apply","twin.btn.dismiss":"Dismiss","twin.card.close":"Close","twin.card.formula":"Formula","twin.card.params":"Parameters","twin.card.sources":"Sources","twin.ctl.pause":"Pause","twin.ctl.play":"Play","twin.ctl.tc":"T controller","twin.ev.refs":"refs:","twin.grade.row":"MI {mi}, ρ {rho}, T {t} °C, iC5 {y} %, cat {c} kg/h (gas ratios by model inversion)","twin.heat.info":"Section 5 m × 15 m, grid 40 × 60. Bottom: distributor (cold gas). Black contour: risk zone. Depends on the grade through T_stick.","twin.heat.lmax":"Local max","twin.heat.mean":"Bed mean","twin.heat.risk":"Risk area (T &gt; T_max)","twin.heat.tmax":"T_max (grade)","twin.kpi.MIc":"MI_c vs grade","twin.kpi.T":"Bed temperature","twin.kpi.T_s":"set {sp} · T_in {tin} °C","twin.kpi.Tstick":"T_stick · margin","twin.kpi.Tstick_s":"margin {m} K · T_max {tm}","twin.kpi.liq":"Condensed liquid","twin.kpi.liq_s":"iC5 {y} % · cooler {c} %","twin.kpi.prod":"Production","twin.kpi.prod_s":"τ {tau} h · bed {m} t","twin.kpi.rhoc":"ρ_c vs grade","twin.kpi.win_mi":"window {a}–{b} · MI_i {i}","twin.kpi.win_rho":"window {a}–{b} · ρ_i {i}","twin.level.bad":"bad","twin.level.info":"info","twin.level.ok":"ok","twin.level.warn":"warn","twin.msg.applied":"Applied: {t}","twin.msg.boot1":"Twin started on {g} at steady state (12 h warm-up computed in browser). Reading tags: T, P, gas composition, G, T_in, catalyst.","twin.msg.boot2":"Parameter registry loaded: {n} parameters, {v} verified, {d} derived, {p} plant design. Click any number for its card.","twin.msg.cooler":"Cooler near limit: {u} % of capacity used (T_in {tin} °C, floor {fl} °C).","twin.msg.dismissed":"Dismissed: {t}","twin.msg.g_alarm":"ALARM: bed {t} °C above T_max {tm} °C for this grade (T_stick {ts} °C, P_eq {p} psia).","twin.msg.g_ok":"Sintering margin restored: T_stick {ts} °C, margin {m} K.","twin.msg.g_warn":"Margin to sintering shrinking: {m} K (T_stick {ts} °C).","twin.msg.g_warn_t":"Margin to sintering shrinking: {m} K (T_stick {ts} °C), reaches 10 K in ≈ {min} min at current trend.","twin.msg.hot_bad":"LOCAL ALARM at {w}: {a} m² of the section above T_max {tm} °C (local max {tl} °C) while the bed mean is {t} °C.","twin.msg.hot_ok":"Bed field normal: local max {t} °C.","twin.msg.hot_warn":"Local heating at {w}: {tl} °C, {d} K below T_max. Bed mean {t} °C.","twin.msg.man_bad":"Controller in MANUAL, reactor is open-loop unstable: twin look-ahead reaches T_max {tm} °C in {min} min.","twin.msg.man_ok":"Controller in MANUAL. Twin look-ahead: T_max not reached within 3 h.","twin.msg.op_applied":"Operator applied the agent transition plan.","twin.msg.op_dismissed":"Operator dismissed the plan; standard step change of set-points executed.","twin.msg.prov":"Provenance card opened: {t} ({s}).","twin.msg.rate":"Rate up to {p} t/h at constant feeds — residence time {tau} h; properties unchanged (ratio-controlled gas).","twin.msg.reserve":"Heat-removal reserve now {r} % (cooler {u} % used). Condensate {l} wt %.","twin.msg.s1":"Scenario 1: steady operation on {g}. All variables expected inside the grade window.","twin.msg.s3":"Scenario 3: operator pushes rate — iC5 to 15 mol %, catalyst +30 %, T set-point +2 K over 40 min.","twin.msg.s4":"Scenario 4: circulation near the wall degrades (static / sheeting), active fines accumulate there.","twin.msg.s5":"Scenario 5: new catalyst batch, activity +30 %.","twin.msg.s6":"Scenario 6: bed temperature controller tripped to MANUAL; cooling-water supply +2 K.","twin.msg.soft_fc":"Instantaneous MI {mi} outside window: bed MI_c leaves spec in ≈ {h} h.","twin.msg.soft_in":"Bed in window of {g}: MI_c {mi}, ρ_c {rho}.","twin.msg.soft_off":"Off-spec vs {g}: MI_c {mi} (target {mit}), ρ_c {rho} (target {rhot}).","twin.msg.tags":"Tags changed: {l}.","twin.msg.tr_done":"Transition complete: bed in window of {g}.","twin.msg.tr_family":"Transition planner in this POC covers the butene family (LLDPE-C4 ↔ HDPE-C4). Load one of them first.","twin.msg.tr_plan":"Planning {a} → {b}: simulating naive set-point change and agent strategy on a copy of the twin (30 h horizon).","twin.msg.tr_ready":"Plan ready in {s} s. Off-spec: naive {no} t / {nh} h, agent {ao} t / {ah} h (−{red} %). Naive ramp exceeds T_max for {over} h; agent keeps ≥ {marg} K to T_stick.","twin.note.target":"target {g}","twin.prm.C6act.d":"Hexene/butene effective reactivity in gas-ratio terms (incl. higher sorption of hexene)","twin.prm.C6act.n":"Fitted so LLDPE-C6 1.0/0.918 needs C6/C2 = 0.164 in gas, as in the Ziegler example of US 8,367,785 (MI 0.9, 0.918, 87 °C).","twin.prm.Cmet.d":"Heat capacity of vessel/internals","twin.prm.Cmet.n":"M_r·c_p,r = 1.4×10⁷ cal/K = 5.86×10⁷ J/K (Dadebo/McAuley).","twin.prm.Ea.d":"Activation energy (all constants)","twin.prm.Ea.n":"9000 cal/mol = 37.66 kJ/mol (Dadebo/McAuley); 9–12 kcal/mol in Touloupidis (AUTh thesis).","twin.prm.FmaxE.d":"Ethylene feed capacity","twin.prm.FmaxE.n":"≈6 × steady consumption (137–158 mol/s); not limiting in the scenarios.","twin.prm.FmaxH.d":"H₂ feed capacity","twin.prm.FmaxH.n":"H₂ inventory step LL→HD (≈27 kmol) in ≈40 min.","twin.prm.FmaxI.d":"iC5 feed capacity","twin.prm.FmaxI.n":"iC5 make-up capacity.","twin.prm.FmaxM.d":"Comonomer feed capacity","twin.prm.FmaxM.n":"≈7 × steady comonomer consumption.","twin.prm.G.d":"Cycle gas mass flow","twin.prm.G.n":"G = U·A·ρ_g: 0.6–0.9 m/s (US 10,266,625; US 11,078,307), A 12.6–15.9 m² (4.0–4.5 m ID), ρ_g 21–28 kg/m³ → 200–280 kg/s.","twin.prm.Kb.d":"Bed-level controller gain (product discharge)","twin.prm.Kb.n":"Level-control time constant 30 min ≪ residence time 4.7 h, so it does not shape grade dynamics.","twin.prm.Kc.d":"Bed temperature PI gain (on T_in set-point)","twin.prm.Kc.n":"DCS tuning. Reference: PI with τ_I = 1500 s in the Dadebo/Ghasem controller studies.","twin.prm.Msp.d":"Bed mass set-point (level control)","twin.prm.Msp.n":"B_w = 7×10⁴ kg in the Dadebo/McAuley model; inside the 60–80 t industrial window.","twin.prm.P.d":"Reactor pressure (held by N₂ make-up)","twin.prm.P.n":"Industrial 20.77 bar (IJCCE plant data); 20 atm in the Dadebo/McAuley model; 20–25 barg claimed in US 11,192,970.","twin.prm.Tcw.d":"Cooling water temperature","twin.prm.Tcw.n":"Cooling-tower water supply, site design basis.","twin.prm.Tg.d":"Mean gas temperature for inventory (moles in loop)","twin.prm.Tg.n":"Inventory sits mostly in the reactor at bed temperature; = T_ref 360 K of the Dadebo/McAuley model.","twin.prm.Ti.d":"Bed temperature PI integral time","twin.prm.Ti.n":"DCS tuning (see K_c).","twin.prm.Tref.d":"Reference temperature for k_ref (87 °C)","twin.prm.Tref.n":"T_ref = 360 K in the Dadebo/McAuley model.","twin.prm.UAl.d":"Heat loss to ambient","twin.prm.UAl.n":"Loss 0.3 MW at ΔT 60 K vs 15–17 MW generated (<2 %); insulated vessel and loop.","twin.prm.Vg.d":"Gas inventory volume, reactor + loop","twin.prm.Vg.n":"Reactor 4.5 m ID × ~30 m (US 5,266,276) with expanded section and loop ≈ 400–500 m³; Dadebo/McAuley model uses 500 m³ (−10 %).","twin.prm.aC4.d":"Density coefficient, butene","twin.prm.aC6.d":"Density coefficient, hexene (same form)","twin.prm.aC6.n":"Same form as butene; gives 3.0 mol % hexene at 0.918, as stated for hexene LLDPE in US 7,381,783.","twin.prm.aMI.d":"MI–Mw coefficient, calibrated so the LL-C4 grade gives MI 1.0","twin.prm.aMI.n":"Form MI = a·Mw^−3.5 from McAuley & MacGregor 1991; a fitted so LL-C4 at H₂/C₂ = 0.15 gives MI 1.0.","twin.prm.antA.d":"Antoine A for iC5, log10(P/bar) = A − B/(T/K + C)","twin.prm.antA.n":"NIST WebBook, 2-methylbutane (Williamham et al. 1945, 289–302 K).","twin.prm.antB.d":"Antoine B for iC5","twin.prm.antB.n":"NIST WebBook (see A).","twin.prm.antC.d":"Antoine C for iC5","twin.prm.antC.n":"NIST WebBook (see A).","twin.prm.appr.d":"Minimum cooler approach, T_in ≥ T_cw + ΔT_app","twin.prm.appr.n":"Minimum cooler approach, exchanger design.","twin.prm.bC4.d":"Density exponent","twin.prm.cMFR.d":"MFR(I21/I2) ≈ c·PDI (POC estimate from two-site PDI)","twin.prm.cMFR.n":"c = MFR/PDI: two-site PDI 3.66 → MFR 25.6; ZN gas-phase LLDPE MFR 24–28 (US 2017/0015768), ≈25 (US 6,384,158; Xu et al.).","twin.prm.cpPE.d":"Heat capacity of PE in the bed","twin.prm.cpPE.n":"PE SRM 1484: 2.09 J/(g·K) at 80 °C, 2.41 at 100 °C (NETZSCH, after Gaur & Wunderlich 1981) → 2.2 at 88 °C.","twin.prm.cpg.d":"Cycle gas heat capacity","twin.prm.cpg.n":"Mass-weighted ideal-gas c_p of the cycle gas at 360 K: 1.51–1.66 kJ/(kg·K) over the three grades (ethylene 1.71–1.80 at 350–375 K).","twin.prm.dDew.d":"T_min = T_dew + 10 °C","twin.prm.dH.d":"Heat of ethylene polymerization","twin.prm.dH.n":"894 cal/g = 3.74 MJ/kg (McAuley/Dadebo); 93.6 kJ/mol = 3.34 MJ/kg (ACS Catal.); 3.3–4.2 MJ/kg (US 4,042,767).","twin.prm.dStick.d":"T_max = T_stick − 10 °C","twin.prm.hMax.d":"Max transient H₂/C₂ ratio (feed / safety limit)","twin.prm.hMax.n":"1.65 × the HDPE target 0.363: room for H₂ overshoot (McAuley & MacGregor 1992).","twin.prm.kE.d":"Chain transfer to ethylene (both sites)","twin.prm.kH1.d":"Chain transfer to H₂, site 1","twin.prm.kH2.d":"Chain transfer to H₂, site 2","twin.prm.kM1.d":"Chain transfer to comonomer, site 1","twin.prm.kM2.d":"Chain transfer to comonomer, site 2","twin.prm.kcs.d":"Co-solubility rate boost per mole fraction iC5: Rp·(1+k_cs·y_iC5)","twin.prm.kcs.n":"+15 % at 10 mol % iC5 (2.1 bar). Lab: 2.5 bar n-pentane gave ×2.5 initial rate, 0.8 bar n-hexane ×1.8; model value is a conservative lower bound for steady rate.","twin.prm.kd.d":"Spontaneous site deactivation","twin.prm.kp1.d":"Ethylene propagation, site 1 (ratio basis)","twin.prm.kp2.d":"Ethylene propagation, site 2 (ratio basis)","twin.prm.kpM1.d":"Comonomer propagation, site 1","twin.prm.kpM2.d":"Comonomer propagation, site 2","twin.prm.kpScale.d":"Absolute scale of all rate constants (ratios kept)","twin.prm.kpScale.n":"Fitted so the LL-C4 base case gives 14.9 t/h; industrial reactors: 13.4 t/h (IJCCE plant data), 13.5 t/h (US 5,266,276).","twin.prm.lamI.d":"Latent heat of iC5 (≈24.7 kJ/mol)","twin.prm.lamI.n":"Δ_vapH(2-methylbutane) 24.7–25.2 kJ/mol (NIST) / 72.15 g/mol.","twin.prm.miTol.d":"Grade window on MI: ±15 %","twin.prm.miTol.n":"In-house window, tighter than IS 7328:2020 (±20 % for MI ≥ 1, ±30 % below 1).","twin.prm.nMI.d":"MI ∝ Mw^n","twin.prm.rampT.d":"Bed temperature ramp rate in transitions","twin.prm.rampT.n":"Plant operating procedure.","twin.prm.rho0.d":"Homopolymer density in ρ = ρ₀ − α·Cx^β","twin.prm.rhoTol.d":"Grade window on density: ±0.002","twin.prm.rhoTol.n":"In-house window, tighter than IS 7328:2020 (±0.004 LLDPE, ±0.003 HDPE).","twin.prm.site.d":"Potential sites per kg catalyst, each type","twin.prm.site.n":"2 × 0.25 = 0.5 mol Ti/kg ≈ Mg/Ti ≈ 20 on MgCl₂ (patent range Mg/Ti 10–50, US 10,138,310); only s_j·s_kp·F_cat is identifiable from production rate.","twin.prm.st1.d":"C1 = 1.175e-3·D^−59.736·MI^0.641","twin.prm.st2.d":"exponent of D in C1","twin.prm.st3.d":"exponent of MI in C1","twin.prm.st4.d":"C2 = 180.6·D^3.07·MFR^−0.077","twin.prm.st5.d":"exponent of D in C2","twin.prm.st6.d":"exponent of MFR in C2","twin.prm.st7.d":"P_eq = P_iC5 + 2.7·P_C6 (psia)","twin.prm.tauC.d":"Gas composition controllers time constant","twin.prm.tauC.n":"Ratio-controller tuning on gas composition.","twin.prm.tauHX.d":"Cooler (gas side) first-order lag","twin.prm.tauHX.n":"Gas-side lag of the cycle-gas cooler; set by exchanger size.","twin.prm.ventBase.d":"Base vent (bleed) as fraction of gas inventory","twin.prm.ventBase.n":"1 %/h of gas inventory ≈ 0.6 % of ethylene feed; bleed as manipulated variable per McAuley & MacGregor 1992.","twin.prm.ventMax.d":"Maximum vent rate","twin.prm.ventMax.n":"Flare / recovery capacity.","twin.prm.ventNaive.d":"Vent during a standard (naive) transition","twin.prm.ventNaive.n":"Operator practice in a standard transition; McAuley & MacGregor 1992 use bleed to speed up H₂ changes.","twin.prov.Fcat.f":"operator set-point; sites s_j per kg","twin.prov.Fcat.t":"Catalyst feed","twin.prov.MFR.f":"MFR ≈ c_MFR·PDI, PDI = Mw/Mn of the two-site blend","twin.prov.MFR.t":"Melt flow ratio I21/I2 (estimate)","twin.prov.MIc.f":"MI_i = a·Mw^(−3.5);  Mw = Σ_j w_j·2·DPn_j·m̄_j\n1/DPn_j = (k_trH,j[H₂] + k_trE[C₂] + k_trM,j[M]) / (k_pE,j[C₂] + k_pM,j[M])\nd ln MI_c/dt = (ln MI_i − ln MI_c)·R_p/M_bed","twin.prov.MIc.t":"Melt index, cumulative (bed)","twin.prov.MIi.f":"MI_i = a·Mw^(−3.5) (two-site Mw from gas composition)","twin.prov.MIi.t":"Melt index, instantaneous","twin.prov.Mbed.f":"dM/dt = R_p − Q_out (level control)","twin.prov.Mbed.t":"Bed mass","twin.prov.P.f":"held by N₂ make-up (fixed in POC)","twin.prov.P.t":"Reactor pressure","twin.prov.T.f":"dT/dt = (R_p·(−ΔH_p) − Q_cycle − Q_loss) / (M_bed·c_p,PE + C_met)\nQ_cycle = G·c_p,g·(T − T_in) + ṁ_liq·λ_iC5\nT_in: cooler lag τ_hx, set by PI on T (AUTO)","twin.prov.T.t":"Bed temperature","twin.prov.Tin.f":"dT_in/dt = (u − T_in)/τ_hx,  u = PI(T − T_set), T_cw + ΔT_app ≤ u ≤ T − 1","twin.prov.Tin.t":"Cycle gas inlet temperature","twin.prov.Tmax.f":"T_max = T_stick − 10 °C","twin.prov.Tmax.t":"Upper limit of the safe window","twin.prov.Tmin.f":"T_min = T_dew + 10 °C\nT_dew: P_sat,iC5(T_dew) = y_iC5·P, Antoine log10(P/bar) = A − B/(T + C)","twin.prov.Tmin.t":"Lower limit of the safe window","twin.prov.Tstick.f":"T_stick = −C1·P_eq + C2\nC1 = 1.175e-3·D^(−59.736)·MI^0.641\nC2 = 180.6·D^3.07·MFR^(−0.077)\nP_eq = P_iC5 + 2.7·P_C6  [psia]\nD, MI, MFR: cumulative (bed) values","twin.prov.Tstick.t":"Stickiness temperature of the bed resin","twin.prov.Tstick.x1":"Now: D {d}, MI {mi}, MFR {mfr}, P_eq {p} psia → C1 {c1}, C2 {c2} °C.","twin.prov.Tstick.x2":"Outside correlation range ({l}): metallocene range D 0.912–0.954, MI 0.5–42, MFR 16–36.","twin.prov.Tstick.x3":"Correlation was developed for metallocene resins; for Ziegler–Natta resins it is calibrated in the pilot.","twin.prov.cool.f":"use = (T − T_in)/(T − T_in,min), T_in,min = T_cw + ΔT_app","twin.prov.cool.t":"Cooler capacity used","twin.prov.h.f":"grade value from inversion of MI_i model; controller τ_c, vent v","twin.prov.h.t":"H₂/C₂ ratio in gas","twin.prov.hot.f":"∂θ/∂t + u·∇θ = ∇·(κ∇θ) + S₀·(a(x,y)·g(T) − 1) − γ(x,y)·θ\nθ = T_local − T_bed, S₀ = R_p(−ΔH_p)/C, g = Arrhenius factor\nlow circulation at the wall: u, κ, γ reduced; fines: a increased\nrisk area: T_local > T_max","twin.prov.hot.t":"Hot zone in bed section (2D proxy)","twin.prov.hot.x":"Proxy only. Grid 40×60 over a 5 m × 15 m section. Not a CFD result.","twin.prov.liq.f":"y_sat = P_sat,iC5(T_in)/P\nṁ_liq = (G/M_g)·max(0, y_iC5 − y_sat)/(1 − y_sat)·M_iC5\nshare = ṁ_liq / G","twin.prov.liq.t":"Condensed liquid in cycle gas","twin.prov.m.f":"grade value from inversion of ρ_i model","twin.prov.m.t":"Comonomer/C₂ ratio in gas","twin.prov.margin.f":"margin = T_stick − T_bed\nSafe window: T_min = T_dew + 10 °C ≤ T_bed ≤ T_max = T_stick − 10 °C\nAlarm when margin < 10 K (T_bed > T_max)","twin.prov.margin.t":"Margin to sintering","twin.prov.offspec.f":"off-spec = ∫ R_p dt while (MI_c, ρ_c) are outside both grade windows\nwindow: |ln(MI_c/MI_B)| ≤ ln(1.15), |ρ_c − ρ_B| ≤ 0.002\nagent: ln MI* = ln MI_B + K(ln MI_B − ln MI_c), 1/ρ* likewise, inverted to H₂/C₂, M/C₂; vent ≤ v_max; T ramp ≤ T_max − 2","twin.prov.offspec.t":"Off-spec during transition","twin.prov.prod.f":"R_p = Σ_j s_kp·k(T)·(1 + k_cs·y_iC5)·Y_j·(k_pE,j[C₂]·M_C₂ + k_pM,j[M]·M_M)\nk(T) = k_ref·exp(−E_a/R·(1/T − 1/T_ref))\ndY_j/dt = F_cat·s_j − k_d·Y_j − (Q_out/M_bed)·Y_j","twin.prov.prod.t":"Production rate","twin.prov.rhoc.f":"ρ_i = 0.966 − α·Cx^β, Cx = mol % comonomer in polymer\nCx from site-weighted copolymer composition (r₂ ≈ 0)\nd(1/ρ_c)/dt = (1/ρ_i − 1/ρ_c)·R_p/M_bed","twin.prov.rhoc.t":"Density, cumulative (bed)","twin.prov.rhoi.f":"ρ_i = 0.966 − α·Cx^β","twin.prov.rhoi.t":"Density, instantaneous","twin.prov.tags.f":"T, P, gas composition, G, T_in, catalyst — read from the twin (OPC UA read-only in the pilot)","twin.prov.tags.t":"Observer tags","twin.prov.tau.f":"τ = M_bed / Q_out,  Q_out = R_p + K_b·(M_bed − M_sp)","twin.prov.tau.t":"Bed residence time","twin.prov.yI.f":"ratio-controlled feed, P_iC5 = y_iC5·P","twin.prov.yI.t":"iC5 in cycle gas","twin.rec.auto":"Return bed temperature controller to AUTO and cut catalyst feed 20 %","twin.rec.auto_in":"T_max in {min} min","twin.rec.auto_none":"no crossing in 3 h","twin.rec.auto_why":"Look-ahead: {la}. Without feedback the heat generation grows faster with T than cycle-gas removal.","twin.rec.hot":"Raise cycle-gas velocity 10 % and cut catalyst feed 10 %","twin.rec.hot_why":"More gas through the bed restores circulation at the wall; less catalyst lowers the local heat source. Check static / fines removal in the field.","twin.rec.ic5":"Reduce iC5 to {y} mol %","twin.rec.ic5_t":"Reduce iC5 to {y} mol % and T set-point by {d} K","twin.rec.ic5_why":"Restores T_stick − T ≈ 14 K for the current resin (D {d}, MI {mi}). Cost: less condensed-mode cooling, lower rate.","twin.rec.none":"No pending recommendation. Agents never change set-points by themselves.","twin.rec.tr_title":"Apply agent transition plan → {b}","twin.rec.tr_why":"Overshoot H₂ and comonomer targets (gain K = {k}), vent up to {v} %/h while purging, temperature ramp held 2 K under T_max of the bed. Expected {ao} t off-spec vs {no} t. Dismiss = operator runs the standard step change.","twin.rec.trim":"Trim catalyst feed by 15 % to restore heat-removal reserve","twin.rec.trim_why":"Keeps ≥ 15 % cooler reserve so that a further upset can be absorbed by the temperature controller.","twin.scen.cooling":"Loss of cooling","twin.scen.hotspot":"Wall hot spot","twin.scen.push":"Push production","twin.scen.steady":"Steady grade","twin.scen.surge":"Catalyst activity surge","twin.scen.transition":"Grade transition A→B","twin.sch.cat":"catalyst","twin.sch.comp":"compressor","twin.sch.cooler":"cooler","twin.sch.cw":"cooling water","twin.sch.cyc":"cycle gas","twin.sch.disch":"product discharge","twin.sch.dist":"distributor","twin.sch.fb":"fluidized bed","twin.sch.feed1":"C₂, H₂, comonomer,","twin.sch.feed2":"iC5, N₂ make-up","twin.sch.liq":"condensed liquid","twin.sch.mbed":"bed mass","twin.sch.p":"pressure","twin.sch.prod":"production","twin.sch.tau":"residence time","twin.sch.tbed":"bed temperature","twin.sch.tin":"T_in after cooler","twin.sch.tstick":"T_stick of bed resin","twin.sl.fcat":"Catalyst feed (kg/h)","twin.sl.m":"Comonomer/C₂ (mol/mol)","twin.sl.tsp":"T set-point (°C)","twin.src.S_ABB.f":"Abbasi M.R., Shamiri A., Hussain M.A. Dynamic modeling and molecular weight distribution of ethylene copolymerization in an industrial gas-phase fluidized-bed reactor. Open manuscript, core.ac.uk/download/341795023.pdf","twin.src.S_ABB.n":"Table of two-site constants; density coefficients for butene.","twin.src.S_ABB.s":"Abbasi, Shamiri, Hussain","twin.src.S_C6.f":"US 8,367,785 (Ineos), Example 4: Ziegler catalyst, ethylene/1-hexene 0.918, MI 0.9, 87 °C: P_C6/P_C2 = 0.164, P_H2/P_C2 = 0.145. US 7,381,783: hexene LLDPE ≈3 mol % comonomer at density 0.918.","twin.src.S_C6.n":"Targets for α_C6 and f_C6. Model H₂/C₂ for this grade: 0.176 (patent 0.145).","twin.src.S_C6.s":"Hexene LLDPE data (patents)","twin.src.S_CAL.f":"Scale factors fitted once so that the base case reproduces sourced industrial numbers (production 13.4–13.5 t/h, MI of the grade). Only the product of fitted scale factors is identifiable; the note of each parameter gives the target.","twin.src.S_CAL.n":"Re-fitted to plant data in the pilot.","twin.src.S_CAL.s":"Fitted to sourced targets","twin.src.S_CPG.f":"Ethylene ideal-gas c_p 1.709 kJ/(kg·K) at 350 K, 1.799 at 375 K (Engineering ToolBox). Mixture c_p = Σ w_i·c_p,i for the three grade compositions (C₂H₄, 1-C₄/1-C₆, H₂, iC5, N₂): 1.51–1.66 kJ/(kg·K).","twin.src.S_CPG.n":"Ideal-gas basis; real-gas correction at 21 bar adds a few %.","twin.src.S_CPG.s":"Cycle gas heat capacity","twin.src.S_CPPE.f":"NETZSCH, PE standard reference material SRM 1484: 2.09 J/(g·K) at 80 °C, 2.41 J/(g·K) at 100 °C; Gaur U., Wunderlich B., J. Phys. Chem. Ref. Data 10:119, 1981.","twin.src.S_CPPE.n":"Interpolated to 88 °C.","twin.src.S_CPPE.s":"Heat capacity of PE","twin.src.S_DAB21.f":"Dabbagh F., Pirker S., Schneiderbauer S. A fast modeling of chemical reactions in industrial-scale olefin polymerization fluidized beds using recurrence CFD. AIChE J. 67(5):e17161, 2021.","twin.src.S_DAB21.n":"Basis for the pilot-grade fast CFD of the bed (L3).","twin.src.S_DAB21.s":"Dabbagh, Pirker, Schneiderbauer 2021","twin.src.S_DAD97.f":"Dadebo S.A., Bell M.L., McLellan P.J., McAuley K.B. Temperature control of industrial gas phase polyethylene reactors. J. Process Control, 1997.","twin.src.S_DAD97.n":"Open-loop unstable reactor; temperature control is mandatory.","twin.src.S_DAD97.s":"Dadebo et al. 1997","twin.src.S_DADT.f":"Parameter table of the industrial gas-phase PE reactor model of McAuley et al. / Dadebo et al. (J. Process Control 1997), as reproduced in Table 2 of PMC12944317 (refs. Dadebo 1997; Ghasem 2006, 2024): V_g 5×10⁵ (= 500 m³), B_w 7×10⁴ kg, M_r·c_p,r 1.4×10⁷ cal/K, E_a 9000 cal/mol, T_ref 360 K, P 20 atm, ΔH −894 (cal/g), k_d 10⁻⁴ 1/s. Some units in the reproduction carry typos and were read against the magnitudes.","twin.src.S_DADT.n":"pmc.ncbi.nlm.nih.gov/articles/PMC12944317","twin.src.S_DADT.s":"Dadebo/McAuley reactor model, parameter table","twin.src.S_DESIGN.f":"Set by the specific plant (equipment size, DCS tuning, operating procedure). The value is inside the range given in the note and is replaced by the customer’s data in the pilot.","twin.src.S_DESIGN.n":"design","twin.src.S_DESIGN.s":"Plant design / tuning value","twin.src.S_DH.f":"McAuley/Dadebo model: −894 cal/g (3.74 MJ/kg). ACS Catal. doi:10.1021/acscatal.9b03282: 93.6 kJ/mol (3.34 MJ/kg). US 4,042,767: 3,300–4,200 kJ/kg.","twin.src.S_DH.n":"Model value = McAuley.","twin.src.S_DH.s":"Heat of polymerization","twin.src.S_GEO.f":"US 5,266,276: 4.5 m ID, ≈30 m, 13.5 t/h HDPE at 90 °C. US 11,078,307: 4.0 m, 0.9 m/s. US 10,266,625: 2.1 MPa, 88 °C, 0.61 m/s, cycle gas density 28.0 kg/m³. US 10,471,407: 0.45 m/s. US 11,459,408: 1–5 ft/s.","twin.src.S_GEO.n":"Used to derive V_g and G.","twin.src.S_GEO.s":"Reactor geometry and gas velocity (patents)","twin.src.S_GRADE.f":"Grades are generic: MI and density as in commercial ZN gas-phase LLDPE film grades (e.g. Unipol LLDPE 1.0/0.920, Hanwha 3120; LL-1002 2.0/0.918, US 7,116,414). Gas ratios H₂/C₂ and M/C₂ come from inverting the property model, not from a plant.","twin.src.S_GRADE.n":"Gas ratios by model inversion.","twin.src.S_GRADE.s":"Generic grades","twin.src.S_ICA.f":"Alizadeh et al., Condensed mode cooling for ethylene polymerization, Part I. Macromol. Chem. Phys. 2015, doi:10.1002/macp.201400600: all ICAs raise the instantaneous rate on a supported ZN catalyst, more in the initial phase. As cited in Chem. Eng. J. (S1385894720338985): 2.5 bar n-pentane with 7 bar ethylene → ≈×2.5 initial rate; 0.8 bar n-hexane → ≈×1.8 initial activity.","twin.src.S_ICA.n":"Model uses a smaller, conservative effect on steady rate.","twin.src.S_ICA.s":"ICA rate effect (McKenna group)","twin.src.S_IND.f":"Control of a fluidized bed polyethylene reactor, Iran. J. Chem. Chem. Eng. (ijcce.ac.ir/article_6973): industrial data P 20.77 bar, production 3722 g/s (13.4 t/h), bed height 14 m. US 11,192,970: reactor pressure 20–25 barg.","twin.src.S_IND.n":"Plant data from the open literature.","twin.src.S_IND.s":"Industrial operating data","twin.src.S_L3.f":"The 2D bed section is an illustrative proxy driven by the live bed temperature. In the pilot it is replaced by the CFD-trained layer, following the published cases in “Proven in industry” (Dabbagh et al. 2021; Borealis/JKU).","twin.src.S_L3.n":"Not a CFD result.","twin.src.S_L3.s":"Illustrative bed section","twin.src.S_MCA90.f":"McAuley K.B., MacGregor J.F., Hamielec A.E. A kinetic model for industrial gas-phase ethylene copolymerization. AIChE J. 36(6):837–850, 1990. doi:10.1002/aic.690360605","twin.src.S_MCA90.n":"Two-site kinetics; constant ratios as reproduced by Abbasi, Shamiri, Hussain.","twin.src.S_MCA90.s":"McAuley, MacGregor, Hamielec 1990","twin.src.S_MCA91.f":"McAuley K.B., MacGregor J.F. On-line inference of polymer properties in an industrial polyethylene reactor. AIChE J. 37(6):825–835, 1991. doi:10.1002/aic.690370605","twin.src.S_MCA91.n":"Instantaneous/cumulative MI and density, first-order mixing with residence time.","twin.src.S_MCA91.s":"McAuley & MacGregor 1991","twin.src.S_MCA92.f":"McAuley K.B., MacGregor J.F. Optimal grade transitions in a gas phase polyethylene reactor. AIChE J. 38(10):1564–1576, 1992. doi:10.1002/aic.690381008","twin.src.S_MCA92.n":"Overshoot of H₂ / comonomer and vent manipulation in transitions.","twin.src.S_MCA92.s":"McAuley & MacGregor 1992","twin.src.S_MCA93.f":"McAuley K.B., MacGregor J.F. Nonlinear product property control in industrial gas-phase polyethylene reactors. AIChE J. 39(5):855–866, 1993. doi:10.1002/aic.690390514","twin.src.S_MCA93.n":"Property control structure.","twin.src.S_MCA93.s":"McAuley & MacGregor 1993","twin.src.S_MFR.f":"US 2017/0015768 (Univation): ZN products MFR I21/I2 ≈ 24–28. Xu, Wen, Xu, Melt flow ratio: a way to identify the type of polyethylene: ZN-LLD near 25. US 6,384,158: ZN gas-phase LLDPE MI 1.04, 0.918, MFR 25.","twin.src.S_MFR.n":"Target for c_MFR.","twin.src.S_MFR.s":"Melt flow ratio of ZN LLDPE","twin.src.S_NIST.f":"NIST Chemistry WebBook, 2-methylbutane (CAS 78-78-4): Antoine log10(P/bar) = A − B/(T + C), A 3.91457, B 1020.012, C −40.053 (Williamham et al. 1945, 289–302 K); Δ_vapH° 24.8–25.2 kJ/mol.","twin.src.S_NIST.n":"Antoine used up to ≈330 K (cooler outlet); slight extrapolation.","twin.src.S_NIST.s":"NIST WebBook, 2-methylbutane","twin.src.S_PAT.f":"Method for determining a stickiness temperature of a resin (Univation examples). USPTO full text: https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/10029226 ; EP 3968020 B1 (same title). Related EP 2893342 A1 (Univation, same title) found by search.","twin.src.S_PAT.n":"Correlation T_stick = −C1·P_eq + C2 and window T_dew+10…T_stick−10 as given in the task; C1 form restored from text. Patent number not re-checked in this build (patent hosts unreachable).","twin.src.S_PAT.s":"Stickiness patent (US 10,029,226 / EP family)","twin.src.S_SPEC.f":"IS 7328:2020 (BIS), cl. 5.2.1.1–5.2.1.2: density within ±4 kg/m³ of nominal for LLDPE, ±3 kg/m³ for HDPE; MFR within ±20 % (nominal ≥ 1) or ±30 % (nominal < 1).","twin.src.S_SPEC.n":"POC windows are tighter than the standard (in-house spec).","twin.src.S_SPEC.s":"Grade specification limits","twin.src.S_WIN.f":"Bed 60–80 t, 20–22 bar, 12–20 t/h, τ 3–6 h (S_IND, S_DADT). Bed temperature by density, US 11,952,445: 75–90 °C for 0.90–0.92, 80–100 °C for 0.92–0.94, 90–115 °C for 0.94–0.96 g/mL.","twin.src.S_WIN.n":"Grade temperatures chosen inside these ranges.","twin.src.S_WIN.s":"Typical operating window","twin.status.derived":"derived","twin.status.design":"design","twin.status.illustrative":"illustrative","twin.status.verified":"verified","twin.sv.act":"activity ×{a}","twin.sv.cool":"cooler {u} % used · G {g} kg/s","twin.sv.tstick":"{t} °C (margin {m} K)","twin.tag.act":"catalyst activity ×{a}","twin.tag.cat":"catalyst {a}→{b} kg/h","twin.tag.tset":"T set {a}→{b} °C","twin.th.status":"Status","twin.th.sym":"Symbol","twin.th.unit":"Unit","twin.th.val":"Value","twin.tr.agent":"Agent strategy (K {k}, vent {v} %/h)","twin.tr.naive":"Naive step change","twin.tr.res":"off-spec · {h} h · above T_max {o} h · vent {v} t C₂","twin.tr.run":"Run scenario 2 to plan a transition.","unit.1/h":"1/h","unit.K/h":"K/h","unit.g/10 min":"g/10 min","unit.g/10min·(g/mol)^3.5":"g/10min·(g/mol)^3.5","unit.h":"h","unit.kg/h":"kg/h","unit.kmol/h":"kmol/h","unit.min":"min","unit.mol %":"mol %","unit.mol/kg cat":"mol/kg cat","unit.t":"t","unit.t/h":"t/h","unit.wt %":"wt %"};
+function _t(k,v){var s=I18N[k];if(s===undefined){return k}if(v){s=s.replace(/\{(\w+)\}/g,function(m,n){return Object.prototype.hasOwnProperty.call(v,n)?String(v[n]):m})}return s}
+var _nfc={},_nloc=(function(){try{var p=new Intl.NumberFormat(_i18n.intl,{minimumFractionDigits:1}).formatToParts(1.5);for(var i=0;i<p.length;i++)if(p[i].type==='decimal'&&p[i].value===_i18n.dec)return _i18n.intl}catch(e){}return _i18n.intl_fb||_i18n.intl})();
+function _n(x,d){x=Number(x);d=d||0;if(!isFinite(x))return String(x);var f=_nfc[d]||(_nfc[d]=new Intl.NumberFormat(_nloc,{minimumFractionDigits:d,maximumFractionDigits:d,useGrouping:_i18n.grouping}));return f.format(x)}
+function _ns(s){s=String(s);return _i18n.dec==='.'?s:s.replace(/(\d)\.(\d)/g,'$1'+_i18n.dec+'$2')}
+function _words(s){if(window.Intl&&Intl.Segmenter&&/[\u0E00-\u0E7F]/.test(s)){var o=[];for(var p of new Intl.Segmenter('th',{granularity:'word'}).segment(s))o.push(p.segment);return o}return s.split(/(\s+)/)}
+function _fit(g,s,x,y,maxW,sk,lh){if(g.measureText(s).width<=maxW)return g.fillText(s,x,y),1;if(sk&&I18N[sk]!==undefined&&g.measureText(I18N[sk]).width<=maxW)return g.fillText(I18N[sk],x,y),1;
+var w=_words(s),ln='',L=[];for(var i=0;i<w.length;i++){var c=ln+w[i];if(ln&&g.measureText(c.trim()).width>maxW){L.push(ln.trim());ln=w[i]}else ln=c}if(ln.trim())L.push(ln.trim());
+lh=lh||parseFloat(g.font)*1.25||13;var f0=g.font,sz=parseFloat((f0.match(/([\d.]+)px/)||[0,12])[1]);for(var j=0;j<L.length;j++){while(g.measureText(L[j]).width>maxW&&sz>7){sz-=0.5;g.font=f0.replace(/[\d.]+px/,sz+'px')}g.fillText(L[j],x,y+j*lh);g.font=f0}return L.length}</script>
 </head>
 <body>
-<div class="sitebar"><a class="sb-logo" href="/"><span>CIRIYC PRO</span><span class="sb-sub">RESEARCH</span><img src="/star.png" alt=""></a><a class="sb-back" href="/#demos">← All demos</a></div>
+<div class="sitebar"><a class="sb-logo" href="/"><span>CIRIYC PRO</span><span class="sb-sub">RESEARCH</span><img src="/star.png" alt=""></a><span class="lsw-a"><details class="lsw" data-i18n-ui><summary aria-label="Language" title="Language"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.6 2.7 3.9 5.9 3.9 9.5s-1.3 6.8-3.9 9.5M12 2.5C9.4 5.2 8.1 8.4 8.1 12s1.3 6.8 3.9 9.5"/></svg><span class="lsw-c">EN</span></summary><ul><li><a href="/stands/gas-phase-pe-twin/" hreflang="en" lang="en" data-lsw="en" aria-current="true">English</a></li><li><a href="/au/stands/gas-phase-pe-twin/" hreflang="en-AU" lang="en-AU" data-lsw="en-AU">English (AU)</a></li><li><a href="/kz/stands/gas-phase-pe-twin/" hreflang="kk-KZ" lang="kk" data-lsw="kk">Қазақша <span class="beta">beta</span></a></li><li><a href="/th/stands/gas-phase-pe-twin/" hreflang="th-TH" lang="th" data-lsw="th">ไทย <span class="beta">beta</span></a></li></ul></details><a class="sb-back" href="/#demos">← All demos</a></span></div>
 
 <div class="wrap">
   <div class="hero">
@@ -332,6 +381,7 @@ canvas{max-width:100%}.card,.col{min-width:0}html{overflow-y:scroll}
 <footer class="disc">
   <div class="wrap">
     <b>What this page is.</b> Computed live: the reactor model (two-site kinetics, gas loop with cooler and condensation, bed temperature control), instantaneous and cumulative polymer properties, the stickiness temperature and safe window, the transition planner and all agents. Illustrative: the bed section stands in for the CFD-trained layer of the pilot; see “Proven in industry” for the published cases this approach follows. Numbers: each parameter in the table above is verified against a source, derived from sourced data (formula given), or a plant design value inside a stated range; fitted scale factors reproduce published industrial production rates and grade data. The stickiness correlation was developed for metallocene resins; for Ziegler–Natta resins it is shown as is and is to be calibrated in the pilot. Grade names are generic. Structure and numbers from open literature and patents. <b>Not calibrated to any specific plant.</b> <span style="color:#888">· Stand version 0.4.0 · 2026-11-23</span>
+    <div class="lsw-foot" data-i18n-ui><span><a href="/stands/gas-phase-pe-twin/" hreflang="en" lang="en" data-lsw="en" aria-current="true">English</a></span><span><a href="/au/stands/gas-phase-pe-twin/" hreflang="en-AU" lang="en-AU" data-lsw="en-AU">English (AU)</a></span><span><a href="/kz/stands/gas-phase-pe-twin/" hreflang="kk-KZ" lang="kk" data-lsw="kk">Қазақша</a> <span class="beta">beta</span></span><span><a href="/th/stands/gas-phase-pe-twin/" hreflang="th-TH" lang="th" data-lsw="th">ไทย</a> <span class="beta">beta</span></span></div>
   </div>
 </footer>
 
@@ -351,96 +401,96 @@ const MWM = { C4: 0.05611, C6: 0.08416 };
 //         set by the specific plant, value inside a stated range; replaced by plant data in the pilot.
 const PRM = {};
 function p(id, v, unit, sym, desc, src, status, note) { PRM[id] = { id, v, unit, sym, desc, src, status, note: note || '' }; }
-p('P', 21, 'bar', 'P', 'Reactor pressure (held by N₂ make-up)', 'S_IND', 'verified', 'Industrial 20.77 bar (IJCCE plant data); 20 atm in the Dadebo/McAuley model; 20–25 barg claimed in US 11,192,970.');
-p('Vg', 450, 'm³', 'V_g', 'Gas inventory volume, reactor + loop', 'S_GEO', 'derived', 'Reactor 4.5 m ID × ~30 m (US 5,266,276) with expanded section and loop ≈ 400–500 m³; Dadebo/McAuley model uses 500 m³ (−10 %).');
-p('Tg', 360, 'K', 'T_g', 'Mean gas temperature for inventory (moles in loop)', 'S_DADT', 'derived', 'Inventory sits mostly in the reactor at bed temperature; = T_ref 360 K of the Dadebo/McAuley model.');
-p('Msp', 70000, 'kg', 'M_bed', 'Bed mass set-point (level control)', 'S_DADT', 'verified', 'B_w = 7×10⁴ kg in the Dadebo/McAuley model; inside the 60–80 t industrial window.');
-p('Kb', 1 / 1800, '1/s', 'K_b', 'Bed-level controller gain (product discharge)', 'S_DESIGN', 'design', 'Level-control time constant 30 min ≪ residence time 4.7 h, so it does not shape grade dynamics.');
-p('kp1', 85, 'L/(mol·s)', 'k_p,E,1', 'Ethylene propagation, site 1 (ratio basis)', 'S_MCA90', 'verified');
-p('kp2', 85, 'L/(mol·s)', 'k_p,E,2', 'Ethylene propagation, site 2 (ratio basis)', 'S_MCA90', 'verified');
-p('kpM1', 2, 'L/(mol·s)', 'k_p,M,1', 'Comonomer propagation, site 1', 'S_MCA90', 'verified');
-p('kpM2', 15, 'L/(mol·s)', 'k_p,M,2', 'Comonomer propagation, site 2', 'S_MCA90', 'verified');
-p('kH1', 0.088, 'L/(mol·s)', 'k_tr,H,1', 'Chain transfer to H₂, site 1', 'S_MCA90', 'verified');
-p('kH2', 0.37, 'L/(mol·s)', 'k_tr,H,2', 'Chain transfer to H₂, site 2', 'S_MCA90', 'verified');
-p('kM1', 0.006, 'L/(mol·s)', 'k_tr,M,1', 'Chain transfer to comonomer, site 1', 'S_MCA90', 'verified');
-p('kM2', 0.11, 'L/(mol·s)', 'k_tr,M,2', 'Chain transfer to comonomer, site 2', 'S_MCA90', 'verified');
-p('kE', 0.0021, 'L/(mol·s)', 'k_tr,E', 'Chain transfer to ethylene (both sites)', 'S_MCA90', 'verified');
-p('kd', 1e-4, '1/s', 'k_d', 'Spontaneous site deactivation', 'S_MCA90', 'verified');
-p('kpScale', 9.2, '—', 's_kp', 'Absolute scale of all rate constants (ratios kept)', 'S_CAL', 'derived', 'Fitted so the LL-C4 base case gives 14.9 t/h; industrial reactors: 13.4 t/h (IJCCE plant data), 13.5 t/h (US 5,266,276).');
-p('Ea', 37656, 'J/mol', 'E_a', 'Activation energy (all constants)', 'S_DADT', 'verified', '9000 cal/mol = 37.66 kJ/mol (Dadebo/McAuley); 9–12 kcal/mol in Touloupidis (AUTh thesis).');
-p('Tref', 360.15, 'K', 'T_ref', 'Reference temperature for k_ref (87 °C)', 'S_DADT', 'verified', 'T_ref = 360 K in the Dadebo/McAuley model.');
-p('site', 0.25, 'mol/kg cat', 's_j', 'Potential sites per kg catalyst, each type', 'S_CAL', 'derived', '2 × 0.25 = 0.5 mol Ti/kg ≈ Mg/Ti ≈ 20 on MgCl₂ (patent range Mg/Ti 10–50, US 10,138,310); only s_j·s_kp·F_cat is identifiable from production rate.');
-p('C6act', 1.884, '—', 'f_C6', 'Hexene/butene effective reactivity in gas-ratio terms (incl. higher sorption of hexene)', 'S_C6', 'derived', 'Fitted so LLDPE-C6 1.0/0.918 needs C6/C2 = 0.164 in gas, as in the Ziegler example of US 8,367,785 (MI 0.9, 0.918, 87 °C).');
-p('kcs', 1.5, '—', 'k_cs', 'Co-solubility rate boost per mole fraction iC5: Rp·(1+k_cs·y_iC5)', 'S_ICA', 'derived', '+15 % at 10 mol % iC5 (2.1 bar). Lab: 2.5 bar n-pentane gave ×2.5 initial rate, 0.8 bar n-hexane ×1.8; model value is a conservative lower bound for steady rate.');
-p('aMI', 0, 'g/10min·(g/mol)^3.5', 'a', 'MI–Mw coefficient, calibrated so the LL-C4 grade gives MI 1.0', 'S_MCA91', 'derived', 'Form MI = a·Mw^−3.5 from McAuley & MacGregor 1991; a fitted so LL-C4 at H₂/C₂ = 0.15 gives MI 1.0.');
-p('nMI', -3.5, '—', 'n', 'MI ∝ Mw^n', 'S_MCA91', 'verified');
-p('cMFR', 7, '—', 'c_MFR', 'MFR(I21/I2) ≈ c·PDI (POC estimate from two-site PDI)', 'S_MFR', 'derived', 'c = MFR/PDI: two-site PDI 3.66 → MFR 25.6; ZN gas-phase LLDPE MFR 24–28 (US 2017/0015768), ≈25 (US 6,384,158; Xu et al.).');
-p('rho0', 0.966, 'g/cm³', 'ρ₀', 'Homopolymer density in ρ = ρ₀ − α·Cx^β', 'S_ABB', 'verified');
-p('aC4', 0.02386, '—', 'α_C4', 'Density coefficient, butene', 'S_ABB', 'verified');
-p('bC4', 0.514, '—', 'β', 'Density exponent', 'S_ABB', 'verified');
-p('aC6', 0.0273, '—', 'α_C6', 'Density coefficient, hexene (same form)', 'S_C6', 'derived', 'Same form as butene; gives 3.0 mol % hexene at 0.918, as stated for hexene LLDPE in US 7,381,783.');
-p('dH', 3.74e6, 'J/kg', '−ΔH_p', 'Heat of ethylene polymerization', 'S_DH', 'verified', '894 cal/g = 3.74 MJ/kg (McAuley/Dadebo); 93.6 kJ/mol = 3.34 MJ/kg (ACS Catal.); 3.3–4.2 MJ/kg (US 4,042,767).');
-p('cpPE', 2200, 'J/(kg·K)', 'c_p,PE', 'Heat capacity of PE in the bed', 'S_CPPE', 'verified', 'PE SRM 1484: 2.09 J/(g·K) at 80 °C, 2.41 at 100 °C (NETZSCH, after Gaur & Wunderlich 1981) → 2.2 at 88 °C.');
-p('Cmet', 5.86e7, 'J/K', 'C_met', 'Heat capacity of vessel/internals', 'S_DADT', 'verified', 'M_r·c_p,r = 1.4×10⁷ cal/K = 5.86×10⁷ J/K (Dadebo/McAuley).');
-p('G', 220, 'kg/s', 'G', 'Cycle gas mass flow', 'S_GEO', 'derived', 'G = U·A·ρ_g: 0.6–0.9 m/s (US 10,266,625; US 11,078,307), A 12.6–15.9 m² (4.0–4.5 m ID), ρ_g 21–28 kg/m³ → 200–280 kg/s.');
-p('cpg', 1600, 'J/(kg·K)', 'c_p,g', 'Cycle gas heat capacity', 'S_CPG', 'derived', 'Mass-weighted ideal-gas c_p of the cycle gas at 360 K: 1.51–1.66 kJ/(kg·K) over the three grades (ethylene 1.71–1.80 at 350–375 K).');
-p('lamI', 3.42e5, 'J/kg', 'λ_iC5', 'Latent heat of iC5 (≈24.7 kJ/mol)', 'S_NIST', 'verified', 'Δ_vapH(2-methylbutane) 24.7–25.2 kJ/mol (NIST) / 72.15 g/mol.');
-p('UAl', 5000, 'W/K', 'UA', 'Heat loss to ambient', 'S_DESIGN', 'design', 'Loss 0.3 MW at ΔT 60 K vs 15–17 MW generated (<2 %); insulated vessel and loop.');
-p('tauHX', 120, 's', 'τ_hx', 'Cooler (gas side) first-order lag', 'S_DESIGN', 'design', 'Gas-side lag of the cycle-gas cooler; set by exchanger size.');
-p('Tcw', 303.15, 'K', 'T_cw', 'Cooling water temperature', 'S_DESIGN', 'design', 'Cooling-tower water supply, site design basis.');
-p('appr', 5, 'K', 'ΔT_app', 'Minimum cooler approach, T_in ≥ T_cw + ΔT_app', 'S_DESIGN', 'design', 'Minimum cooler approach, exchanger design.');
-p('Kc', 6, 'K/K', 'K_c', 'Bed temperature PI gain (on T_in set-point)', 'S_DESIGN', 'design', 'DCS tuning. Reference: PI with τ_I = 1500 s in the Dadebo/Ghasem controller studies.');
-p('Ti', 900, 's', 'T_i', 'Bed temperature PI integral time', 'S_DESIGN', 'design', 'DCS tuning (see K_c).');
-p('tauC', 300, 's', 'τ_c', 'Gas composition controllers time constant', 'S_DESIGN', 'design', 'Ratio-controller tuning on gas composition.');
-p('ventBase', 0.01, '1/h', 'v₀', 'Base vent (bleed) as fraction of gas inventory', 'S_DESIGN', 'design', '1 %/h of gas inventory ≈ 0.6 % of ethylene feed; bleed as manipulated variable per McAuley & MacGregor 1992.');
-p('ventNaive', 0.1, '1/h', 'v_tr', 'Vent during a standard (naive) transition', 'S_DESIGN', 'design', 'Operator practice in a standard transition; McAuley & MacGregor 1992 use bleed to speed up H₂ changes.');
-p('rampT', 5, 'K/h', 'r_T', 'Bed temperature ramp rate in transitions', 'S_DESIGN', 'design', 'Plant operating procedure.');
-p('hMax', 0.6, '—', 'h_max', 'Max transient H₂/C₂ ratio (feed / safety limit)', 'S_DESIGN', 'design', '1.65 × the HDPE target 0.363: room for H₂ overshoot (McAuley & MacGregor 1992).');
-p('ventMax', 0.25, '1/h', 'v_max', 'Maximum vent rate', 'S_DESIGN', 'design', 'Flare / recovery capacity.');
-p('FmaxE', 900, 'mol/s', 'F_E,max', 'Ethylene feed capacity', 'S_DESIGN', 'design', '≈6 × steady consumption (137–158 mol/s); not limiting in the scenarios.');
-p('FmaxH', 12, 'mol/s', 'F_H,max', 'H₂ feed capacity', 'S_DESIGN', 'design', 'H₂ inventory step LL→HD (≈27 kmol) in ≈40 min.');
-p('FmaxM', 40, 'mol/s', 'F_M,max', 'Comonomer feed capacity', 'S_DESIGN', 'design', '≈7 × steady comonomer consumption.');
-p('FmaxI', 40, 'mol/s', 'F_I,max', 'iC5 feed capacity', 'S_DESIGN', 'design', 'iC5 make-up capacity.');
-p('antA', 3.91457, '—', 'A', 'Antoine A for iC5, log10(P/bar) = A − B/(T/K + C)', 'S_NIST', 'verified', 'NIST WebBook, 2-methylbutane (Williamham et al. 1945, 289–302 K).');
-p('antB', 1020.01, 'K', 'B', 'Antoine B for iC5', 'S_NIST', 'verified', 'NIST WebBook (see A).');
-p('antC', -40.053, 'K', 'C', 'Antoine C for iC5', 'S_NIST', 'verified', 'NIST WebBook (see A).');
-p('st1', 1.175e-3, '—', 'C1 coef', 'C1 = 1.175e-3·D^−59.736·MI^0.641', 'S_PAT', 'verified');
-p('st2', -59.736, '—', 'C1 D-exp', 'exponent of D in C1', 'S_PAT', 'verified');
-p('st3', 0.641, '—', 'C1 MI-exp', 'exponent of MI in C1', 'S_PAT', 'verified');
-p('st4', 180.6, '°C', 'C2 coef', 'C2 = 180.6·D^3.07·MFR^−0.077', 'S_PAT', 'verified');
-p('st5', 3.07, '—', 'C2 D-exp', 'exponent of D in C2', 'S_PAT', 'verified');
-p('st6', -0.077, '—', 'C2 MFR-exp', 'exponent of MFR in C2', 'S_PAT', 'verified');
-p('st7', 2.7, '—', 'w_C6', 'P_eq = P_iC5 + 2.7·P_C6 (psia)', 'S_PAT', 'verified');
-p('dStick', 10, 'K', 'Δ_stick', 'T_max = T_stick − 10 °C', 'S_PAT', 'verified');
-p('dDew', 10, 'K', 'Δ_dew', 'T_min = T_dew + 10 °C', 'S_PAT', 'verified');
-p('miTol', 0.15, '—', 'tol_MI', 'Grade window on MI: ±15 %', 'S_SPEC', 'design', 'In-house window, tighter than IS 7328:2020 (±20 % for MI ≥ 1, ±30 % below 1).');
-p('rhoTol', 0.002, 'g/cm³', 'tol_ρ', 'Grade window on density: ±0.002', 'S_SPEC', 'design', 'In-house window, tighter than IS 7328:2020 (±0.004 LLDPE, ±0.003 HDPE).');
+p('P', 21, 'bar', 'P', _t('twin.prm.P.d'), 'S_IND', 'verified', _t('twin.prm.P.n'));
+p('Vg', 450, 'm³', 'V_g', _t('twin.prm.Vg.d'), 'S_GEO', 'derived', _t('twin.prm.Vg.n'));
+p('Tg', 360, 'K', 'T_g', _t('twin.prm.Tg.d'), 'S_DADT', 'derived', _t('twin.prm.Tg.n'));
+p('Msp', 70000, 'kg', 'M_bed', _t('twin.prm.Msp.d'), 'S_DADT', 'verified', _t('twin.prm.Msp.n'));
+p('Kb', 1 / 1800, '1/s', 'K_b', _t('twin.prm.Kb.d'), 'S_DESIGN', 'design', _t('twin.prm.Kb.n'));
+p('kp1', 85, 'L/(mol·s)', 'k_p,E,1', _t('twin.prm.kp1.d'), 'S_MCA90', 'verified');
+p('kp2', 85, 'L/(mol·s)', 'k_p,E,2', _t('twin.prm.kp2.d'), 'S_MCA90', 'verified');
+p('kpM1', 2, 'L/(mol·s)', 'k_p,M,1', _t('twin.prm.kpM1.d'), 'S_MCA90', 'verified');
+p('kpM2', 15, 'L/(mol·s)', 'k_p,M,2', _t('twin.prm.kpM2.d'), 'S_MCA90', 'verified');
+p('kH1', 0.088, 'L/(mol·s)', 'k_tr,H,1', _t('twin.prm.kH1.d'), 'S_MCA90', 'verified');
+p('kH2', 0.37, 'L/(mol·s)', 'k_tr,H,2', _t('twin.prm.kH2.d'), 'S_MCA90', 'verified');
+p('kM1', 0.006, 'L/(mol·s)', 'k_tr,M,1', _t('twin.prm.kM1.d'), 'S_MCA90', 'verified');
+p('kM2', 0.11, 'L/(mol·s)', 'k_tr,M,2', _t('twin.prm.kM2.d'), 'S_MCA90', 'verified');
+p('kE', 0.0021, 'L/(mol·s)', 'k_tr,E', _t('twin.prm.kE.d'), 'S_MCA90', 'verified');
+p('kd', 1e-4, '1/s', 'k_d', _t('twin.prm.kd.d'), 'S_MCA90', 'verified');
+p('kpScale', 9.2, '—', 's_kp', _t('twin.prm.kpScale.d'), 'S_CAL', 'derived', _t('twin.prm.kpScale.n'));
+p('Ea', 37656, 'J/mol', 'E_a', _t('twin.prm.Ea.d'), 'S_DADT', 'verified', _t('twin.prm.Ea.n'));
+p('Tref', 360.15, 'K', 'T_ref', _t('twin.prm.Tref.d'), 'S_DADT', 'verified', _t('twin.prm.Tref.n'));
+p('site', 0.25, 'mol/kg cat', 's_j', _t('twin.prm.site.d'), 'S_CAL', 'derived', _t('twin.prm.site.n'));
+p('C6act', 1.884, '—', 'f_C6', _t('twin.prm.C6act.d'), 'S_C6', 'derived', _t('twin.prm.C6act.n'));
+p('kcs', 1.5, '—', 'k_cs', _t('twin.prm.kcs.d'), 'S_ICA', 'derived', _t('twin.prm.kcs.n'));
+p('aMI', 0, 'g/10min·(g/mol)^3.5', 'a', _t('twin.prm.aMI.d'), 'S_MCA91', 'derived', _t('twin.prm.aMI.n'));
+p('nMI', -3.5, '—', 'n', _t('twin.prm.nMI.d'), 'S_MCA91', 'verified');
+p('cMFR', 7, '—', 'c_MFR', _t('twin.prm.cMFR.d'), 'S_MFR', 'derived', _t('twin.prm.cMFR.n'));
+p('rho0', 0.966, 'g/cm³', 'ρ₀', _t('twin.prm.rho0.d'), 'S_ABB', 'verified');
+p('aC4', 0.02386, '—', 'α_C4', _t('twin.prm.aC4.d'), 'S_ABB', 'verified');
+p('bC4', 0.514, '—', 'β', _t('twin.prm.bC4.d'), 'S_ABB', 'verified');
+p('aC6', 0.0273, '—', 'α_C6', _t('twin.prm.aC6.d'), 'S_C6', 'derived', _t('twin.prm.aC6.n'));
+p('dH', 3.74e6, 'J/kg', '−ΔH_p', _t('twin.prm.dH.d'), 'S_DH', 'verified', _t('twin.prm.dH.n'));
+p('cpPE', 2200, 'J/(kg·K)', 'c_p,PE', _t('twin.prm.cpPE.d'), 'S_CPPE', 'verified', _t('twin.prm.cpPE.n'));
+p('Cmet', 5.86e7, 'J/K', 'C_met', _t('twin.prm.Cmet.d'), 'S_DADT', 'verified', _t('twin.prm.Cmet.n'));
+p('G', 220, 'kg/s', 'G', _t('twin.prm.G.d'), 'S_GEO', 'derived', _t('twin.prm.G.n'));
+p('cpg', 1600, 'J/(kg·K)', 'c_p,g', _t('twin.prm.cpg.d'), 'S_CPG', 'derived', _t('twin.prm.cpg.n'));
+p('lamI', 3.42e5, 'J/kg', 'λ_iC5', _t('twin.prm.lamI.d'), 'S_NIST', 'verified', _t('twin.prm.lamI.n'));
+p('UAl', 5000, 'W/K', 'UA', _t('twin.prm.UAl.d'), 'S_DESIGN', 'design', _t('twin.prm.UAl.n'));
+p('tauHX', 120, 's', 'τ_hx', _t('twin.prm.tauHX.d'), 'S_DESIGN', 'design', _t('twin.prm.tauHX.n'));
+p('Tcw', 303.15, 'K', 'T_cw', _t('twin.prm.Tcw.d'), 'S_DESIGN', 'design', _t('twin.prm.Tcw.n'));
+p('appr', 5, 'K', 'ΔT_app', _t('twin.prm.appr.d'), 'S_DESIGN', 'design', _t('twin.prm.appr.n'));
+p('Kc', 6, 'K/K', 'K_c', _t('twin.prm.Kc.d'), 'S_DESIGN', 'design', _t('twin.prm.Kc.n'));
+p('Ti', 900, 's', 'T_i', _t('twin.prm.Ti.d'), 'S_DESIGN', 'design', _t('twin.prm.Ti.n'));
+p('tauC', 300, 's', 'τ_c', _t('twin.prm.tauC.d'), 'S_DESIGN', 'design', _t('twin.prm.tauC.n'));
+p('ventBase', 0.01, '1/h', 'v₀', _t('twin.prm.ventBase.d'), 'S_DESIGN', 'design', _t('twin.prm.ventBase.n'));
+p('ventNaive', 0.1, '1/h', 'v_tr', _t('twin.prm.ventNaive.d'), 'S_DESIGN', 'design', _t('twin.prm.ventNaive.n'));
+p('rampT', 5, 'K/h', 'r_T', _t('twin.prm.rampT.d'), 'S_DESIGN', 'design', _t('twin.prm.rampT.n'));
+p('hMax', 0.6, '—', 'h_max', _t('twin.prm.hMax.d'), 'S_DESIGN', 'design', _t('twin.prm.hMax.n'));
+p('ventMax', 0.25, '1/h', 'v_max', _t('twin.prm.ventMax.d'), 'S_DESIGN', 'design', _t('twin.prm.ventMax.n'));
+p('FmaxE', 900, 'mol/s', 'F_E,max', _t('twin.prm.FmaxE.d'), 'S_DESIGN', 'design', _t('twin.prm.FmaxE.n'));
+p('FmaxH', 12, 'mol/s', 'F_H,max', _t('twin.prm.FmaxH.d'), 'S_DESIGN', 'design', _t('twin.prm.FmaxH.n'));
+p('FmaxM', 40, 'mol/s', 'F_M,max', _t('twin.prm.FmaxM.d'), 'S_DESIGN', 'design', _t('twin.prm.FmaxM.n'));
+p('FmaxI', 40, 'mol/s', 'F_I,max', _t('twin.prm.FmaxI.d'), 'S_DESIGN', 'design', _t('twin.prm.FmaxI.n'));
+p('antA', 3.91457, '—', 'A', _t('twin.prm.antA.d'), 'S_NIST', 'verified', _t('twin.prm.antA.n'));
+p('antB', 1020.01, 'K', 'B', _t('twin.prm.antB.d'), 'S_NIST', 'verified', _t('twin.prm.antB.n'));
+p('antC', -40.053, 'K', 'C', _t('twin.prm.antC.d'), 'S_NIST', 'verified', _t('twin.prm.antC.n'));
+p('st1', 1.175e-3, '—', 'C1 coef', _t('twin.prm.st1.d'), 'S_PAT', 'verified');
+p('st2', -59.736, '—', 'C1 D-exp', _t('twin.prm.st2.d'), 'S_PAT', 'verified');
+p('st3', 0.641, '—', 'C1 MI-exp', _t('twin.prm.st3.d'), 'S_PAT', 'verified');
+p('st4', 180.6, '°C', 'C2 coef', _t('twin.prm.st4.d'), 'S_PAT', 'verified');
+p('st5', 3.07, '—', 'C2 D-exp', _t('twin.prm.st5.d'), 'S_PAT', 'verified');
+p('st6', -0.077, '—', 'C2 MFR-exp', _t('twin.prm.st6.d'), 'S_PAT', 'verified');
+p('st7', 2.7, '—', 'w_C6', _t('twin.prm.st7.d'), 'S_PAT', 'verified');
+p('dStick', 10, 'K', 'Δ_stick', _t('twin.prm.dStick.d'), 'S_PAT', 'verified');
+p('dDew', 10, 'K', 'Δ_dew', _t('twin.prm.dDew.d'), 'S_PAT', 'verified');
+p('miTol', 0.15, '—', 'tol_MI', _t('twin.prm.miTol.d'), 'S_SPEC', 'design', _t('twin.prm.miTol.n'));
+p('rhoTol', 0.002, 'g/cm³', 'tol_ρ', _t('twin.prm.rhoTol.d'), 'S_SPEC', 'design', _t('twin.prm.rhoTol.n'));
 
 const SOURCES = {
-  S_MCA90: { short: 'McAuley, MacGregor, Hamielec 1990', full: 'McAuley K.B., MacGregor J.F., Hamielec A.E. A kinetic model for industrial gas-phase ethylene copolymerization. AIChE J. 36(6):837–850, 1990. doi:10.1002/aic.690360605', status: 'verified', note: 'Two-site kinetics; constant ratios as reproduced by Abbasi, Shamiri, Hussain.' },
-  S_MCA91: { short: 'McAuley & MacGregor 1991', full: 'McAuley K.B., MacGregor J.F. On-line inference of polymer properties in an industrial polyethylene reactor. AIChE J. 37(6):825–835, 1991. doi:10.1002/aic.690370605', status: 'verified', note: 'Instantaneous/cumulative MI and density, first-order mixing with residence time.' },
-  S_MCA92: { short: 'McAuley & MacGregor 1992', full: 'McAuley K.B., MacGregor J.F. Optimal grade transitions in a gas phase polyethylene reactor. AIChE J. 38(10):1564–1576, 1992. doi:10.1002/aic.690381008', status: 'verified', note: 'Overshoot of H₂ / comonomer and vent manipulation in transitions.' },
-  S_MCA93: { short: 'McAuley & MacGregor 1993', full: 'McAuley K.B., MacGregor J.F. Nonlinear product property control in industrial gas-phase polyethylene reactors. AIChE J. 39(5):855–866, 1993. doi:10.1002/aic.690390514', status: 'verified', note: 'Property control structure.' },
-  S_DAD97: { short: 'Dadebo et al. 1997', full: 'Dadebo S.A., Bell M.L., McLellan P.J., McAuley K.B. Temperature control of industrial gas phase polyethylene reactors. J. Process Control, 1997.', status: 'verified', note: 'Open-loop unstable reactor; temperature control is mandatory.' },
-  S_DAB21: { short: 'Dabbagh, Pirker, Schneiderbauer 2021', full: 'Dabbagh F., Pirker S., Schneiderbauer S. A fast modeling of chemical reactions in industrial-scale olefin polymerization fluidized beds using recurrence CFD. AIChE J. 67(5):e17161, 2021.', status: 'verified', note: 'Basis for the pilot-grade fast CFD of the bed (L3).' },
-  S_PAT: { short: 'Stickiness patent (US 10,029,226 / EP family)', full: 'Method for determining a stickiness temperature of a resin (Univation examples). USPTO full text: https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/10029226 ; EP 3968020 B1 (same title). Related EP 2893342 A1 (Univation, same title) found by search.', status: 'verified', note: 'Correlation T_stick = −C1·P_eq + C2 and window T_dew+10…T_stick−10 as given in the task; C1 form restored from text. Patent number not re-checked in this build (patent hosts unreachable).' },
-  S_ABB: { short: 'Abbasi, Shamiri, Hussain', full: 'Abbasi M.R., Shamiri A., Hussain M.A. Dynamic modeling and molecular weight distribution of ethylene copolymerization in an industrial gas-phase fluidized-bed reactor. Open manuscript, core.ac.uk/download/341795023.pdf', status: 'verified', note: 'Table of two-site constants; density coefficients for butene.' },
-  S_DADT: { short: 'Dadebo/McAuley reactor model, parameter table', full: 'Parameter table of the industrial gas-phase PE reactor model of McAuley et al. / Dadebo et al. (J. Process Control 1997), as reproduced in Table 2 of PMC12944317 (refs. Dadebo 1997; Ghasem 2006, 2024): V_g 5×10⁵ (= 500 m³), B_w 7×10⁴ kg, M_r·c_p,r 1.4×10⁷ cal/K, E_a 9000 cal/mol, T_ref 360 K, P 20 atm, ΔH −894 (cal/g), k_d 10⁻⁴ 1/s. Some units in the reproduction carry typos and were read against the magnitudes.', status: 'verified', note: 'pmc.ncbi.nlm.nih.gov/articles/PMC12944317' },
-  S_IND: { short: 'Industrial operating data', full: 'Control of a fluidized bed polyethylene reactor, Iran. J. Chem. Chem. Eng. (ijcce.ac.ir/article_6973): industrial data P 20.77 bar, production 3722 g/s (13.4 t/h), bed height 14 m. US 11,192,970: reactor pressure 20–25 barg.', status: 'verified', note: 'Plant data from the open literature.' },
-  S_GEO: { short: 'Reactor geometry and gas velocity (patents)', full: 'US 5,266,276: 4.5 m ID, ≈30 m, 13.5 t/h HDPE at 90 °C. US 11,078,307: 4.0 m, 0.9 m/s. US 10,266,625: 2.1 MPa, 88 °C, 0.61 m/s, cycle gas density 28.0 kg/m³. US 10,471,407: 0.45 m/s. US 11,459,408: 1–5 ft/s.', status: 'verified', note: 'Used to derive V_g and G.' },
-  S_CAL: { short: 'Fitted to sourced targets', full: 'Scale factors fitted once so that the base case reproduces sourced industrial numbers (production 13.4–13.5 t/h, MI of the grade). Only the product of fitted scale factors is identifiable; the note of each parameter gives the target.', status: 'derived', note: 'Re-fitted to plant data in the pilot.' },
-  S_ICA: { short: 'ICA rate effect (McKenna group)', full: 'Alizadeh et al., Condensed mode cooling for ethylene polymerization, Part I. Macromol. Chem. Phys. 2015, doi:10.1002/macp.201400600: all ICAs raise the instantaneous rate on a supported ZN catalyst, more in the initial phase. As cited in Chem. Eng. J. (S1385894720338985): 2.5 bar n-pentane with 7 bar ethylene → ≈×2.5 initial rate; 0.8 bar n-hexane → ≈×1.8 initial activity.', status: 'verified', note: 'Model uses a smaller, conservative effect on steady rate.' },
-  S_MFR: { short: 'Melt flow ratio of ZN LLDPE', full: 'US 2017/0015768 (Univation): ZN products MFR I21/I2 ≈ 24–28. Xu, Wen, Xu, Melt flow ratio: a way to identify the type of polyethylene: ZN-LLD near 25. US 6,384,158: ZN gas-phase LLDPE MI 1.04, 0.918, MFR 25.', status: 'verified', note: 'Target for c_MFR.' },
-  S_C6: { short: 'Hexene LLDPE data (patents)', full: 'US 8,367,785 (Ineos), Example 4: Ziegler catalyst, ethylene/1-hexene 0.918, MI 0.9, 87 °C: P_C6/P_C2 = 0.164, P_H2/P_C2 = 0.145. US 7,381,783: hexene LLDPE ≈3 mol % comonomer at density 0.918.', status: 'verified', note: 'Targets for α_C6 and f_C6. Model H₂/C₂ for this grade: 0.176 (patent 0.145).' },
-  S_NIST: { short: 'NIST WebBook, 2-methylbutane', full: 'NIST Chemistry WebBook, 2-methylbutane (CAS 78-78-4): Antoine log10(P/bar) = A − B/(T + C), A 3.91457, B 1020.012, C −40.053 (Williamham et al. 1945, 289–302 K); Δ_vapH° 24.8–25.2 kJ/mol.', status: 'verified', note: 'Antoine used up to ≈330 K (cooler outlet); slight extrapolation.' },
-  S_DH: { short: 'Heat of polymerization', full: 'McAuley/Dadebo model: −894 cal/g (3.74 MJ/kg). ACS Catal. doi:10.1021/acscatal.9b03282: 93.6 kJ/mol (3.34 MJ/kg). US 4,042,767: 3,300–4,200 kJ/kg.', status: 'verified', note: 'Model value = McAuley.' },
-  S_CPPE: { short: 'Heat capacity of PE', full: 'NETZSCH, PE standard reference material SRM 1484: 2.09 J/(g·K) at 80 °C, 2.41 J/(g·K) at 100 °C; Gaur U., Wunderlich B., J. Phys. Chem. Ref. Data 10:119, 1981.', status: 'verified', note: 'Interpolated to 88 °C.' },
-  S_CPG: { short: 'Cycle gas heat capacity', full: 'Ethylene ideal-gas c_p 1.709 kJ/(kg·K) at 350 K, 1.799 at 375 K (Engineering ToolBox). Mixture c_p = Σ w_i·c_p,i for the three grade compositions (C₂H₄, 1-C₄/1-C₆, H₂, iC5, N₂): 1.51–1.66 kJ/(kg·K).', status: 'derived', note: 'Ideal-gas basis; real-gas correction at 21 bar adds a few %.' },
-  S_SPEC: { short: 'Grade specification limits', full: 'IS 7328:2020 (BIS), cl. 5.2.1.1–5.2.1.2: density within ±4 kg/m³ of nominal for LLDPE, ±3 kg/m³ for HDPE; MFR within ±20 % (nominal ≥ 1) or ±30 % (nominal < 1).', status: 'verified', note: 'POC windows are tighter than the standard (in-house spec).' },
-  S_WIN: { short: 'Typical operating window', full: 'Bed 60–80 t, 20–22 bar, 12–20 t/h, τ 3–6 h (S_IND, S_DADT). Bed temperature by density, US 11,952,445: 75–90 °C for 0.90–0.92, 80–100 °C for 0.92–0.94, 90–115 °C for 0.94–0.96 g/mL.', status: 'verified', note: 'Grade temperatures chosen inside these ranges.' },
-  S_GRADE: { short: 'Generic grades', full: 'Grades are generic: MI and density as in commercial ZN gas-phase LLDPE film grades (e.g. Unipol LLDPE 1.0/0.920, Hanwha 3120; LL-1002 2.0/0.918, US 7,116,414). Gas ratios H₂/C₂ and M/C₂ come from inverting the property model, not from a plant.', status: 'derived', note: 'Gas ratios by model inversion.' },
-  S_L3: { short: 'Illustrative bed section', full: 'The 2D bed section is an illustrative proxy driven by the live bed temperature. In the pilot it is replaced by the CFD-trained layer, following the published cases in “Proven in industry” (Dabbagh et al. 2021; Borealis/JKU).', status: 'illustrative', note: 'Not a CFD result.' },
-  S_DESIGN: { short: 'Plant design / tuning value', full: 'Set by the specific plant (equipment size, DCS tuning, operating procedure). The value is inside the range given in the note and is replaced by the customer’s data in the pilot.', status: 'design', note: 'design' }
+  S_MCA90: { short: _t('twin.src.S_MCA90.s'), full: _t('twin.src.S_MCA90.f'), status: 'verified', note: _t('twin.src.S_MCA90.n') },
+  S_MCA91: { short: _t('twin.src.S_MCA91.s'), full: _t('twin.src.S_MCA91.f'), status: 'verified', note: _t('twin.src.S_MCA91.n') },
+  S_MCA92: { short: _t('twin.src.S_MCA92.s'), full: _t('twin.src.S_MCA92.f'), status: 'verified', note: _t('twin.src.S_MCA92.n') },
+  S_MCA93: { short: _t('twin.src.S_MCA93.s'), full: _t('twin.src.S_MCA93.f'), status: 'verified', note: _t('twin.src.S_MCA93.n') },
+  S_DAD97: { short: _t('twin.src.S_DAD97.s'), full: _t('twin.src.S_DAD97.f'), status: 'verified', note: _t('twin.src.S_DAD97.n') },
+  S_DAB21: { short: _t('twin.src.S_DAB21.s'), full: _t('twin.src.S_DAB21.f'), status: 'verified', note: _t('twin.src.S_DAB21.n') },
+  S_PAT: { short: _t('twin.src.S_PAT.s'), full: _t('twin.src.S_PAT.f'), status: 'verified', note: _t('twin.src.S_PAT.n') },
+  S_ABB: { short: _t('twin.src.S_ABB.s'), full: _t('twin.src.S_ABB.f'), status: 'verified', note: _t('twin.src.S_ABB.n') },
+  S_DADT: { short: _t('twin.src.S_DADT.s'), full: _t('twin.src.S_DADT.f'), status: 'verified', note: _t('twin.src.S_DADT.n') },
+  S_IND: { short: _t('twin.src.S_IND.s'), full: _t('twin.src.S_IND.f'), status: 'verified', note: _t('twin.src.S_IND.n') },
+  S_GEO: { short: _t('twin.src.S_GEO.s'), full: _t('twin.src.S_GEO.f'), status: 'verified', note: _t('twin.src.S_GEO.n') },
+  S_CAL: { short: _t('twin.src.S_CAL.s'), full: _t('twin.src.S_CAL.f'), status: 'derived', note: _t('twin.src.S_CAL.n') },
+  S_ICA: { short: _t('twin.src.S_ICA.s'), full: _t('twin.src.S_ICA.f'), status: 'verified', note: _t('twin.src.S_ICA.n') },
+  S_MFR: { short: _t('twin.src.S_MFR.s'), full: _t('twin.src.S_MFR.f'), status: 'verified', note: _t('twin.src.S_MFR.n') },
+  S_C6: { short: _t('twin.src.S_C6.s'), full: _t('twin.src.S_C6.f'), status: 'verified', note: _t('twin.src.S_C6.n') },
+  S_NIST: { short: _t('twin.src.S_NIST.s'), full: _t('twin.src.S_NIST.f'), status: 'verified', note: _t('twin.src.S_NIST.n') },
+  S_DH: { short: _t('twin.src.S_DH.s'), full: _t('twin.src.S_DH.f'), status: 'verified', note: _t('twin.src.S_DH.n') },
+  S_CPPE: { short: _t('twin.src.S_CPPE.s'), full: _t('twin.src.S_CPPE.f'), status: 'verified', note: _t('twin.src.S_CPPE.n') },
+  S_CPG: { short: _t('twin.src.S_CPG.s'), full: _t('twin.src.S_CPG.f'), status: 'derived', note: _t('twin.src.S_CPG.n') },
+  S_SPEC: { short: _t('twin.src.S_SPEC.s'), full: _t('twin.src.S_SPEC.f'), status: 'verified', note: _t('twin.src.S_SPEC.n') },
+  S_WIN: { short: _t('twin.src.S_WIN.s'), full: _t('twin.src.S_WIN.f'), status: 'verified', note: _t('twin.src.S_WIN.n') },
+  S_GRADE: { short: _t('twin.src.S_GRADE.s'), full: _t('twin.src.S_GRADE.f'), status: 'derived', note: _t('twin.src.S_GRADE.n') },
+  S_L3: { short: _t('twin.src.S_L3.s'), full: _t('twin.src.S_L3.f'), status: 'illustrative', note: _t('twin.src.S_L3.n') },
+  S_DESIGN: { short: _t('twin.src.S_DESIGN.s'), full: _t('twin.src.S_DESIGN.f'), status: 'design', note: _t('twin.src.S_DESIGN.n') }
 };
 
 // ---------------- grades ----------------
@@ -747,7 +797,8 @@ if (typeof module !== 'undefined') module.exports = TW;
 'use strict';
 const $ = id => document.getElementById(id);
 const P = TW.PRM, G = TW.GRADES, S = TW.SOURCES;
-const fmt = (v, d) => (v === undefined || v === null || !isFinite(v)) ? '—' : Number(v).toFixed(d);
+const fmt = (v, d) => (v === undefined || v === null || !isFinite(v)) ? '—' : _n(v, d);
+const _u = u => { const k = 'unit.' + u; return I18N[k] === undefined ? u : I18N[k]; };
 const hm = s => { const m = Math.floor(s / 60), h = Math.floor(m / 60); return h + ':' + String(m % 60).padStart(2, '0'); };
 let lsSpeed = null; try { lsSpeed = window.localStorage.getItem('gpe_speed'); } catch (e) { lsSpeed = null; }
 
@@ -777,16 +828,16 @@ function stepFieldOnce() {
 
 // ---------------- scenarios ----------------
 const SCN = {
-  steady: { name: 'Steady grade', start() { resetTo(st.gradeSel || 'LL4'); post('observer', 'info', `Scenario 1: steady operation on ${G[st.grade].name}. All variables expected inside the grade window.`, ['T', 'MIc', 'rhoc']); } },
-  transition: { name: 'Grade transition A→B', start() { startTransition(); } },
-  push: { name: 'Push production', start() { st.scen0 = st.pl.t; st.pushFrom = { yI: st.pl.u.yI, Fcat: st.pl.u.Fcat, Tsp: st.pl.u.Tsp };
-      post('observer', 'info', 'Scenario 3: operator pushes rate — iC5 to 15 mol %, catalyst +30 %, T set-point +2 K over 40 min.', ['yI', 'Fcat']); },
+  steady: { name: _t('twin.scen.steady'), start() { resetTo(st.gradeSel || 'LL4'); post('observer', 'info', _t('twin.msg.s1', { g: G[st.grade].name }), ['T', 'MIc', 'rhoc']); } },
+  transition: { name: _t('twin.scen.transition'), start() { startTransition(); } },
+  push: { name: _t('twin.scen.push'), start() { st.scen0 = st.pl.t; st.pushFrom = { yI: st.pl.u.yI, Fcat: st.pl.u.Fcat, Tsp: st.pl.u.Tsp };
+      post('observer', 'info', _t('twin.msg.s3'), ['yI', 'Fcat']); },
     tick(t) { const f = Math.min(1, t / 2400), a = st.pushFrom; st.pl.u.yI = a.yI + (0.15 - a.yI) * f; st.pl.u.Fcat = a.Fcat * (1 + 0.3 * f); st.pl.u.Tsp = a.Tsp + 2 * f; } },
-  hotspot: { name: 'Wall hot spot', start() { st.scen0 = st.pl.t; post('observer', 'info', 'Scenario 4: circulation near the wall degrades (static / sheeting), active fines accumulate there.', ['hot']); },
+  hotspot: { name: _t('twin.scen.hotspot'), start() { st.scen0 = st.pl.t; post('observer', 'info', _t('twin.msg.s4'), ['hot']); },
     tick(t) { const f = Math.min(1, t / 1800) * (st.flags.hotFixed ? 0.35 : 1); if (Math.abs(f - st.F.wall) > 0.01) TW.setDisturb(st.F, f, f, 0.5); } },
-  surge: { name: 'Catalyst activity surge', start() { st.scen0 = st.pl.t; st.pl.u.act = 1.3; post('observer', 'info', 'Scenario 5: new catalyst batch, activity +30 %.', ['prod']); } },
-  cooling: { name: 'Loss of cooling', start() { st.scen0 = st.pl.t; st.pl.u.uMan = st.pl.x[8] - 273.15 + 273.15; st.pl.u.auto = false; st.pl.u.dTcw = 2;
-      post('observer', 'bad', 'Scenario 6: bed temperature controller tripped to MANUAL; cooling-water supply +2 K.', ['T', 'Tin']); syncSliders(); } }
+  surge: { name: _t('twin.scen.surge'), start() { st.scen0 = st.pl.t; st.pl.u.act = 1.3; post('observer', 'info', _t('twin.msg.s5'), ['prod']); } },
+  cooling: { name: _t('twin.scen.cooling'), start() { st.scen0 = st.pl.t; st.pl.u.uMan = st.pl.x[8] - 273.15 + 273.15; st.pl.u.auto = false; st.pl.u.dTcw = 2;
+      post('observer', 'bad', _t('twin.msg.s6'), ['T', 'Tin']); syncSliders(); } }
 };
 function runScenario(name) {
   if (name !== 'steady' && name !== 'transition') { if (st.scen) resetTo(st.grade); }
@@ -801,29 +852,29 @@ function runScenario(name) {
 function otherGrade(g) { return g === 'LL4' ? 'HD' : g === 'HD' ? 'LL4' : null; }
 function startTransition() {
   const A = st.grade, B = otherGrade(A);
-  if (!B) { post('planner', 'warn', 'Transition planner in this POC covers the butene family (LLDPE-C4 ↔ HDPE-C4). Load one of them first.', []); return; }
+  if (!B) { post('planner', 'warn', _t('twin.msg.tr_family'), []); return; }
   st.agState.planner = 'busy';
-  post('planner', 'info', `Planning ${G[A].name} → ${G[B].name}: simulating naive set-point change and agent strategy on a copy of the twin (30 h horizon).`, ['offspec']);
+  post('planner', 'info', _t('twin.msg.tr_plan', { a: G[A].name, b: G[B].name }), ['offspec']);
   const t0 = performance.now(), plan = TW.planTransition(st.pl, B, 30), ms = performance.now() - t0;
   st.plan = plan; st.agState.planner = 'ok';
   const red = 1 - plan.agent.offspec_t / plan.naive.offspec_t;
-  post('planner', 'ok', `Plan ready in ${fmt(ms / 1000, 1)} s. Off-spec: naive ${fmt(plan.naive.offspec_t, 0)} t / ${fmt(plan.naive.time_h, 1)} h, agent ${fmt(plan.agent.offspec_t, 0)} t / ${fmt(plan.agent.time_h, 1)} h (−${fmt(red * 100, 0)} %). Naive ramp exceeds T_max for ${fmt(plan.naive.overTmax_h, 1)} h; agent keeps ≥ ${fmt(plan.agent.minMargin, 1)} K to T_stick.`, ['offspec']);
-  setRec({ agent: 'planner', title: `Apply agent transition plan → ${G[B].name}`,
-    why: `Overshoot H₂ and comonomer targets (gain K = ${plan.agent.prm.K}), vent up to ${fmt(plan.agent.prm.vent * 100, 0)} %/h while purging, temperature ramp held 2 K under T_max of the bed. Expected ${fmt(plan.agent.offspec_t, 0)} t off-spec vs ${fmt(plan.naive.offspec_t, 0)} t. Dismiss = operator runs the standard step change.`,
-    apply() { st.policy = { mode: 'agent', B, prm: plan.agent.prm }; st.target = B; post('operator', 'ok', 'Operator applied the agent transition plan.', []); },
-    dismiss() { st.policy = { mode: 'naive', B, prm: {} }; st.target = B; post('operator', 'info', 'Operator dismissed the plan; standard step change of set-points executed.', []); } });
+  post('planner', 'ok', _t('twin.msg.tr_ready', { s: fmt(ms / 1000, 1), no: fmt(plan.naive.offspec_t, 0), nh: fmt(plan.naive.time_h, 1), ao: fmt(plan.agent.offspec_t, 0), ah: fmt(plan.agent.time_h, 1), red: fmt(red * 100, 0), over: fmt(plan.naive.overTmax_h, 1), marg: fmt(plan.agent.minMargin, 1) }), ['offspec']);
+  setRec({ agent: 'planner', title: _t('twin.rec.tr_title', { b: G[B].name }),
+    why: _t('twin.rec.tr_why', { k: plan.agent.prm.K, v: fmt(plan.agent.prm.vent * 100, 0), ao: fmt(plan.agent.offspec_t, 0), no: fmt(plan.naive.offspec_t, 0) }),
+    apply() { st.policy = { mode: 'agent', B, prm: plan.agent.prm }; st.target = B; post('operator', 'ok', _t('twin.msg.op_applied'), []); },
+    dismiss() { st.policy = { mode: 'naive', B, prm: {} }; st.target = B; post('operator', 'info', _t('twin.msg.op_dismissed'), []); } });
   drawTransition();
 }
 
 // ---------------- agents ----------------
-const AG = [['observer', 'Observer'], ['soft', 'Property soft-sensor'], ['guard', 'Stickiness guard'], ['hot', 'Hot-spot detector'], ['planner', 'Transition planner'], ['prov', 'Provenance'], ['operator', 'Operator (HITL)']];
+const AG = [['observer', _t('twin.ag.observer')], ['soft', _t('twin.ag.soft')], ['guard', _t('twin.ag.guard')], ['hot', _t('twin.ag.hot')], ['planner', _t('twin.ag.planner')], ['prov', _t('twin.ag.prov')], ['operator', _t('twin.ag.operator')]];
 AG.forEach(([k]) => st.agState[k] = 'ok');
 const AGN = Object.fromEntries(AG);
 function post(agent, level, text, refs) {
   const ev = { t: st.pl ? st.pl.t : 0, agent, level, text, refs: refs || [] };
   st.events.push(ev); if (st.events.length > 400) st.events.shift();
   const feed = $('feed'); const d = document.createElement('div'); d.className = 'ev ' + level;
-  d.innerHTML = `<div class="h"><span>${AGN[agent]}</span><span>t ${hm(ev.t)} · ${level}</span></div><div></div>` + (ev.refs.length ? `<div class="refs">refs: ${ev.refs.join(', ')}</div>` : '');
+  d.innerHTML = `<div class="h"><span>${AGN[agent]}</span><span>t ${hm(ev.t)} · ${_t('twin.level.' + level)}</span></div><div></div>` + (ev.refs.length ? `<div class="refs">${_t('twin.ev.refs')} <span translate="no">${ev.refs.join(', ')}</span></div>` : '');
   d.children[1].textContent = text;
   feed.prepend(d); while (feed.children.length > 120) feed.lastChild.remove();
   if (level === 'bad') st.agState[agent] = 'alert'; else if (level === 'warn') st.agState[agent] = 'busy';
@@ -833,11 +884,11 @@ function drawAgents() { $('agents').innerHTML = AG.map(([k, n]) => `<div class="
 function setRec(r) { st.rec = r; renderRec(); st.agState.operator = 'busy'; drawAgents(); }
 function renderRec() {
   const el = $('rec'); const r = st.rec;
-  if (!r) { el.innerHTML = '<div class="empty">No pending recommendation. Agents never change set-points by themselves.</div>'; return; }
-  el.innerHTML = `<div class="t"></div><div class="why"></div><div class="acts"><button class="btn primary" id="rApply">Apply</button><button class="btn" id="rDis">Dismiss</button></div>`;
+  if (!r) { el.innerHTML = '<div class="empty">' + _t('twin.rec.none') + '</div>'; return; }
+  el.innerHTML = `<div class="t"></div><div class="why"></div><div class="acts"><button class="btn primary" id="rApply">${_t('twin.btn.apply')}</button><button class="btn" id="rDis">${_t('twin.btn.dismiss')}</button></div>`;
   el.querySelector('.t').textContent = r.title; el.querySelector('.why').textContent = r.why;
-  $('rApply').onclick = () => { const x = st.rec; st.rec = null; renderRec(); st.agState.operator = 'ok'; x.apply(); if (!/Operator/.test(st.events[st.events.length - 1].text)) post('operator', 'ok', 'Applied: ' + x.title, []); syncSliders(); };
-  $('rDis').onclick = () => { const x = st.rec; st.rec = null; renderRec(); st.agState.operator = 'ok'; if (x.dismiss) x.dismiss(); else post('operator', 'info', 'Dismissed: ' + x.title, []); syncSliders(); };
+  $('rApply').onclick = () => { const x = st.rec; st.rec = null; renderRec(); st.agState.operator = 'ok'; x.apply(); if (![_t('twin.msg.op_applied'), _t('twin.msg.op_dismissed')].includes(st.events[st.events.length - 1].text)) post('operator', 'ok', _t('twin.msg.applied', { t: x.title }), []); syncSliders(); };
+  $('rDis').onclick = () => { const x = st.rec; st.rec = null; renderRec(); st.agState.operator = 'ok'; if (x.dismiss) x.dismiss(); else post('operator', 'info', _t('twin.msg.dismissed', { t: x.title }), []); syncSliders(); };
 }
 function iC5For(margin, s) {
   // solve T_stick − T = margin for P_iC5 (psia) → mol %
@@ -854,27 +905,27 @@ function agentsTick(s, fs) {
   const u = st.pl.u, prev = st.lastPrev, t = st.pl.t, g = G[st.target];
   // Observer: regime changes
   const ch = [];
-  if (Math.abs(u.yI - prev.yI) > 0.004) ch.push(`iC5 ${fmt(prev.yI * 100, 1)}→${fmt(u.yI * 100, 1)} mol %`);
-  if (Math.abs(u.Fcat - prev.Fcat) / prev.Fcat > 0.04) ch.push(`catalyst ${fmt(prev.Fcat, 2)}→${fmt(u.Fcat, 2)} kg/h`);
-  if (Math.abs(u.Tsp - prev.Tsp) > 0.4) ch.push(`T set ${fmt(prev.Tsp - 273.15, 1)}→${fmt(u.Tsp - 273.15, 1)} °C`);
+  if (Math.abs(u.yI - prev.yI) > 0.004) ch.push(`iC5 ${fmt(prev.yI * 100, 1)}→${fmt(u.yI * 100, 1)} ${_u('mol %')}`);
+  if (Math.abs(u.Fcat - prev.Fcat) / prev.Fcat > 0.04) ch.push(_t('twin.tag.cat', { a: fmt(prev.Fcat, 2), b: fmt(u.Fcat, 2) }));
+  if (Math.abs(u.Tsp - prev.Tsp) > 0.4) ch.push(_t('twin.tag.tset', { a: fmt(prev.Tsp - 273.15, 1), b: fmt(u.Tsp - 273.15, 1) }));
   if (Math.abs(u.h - prev.h) > 0.01) ch.push(`H₂/C₂ ${fmt(prev.h, 3)}→${fmt(u.h, 3)}`);
   if (Math.abs(u.m - prev.m) > 0.01) ch.push(`M/C₂ ${fmt(prev.m, 3)}→${fmt(u.m, 3)}`);
-  if (u.auto !== prev.auto) ch.push(`T controller ${u.auto ? 'AUTO' : 'MANUAL'}`);
-  if (Math.abs(u.act - prev.act) > 0.02) ch.push(`catalyst activity ×${fmt(u.act, 2)}`);
-  if (ch.length) { post('observer', u.auto ? 'info' : 'warn', 'Tags changed: ' + ch.join('; ') + '.', ['tags']); st.lastPrev = Object.assign({}, u); }
+  if (u.auto !== prev.auto) ch.push(_t('twin.ctl.tc') + ' ' + (u.auto ? 'AUTO' : 'MANUAL'));
+  if (Math.abs(u.act - prev.act) > 0.02) ch.push(_t('twin.tag.act', { a: fmt(u.act, 2) }));
+  if (ch.length) { post('observer', u.auto ? 'info' : 'warn', _t('twin.msg.tags', { l: ch.join('; ') }), ['tags']); st.lastPrev = Object.assign({}, u); }
   // Property soft-sensor (every 15 min model time, or on exit)
   const inMI = Math.abs(Math.log(s.MIc / g.MI)) <= Math.log(1 + P.miTol.v), inR = Math.abs(s.rhoc - g.rho) <= P.rhoTol.v;
   const key = (inMI ? 1 : 0) + (inR ? 2 : 0);
   if (st.flags.softKey !== key) {
     st.flags.softKey = key;
-    if (key === 3) { post('soft', 'ok', `Bed in window of ${g.name}: MI_c ${fmt(s.MIc, 2)}, ρ_c ${fmt(s.rhoc, 4)}.`, ['MIc', 'rhoc']); st.agState.soft = 'ok'; }
-    else post('soft', st.policy ? 'info' : 'warn', `Off-spec vs ${g.name}: MI_c ${fmt(s.MIc, 2)} (target ${g.MI}), ρ_c ${fmt(s.rhoc, 4)} (target ${g.rho}).`, ['MIc', 'rhoc']);
+    if (key === 3) { post('soft', 'ok', _t('twin.msg.soft_in', { g: g.name, mi: fmt(s.MIc, 2), rho: fmt(s.rhoc, 4) }), ['MIc', 'rhoc']); st.agState.soft = 'ok'; }
+    else post('soft', st.policy ? 'info' : 'warn', _t('twin.msg.soft_off', { g: g.name, mi: fmt(s.MIc, 2), mit: _ns(g.MI), rho: fmt(s.rhoc, 4), rhot: _ns(g.rho) }), ['MIc', 'rhoc']);
   } else if (key === 3 && !st.policy) {
     const lmi = Math.log(s.MIi), lb = Math.log(g.MI), tol = Math.log(1 + P.miTol.v);
     if (Math.abs(lmi - lb) > tol && !st.flags.softFc) {
       const bound = lmi > lb ? lb + tol : lb - tol, lc = Math.log(s.MIc);
       const tt = s.tau * Math.log(Math.abs(lmi - lc) / Math.abs(lmi - bound));
-      post('soft', 'warn', `Instantaneous MI ${fmt(s.MIi, 2)} outside window: bed MI_c leaves spec in ≈ ${fmt(tt, 1)} h.`, ['MIi', 'tau']); st.flags.softFc = 1;
+      post('soft', 'warn', _t('twin.msg.soft_fc', { mi: fmt(s.MIi, 2), h: fmt(tt, 1) }), ['MIi', 'tau']); st.flags.softFc = 1;
     }
   }
   // Stickiness guard
@@ -885,17 +936,17 @@ function agentsTick(s, fs) {
   if (s.T > s.Tmax && st.firstTmaxCross === null) st.firstTmaxCross = t;
   if (lvl !== st.flags.guard) {
     st.flags.guard = lvl;
-    if (lvl === 'ok') { post('guard', 'ok', `Sintering margin restored: T_stick ${fmt(s.Tstick, 1)} °C, margin ${fmt(s.margin, 1)} K.`, ['Tstick', 'margin']); st.agState.guard = 'ok'; }
+    if (lvl === 'ok') { post('guard', 'ok', _t('twin.msg.g_ok', { ts: fmt(s.Tstick, 1), m: fmt(s.margin, 1) }), ['Tstick', 'margin']); st.agState.guard = 'ok'; }
     else {
       if (st.firstStickWarn === null) st.firstStickWarn = t;
-      const txt = lvl === 'bad' ? `ALARM: bed ${fmt(s.T, 1)} °C above T_max ${fmt(s.Tmax, 1)} °C for this grade (T_stick ${fmt(s.Tstick, 1)} °C, P_eq ${fmt(s.Peq, 1)} psia).`
-        : `Margin to sintering shrinking: ${fmt(s.margin, 1)} K (T_stick ${fmt(s.Tstick, 1)} °C)` + (isFinite(tPred) ? `, reaches 10 K in ≈ ${fmt(tPred / 60, 0)} min at current trend.` : '.');
+      const txt = lvl === 'bad' ? _t('twin.msg.g_alarm', { t: fmt(s.T, 1), tm: fmt(s.Tmax, 1), ts: fmt(s.Tstick, 1), p: fmt(s.Peq, 1) })
+        : (isFinite(tPred) ? _t('twin.msg.g_warn_t', { m: fmt(s.margin, 1), ts: fmt(s.Tstick, 1), min: fmt(tPred / 60, 0) }) : _t('twin.msg.g_warn', { m: fmt(s.margin, 1), ts: fmt(s.Tstick, 1) }));
       post('guard', lvl, txt, ['Tstick', 'margin', 'yI']);
       if (u.auto && !st.rec && !st.policy) {
         const yTarget = Math.min(u.yI, iC5For(P.dStick.v + 4, s));
         const dT = Math.max(0, s.T - (s.Tmax - 2));
-        setRec({ agent: 'guard', title: `Reduce iC5 to ${fmt(yTarget * 100, 1)} mol %` + (dT > 0.2 ? ` and T set-point by ${fmt(dT, 1)} K` : ''),
-          why: `Restores T_stick − T ≈ 14 K for the current resin (D ${fmt(s.rhoc, 4)}, MI ${fmt(s.MIc, 2)}). Cost: less condensed-mode cooling, lower rate.`,
+        setRec({ agent: 'guard', title: dT > 0.2 ? _t('twin.rec.ic5_t', { y: fmt(yTarget * 100, 1), d: fmt(dT, 1) }) : _t('twin.rec.ic5', { y: fmt(yTarget * 100, 1) }),
+          why: _t('twin.rec.ic5_why', { d: fmt(s.rhoc, 4), mi: fmt(s.MIc, 2) }),
           apply() { u.yI = yTarget; if (dT > 0.2) u.Tsp -= dT; if (st.scen === 'push') st.scen = null; } });
       }
     }
@@ -905,17 +956,17 @@ function agentsTick(s, fs) {
     st.flags.lastFc = t; const tt = forecastTmax(3);
     st.timeToTmax = tt;
     if (!u.auto) {
-      post('guard', tt === null ? 'warn' : 'bad', tt === null ? 'Controller in MANUAL. Twin look-ahead: T_max not reached within 3 h.' : `Controller in MANUAL, reactor is open-loop unstable: twin look-ahead reaches T_max ${fmt(s.Tmax, 1)} °C in ${fmt(tt / 60, 0)} min.`, ['T', 'Tmax']);
-      if (!st.rec) setRec({ agent: 'guard', title: 'Return bed temperature controller to AUTO and cut catalyst feed 20 %', why: `Look-ahead: ${tt === null ? 'no crossing in 3 h' : 'T_max in ' + fmt(tt / 60, 0) + ' min'}. Without feedback the heat generation grows faster with T than cycle-gas removal.`,
+      post('guard', tt === null ? 'warn' : 'bad', tt === null ? _t('twin.msg.man_ok') : _t('twin.msg.man_bad', { tm: fmt(s.Tmax, 1), min: fmt(tt / 60, 0) }), ['T', 'Tmax']);
+      if (!st.rec) setRec({ agent: 'guard', title: _t('twin.rec.auto'), why: _t('twin.rec.auto_why', { la: tt === null ? _t('twin.rec.auto_none') : _t('twin.rec.auto_in', { min: fmt(tt / 60, 0) }) }),
         apply() { u.auto = true; u.Fcat *= 0.8; u.dTcw = 0; st.pl.x[9] = 0; if (st.scen === 'cooling') st.scen = null; } });
     }
   }
   // cooling capacity (surge)
-  if (s.coolUse > 0.95 && !st.flags.cool) { st.flags.cool = 1; post('guard', 'warn', `Cooler near limit: ${fmt(s.coolUse * 100, 0)} % of capacity used (T_in ${fmt(s.Tin, 1)} °C, floor ${fmt(s.Tlo, 1)} °C).`, ['cool']); }
+  if (s.coolUse > 0.95 && !st.flags.cool) { st.flags.cool = 1; post('guard', 'warn', _t('twin.msg.cooler', { u: fmt(s.coolUse * 100, 0), tin: fmt(s.Tin, 1), fl: fmt(s.Tlo, 1) }), ['cool']); }
   if (u.act > 1.05 && !st.flags.surge) {
-    st.flags.surge = 1; post('soft', 'info', `Rate up to ${fmt(s.prod, 1)} t/h at constant feeds — residence time ${fmt(s.tau, 2)} h; properties unchanged (ratio-controlled gas).`, ['prod', 'tau']);
-    post('guard', 'warn', `Heat-removal reserve now ${fmt((1 - s.coolUse) * 100, 0)} % (cooler ${fmt(s.coolUse * 100, 0)} % used). Condensate ${fmt(s.liq, 1)} wt %.`, ['cool', 'liq']);
-    if (!st.rec) setRec({ agent: 'guard', title: 'Trim catalyst feed by 15 % to restore heat-removal reserve', why: 'Keeps ≥ 15 % cooler reserve so that a further upset can be absorbed by the temperature controller.', apply() { u.Fcat *= 0.85; } });
+    st.flags.surge = 1; post('soft', 'info', _t('twin.msg.rate', { p: fmt(s.prod, 1), tau: fmt(s.tau, 2) }), ['prod', 'tau']);
+    post('guard', 'warn', _t('twin.msg.reserve', { r: fmt((1 - s.coolUse) * 100, 0), u: fmt(s.coolUse * 100, 0), l: fmt(s.liq, 1) }), ['cool', 'liq']);
+    if (!st.rec) setRec({ agent: 'guard', title: _t('twin.rec.trim'), why: _t('twin.rec.trim_why'), apply() { u.Fcat *= 0.85; } });
   }
   // Hot-spot detector
   const hl = fs.riskFrac > 0 ? 'bad' : fs.Tmax_local > s.Tmax - 3 ? 'warn' : 'ok';
@@ -923,16 +974,16 @@ function agentsTick(s, fs) {
     st.flags.hot = hl;
     if (hl === 'bad' && st.firstHotAlarm === null) st.firstHotAlarm = t;
     const where = `x ${fmt((fs.at[0] + .5) * TW.dxg, 2)} m, h ${fmt((fs.at[1] + .5) * TW.dyg, 1)} m`;
-    if (hl === 'ok') { post('hot', 'ok', `Bed field normal: local max ${fmt(fs.Tmax_local, 1)} °C.`, ['hot']); st.agState.hot = 'ok'; }
+    if (hl === 'ok') { post('hot', 'ok', _t('twin.msg.hot_ok', { t: fmt(fs.Tmax_local, 1) }), ['hot']); st.agState.hot = 'ok'; }
     else {
-      post('hot', hl, hl === 'bad' ? `LOCAL ALARM at ${where}: ${fmt(fs.riskArea_m2, 2)} m² of the section above T_max ${fmt(s.Tmax, 1)} °C (local max ${fmt(fs.Tmax_local, 1)} °C) while the bed mean is ${fmt(s.T, 1)} °C.`
-        : `Local heating at ${where}: ${fmt(fs.Tmax_local, 1)} °C, ${fmt(s.Tmax - fs.Tmax_local, 1)} K below T_max. Bed mean ${fmt(s.T, 1)} °C.`, ['hot', 'Tmax']);
-      if (hl === 'bad' && !st.rec) setRec({ agent: 'hot', title: 'Raise cycle-gas velocity 10 % and cut catalyst feed 10 %', why: 'More gas through the bed restores circulation at the wall; less catalyst lowers the local heat source. Check static / fines removal in the field.',
+      post('hot', hl, hl === 'bad' ? _t('twin.msg.hot_bad', { w: where, a: fmt(fs.riskArea_m2, 2), tm: fmt(s.Tmax, 1), tl: fmt(fs.Tmax_local, 1), t: fmt(s.T, 1) })
+        : _t('twin.msg.hot_warn', { w: where, tl: fmt(fs.Tmax_local, 1), d: fmt(s.Tmax - fs.Tmax_local, 1), t: fmt(s.T, 1) }), ['hot', 'Tmax']);
+      if (hl === 'bad' && !st.rec) setRec({ agent: 'hot', title: _t('twin.rec.hot'), why: _t('twin.rec.hot_why'),
         apply() { u.Gf = 1.1; u.Fcat *= 0.9; st.flags.hotFixed = 1; TW.setDisturb(st.F, st.F.wall * 0.35, st.F.fines * 0.35, st.F.dist); } });
     }
   }
   // transition progress
-  if (st.policy && key === 3 && !st.flags.trDone) { st.flags.trDone = 1; st.grade = st.target; const B = G[st.target]; Object.assign(u, { h: B.h, m: B.m, yI: B.yI, Fcat: B.Fcat, vent: P.ventBase.v, Tsp: B.T + 273.15 }); st.policy = null; st.lastPrev = Object.assign({}, u); post('planner', 'ok', `Transition complete: bed in window of ${g.name}.`, ['MIc', 'rhoc']); }
+  if (st.policy && key === 3 && !st.flags.trDone) { st.flags.trDone = 1; st.grade = st.target; const B = G[st.target]; Object.assign(u, { h: B.h, m: B.m, yI: B.yI, Fcat: B.Fcat, vent: P.ventBase.v, Tsp: B.T + 273.15 }); st.policy = null; st.lastPrev = Object.assign({}, u); post('planner', 'ok', _t('twin.msg.tr_done', { g: g.name }), ['MIc', 'rhoc']); }
   drawAgents();
 }
 
@@ -948,7 +999,7 @@ function stepModel() {
 function ff(sec) { const n = Math.round(sec / DT); for (let i = 0; i < n; i++) stepModel(); draw(); }
 window.TWIN.ff = ff; window.TWIN.runScenario = runScenario; window.TWIN.snap = () => TW.snapshot(st.pl); window.TWIN.fieldStats = () => { const s = TW.snapshot(st.pl); return TW.fieldStats(st.F, s.T, s.Tmax); };
 window.TWIN.applyRec = () => { if (st.rec) $('rApply').click(); }; window.TWIN.dismissRec = () => { if (st.rec) $('rDis').click(); };
-window.TWIN.resetTo = resetTo; window.TWIN.pause = () => { st.running = false; $('bPlay').textContent = 'Play'; };
+window.TWIN.resetTo = resetTo; window.TWIN.pause = () => { st.running = false; $('bPlay').textContent = _t('twin.ctl.play'); };
 let lastT = performance.now(), acc = 0, lastDraw = 0;
 function frame(now) {
   const dt = Math.min(0.1, (now - lastT) / 1000); lastT = now;
@@ -959,59 +1010,60 @@ function frame(now) {
 
 // ---------------- provenance ----------------
 const PROV = {
-  prod: { t: 'Production rate', u: 't/h', v: s => s.prod, d: 2, f: 'R_p = Σ_j s_kp·k(T)·(1 + k_cs·y_iC5)·Y_j·(k_pE,j[C₂]·M_C₂ + k_pM,j[M]·M_M)\nk(T) = k_ref·exp(−E_a/R·(1/T − 1/T_ref))\ndY_j/dt = F_cat·s_j − k_d·Y_j − (Q_out/M_bed)·Y_j', p: ['kp1', 'kp2', 'kpM1', 'kpM2', 'kpScale', 'Ea', 'Tref', 'kd', 'site', 'kcs'], s: ['S_MCA90', 'S_ICA', 'S_CAL'] },
-  T: { t: 'Bed temperature', u: '°C', v: s => s.T, d: 2, f: 'dT/dt = (R_p·(−ΔH_p) − Q_cycle − Q_loss) / (M_bed·c_p,PE + C_met)\nQ_cycle = G·c_p,g·(T − T_in) + ṁ_liq·λ_iC5\nT_in: cooler lag τ_hx, set by PI on T (AUTO)', p: ['dH', 'cpPE', 'Cmet', 'G', 'cpg', 'lamI', 'UAl', 'tauHX', 'Kc', 'Ti'], s: ['S_DAD97', 'S_DH', 'S_DADT', 'S_CPPE', 'S_CPG'] },
-  Tin: { t: 'Cycle gas inlet temperature', u: '°C', v: s => s.Tin, d: 1, f: 'dT_in/dt = (u − T_in)/τ_hx,  u = PI(T − T_set), T_cw + ΔT_app ≤ u ≤ T − 1', p: ['tauHX', 'Kc', 'Ti', 'Tcw', 'appr'], s: ['S_DAD97', 'S_DESIGN'] },
-  Tstick: { t: 'Stickiness temperature of the bed resin', u: '°C', v: s => s.Tstick, d: 1, f: 'T_stick = −C1·P_eq + C2\nC1 = 1.175e-3·D^(−59.736)·MI^0.641\nC2 = 180.6·D^3.07·MFR^(−0.077)\nP_eq = P_iC5 + 2.7·P_C6  [psia]\nD, MI, MFR: cumulative (bed) values', p: ['st1', 'st2', 'st3', 'st4', 'st5', 'st6', 'st7'], s: ['S_PAT'], x: s => `Now: D ${fmt(s.rhoc, 4)}, MI ${fmt(s.MIc, 2)}, MFR ${fmt(s.MFRc, 1)}, P_eq ${fmt(s.Peq, 1)} psia → C1 ${fmt(s.C1, 4)}, C2 ${fmt(s.C2, 1)} °C.` + (s.outside.length ? ` Outside correlation range (${s.outside.join(', ')}): metallocene range D 0.912–0.954, MI 0.5–42, MFR 16–36.` : '') + ' Correlation was developed for metallocene resins; for Ziegler–Natta resins it is calibrated in the pilot.' },
-  margin: { t: 'Margin to sintering', u: 'K', v: s => s.margin, d: 1, f: 'margin = T_stick − T_bed\nSafe window: T_min = T_dew + 10 °C ≤ T_bed ≤ T_max = T_stick − 10 °C\nAlarm when margin < 10 K (T_bed > T_max)', p: ['dStick', 'dDew', 'st1', 'st4'], s: ['S_PAT'] },
-  Tmax: { t: 'Upper limit of the safe window', u: '°C', v: s => s.Tmax, d: 1, f: 'T_max = T_stick − 10 °C', p: ['dStick'], s: ['S_PAT'] },
-  Tmin: { t: 'Lower limit of the safe window', u: '°C', v: s => s.Tmin, d: 1, f: 'T_min = T_dew + 10 °C\nT_dew: P_sat,iC5(T_dew) = y_iC5·P, Antoine log10(P/bar) = A − B/(T + C)', p: ['dDew', 'antA', 'antB', 'antC', 'P'], s: ['S_PAT', 'S_NIST'] },
-  MIc: { t: 'Melt index, cumulative (bed)', u: 'g/10 min', v: s => s.MIc, d: 2, f: 'MI_i = a·Mw^(−3.5);  Mw = Σ_j w_j·2·DPn_j·m̄_j\n1/DPn_j = (k_trH,j[H₂] + k_trE[C₂] + k_trM,j[M]) / (k_pE,j[C₂] + k_pM,j[M])\nd ln MI_c/dt = (ln MI_i − ln MI_c)·R_p/M_bed', p: ['aMI', 'nMI', 'kH1', 'kH2', 'kE', 'kM1', 'kM2', 'kp1', 'kp2'], s: ['S_MCA91', 'S_MCA90', 'S_ABB'] },
-  MIi: { t: 'Melt index, instantaneous', u: 'g/10 min', v: s => s.MIi, d: 2, f: 'MI_i = a·Mw^(−3.5) (two-site Mw from gas composition)', p: ['aMI', 'nMI', 'kH1', 'kH2'], s: ['S_MCA91', 'S_MCA90'] },
-  rhoc: { t: 'Density, cumulative (bed)', u: 'g/cm³', v: s => s.rhoc, d: 4, f: 'ρ_i = 0.966 − α·Cx^β, Cx = mol % comonomer in polymer\nCx from site-weighted copolymer composition (r₂ ≈ 0)\nd(1/ρ_c)/dt = (1/ρ_i − 1/ρ_c)·R_p/M_bed', p: ['rho0', 'aC4', 'bC4', 'aC6', 'kpM1', 'kpM2'], s: ['S_ABB', 'S_MCA90', 'S_MCA91'] },
-  rhoi: { t: 'Density, instantaneous', u: 'g/cm³', v: s => s.rhoi, d: 4, f: 'ρ_i = 0.966 − α·Cx^β', p: ['rho0', 'aC4', 'bC4', 'aC6'], s: ['S_ABB'] },
-  MFR: { t: 'Melt flow ratio I21/I2 (estimate)', u: '—', v: s => s.MFRc, d: 1, f: 'MFR ≈ c_MFR·PDI, PDI = Mw/Mn of the two-site blend', p: ['cMFR'], s: ['S_MFR'] },
-  liq: { t: 'Condensed liquid in cycle gas', u: 'wt %', v: s => s.liq, d: 1, f: 'y_sat = P_sat,iC5(T_in)/P\nṁ_liq = (G/M_g)·max(0, y_iC5 − y_sat)/(1 − y_sat)·M_iC5\nshare = ṁ_liq / G', p: ['antA', 'antB', 'antC', 'G', 'P', 'lamI'], s: ['S_NIST', 'S_GEO'] },
-  tau: { t: 'Bed residence time', u: 'h', v: s => s.tau, d: 2, f: 'τ = M_bed / Q_out,  Q_out = R_p + K_b·(M_bed − M_sp)', p: ['Msp', 'Kb'], s: ['S_DADT', 'S_DESIGN'] },
-  cool: { t: 'Cooler capacity used', u: '%', v: s => s.coolUse * 100, d: 0, f: 'use = (T − T_in)/(T − T_in,min), T_in,min = T_cw + ΔT_app', p: ['Tcw', 'appr', 'G', 'cpg'], s: ['S_GEO', 'S_CPG', 'S_DESIGN'] },
-  yI: { t: 'iC5 in cycle gas', u: 'mol %', v: s => s.yI * 100, d: 1, f: 'ratio-controlled feed, P_iC5 = y_iC5·P', p: ['P', 'FmaxI'], s: ['S_WIN', 'S_DESIGN'] },
-  h: { t: 'H₂/C₂ ratio in gas', u: 'mol/mol', v: s => s.h, d: 3, f: 'grade value from inversion of MI_i model; controller τ_c, vent v', p: ['tauC', 'ventBase', 'FmaxH'], s: ['S_MCA92', 'S_GRADE'] },
-  m: { t: 'Comonomer/C₂ ratio in gas', u: 'mol/mol', v: s => s.m, d: 3, f: 'grade value from inversion of ρ_i model', p: ['tauC', 'ventBase', 'FmaxM'], s: ['S_MCA92', 'S_GRADE'] },
-  hot: { t: 'Hot zone in bed section (2D proxy)', u: '°C', v: () => window.TWIN.fieldStats().Tmax_local, d: 1, f: '∂θ/∂t + u·∇θ = ∇·(κ∇θ) + S₀·(a(x,y)·g(T) − 1) − γ(x,y)·θ\nθ = T_local − T_bed, S₀ = R_p(−ΔH_p)/C, g = Arrhenius factor\nlow circulation at the wall: u, κ, γ reduced; fines: a increased\nrisk area: T_local > T_max', p: ['Ea', 'dStick'], s: ['S_DAB21', 'S_L3'], x: () => 'Proxy only. Grid 40×60 over a 5 m × 15 m section. Not a CFD result.' },
-  offspec: { t: 'Off-spec during transition', u: 't', v: () => st.plan ? st.plan.agent.offspec_t : NaN, d: 0, f: 'off-spec = ∫ R_p dt while (MI_c, ρ_c) are outside both grade windows\nwindow: |ln(MI_c/MI_B)| ≤ ln(1.15), |ρ_c − ρ_B| ≤ 0.002\nagent: ln MI* = ln MI_B + K(ln MI_B − ln MI_c), 1/ρ* likewise, inverted to H₂/C₂, M/C₂; vent ≤ v_max; T ramp ≤ T_max − 2', p: ['miTol', 'rhoTol', 'ventNaive', 'ventMax', 'rampT', 'hMax'], s: ['S_MCA92', 'S_GRADE'] },
-  Fcat: { t: 'Catalyst feed', u: 'kg/h', v: () => st.pl.u.Fcat, d: 2, f: 'operator set-point; sites s_j per kg', p: ['site'], s: ['S_CAL'] },
-  P: { t: 'Reactor pressure', u: 'bar', v: () => P.P.v, d: 1, f: 'held by N₂ make-up (fixed in POC)', p: ['P'], s: ['S_IND'] },
-  Mbed: { t: 'Bed mass', u: 't', v: s => s.M / 1000, d: 1, f: 'dM/dt = R_p − Q_out (level control)', p: ['Msp', 'Kb'], s: ['S_DADT', 'S_DESIGN'] },
-  tags: { t: 'Observer tags', u: '', v: () => NaN, d: 0, f: 'T, P, gas composition, G, T_in, catalyst — read from the twin (OPC UA read-only in the pilot)', p: [], s: ['S_DESIGN'] }
+  prod: { t: _t('twin.prov.prod.t'), u: 't/h', v: s => s.prod, d: 2, f: _t('twin.prov.prod.f'), p: ['kp1', 'kp2', 'kpM1', 'kpM2', 'kpScale', 'Ea', 'Tref', 'kd', 'site', 'kcs'], s: ['S_MCA90', 'S_ICA', 'S_CAL'] },
+  T: { t: _t('twin.prov.T.t'), u: '°C', v: s => s.T, d: 2, f: _t('twin.prov.T.f'), p: ['dH', 'cpPE', 'Cmet', 'G', 'cpg', 'lamI', 'UAl', 'tauHX', 'Kc', 'Ti'], s: ['S_DAD97', 'S_DH', 'S_DADT', 'S_CPPE', 'S_CPG'] },
+  Tin: { t: _t('twin.prov.Tin.t'), u: '°C', v: s => s.Tin, d: 1, f: _t('twin.prov.Tin.f'), p: ['tauHX', 'Kc', 'Ti', 'Tcw', 'appr'], s: ['S_DAD97', 'S_DESIGN'] },
+  Tstick: { t: _t('twin.prov.Tstick.t'), u: '°C', v: s => s.Tstick, d: 1, f: _t('twin.prov.Tstick.f'), p: ['st1', 'st2', 'st3', 'st4', 'st5', 'st6', 'st7'], s: ['S_PAT'], x: s => _t('twin.prov.Tstick.x1', { d: fmt(s.rhoc, 4), mi: fmt(s.MIc, 2), mfr: fmt(s.MFRc, 1), p: fmt(s.Peq, 1), c1: fmt(s.C1, 4), c2: fmt(s.C2, 1) }) + (s.outside.length ? ' ' + _t('twin.prov.Tstick.x2', { l: s.outside.join(', ') }) : '') + ' ' + _t('twin.prov.Tstick.x3') },
+  margin: { t: _t('twin.prov.margin.t'), u: 'K', v: s => s.margin, d: 1, f: _t('twin.prov.margin.f'), p: ['dStick', 'dDew', 'st1', 'st4'], s: ['S_PAT'] },
+  Tmax: { t: _t('twin.prov.Tmax.t'), u: '°C', v: s => s.Tmax, d: 1, f: _t('twin.prov.Tmax.f'), p: ['dStick'], s: ['S_PAT'] },
+  Tmin: { t: _t('twin.prov.Tmin.t'), u: '°C', v: s => s.Tmin, d: 1, f: _t('twin.prov.Tmin.f'), p: ['dDew', 'antA', 'antB', 'antC', 'P'], s: ['S_PAT', 'S_NIST'] },
+  MIc: { t: _t('twin.prov.MIc.t'), u: 'g/10 min', v: s => s.MIc, d: 2, f: _t('twin.prov.MIc.f'), p: ['aMI', 'nMI', 'kH1', 'kH2', 'kE', 'kM1', 'kM2', 'kp1', 'kp2'], s: ['S_MCA91', 'S_MCA90', 'S_ABB'] },
+  MIi: { t: _t('twin.prov.MIi.t'), u: 'g/10 min', v: s => s.MIi, d: 2, f: _t('twin.prov.MIi.f'), p: ['aMI', 'nMI', 'kH1', 'kH2'], s: ['S_MCA91', 'S_MCA90'] },
+  rhoc: { t: _t('twin.prov.rhoc.t'), u: 'g/cm³', v: s => s.rhoc, d: 4, f: _t('twin.prov.rhoc.f'), p: ['rho0', 'aC4', 'bC4', 'aC6', 'kpM1', 'kpM2'], s: ['S_ABB', 'S_MCA90', 'S_MCA91'] },
+  rhoi: { t: _t('twin.prov.rhoi.t'), u: 'g/cm³', v: s => s.rhoi, d: 4, f: _t('twin.prov.rhoi.f'), p: ['rho0', 'aC4', 'bC4', 'aC6'], s: ['S_ABB'] },
+  MFR: { t: _t('twin.prov.MFR.t'), u: '—', v: s => s.MFRc, d: 1, f: _t('twin.prov.MFR.f'), p: ['cMFR'], s: ['S_MFR'] },
+  liq: { t: _t('twin.prov.liq.t'), u: 'wt %', v: s => s.liq, d: 1, f: _t('twin.prov.liq.f'), p: ['antA', 'antB', 'antC', 'G', 'P', 'lamI'], s: ['S_NIST', 'S_GEO'] },
+  tau: { t: _t('twin.prov.tau.t'), u: 'h', v: s => s.tau, d: 2, f: _t('twin.prov.tau.f'), p: ['Msp', 'Kb'], s: ['S_DADT', 'S_DESIGN'] },
+  cool: { t: _t('twin.prov.cool.t'), u: '%', v: s => s.coolUse * 100, d: 0, f: _t('twin.prov.cool.f'), p: ['Tcw', 'appr', 'G', 'cpg'], s: ['S_GEO', 'S_CPG', 'S_DESIGN'] },
+  yI: { t: _t('twin.prov.yI.t'), u: 'mol %', v: s => s.yI * 100, d: 1, f: _t('twin.prov.yI.f'), p: ['P', 'FmaxI'], s: ['S_WIN', 'S_DESIGN'] },
+  h: { t: _t('twin.prov.h.t'), u: 'mol/mol', v: s => s.h, d: 3, f: _t('twin.prov.h.f'), p: ['tauC', 'ventBase', 'FmaxH'], s: ['S_MCA92', 'S_GRADE'] },
+  m: { t: _t('twin.prov.m.t'), u: 'mol/mol', v: s => s.m, d: 3, f: _t('twin.prov.m.f'), p: ['tauC', 'ventBase', 'FmaxM'], s: ['S_MCA92', 'S_GRADE'] },
+  hot: { t: _t('twin.prov.hot.t'), u: '°C', v: () => window.TWIN.fieldStats().Tmax_local, d: 1, f: _t('twin.prov.hot.f'), p: ['Ea', 'dStick'], s: ['S_DAB21', 'S_L3'], x: () => _t('twin.prov.hot.x') },
+  offspec: { t: _t('twin.prov.offspec.t'), u: 't', v: () => st.plan ? st.plan.agent.offspec_t : NaN, d: 0, f: _t('twin.prov.offspec.f'), p: ['miTol', 'rhoTol', 'ventNaive', 'ventMax', 'rampT', 'hMax'], s: ['S_MCA92', 'S_GRADE'] },
+  Fcat: { t: _t('twin.prov.Fcat.t'), u: 'kg/h', v: () => st.pl.u.Fcat, d: 2, f: _t('twin.prov.Fcat.f'), p: ['site'], s: ['S_CAL'] },
+  P: { t: _t('twin.prov.P.t'), u: 'bar', v: () => P.P.v, d: 1, f: _t('twin.prov.P.f'), p: ['P'], s: ['S_IND'] },
+  Mbed: { t: _t('twin.prov.Mbed.t'), u: 't', v: s => s.M / 1000, d: 1, f: _t('twin.prov.Mbed.f'), p: ['Msp', 'Kb'], s: ['S_DADT', 'S_DESIGN'] },
+  tags: { t: _t('twin.prov.tags.t'), u: '', v: () => NaN, d: 0, f: _t('twin.prov.tags.f'), p: [], s: ['S_DESIGN'] }
 };
 window.TWIN.PROV = PROV;
 function openProv(key) {
   const pr = PROV[key]; if (!pr) return; const s = TW.snapshot(st.pl);
-  const rows = pr.p.map(id => { const q = P[id]; return `<tr><td>${q.sym}</td><td class="num">${fmtP(q.v)}</td><td>${q.unit}</td><td><span class="st ${q.status}">${q.status}</span></td></tr>` + (q.note ? `<tr><td></td><td colspan="3" class="pn">${esc(q.note)}</td></tr>` : ''); }).join('');
-  $('pcard').innerHTML = `<div class="row" style="justify-content:space-between"><h4></h4><button class="btn sm" id="pClose">Close</button></div>
-    <div class="val">${fmt(pr.v(s), pr.d)} ${pr.u}</div><div class="lbl">Formula</div><div class="formula"></div>
+  const rows = pr.p.map(id => { const q = P[id]; return `<tr><td>${q.sym}</td><td class="num">${fmtP(q.v)}</td><td>${_u(q.unit)}</td><td><span class="st ${q.status}">${_t('twin.status.' + q.status)}</span></td></tr>` + (q.note ? `<tr><td></td><td colspan="3" class="pn">${esc(q.note)}</td></tr>` : ''); }).join('');
+  $('pcard').innerHTML = `<div class="row" style="justify-content:space-between"><h4></h4><button class="btn sm" id="pClose">${_t('twin.card.close')}</button></div>
+    <div class="val">${fmt(pr.v(s), pr.d)} ${_u(pr.u)}</div><div class="lbl">${_t('twin.card.formula')}</div><div class="formula"></div>
     ${pr.x ? '<div class="warnline"></div>' : ''}
-    ${rows ? `<div class="lbl">Parameters</div><div class="tblw" style="margin-top:0"><table><thead><tr><th>Symbol</th><th>Value</th><th>Unit</th><th>Status</th></tr></thead><tbody>${rows}</tbody></table></div>` : ''}
-    <div class="lbl">Sources</div><div class="src">${pr.s.map(k => `<div><span class="st ${S[k].status}">${S[k].status}</span> ${esc(S[k].full)}</div>`).join('')}</div>`;
+    ${rows ? `<div class="lbl">${_t('twin.card.params')}</div><div class="tblw" style="margin-top:0"><table><thead><tr><th>${_t('twin.th.sym')}</th><th>${_t('twin.th.val')}</th><th>${_t('twin.th.unit')}</th><th>${_t('twin.th.status')}</th></tr></thead><tbody>${rows}</tbody></table></div>` : ''}
+    <div class="lbl">${_t('twin.card.sources')}</div><div class="src">${pr.s.map(k => `<div><span class="st ${S[k].status}">${_t('twin.status.' + S[k].status)}</span> ${esc(S[k].full)}</div>`).join('')}</div>`;
   $('pcard').querySelector('h4').textContent = pr.t; $('pcard').querySelector('.formula').textContent = pr.f;
   if (pr.x) $('pcard').querySelector('.warnline').textContent = pr.x(s);
   $('modal').classList.add('open'); $('pClose').onclick = closeProv;
-  post('prov', 'info', `Provenance card opened: ${pr.t} (${pr.s.map(k => S[k].short).join('; ')}).`, [key]);
+  post('prov', 'info', _t('twin.msg.prov', { t: pr.t, s: pr.s.map(k => S[k].short).join('; ') }), [key]);
 }
 function closeProv() { $('modal').classList.remove('open'); }
 $('modal').addEventListener('click', e => { if (e.target.id === 'modal') closeProv(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeProv(); });
 function esc(t) { return String(t).replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c])); }
-function fmtP(v) { if (v === 0) return '0'; const a = Math.abs(v); if (a >= 1e5 || a < 1e-3) return v.toExponential(3); if (a >= 100) return String(+v.toFixed(1)); return String(+v.toPrecision(4)); }
+function fmtP(v) { return _ns(fmtP0(v)); }
+function fmtP0(v) { if (v === 0) return '0'; const a = Math.abs(v); if (a >= 1e5 || a < 1e-3) return v.toExponential(3); if (a >= 100) return String(+v.toFixed(1)); return String(+v.toPrecision(4)); }
 
 // ---------------- KPIs ----------------
 const KPI = [
-  ['prod', 'Production', s => fmt(s.prod, 1) + ' t/h', s => `τ ${fmt(s.tau, 2)} h · bed ${fmt(s.M / 1000, 1)} t`, s => s.prod >= 12 && s.prod <= 20 ? '' : 'warn'],
-  ['T', 'Bed temperature', s => fmt(s.T, 1) + ' °C', s => `set ${fmt(st.pl.u.Tsp - 273.15, 1)} · T_in ${fmt(s.Tin, 1)} °C`, s => s.T > s.Tmax ? 'bad' : s.T > s.Tmax - 2 ? 'warn' : ''],
-  ['Tstick', 'T_stick · margin', s => fmt(s.Tstick, 1) + ' °C', s => `margin ${fmt(s.margin, 1)} K · T_max ${fmt(s.Tmax, 1)}`, s => s.margin < 10 ? 'bad' : s.margin < 13 ? 'warn' : 'ok'],
-  ['MIc', 'MI_c vs grade', s => fmt(s.MIc, 2), s => `window ${fmt(G[st.target].MI / 1.15, 2)}–${fmt(G[st.target].MI * 1.15, 2)} · MI_i ${fmt(s.MIi, 2)}`, s => Math.abs(Math.log(s.MIc / G[st.target].MI)) <= Math.log(1.15) ? 'ok' : 'warn'],
-  ['rhoc', 'ρ_c vs grade', s => fmt(s.rhoc, 4), s => `window ${fmt(G[st.target].rho - 0.002, 3)}–${fmt(G[st.target].rho + 0.002, 3)} · ρ_i ${fmt(s.rhoi, 4)}`, s => Math.abs(s.rhoc - G[st.target].rho) <= 0.002 ? 'ok' : 'warn'],
-  ['liq', 'Condensed liquid', s => fmt(s.liq, 1) + ' wt %', s => `iC5 ${fmt(s.yI * 100, 1)} % · cooler ${fmt(s.coolUse * 100, 0)} %`, s => s.coolUse > 0.95 ? 'warn' : '']
+  ['prod', _t('twin.kpi.prod'), s => fmt(s.prod, 1) + ' ' + _u('t/h'), s => _t('twin.kpi.prod_s', { tau: fmt(s.tau, 2), m: fmt(s.M / 1000, 1) }), s => s.prod >= 12 && s.prod <= 20 ? '' : 'warn'],
+  ['T', _t('twin.kpi.T'), s => fmt(s.T, 1) + ' °C', s => _t('twin.kpi.T_s', { sp: fmt(st.pl.u.Tsp - 273.15, 1), tin: fmt(s.Tin, 1) }), s => s.T > s.Tmax ? 'bad' : s.T > s.Tmax - 2 ? 'warn' : ''],
+  ['Tstick', _t('twin.kpi.Tstick'), s => fmt(s.Tstick, 1) + ' °C', s => _t('twin.kpi.Tstick_s', { m: fmt(s.margin, 1), tm: fmt(s.Tmax, 1) }), s => s.margin < 10 ? 'bad' : s.margin < 13 ? 'warn' : 'ok'],
+  ['MIc', _t('twin.kpi.MIc'), s => fmt(s.MIc, 2), s => _t('twin.kpi.win_mi', { a: fmt(G[st.target].MI / 1.15, 2), b: fmt(G[st.target].MI * 1.15, 2), i: fmt(s.MIi, 2) }), s => Math.abs(Math.log(s.MIc / G[st.target].MI)) <= Math.log(1.15) ? 'ok' : 'warn'],
+  ['rhoc', _t('twin.kpi.rhoc'), s => fmt(s.rhoc, 4), s => _t('twin.kpi.win_rho', { a: fmt(G[st.target].rho - 0.002, 3), b: fmt(G[st.target].rho + 0.002, 3), i: fmt(s.rhoi, 4) }), s => Math.abs(s.rhoc - G[st.target].rho) <= 0.002 ? 'ok' : 'warn'],
+  ['liq', _t('twin.kpi.liq'), s => fmt(s.liq, 1) + ' ' + _u('wt %'), s => _t('twin.kpi.liq_s', { y: fmt(s.yI * 100, 1), c: fmt(s.coolUse * 100, 0) }), s => s.coolUse > 0.95 ? 'warn' : '']
 ];
 $('kpis').innerHTML = KPI.map(k => `<div class="kpi" data-prov="${k[0]}" tabindex="0"><span class="i">i</span><div class="k">${k[1]}</div><div class="v"></div><div class="s"></div></div>`).join('');
 document.querySelectorAll('[data-prov]').forEach(el => { el.addEventListener('click', () => openProv(el.dataset.prov)); el.addEventListener('keydown', e => { if (e.key === 'Enter') openProv(el.dataset.prov); }); });
@@ -1030,33 +1082,33 @@ function buildScheme() {
   <path d="M200,95 Q200,40 270,40 Q340,40 340,95 L340,110 L310,135 L310,330 L230,330 L230,135 L200,110 Z" fill="#fff" stroke="#0a0a0a" stroke-width="2"/>
   <rect id="bed" x="232" y="170" width="76" height="158" fill="url(#bedg)"/>
   <line x1="230" y1="312" x2="310" y2="312" stroke="#0a0a0a" stroke-width="2" stroke-dasharray="4 3"/>
-  ${L(270, 160, 'fluidized bed', 'middle')}
-  ${L(270, 325, 'distributor', 'middle', 10)}
+  ${L(270, 160, _t('twin.sch.fb'), 'middle')}
+  ${L(270, 325, _t('twin.sch.dist'), 'middle', 10)}
   <path d="M270,40 L270,18 L640,18 L640,70" fill="none" stroke="#2563eb" stroke-width="2.5" marker-end="url(#ar)"/>
   <circle cx="640" cy="95" r="22" fill="#fff" stroke="#0a0a0a" stroke-width="2"/><path d="M628,85 L656,95 L628,105 Z" fill="none" stroke="#0a0a0a" stroke-width="1.5"/>
-  ${L(670, 92, 'compressor')}
+  ${L(670, 92, _t('twin.sch.comp'))}
   <path d="M640,117 L640,150" fill="none" stroke="#2563eb" stroke-width="2.5" marker-end="url(#ar)"/>
   <rect x="610" y="152" width="60" height="96" rx="8" fill="#fff" stroke="#0a0a0a" stroke-width="2"/>
   <path d="M618,170 L662,182 L618,194 L662,206 L618,218 L662,230" fill="none" stroke="#0d9488" stroke-width="2"/>
-  ${L(680, 175, 'cooler')}
-  ${L(680, 192, 'cooling water')}
+  ${L(680, 175, _t('twin.sch.cooler'))}
+  ${L(680, 192, _t('twin.sch.cw'))}
   <path d="M640,248 L640,372 L270,372 L270,334" fill="none" stroke="#2563eb" stroke-width="2.5" marker-end="url(#ar)"/>
   <g id="drops"><circle cx="560" cy="372" r="4" fill="#0d9488"/><circle cx="520" cy="372" r="4" fill="#0d9488"/><circle cx="480" cy="372" r="4" fill="#0d9488"/></g>
   <path d="M310,300 L380,300 L380,345" fill="none" stroke="#0a0a0a" stroke-width="2" marker-end="url(#ar)"/>
-  ${L(388, 340, 'product discharge')}
-  <path d="M120,250 L228,250" fill="none" stroke="#7c3aed" stroke-width="2" marker-end="url(#ar)"/>${L(20, 246, 'catalyst')}
+  ${L(388, 340, _t('twin.sch.disch'))}
+  <path d="M120,250 L228,250" fill="none" stroke="#7c3aed" stroke-width="2" marker-end="url(#ar)"/>${L(20, 246, _t('twin.sch.cat'))}
   <path d="M120,385 L120,372 L262,372" fill="none" stroke="#888" stroke-width="1.5"/>
-  ${L(20, 360, 'C₂, H₂, comonomer,')}${L(20, 374, 'iC5, N₂ make-up')}
-  ${L(470, 12, 'cycle gas', 'start')}
-  ${T(360, 196, 'T:bed', 'start', 20, 700)}${L(360, 212, 'bed temperature')}
-  ${T(360, 236, 'Tstick:svg', 'start', 13)}${L(360, 250, 'T_stick of bed resin')}
-  ${T(360, 272, 'prod:svg', 'start', 13)}${L(360, 286, 'production')}
+  ${L(20, 360, _t('twin.sch.feed1'))}${L(20, 374, _t('twin.sch.feed2'))}
+  ${L(470, 12, _t('twin.sch.cyc'), 'start')}
+  ${T(360, 196, 'T:bed', 'start', 20, 700)}${L(360, 212, _t('twin.sch.tbed'))}
+  ${T(360, 236, 'Tstick:svg', 'start', 13)}${L(360, 250, _t('twin.sch.tstick'))}
+  ${T(360, 272, 'prod:svg', 'start', 13)}${L(360, 286, _t('twin.sch.prod'))}
   ${T(130, 270, 'Fcat:svg', 'start', 12, 500)}
-  ${T(355, 60, 'P:svg', 'start', 13)}${L(355, 74, 'pressure')}
-  ${T(130, 120, 'Mbed:svg', 'start', 12)}${L(130, 134, 'bed mass')}
-  ${T(130, 160, 'tau:svg', 'start', 12)}${L(130, 174, 'residence time')}
-  ${T(700, 300, 'Tin:svg', 'start', 13)}${L(700, 314, 'T_in after cooler')}
-  ${T(700, 338, 'liq:svg', 'start', 13)}${L(700, 352, 'condensed liquid')}
+  ${T(355, 60, 'P:svg', 'start', 13)}${L(355, 74, _t('twin.sch.p'))}
+  ${T(130, 120, 'Mbed:svg', 'start', 12)}${L(130, 134, _t('twin.sch.mbed'))}
+  ${T(130, 160, 'tau:svg', 'start', 12)}${L(130, 174, _t('twin.sch.tau'))}
+  ${T(700, 300, 'Tin:svg', 'start', 13)}${L(700, 314, _t('twin.sch.tin'))}
+  ${T(700, 338, 'liq:svg', 'start', 13)}${L(700, 352, _t('twin.sch.liq'))}
   ${T(470, 40, 'yI:svg', 'start', 12, 500)}${T(470, 56, 'h:svg', 'start', 12, 500)}${T(470, 72, 'm:svg', 'start', 12, 500)}
   ${T(700, 230, 'cool:svg', 'start', 12, 500)}
   `;
@@ -1064,10 +1116,10 @@ function buildScheme() {
 }
 function drawScheme(s) {
   const v = {
-    'T:bed': fmt(s.T, 1) + ' °C', 'Tstick:svg': fmt(s.Tstick, 1) + ' °C (margin ' + fmt(s.margin, 1) + ' K)', 'prod:svg': fmt(s.prod, 1) + ' t/h',
-    'Fcat:svg': fmt(st.pl.u.Fcat, 2) + ' kg/h' + (st.pl.u.act !== 1 ? ' · activity ×' + fmt(st.pl.u.act, 2) : ''), 'P:svg': fmt(P.P.v, 1) + ' bar', 'Mbed:svg': fmt(s.M / 1000, 1) + ' t', 'tau:svg': fmt(s.tau, 2) + ' h',
-    'Tin:svg': fmt(s.Tin, 1) + ' °C', 'liq:svg': fmt(s.liq, 1) + ' wt %', 'yI:svg': `iC5 ${fmt(s.yI * 100, 1)} mol % · C₂ ${fmt(s.yE * 100, 1)} %`, 'h:svg': `H₂/C₂ ${fmt(s.h, 3)}`,
-    'm:svg': `${st.pl.u.como === 'C6' ? 'C₆' : 'C₄'}/C₂ ${fmt(s.m, 3)}`, 'cool:svg': `cooler ${fmt(s.coolUse * 100, 0)} % used · G ${fmt(P.G.v * st.pl.u.Gf, 0)} kg/s`
+    'T:bed': fmt(s.T, 1) + ' °C', 'Tstick:svg': _t('twin.sv.tstick', { t: fmt(s.Tstick, 1), m: fmt(s.margin, 1) }), 'prod:svg': fmt(s.prod, 1) + ' ' + _u('t/h'),
+    'Fcat:svg': fmt(st.pl.u.Fcat, 2) + ' ' + _u('kg/h') + (st.pl.u.act !== 1 ? ' · ' + _t('twin.sv.act', { a: fmt(st.pl.u.act, 2) }) : ''), 'P:svg': fmt(P.P.v, 1) + ' bar', 'Mbed:svg': fmt(s.M / 1000, 1) + ' ' + _u('t'), 'tau:svg': fmt(s.tau, 2) + ' ' + _u('h'),
+    'Tin:svg': fmt(s.Tin, 1) + ' °C', 'liq:svg': fmt(s.liq, 1) + ' ' + _u('wt %'), 'yI:svg': `iC5 ${fmt(s.yI * 100, 1)} ${_u('mol %')} · C₂ ${fmt(s.yE * 100, 1)} %`, 'h:svg': `H₂/C₂ ${fmt(s.h, 3)}`,
+    'm:svg': `${st.pl.u.como === 'C6' ? 'C₆' : 'C₄'}/C₂ ${fmt(s.m, 3)}`, 'cool:svg': _t('twin.sv.cool', { u: fmt(s.coolUse * 100, 0), g: fmt(P.G.v * st.pl.u.Gf, 0) })
   };
   $('scheme').querySelectorAll('[data-sv]').forEach(el => { el.textContent = v[el.dataset.sv]; });
   const tb = $('scheme').querySelector('[data-sv="T:bed"]'); tb.setAttribute('fill', s.T > s.Tmax ? '#dc2626' : s.T > s.Tmax - 2 ? '#d97706' : '#0a0a0a');
@@ -1122,7 +1174,7 @@ function drawProps() {
     line(g, sel.map(r => [X(r[0]), Y(r[p.k[0]])]), p.col, 2.2);
     if (pi === 1) { g.textAlign = 'center'; g.textBaseline = 'top'; g.fillStyle = '#888'; const span = tm - tmin, step = span > 4 * 3600 ? 3600 : span > 7200 ? 1800 : 900; for (let t = Math.ceil(tmin / step) * step; t <= tm; t += step) g.fillText(hm(t), X(t), p.y0 + p.h + 4); }
   });
-  $('gradeNote').textContent = 'target ' + gr.name;
+  $('gradeNote').textContent = _t('twin.note.target', { g: gr.name });
 }
 function colormap(v) { // v 0..1 → teal-white-amber-red
   const stops = [[0, [37, 99, 235]], [0.35, [204, 238, 234]], [0.55, [255, 247, 237]], [0.75, [217, 119, 6]], [1, [220, 38, 38]]];
@@ -1151,12 +1203,12 @@ function drawHeat(s) {
   const cbx = bx + bw + 8; for (let y = 0; y < bh; y++) { const col = colormap(1 - y / bh); g.fillStyle = `rgb(${col})`; g.fillRect(cbx, by + y, 8, 1); }
   g.fillStyle = '#888'; g.font = '10px Inter,sans-serif'; g.textAlign = 'left'; g.textBaseline = 'top'; g.fillText(fmt(hi, 0), cbx + 10 > w - 16 ? cbx - 2 : cbx + 10, by); g.textBaseline = 'bottom'; g.fillText(fmt(lo, 0), cbx + 10 > w - 16 ? cbx - 2 : cbx + 10, by + bh);
   const fs = TW.fieldStats(F, s.T, s.Tmax);
-  $('heatInfo').innerHTML = `<div class="pv" data-prov="hot">Local max <b>${fmt(fs.Tmax_local, 1)} °C</b></div><div>Bed mean <b>${fmt(s.T, 1)} °C</b></div><div>T_max (grade) <b>${fmt(s.Tmax, 1)} °C</b></div>
-    <div>Risk area (T &gt; T_max) <b class="${fs.riskFrac > 0 ? 'bad' : 'ok'}">${fmt(fs.riskArea_m2, 2)} m²</b></div><div style="margin-top:6px">Section 5 m × 15 m, grid 40 × 60. Bottom: distributor (cold gas). Black contour: risk zone. Depends on the grade through T_stick.</div>`;
+  $('heatInfo').innerHTML = `<div class="pv" data-prov="hot">${_t('twin.heat.lmax')} <b>${fmt(fs.Tmax_local, 1)} °C</b></div><div>${_t('twin.heat.mean')} <b>${fmt(s.T, 1)} °C</b></div><div>${_t('twin.heat.tmax')} <b>${fmt(s.Tmax, 1)} °C</b></div>
+    <div>${_t('twin.heat.risk')} <b class="${fs.riskFrac > 0 ? 'bad' : 'ok'}">${fmt(fs.riskArea_m2, 2)} m²</b></div><div style="margin-top:6px">${_t('twin.heat.info')}</div>`;
   $('heatInfo').querySelector('[data-prov]').onclick = () => openProv('hot');
 }
 function drawTransition() {
-  const { g, w, h } = ctx2($('cTr')); const pl = st.plan; if (!pl) { g.fillStyle = '#888'; g.font = '12px Inter,sans-serif'; g.fillText('Run scenario 2 to plan a transition.', 10, 20); return; }
+  const { g, w, h } = ctx2($('cTr')); const pl = st.plan; if (!pl) { g.fillStyle = '#888'; g.font = '12px Inter,sans-serif'; _fit(g, _t('twin.tr.run'), 10, 20, w - 20, 'twin.tr.run.short'); return; }
   const B = G[pl.B], A = G[pl.A], x0 = 40, W = w - x0 - 30, Ht = (h - 40) / 2, tmaxH = 24;
   const X = t => x0 + t / tmaxH * W;
   [[1, Math.log(Math.min(A.MI, B.MI) / 1.6), Math.log(Math.max(A.MI, B.MI) * 1.8), v => Math.log(v), B.MI, 'MI', true], [2, Math.min(A.rho, B.rho) - 0.004, Math.max(A.rho, B.rho) + 0.004, v => v, B.rho, 'ρ', false]].forEach((q, pi) => {
@@ -1168,29 +1220,29 @@ function drawTransition() {
     g.textAlign = 'left'; g.fillText(q[5], x0 + W + 6, y0 + 8);
     line(g, pl.naive.traj.filter(r => r[0] <= tmaxH).map(r => [X(r[0]), Y(r[q[0]])]), '#888', 2);
     line(g, pl.agent.traj.filter(r => r[0] <= tmaxH).map(r => [X(r[0]), Y(r[q[0]])]), '#0d9488', 2.4);
-    if (pi === 1) { g.textAlign = 'center'; g.textBaseline = 'top'; for (let t = 0; t <= tmaxH; t += 4) g.fillText(t + ' h', X(t), y0 + Ht + 4); }
+    if (pi === 1) { g.textAlign = 'center'; g.textBaseline = 'top'; for (let t = 0; t <= tmaxH; t += 4) g.fillText(t + ' ' + _u('h'), X(t), y0 + Ht + 4); }
   });
   const red = 1 - pl.agent.offspec_t / pl.naive.offspec_t;
   $('trNote').textContent = `${A.name} → ${B.name}`;
-  $('trRes').innerHTML = `<div class="box"><div class="empty">Naive step change</div><div class="n pv" data-prov="offspec">${fmt(pl.naive.offspec_t, 0)} t</div><div class="empty">off-spec · ${fmt(pl.naive.time_h, 1)} h · above T_max ${fmt(pl.naive.overTmax_h, 1)} h · vent ${fmt(pl.naive.vented_t, 1)} t C₂</div></div>
-    <div class="box agent"><div class="empty">Agent strategy (K ${pl.agent.prm.K}, vent ${fmt(pl.agent.prm.vent * 100, 0)} %/h)</div><div class="n pv" data-prov="offspec">${fmt(pl.agent.offspec_t, 0)} t <span class="ok" style="font-size:13px">−${fmt(red * 100, 0)} %</span></div><div class="empty">off-spec · ${fmt(pl.agent.time_h, 1)} h · above T_max ${fmt(pl.agent.overTmax_h, 1)} h · vent ${fmt(pl.agent.vented_t, 1)} t C₂</div></div>`;
+  $('trRes').innerHTML = `<div class="box"><div class="empty">${_t('twin.tr.naive')}</div><div class="n pv" data-prov="offspec">${fmt(pl.naive.offspec_t, 0)} ${_u('t')}</div><div class="empty">${_t('twin.tr.res', { h: fmt(pl.naive.time_h, 1), o: fmt(pl.naive.overTmax_h, 1), v: fmt(pl.naive.vented_t, 1) })}</div></div>
+    <div class="box agent"><div class="empty">${_t('twin.tr.agent', { k: pl.agent.prm.K, v: fmt(pl.agent.prm.vent * 100, 0) })}</div><div class="n pv" data-prov="offspec">${fmt(pl.agent.offspec_t, 0)} ${_u('t')} <span class="ok" style="font-size:13px">−${fmt(red * 100, 0)} %</span></div><div class="empty">${_t('twin.tr.res', { h: fmt(pl.agent.time_h, 1), o: fmt(pl.agent.overTmax_h, 1), v: fmt(pl.agent.vented_t, 1) })}</div></div>`;
   $('trRes').querySelectorAll('[data-prov]').forEach(el => el.onclick = () => openProv('offspec'));
 }
 function draw() {
   if (!st.pl) return; const s = TW.snapshot(st.pl);
   $('clock').textContent = 't = ' + hm(st.pl.t) + (st.scen ? ' · ' + SCN[st.scen].name : '');
   drawKPI(s); drawScheme(s); drawTrend(); drawProps(); drawHeat(s);
-  $('ctlMode').textContent = st.pl.u.auto ? 'T controller AUTO' : 'T controller MANUAL'; $('bAuto').textContent = 'T controller: ' + (st.pl.u.auto ? 'AUTO' : 'MANUAL'); $('bAuto').classList.toggle('on', !st.pl.u.auto);
+  $('ctlMode').textContent = _t('twin.ctl.tc') + (st.pl.u.auto ? ' AUTO' : ' MANUAL'); $('bAuto').textContent = _t('twin.ctl.tc') + ': ' + (st.pl.u.auto ? 'AUTO' : 'MANUAL'); $('bAuto').classList.toggle('on', !st.pl.u.auto);
   if (!document.activeElement || document.activeElement.type !== 'range') syncSliders();
 }
 
 // ---------------- sliders ----------------
 const SL = [
   ['h', 'H₂/C₂ (mol/mol)', 0.02, 0.6, 0.005, u => u.h, (u, v) => u.h = v, v => fmt(v, 3)],
-  ['m', 'Comonomer/C₂ (mol/mol)', 0, 0.8, 0.005, u => u.m, (u, v) => u.m = v, v => fmt(v, 3)],
-  ['yI', 'iC5 (mol %)', 0, 18, 0.1, u => u.yI * 100, (u, v) => u.yI = v / 100, v => fmt(v, 1)],
-  ['Tsp', 'T set-point (°C)', 80, 108, 0.1, u => u.Tsp - 273.15, (u, v) => u.Tsp = v + 273.15, v => fmt(v, 1)],
-  ['Fcat', 'Catalyst feed (kg/h)', 0.2, 1.0, 0.01, u => u.Fcat, (u, v) => u.Fcat = v, v => fmt(v, 2)]
+  ['m', _t('twin.sl.m'), 0, 0.8, 0.005, u => u.m, (u, v) => u.m = v, v => fmt(v, 3)],
+  ['yI', 'iC5 (' + _u('mol %') + ')', 0, 18, 0.1, u => u.yI * 100, (u, v) => u.yI = v / 100, v => fmt(v, 1)],
+  ['Tsp', _t('twin.sl.tsp'), 80, 108, 0.1, u => u.Tsp - 273.15, (u, v) => u.Tsp = v + 273.15, v => fmt(v, 1)],
+  ['Fcat', _t('twin.sl.fcat'), 0.2, 1.0, 0.01, u => u.Fcat, (u, v) => u.Fcat = v, v => fmt(v, 2)]
 ];
 $('sliders').innerHTML = SL.map(s => `<div class="sl"><label for="sl_${s[0]}"><span>${s[1]}</span><b id="sv_${s[0]}"></b></label><input type="range" id="sl_${s[0]}" min="${s[2]}" max="${s[3]}" step="${s[4]}"></div>`).join('');
 SL.forEach(s => { $('sl_' + s[0]).addEventListener('input', e => { const v = +e.target.value; s[6](st.pl.u, v); $('sv_' + s[0]).textContent = s[7](v); if (st.scen && st.scen !== 'transition') st.scen = null; }); });
@@ -1201,7 +1253,7 @@ $('bAuto').onclick = () => { const u = st.pl.u; u.auto = !u.auto; if (!u.auto) u
 $('gradeSel').innerHTML = Object.values(G).map(g => `<option value="${g.id}">${g.name}</option>`).join('');
 $('gradeSel').onchange = e => { st.gradeSel = e.target.value; };
 $('bLoad').onclick = () => { st.gradeSel = $('gradeSel').value; runScenario('steady'); };
-$('bPlay').onclick = () => { st.running = !st.running; $('bPlay').textContent = st.running ? 'Pause' : 'Play'; };
+$('bPlay').onclick = () => { st.running = !st.running; $('bPlay').textContent = st.running ? _t('twin.ctl.pause') : _t('twin.ctl.play'); };
 $('speed').value = String(st.speed); if (!$('speed').value) { $('speed').value = '300'; st.speed = 300; }
 $('speed').onchange = e => { st.speed = +e.target.value; try { window.localStorage.setItem('gpe_speed', e.target.value); } catch (er) { /* storage unavailable */ } };
 document.querySelectorAll('[data-scen]').forEach(b => b.onclick = () => runScenario(b.dataset.scen));
@@ -1209,31 +1261,31 @@ document.querySelectorAll('[data-scen]').forEach(b => b.onclick = () => runScena
 // ---------------- architecture SVG + parameter table ----------------
 function buildArch() {
   const Ls = [
-    ['L5', 'MAIF agents + operator (HITL)', 'Observer · property soft-sensor · stickiness guard · hot-spot detector · transition planner · provenance · operator', 'live in this POC · bus emulated', 'Pilot: MAIF core (Go + Kafka), OPC UA read-only, shadow mode', '#0a0a0a'],
-    ['L4', 'Knowledge', 'Parameters, constraints and operating windows with source and status', 'live in this POC · registry below', 'Pilot: papers, operating procedures, plant data, operators’ experience', '#7c3aed'],
-    ['L3', 'Bed field (3D CFD + surrogate)', 'Temperature / activity field in the bed, hot zones at wall and distributor', 'illustrative field live · CFD-trained in pilot', 'Pilot: 3D CFD of the reactor geometry + trained surrogate with certified error', '#d97706'],
-    ['L2', 'Polymer properties', 'Instantaneous and cumulative MI, density, MFR estimate', 'live in this POC', 'Pilot: calibrated on plant lab analyses', '#0d9488'],
-    ['L1', 'Process model', 'Fluidized bed as CSTR, two-site catalyst kinetics, gas loop with cooler and condensed mode, T control', 'live in this POC', 'Pilot: calibrated on plant archive, EKF state estimation', '#2563eb']
+    ['L5', _t('twin.arch.L5.t'), _t('twin.arch.L5.d'), _t('twin.arch.L5.tag'), _t('twin.arch.L5.p'), '#0a0a0a', 1],
+    ['L4', _t('twin.arch.L4.t'), _t('twin.arch.L4.d'), _t('twin.arch.L4.tag'), _t('twin.arch.L4.p'), '#7c3aed', 1],
+    ['L3', _t('twin.arch.L3.t'), _t('twin.arch.L3.d'), _t('twin.arch.L3.tag'), _t('twin.arch.L3.p'), '#d97706', 1],
+    ['L2', _t('twin.arch.L2.t'), _t('twin.arch.L2.d'), _t('twin.arch.live'), _t('twin.arch.L2.p'), '#0d9488', 1],
+    ['L1', _t('twin.arch.L1.t'), _t('twin.arch.L1.d'), _t('twin.arch.live'), _t('twin.arch.L1.p'), '#2563eb', 1]
   ];
-  const links = ['events, recommendations ↔ set-point requests via operator', 'parameters with source and uncertainty', 'local hot zones, risk area', 'properties of the resin in the bed'];
+  const links = [_t('twin.arch.link1'), _t('twin.arch.link2'), _t('twin.arch.link3'), _t('twin.arch.link4')];
   let o = '';
   Ls.forEach((l, i) => {
-    const live = /live/.test(l[3]);
+    const live = !!l[6];
     o += `<div class="al" style="border-left-color:${l[5]}"><div class="id" style="color:${l[5]}">${l[0]}</div><div><div class="tt">${l[1]}</div><div class="ds">${l[2]}</div></div><div><span class="tg ${live ? 'live' : ''}">${l[3]}</span><div class="pl">${l[4]}</div></div></div>`;
     if (i < 4) o += `<div class="alink">↕ ${links[i]}</div>`;
   });
   $('arch').innerHTML = o;
   const tb = $('ptab').querySelector('tbody');
-  tb.innerHTML = Object.values(P).map(q => `<tr><td>${q.sym}</td><td class="num">${fmtP(q.v)}</td><td>${q.unit}</td><td>${esc(q.desc)}${q.note ? `<div class="pn">${esc(q.note)}</div>` : ''}</td><td>${esc(S[q.src].short)}</td><td><span class="st ${q.status}">${q.status}</span></td></tr>`).join('') +
-    Object.values(G).map(g => `<tr><td>${g.id}</td><td class="num">H₂/C₂ ${fmt(g.h, 3)} · M/C₂ ${fmt(g.m, 3)}</td><td>mol/mol</td><td>${esc(g.name)}: MI ${g.MI}, ρ ${g.rho}, T ${g.T} °C, iC5 ${g.yI * 100} %, cat ${g.Fcat} kg/h (gas ratios by model inversion)</td><td>${S.S_GRADE.short}</td><td><span class="st derived">derived</span></td></tr>`).join('');
-  $('srcl').innerHTML = Object.entries(S).map(([k, v]) => `<div><span class="st ${v.status}">${v.status}</span> <b>${esc(v.short)}.</b> ${esc(v.full)} <i>${esc(v.note)}</i></div>`).join('');
+  tb.innerHTML = Object.values(P).map(q => `<tr><td>${q.sym}</td><td class="num">${fmtP(q.v)}</td><td>${_u(q.unit)}</td><td>${esc(q.desc)}${q.note ? `<div class="pn">${esc(q.note)}</div>` : ''}</td><td>${esc(S[q.src].short)}</td><td><span class="st ${q.status}">${_t('twin.status.' + q.status)}</span></td></tr>`).join('') +
+    Object.values(G).map(g => `<tr><td>${g.id}</td><td class="num">H₂/C₂ ${fmt(g.h, 3)} · M/C₂ ${fmt(g.m, 3)}</td><td>mol/mol</td><td>${esc(g.name)}: ${_t('twin.grade.row', { mi: _ns(g.MI), rho: _ns(g.rho), t: _ns(g.T), y: _ns(g.yI * 100), c: _ns(g.Fcat) })}</td><td>${S.S_GRADE.short}</td><td><span class="st derived">${_t('twin.status.derived')}</span></td></tr>`).join('');
+  $('srcl').innerHTML = Object.entries(S).map(([k, v]) => `<div><span class="st ${v.status}">${_t('twin.status.' + v.status)}</span> <b>${esc(v.short)}.</b> ${esc(v.full)} <i>${esc(v.note)}</i></div>`).join('');
 }
 
 // ---------------- boot ----------------
 buildScheme(); buildArch(); drawAgents();
 resetTo('LL4');
-post('observer', 'info', `Twin started on ${G.LL4.name} at steady state (12 h warm-up computed in browser). Reading tags: T, P, gas composition, G, T_in, catalyst.`, ['tags']);
-post('prov', 'info', `Parameter registry loaded: ${Object.keys(P).length} parameters, ${Object.values(P).filter(q => q.status === 'verified').length} verified, ${Object.values(P).filter(q => q.status === 'derived').length} derived, ${Object.values(P).filter(q => q.status === 'design').length} plant design. Click any number for its card.`, []);
+post('observer', 'info', _t('twin.msg.boot1', { g: G.LL4.name }), ['tags']);
+post('prov', 'info', _t('twin.msg.boot2', { n: Object.keys(P).length, v: Object.values(P).filter(q => q.status === 'verified').length, d: Object.values(P).filter(q => q.status === 'derived').length, p: Object.values(P).filter(q => q.status === 'design').length }), []);
 draw(); drawTransition();
 window.addEventListener('resize', () => { draw(); drawTransition(); });
 requestAnimationFrame(frame);
